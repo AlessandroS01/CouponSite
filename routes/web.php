@@ -15,7 +15,7 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
-
+/*
 Route::get('/', [PublicController::class, 'showCatalog1'])
         ->name('catalog1');
 
@@ -43,6 +43,7 @@ Route::view('/where', 'where')
 
 Route::view('/who', 'who')
         ->name('who');
+*/
 
 
 
@@ -56,36 +57,36 @@ Route::view('/who', 'who')
 // rotta che riporta alla home
 Route::get('/', [PublicController::class, 'showHome'])
         ->name('home');
-       
+
 // rotta che riporta alla pagina in cui sono contenute tutte le offerte
 Route::get('/catalogo', [PublicController::class, 'showCatalogoOfferte'])
         ->name('catalogo offerte');
- 
+
 // rotta che riporta alla pagina in cui sono contenute tutte le aziende
 Route::get('/aziende', [PublicController::class, 'showCatalogoAziende'])
         ->name('catalogo aziende');
- 
-// rotta che riporta alla pagina dei contatti        
+
+// rotta che riporta alla pagina dei contatti
 Route::get('/contatti', [PublicController::class, 'showContatti'])
         ->name('contatti');
-        
+
 // rotta che riporta alla pagina della FAQ
 Route::get('/faq', [PublicController::class, 'showFaq'])
         ->name('faqs');
 
-// rotta che riporta alla pagina del login        
+// rotta che riporta alla pagina del login
 Route::get('/login', [PublicController::class, 'showLogin'])
         ->name('login');
-        
+
 
 // rotta che riporta alla pagina di registrazione
 Route::get('/signup', [PublicController::class, 'showSignup'])
         ->name('signup');
-        
+
 // rotta per visualizzare un'offerta dopo il click su ottieni
 Route::get('/offerta', [PublicController::class, 'showOfferta'])
         ->name('offerta');
-        
+
 // rotta per visualizzare un'azienda dopo il click su una di esse
 Route::get('/azienda', [PublicController::class, 'showAzienda'])
         ->name('azienda');
