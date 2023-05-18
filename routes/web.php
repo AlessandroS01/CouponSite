@@ -15,6 +15,8 @@ use App\Http\Controllers\UserController;
 | contains the "web" middleware group. Now create something great!
 |
 */
+
+
 /*
 Route::get('/', [PublicController::class, 'showCatalog1'])
         ->name('catalog1');
