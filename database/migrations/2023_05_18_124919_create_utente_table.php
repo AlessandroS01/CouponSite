@@ -26,6 +26,7 @@ return new class extends Migration
             $table->integer('numero_civico');
             $table->string('citta', 50);
             $table->integer('livello');
+
             $table->rememberToken();
             $table->timestamps();
         });

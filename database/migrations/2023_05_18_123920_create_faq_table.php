@@ -17,6 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->text('domanda');
             $table->text('risposta');
+
             $table->timestamps();
         });
     }

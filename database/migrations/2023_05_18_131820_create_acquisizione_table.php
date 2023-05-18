@@ -19,7 +19,6 @@ return new class extends Migration
             $table->string('cliente', 50);
 
             $table->primary(['offerta', 'cliente']);
-            $table->index(['offerta', 'cliente']);
 
             $table->foreign('offerta')
                 ->references('codice')
@@ -32,6 +31,8 @@ return new class extends Migration
                 ->on('utente')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->timestamps();
         });
     }
 

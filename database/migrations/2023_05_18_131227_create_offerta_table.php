@@ -36,6 +36,8 @@ return new class extends Migration
                 ->on('utente')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->timestamps();
         });
     }
 

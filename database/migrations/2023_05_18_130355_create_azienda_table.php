@@ -21,6 +21,8 @@ return new class extends Migration
             $table->longText('descrizione');
             $table->longText('logo');
             $table->string('ragione_sociale', 20)->nullable();
+
+            $table->timestamps();
         });
     }
 

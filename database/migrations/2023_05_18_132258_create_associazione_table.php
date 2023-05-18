@@ -30,6 +30,8 @@ return new class extends Migration
                 ->on('pacchetto')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
+
+            $table->timestamps();
         });
     }
 
