@@ -2,19 +2,12 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Log;
-use App\Models\Faq;
 
 
 class PublicController extends Controller
 {
-    // crea una varibile che contiene le faq
-    protected $_faqs;
-
-    public function __construct() {
-        // inizializza il valore della variabile contenente le faq
-        $this->_faqs = new Faq;
-    }
 
     public function showHome() {
         return view('home');  //passare alla view i prodotti da visualizzare nella home contenuti in Models/prodotti.php
@@ -34,7 +27,7 @@ class PublicController extends Controller
 
     public function showFaq() {
         // passa alla vista l'insieme di tutte le faq
-        return view('faqs', ['faqs' => $this->_faqs->getFaqs()]);
+        return view('faqs', [ 'faqs' => Faq::all()] );
     }
 
     public function showLogin() {

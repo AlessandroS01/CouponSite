@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Pacchetto extends Model {
 
     protected $table = 'pacchetto';
-    protected $primaryKey = 'pacchettoId';
+    protected $primaryKey = 'codice';
 
-    // pacchettoId non modificabile da un HTTP Request (Mass Assignment)
-    protected $guarded = ['pacchettoId'];
+    // codice non modificabile da un HTTP Request (Mass Assignment)
+    protected $guarded = ['codice'];
 
     public $timestamps = false;
 
