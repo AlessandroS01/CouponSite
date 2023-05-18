@@ -1,0 +1,82 @@
+#faqs{
+  width: 100%;
+}
+
+button{
+  background-color: white;
+}
+
+
+.titolo-faq{
+  padding: 20px;
+  margin: 0%;
+  color: black;
+  width: 100%;
+  font-size: 43px;
+  font-family: 'Open Sans', sans-serif;
+}
+
+.faq-container{
+  margin: 0 auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: white;
+  max-width: 800px;
+
+}
+
+
+/* Style the buttons that are used to open and close the accordion panel */
+.accordion {
+  margin: auto;
+  border-top: 2px solid var(--main-color);
+  border-bottom: 2px solid var(--main-color);
+  border-left: none;
+  border-right: none;
+  font-weight: bold;
+  color: black;
+  cursor: pointer;
+  padding: 18px;
+  width: 100%;
+  text-align: left;
+  outline: none;
+  transition: 0.4s;
+  margin-bottom: 5px;
+  font-size: 16px;
+  transition: 0.4s;
+}
+
+/* Add a background color to the button if it is clicked on (add the .active class with JS), and when you move the mouse over it (hover) */
+.active, .accordion:hover {
+  background-color: #b4b5d3;
+}
+
+/* Style the accordion panel. Note: hidden by default */
+.container-risposta {
+  margin-bottom: 10px;
+  width: 100%;
+  background-color: white;
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height 0.2s ease-out;
+}
+
+.container-risposta p {
+  text-align: left ;
+  padding: 0 15px;
+}
+
+.accordion:after {
+  content: '\02795'; /* Unicode character for "plus" sign (+) */
+  font-size: 10px;
+  color: black ;
+  float: right;
+  margin-left: 5px;
+}
+
+.active:after {
+  content: "\2796"; /* Unicode character for "minus" sign (-) */
+}
+  

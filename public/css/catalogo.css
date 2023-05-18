@@ -1,0 +1,144 @@
+.container-barra_ricerca{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+}
+
+.barra-ricerca{
+    display: grid;
+    grid-template-columns: 70% 24% 6%;
+    padding: 5px;
+
+    margin-top: 20px;
+    width: 25%;
+    border-radius: 20px;
+    border: 2px solid var(--main-color);
+    align-items: center;
+}
+
+
+
+.container-barra_ricerca .barra-ricerca:hover{
+    box-shadow: 1px 1px 3px var(--main-color);
+}
+
+
+.lente-ricerca{
+    max-width: 100%;
+}
+
+
+.barra-ricerca input {
+    font-size: 15px;
+    padding: 5px;
+    background-color: transparent;
+}
+
+.barra-ricerca input:focus{
+    outline: none;
+}
+
+.ricerca-prodotto{
+    border-top: none ;
+    border-bottom: none ;
+    border-left: none ;
+    border-right: 1.5px solid var(--main-color);
+}
+
+.ricerca-azienda{
+    border: none;
+}
+
+
+.catalogo{
+    background-color: var(--main-color);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    max-width: 1000px;
+    margin: auto;
+    margin-top: 30px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0px #00000085;
+    margin-bottom: 40px;
+}
+
+.catalogo-offerte{
+    display: grid;
+    grid-template-columns: 20% 80%;
+    width: 100%;
+    
+}
+
+.catalogo-offerte .filters{
+    width: 100%;
+    margin: 20px 0;
+
+
+}
+
+.catalogo-offerte .filters h2{
+    padding: 10px 10px;
+    margin: 0;
+    color: white;
+
+}
+
+.accordion-panel{
+    margin-bottom: 10px;
+    width: 100%;
+    background-color: transparent;
+    overflow: hidden;
+    max-height: 0;
+    transition: max-height 0.2s ease-out;
+    color: white;
+    margin: 0;
+}
+
+.catalogo .accordion{
+    background-color: var(--main-color);
+    color: white;
+    margin-bottom: 0;
+}
+
+.accordion-panel fieldset{
+    border: 0;
+
+}
+
+.filter-items label{
+  margin-top: 10px;
+}
+
+.offerte{
+    background-color: white;
+    border-radius: 0 20px 20px 0;
+}
+
+.filter-items{
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-items label{
+    margin-top: 10px;
+}
+
+.offerte {
+    display: grid;
+    grid-template-columns: auto auto auto;
+    width: 100%;
+    margin: auto;
+}
+
+.catalogo .container-offerte {
+    background-color: white;
+    padding: 15px;
+    border-radius: 0 20px 20px 0;
+}
+
+.offerte .card {
+    width: 250px;
+    margin-top: 20px ;
+}

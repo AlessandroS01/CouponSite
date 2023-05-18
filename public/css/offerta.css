@@ -1,0 +1,120 @@
+.container-offerta_completa{
+    width: 90%;
+    margin-top: 30px;
+    margin-left: 2%;
+    display: grid;
+    grid-template-columns: 43% 35% 20%;
+    gap: 40px;
+    align-items: center;
+
+}
+
+.container-offerta_completa img{
+    width: 100%;
+    margin: 0;
+}
+
+
+.ancora_azienda{
+    font-size: 14px;
+    text-decoration: none;
+    color: #007185;
+    margin: 0px;
+    display: inline-block;
+    margin-bottom: 30px;
+}
+
+.ancora_azienda:hover{
+    cursor: pointer;
+    text-decoration: underline;
+    color: rgb(255, 102, 0);
+}
+
+.container-prezzo_offerta .span-offerta{
+    color: #cc0c39;
+}
+.container-prezzo_offerta h6 span{
+    color: black !important;
+}
+
+.container-prezzo_scontato{
+    display: grid;
+    grid-template-columns: 15% 75%;
+    align-items: center;
+}
+
+.container-prezzo_scontato .sconto_offerta{
+    color: #cc0c39;
+    margin: 0;
+}
+.container-prezzo_scontato h2{
+    margin: 0;
+}
+
+
+
+.container-prezzo_offerta h6{
+    color: #565959;
+    margin-bottom: 0;
+}
+
+.container-dettagli-offerta hr{
+    margin: 0;
+    border: none;
+    border-top: 1px solid var(--main-color);
+}
+
+.container-prezzo_offerta h6 span{
+    text-decoration: line-through;
+    color: #565959 !important;
+}
+
+.container-dettagli-offerta .descrizione-offerta{
+    margin-top: 20px;
+}
+
+.container-acquisizione_offerta{
+    border: 1px solid var(--main-color);
+    margin-left: 70px;
+    display: flex;
+    flex-direction: column;
+    padding: 15px;
+    align-items: flex-start;
+}
+
+.container-acquisizione_offerta p,
+.container-acquisizione_offerta h3{
+    color: var(--main-color);
+}
+
+
+
+.modalita-fruizione_offerta{
+    font-size: 14px;
+    margin-top: 30px;
+    color: #565959;
+}
+
+.bottone-acquisizione{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    align-self: center;
+}
+
+.bottone-acquisizione a{
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 15px;
+    font-weight: bold;
+}
+
+
+
+
+
+
+

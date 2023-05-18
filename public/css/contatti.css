@@ -1,0 +1,48 @@
+.container-contatti {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+    background-color: white;
+    justify-content: center;
+    margin: 0;
+    padding: 20px;
+}
+
+
+.contact-info h2 {
+    margin-left: 40px;
+    font-size: 24px;
+    margin-bottom: 10px;
+    font-family: 'Open Sans', sans-serif;
+    margin-top: 10px;
+
+}
+.contatti h1{
+    margin-left: 170px;
+    font-size: 36px;
+    margin-bottom: 35px;
+    font-family: 'Open Sans', sans-serif;
+}
+
+.contatti .contact-info{
+    display: flex;
+    flex-direction: column;
+    margin-left: 200px;
+}
+
+.contact-info p {
+    margin: 0;
+    line-height: 1.5;
+}
+
+.contact-info i {
+    margin-left: 60px;
+    margin-right: 10px;
+}
+
+.mappa{
+    right: 0;
+    margin-top: 70px;
+    width: 400px;
+}
+

@@ -1,0 +1,91 @@
+.container-login{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.container-login h1{
+    color: var(--main-color);
+    display: inline-block;
+}
+
+
+.container-dati-login{
+    height: 45px;
+    padding: 10px;
+    display: flex;
+    align-content: center;
+    margin-top: 10px;
+    position: relative;
+    margin-bottom: 10px;
+}
+
+.container-dati-login input{
+    width: 100%;
+    font-size: 17px;
+    padding-top: 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    padding-left: 10px;
+    color: var(--main-color);
+}
+
+
+.container-dati-login input:focus,
+.container-dati-login input:hover{
+    box-shadow: 0px 0px 10px #7b7e9d;
+    outline: none;
+}
+
+
+.container-dati-login span{
+    color: var(--main-color);
+    position: absolute;
+    left: 20px;
+    top: 13px;
+    pointer-events: none;
+    font-size: 13px;
+}
+
+.container-autenticazione_button{
+    width: 15%;
+    margin-top: 40px;
+}
+
+.container-autenticazione_button button{
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 15px;
+    border: 2px solid var(--main-color);
+    background-color: white;
+    cursor: pointer;
+    transition: all 0.25s;
+    border-radius: 5px;
+    color: var(--main-color);
+}
+
+.container-autenticazione_button button:hover{
+    background-color: var(--main-color);
+    color: white;
+    box-shadow: 1px 1px 10px #7b7e9d;
+    font-style: bold;
+}
+
+.container-autenticazione_button:hover a{
+    color: white;
+    font-style: bold;
+}
+
+.container-auth{
+    border: 5px solid var(--main-color);
+    border-radius: 40px;
+    width: 400px;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+}
+
+.container-autenticazione_button a {
+    display: block;
+    text-decoration: none;
+    color: var(--main-color);
+}
