@@ -14,8 +14,11 @@ class CatalogoAziende extends Model {
         return Azienda::take(3)->get();
     }
 
-    public function getPrimi5Elementi() {
-        return Azienda::take(3)->get();
+    /**
+     * @return i primi 5 elementi della relazione Azienda
+     */
+    public function getPrimiCinqueElementi() {
+        return Azienda::take(5)->get();
     }
 
 

@@ -18,11 +18,13 @@
 
         <div class="slideshow-container">
 
-            @foreach($allAziende as $index => $azienda )
+            @foreach($catalogoAziende->getPrimiTreElementi() as $index => $singolaAzienda )
+
             <div class="slide fade">
                 <div class="numbertext">{{ $index + 1 }} / 3</div>
-                <img src={{ $azienda->logo }} style="width:100%">
+                <img src={{ $singolaAzienda->logo }} style="width:100%">
             </div>
+
             @endforeach
 
             <a class="prev" onclick="plusSlides(-1)">❮</a>

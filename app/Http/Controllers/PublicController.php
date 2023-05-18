@@ -13,10 +13,8 @@ class PublicController extends Controller
 
     //passare alla view i prodotti da visualizzare nella home contenuti in Models/prodotti.php
     public function showHome() {
-        $allAziende = Azienda::all();
         $catalogoAziende = new CatalogoAziende;
         return view('home')
-                    ->with('allAziende', $allAziende)
                     ->with('catalogoAziende', $catalogoAziende);
     }
 
