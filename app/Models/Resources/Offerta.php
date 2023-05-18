@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Offerta extends Model {
 
     protected $table = 'offerta';
-    protected $primaryKey = 'offertaId';
+    protected $primaryKey = 'codice';
 
-    // offertaId non modificabile da un HTTP Request (Mass Assignment)
-    protected $guarded = ['offertaId'];
+    // codice non modificabile da un HTTP Request (Mass Assignment)
+    protected $guarded = ['codice'];
 
     public $timestamps = false;
 

@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Faq extends Model {
 
     protected $table = 'faq';
-    protected $primaryKey = 'faqId';
+    protected $primaryKey = 'id';
 
-    // faqId non modificabile da un HTTP Request (Mass Assignment)
-    protected $guarded = ['faqId'];
+    // id non modificabile da un HTTP Request (Mass Assignment)
+    protected $guarded = ['id'];
 
     public $timestamps = false;
 

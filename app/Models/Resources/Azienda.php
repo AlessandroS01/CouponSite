@@ -7,10 +7,10 @@ use Illuminate\Database\Eloquent\Model;
 class Azienda extends Model {
 
     protected $table = 'azienda';
-    protected $primaryKey = 'partitaIva';
+    protected $primaryKey = 'partita_iva';
 
-    // partitaIva non modificabile da un HTTP Request (Mass Assignment)
-    protected $guarded = ['partitaIva'];
+    // partita_iva non modificabile da un HTTP Request (Mass Assignment)
+    protected $guarded = ['partita_iva'];
 
     public $timestamps = false;
 
