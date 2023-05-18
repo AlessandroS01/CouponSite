@@ -62,9 +62,9 @@ class DatabaseSeeder extends Seeder {
         ]);
 
         DB::table('azienda')->insert([
-            ["partita_iva"=>"00011122233", "nome" => "mediaworld", "localita" => "Ancona", "tipologia" =>"elettronica", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"prova.jpg", "ragione_sociale" => "S.p.a"],
-            ["partita_iva"=>"00011122234", "nome" => "euronics", "localita" => "Pescara", "tipologia" =>"elettronica", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"prova.jpg", "ragione_sociale" => "S.p.a"],
-            ["partita_iva"=>"00011122235", "nome" => "H&M", "localita" => "Ancona", "tipologia" =>"abbigliamento", "descrizione" => "negozio di abbigliamento", "logo"=>"prova.jpg", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122233", "nome" => "mediaworld", "localita" => "Ancona", "tipologia" =>"elettronica", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"public/img/Media_World_Logo.png", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122234", "nome" => "euronics", "localita" => "Pescara", "tipologia" =>"elettronica", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"public/img/Nuovo_logo_Euronics.png", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122235", "nome" => "H&M", "localita" => "Ancona", "tipologia" =>"abbigliamento", "descrizione" => "negozio di abbigliamento", "logo"=>"public/img/HM-Share-Image.jpg", "ragione_sociale" => "S.p.a"],
 
         ]);
 
