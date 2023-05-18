@@ -18,20 +18,12 @@
 
         <div class="slideshow-container">
 
+            @foreach($allAziende as $index => $azienda )
             <div class="slide fade">
-            <div class="numbertext">1 / 3</div>
-            <img src="img/amazon.png" style="width:100%">
+                <div class="numbertext">{{ $index + 1 }} / 3</div>
+                <img src={{ $azienda->logo }} style="width:100%">
             </div>
-
-            <div class="slide fade">
-            <div class="numbertext">2 / 3</div>
-            <img src="img/office.jpg" style="width:100%">
-            </div>
-
-            <div class="slide fade">
-            <div class="numbertext">3 / 3</div>
-            <img src="img/amazon.png" style="width:100%">
-            </div>
+            @endforeach
 
             <a class="prev" onclick="plusSlides(-1)">❮</a>
             <a class="next" onclick="plusSlides(1)">❯</a>
@@ -51,8 +43,8 @@
 
                 @foreach($catalogoAziende->getPrimiTreElementi() as $singolaAzienda)
                 <div class="card-azienda">
-                <img src="img/amazon.png" >
-                <a href="{{ route('azienda') }}">{{ $singolaAzienda-> nome}}</a>
+                <img src={{ $singolaAzienda->logo }} >
+                <a href="{{ route('azienda') }}">{{ $singolaAzienda->nome }}</a>
                 </div>
                 @endforeach
 
