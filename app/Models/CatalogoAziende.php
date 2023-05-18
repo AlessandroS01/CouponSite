@@ -14,6 +14,10 @@ class CatalogoAziende extends Model {
         return Azienda::take(3)->get();
     }
 
+    public function getPrimi5Elementi() {
+        return Azienda::take(3)->get();
+    }
+
 
 
 }
