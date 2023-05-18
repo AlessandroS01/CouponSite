@@ -6,8 +6,8 @@ use Illuminate\Support\Facades\Log;
 use App\Models\Faq;
 
 
-class PublicController extends Controller
+class ClientController extends Controller
 {
-   
+
 
 }
