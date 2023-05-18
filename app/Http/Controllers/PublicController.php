@@ -2,6 +2,8 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatalogoAziende;
+use App\Models\Resources\Azienda;
 use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Log;
 
@@ -9,8 +11,13 @@ use Illuminate\Support\Facades\Log;
 class PublicController extends Controller
 {
 
+    //passare alla view i prodotti da visualizzare nella home contenuti in Models/prodotti.php
     public function showHome() {
-        return view('home');  //passare alla view i prodotti da visualizzare nella home contenuti in Models/prodotti.php
+        $allAziende = Azienda::all();
+        $catalogoAziende = new CatalogoAziende;
+        return view('home')
+                    ->with('allAziende', $allAziende)
+                    ->with('catalogoAziende', $catalogoAziende);
     }
 
     public function showCatalogoOfferte() {

@@ -15,6 +15,7 @@
 
 
 
+
         <div class="slideshow-container">
 
             <div class="slide fade">
@@ -36,45 +37,27 @@
             <a class="next" onclick="plusSlides(1)">❯</a>
 
             <div id="dot-container">
-            <span class="dot" onclick="currentSlide(1)"></span> 
-            <span class="dot" onclick="currentSlide(2)"></span> 
-            <span class="dot" onclick="currentSlide(3)"></span> 
+            <span class="dot" onclick="currentSlide(1)"></span>
+            <span class="dot" onclick="currentSlide(2)"></span>
+            <span class="dot" onclick="currentSlide(3)"></span>
             </div>
 
 
         </div>
 
         <div id="row-aziende">
-            
+
             <div id="aziende-container">
 
+                @foreach($catalogoAziende->getPrimiTreElementi() as $singolaAzienda)
                 <div class="card-azienda">
                 <img src="img/amazon.png" >
-                <a href="{{ route('azienda') }}">Nome Azienda</a>
+                <a href="{{ route('azienda') }}">{{ $singolaAzienda-> nome}}</a>
                 </div>
-                
-                <div class="card-azienda">
-                <img src="img/office.jpg" >
-                <a href="{{ route('azienda') }}"">Nome Azienda</a>
-                </div>
-                
-                <div class="card-azienda">
-                <img src="img/amazon.png" >
-                <a href="{{ route('azienda') }}"">Nome Azienda</a>
-                </div>
+                @endforeach
 
-                <div class="card-azienda">
-                <img src="img/office.jpg" >
-                <a href="{{ route('azienda') }}"">Nome Azienda</a>
-                </div>
-                
-                <div class="card-azienda">
-                <img src="img/amazon.png" >
-                <a href="{{ route('azienda') }}"">Nome Azienda</a>
-                </div>    
+            </div>
 
-            </div>    
-                
 
         </div>
 
@@ -93,12 +76,12 @@
 
     <h1>Offerte in evidenza</h1>
     </div>
-    
-    
+
+
     <div class="container-offerte">
-        
+
         <div class="card">
-            
+
             <div class="img-container">
                 <img src="img/amazon.png" alt="logo offerta" >
             </div>
@@ -116,11 +99,11 @@
                 <p>50%</p>
             </div>
 
-            
+
         </div>
 
         <div class="card">
-            
+
             <div class="img-container">
                 <img src="img/amazon.png" alt="logo offerta" >
             </div>
@@ -138,11 +121,11 @@
                 <p>50%</p>
             </div>
 
-            
+
         </div>
 
         <div class="card">
-            
+
             <div class="img-container">
                 <img src="img/amazon.png" alt="logo offerta" >
             </div>
@@ -160,11 +143,11 @@
                 <p>50%</p>
             </div>
 
-            
+
         </div>
 
-    </div>  
-    
+    </div>
+
     <div class="title-offerte-home">
         <h1>Scadono a breve</h1>
     </div>
@@ -172,7 +155,7 @@
     <div class="container-offerte">
 
         <div class="card">
-            
+
             <div class="img-container">
                 <img src="img/amazon.png" alt="logo offerta" >
             </div>
@@ -190,12 +173,12 @@
                 <p>50%</p>
             </div>
 
-            
+
         </div>
 
 
         <div class="card">
-            
+
             <div class="img-container">
                 <img src="img/amazon.png" alt="logo offerta" >
             </div>
@@ -213,11 +196,11 @@
                 <p>50%</p>
             </div>
 
-            
+
         </div>
 
         <div class="card">
-            
+
             <div class="img-container">
                 <img src="img/amazon.png" alt="logo offerta" >
             </div>
@@ -235,7 +218,7 @@
                 <p>50%</p>
             </div>
 
-            
+
         </div>
 
 
