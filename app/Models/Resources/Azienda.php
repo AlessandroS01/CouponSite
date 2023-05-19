@@ -14,5 +14,4 @@ class Azienda extends Model {
 
     public $timestamps = false;
 
-
 }

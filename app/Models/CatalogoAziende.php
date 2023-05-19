@@ -23,10 +23,10 @@ class CatalogoAziende extends Model {
     }
 
     /**
-     * @return l'azienda con il nome dato come parametro
+     * @return l'azienda con la partita iva data come parametro
      */
-    public function getAziendaByNome($nome_azienda) {
-        return Azienda::where('nome', $nome_azienda)->first();
+    public function getAziendaByPartitaIva($partita_iva) {
+        return Azienda::where('partita_iva', $partita_iva)->first();
     }
 
     /**

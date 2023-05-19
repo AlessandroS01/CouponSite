@@ -42,7 +42,7 @@
 
                     <div class="card-azienda">
                     <img src={{ $azienda->logo }} >
-                    <a href="{{ route('azienda', ['nome' => $azienda->nome] ) }}">{{ $azienda->nome }}</a>
+                    <a href="{{ route('azienda', ['partita_iva' => $azienda->partita_iva] ) }}">{{ $azienda->nome }}</a>
                     </div>
 
                 @endforeach

@@ -71,10 +71,10 @@ class PublicController extends Controller
                     ->with('azienda', $this->catalogoAziende->getAziendaByOfferta($offerta));
     }
 
-    public function showAzienda($nome) {
+    public function showAzienda($partita_iva) {
 
-        $azienda = $this->catalogoAziende->getAziendaByNome($nome);
-        $offerte = $this->catalogoOfferte->getOfferteByAzienda($azienda);
+        $azienda = $this->catalogoAziende->getAziendaByPartitaIva($partita_iva);
+        $offerte = $this->catalogoOfferte->getOfferteByAzienda($partita_iva);
 
         return view('azienda')
                         ->with('azienda', $azienda)
