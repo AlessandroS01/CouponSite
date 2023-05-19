@@ -79,7 +79,7 @@ Route::get('/signup', [PublicController::class, 'showSignup'])
         ->name('signup');
 
 // rotta per visualizzare un'offerta dopo il click su ottieni
-Route::get('/offerta', [PublicController::class, 'showOfferta'])
+Route::get('/offerta/{offertaId}', [PublicController::class, 'showOfferta'])
         ->name('offerta');
 
 // rotta per visualizzare un'azienda dopo il click su una di esse

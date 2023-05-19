@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Resources\Azienda;
+use App\Models\Resources\Offerta;
 use Illuminate\Database\Eloquent\Model;
 
 class CatalogoAziende extends Model {
@@ -19,6 +20,13 @@ class CatalogoAziende extends Model {
      */
     public function getPrimiCinqueElementi() {
         return Azienda::take(5)->get();
+    }
+
+    /**
+     * @return l'azienda di una determinata offerta
+     */
+    public function getAziendaByOfferta(Offerta $offerta) {
+        return Azienda::where('partita_iva', $offerta->azienda)->get();
     }
 
 

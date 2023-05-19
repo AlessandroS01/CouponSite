@@ -12,13 +12,20 @@ use Illuminate\Support\Facades\Log;
 class PublicController extends Controller
 {
 
+    protected $catalogoAzienda;
+    protected $catalogoOfferte;
+
+    public function _construct(){
+        $this->catalogoAziende = new CatalogoAziende;
+        $this->catalogoOfferte = new CatalogoOfferte;
+    }
+
+
     //passare alla view i prodotti da visualizzare nella home contenuti in Models/prodotti.php
     public function showHome() {
-        $catalogoAziende = new CatalogoAziende;
-        $catalogoOfferte = new CatalogoOfferte;
         return view('home')
-                    ->with('catalogoAziende', $catalogoAziende)
-                    ->with('catalogoOfferte', $catalogoOfferte);
+                    ->with('catalogoAziende', $this->catalogoAziende)
+                    ->with('catalogoOfferte', $this->catalogoOfferte);
     }
 
     public function showCatalogoOfferte() {
@@ -51,8 +58,9 @@ class PublicController extends Controller
     }
 
 
-    public function showOfferta() {
-        return view('offerta');
+    public function showOfferta($offertaId) {
+        return view('offerta')
+                    ->with('offerta', $this->catalogoOfferte->getOffertaByID($offertaId));
     }
 
     public function showAzienda() {
