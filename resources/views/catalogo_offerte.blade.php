@@ -9,7 +9,7 @@
             <input class="ricerca-prodotto" type="search" name="prodotto" placeholder="Prodotto">
             <input class="ricerca-azienda" type="search" name="azienda" placeholder="Azienda">
             <a href="{{ route('catalogo_offerte_search', ['prodotto' => request('prodotto'), 'azienda' => request('azienda')]) }}">
-                <img class="lente-ricerca" src="img/search_icon.svg">
+                <img class="lente-ricerca" src="{{asset("img/search_icon.svg")}}">
             </a>
         </div>
     </div>
@@ -83,91 +83,26 @@
             <div class="container-offerte">
                 <div class="offerte">
 
-                    <div class="card">
-
-                        <div class="img-container">
-                            <img src="img/amazon.png" alt="logo offerta" >
-                        </div>
-
-                        <div class="info">
-                            <h1>Offerta</h1>
-                            <p>Descrizione offerta</p>
-                        </div>
-
-                        <div class="button">
-                            <a href="{{ route('offerta') }}">ottieni</a>
-                        </div>
-
-                        <div class="badge">
-                            <p>50%</p>
-                        </div>
-
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="img-container">
-                            <img src="img/amazon.png" alt="logo offerta" >
-                        </div>
-
-                        <div class="info">
-                            <h1>Offerta</h1>
-                            <p>Descrizione offerta</p>
-                        </div>
-
-                        <div class="button">
-                            <a href="{{ route('offerta') }}">ottieni</a>
-                        </div>
-
-                        <div class="badge">
-                            <p>50%</p>
-                        </div>
-
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="img-container">
-                            <img src="img/amazon.png" alt="logo offerta" >
-                        </div>
-
-                        <div class="info">
-                            <h1>Offerta</h1>
-                            <p>Descrizione offerta</p>
-                        </div>
-
-                        <div class="button">
-                            <a href="{{ route('offerta') }}">ottieni</a>
-                        </div>
-
-                        <div class="badge">
-                            <p>50%</p>
-                        </div>
-
-
-                    </div>
-
-                    <div class="card">
-
-                        <div class="img-container">
-                            <img src="img/amazon.png" alt="logo offerta" >
-                        </div>
-
-                        <div class="info">
-                            <h1>Offerta</h1>
-                            <p>Descrizione offerta</p>
-                        </div>
-
-                        <div class="button">
-                            <a href="{{ route('offerta') }}">ottieni</a>
-                        </div>
-
-                        <div class="badge">
-                            <p>50%</p>
-                        </div>
-
+                    <div class="offerte">
+                        @if(isset($parametro))
+                            @foreach ($offerte as $offerte)
+                                <div class="card">
+                                    <div class="img-container">
+                                        <img src="{{ asset('img/amazon.png') }}" alt="logo offerta">
+                                    </div>
+                                    <div class="info">
+                                        <h1>{{ $offerte->titolo }}</h1>
+                                        <p>{{ $offerte->descrizione }}</p>
+                                    </div>
+                                    <div class="button">
+                                        <a href="{{ route('offerta'), ['offertaId' => $offerte->titolo] }}">ottieni</a>
+                                    </div>
+                                    <div class="badge">
+                                        <p>{{ $offerte->sconto }}%</p>
+                                    </div>
+                                </div>
+                            @endforeach
+                        @endif
 
                     </div>
 
@@ -177,6 +112,7 @@
             </div>
 
         </div>
+
     </section>
 
 

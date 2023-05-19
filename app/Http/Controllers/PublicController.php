@@ -29,7 +29,9 @@ class PublicController extends Controller
     }
 
     public function showCatalogoOfferte() {
-        return view('catalogo_offerte');
+        $offerte = $this->catalogoOfferte->getOfferteByName();
+        return view('catalogo_offerte')
+                    -> with('offerte', $offerte);
     }
 
     public function showCatalogoAziende() {
@@ -68,8 +70,10 @@ class PublicController extends Controller
     }
 
     public function showSearchOfferta() {
+        $prodotto = request('prodotto');
+        $offerte = $this->catalogoOfferte->getOffertaByProdotto($prodotto);
         return view('catalogo_offerte')
-            ->with('prodotto', request('prodotto'))
+            ->with('offerte', $offerte)
             ->with('azienda', request('azienda'));
     }
 

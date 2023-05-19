@@ -30,9 +30,17 @@ class CatalogoOfferte extends Model {
         return Offerta::where('codice',$offertaId)->get();
     }
 
+    public function getOffertaByProdotto($prodotto) {
+        return Offerta::where('oggetto_offerta', 'like', "%{$prodotto}%")->get();
+    }
     public function getPrezzoScontato($offerta){
 
     }
+
+    public function getOfferteByName() {
+        return Offerta::orderBy('azienda')->get();
+    }
+
 
 
 
