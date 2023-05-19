@@ -35,7 +35,7 @@ class CatalogoOfferte extends Model {
      * @return la lista delle offerte dell'azienda passata come parametro
      */
     public function getOfferteByAzienda($partita_iva){
-        return Offerta::where('azienda',$partita_iva)->get();
+        return Offerta::where('azienda', $partita_iva)->get();
     }
 
     public function getOffertaByProdotto($prodotto) {

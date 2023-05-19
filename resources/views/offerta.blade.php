@@ -16,7 +16,7 @@
             <div class="container-dettagli-offerta">
                 <h1> {{ $offerta->oggetto_offerta }}</h1>
                 <!-- l'href va puntato alla pagina dell'azienda -->
-                <a class="ancora_azienda"href=" {{ route('azienda', ['nome' => $azienda->nome] ) }}">
+                <a class="ancora_azienda"href=" {{ route('azienda', ['partita_iva' => $azienda->partita_iva] ) }}">
                     {{ $azienda->nome }}
                 </a>
 
