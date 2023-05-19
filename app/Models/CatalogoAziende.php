@@ -5,6 +5,8 @@ namespace App\Models;
 use App\Models\Resources\Azienda;
 use App\Models\Resources\Offerta;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Log;
 
 class CatalogoAziende extends Model {
 
@@ -23,17 +25,21 @@ class CatalogoAziende extends Model {
     }
 
     /**
+     * @param $partita_iva rappresenta la partita iva dell'azienda che si vuole ricercare
      * @return l'azienda con la partita iva data come parametro
      */
     public function getAziendaByPartitaIva($partita_iva) {
-        return Azienda::where('partita_iva', $partita_iva)->first();
+
+        // Non restituisce il valore dell'oggetto azienda se levassimo like e %
+        return Azienda::where('partita_iva', 'like', "%{$partita_iva}")->first();
+
     }
 
     /**
      * @param $offerta rappresenta l'offerta da cui si può riprendere la partita iva dell'azienda
      * @return l'azienda di una determinata offerta
      */
-    public function getAziendaByOfferta(Offerta $offerta) {
+    public function getAziendaByOfferta($offerta) {
         return Azienda::where('partita_iva', $offerta->azienda)->first();
     }
 

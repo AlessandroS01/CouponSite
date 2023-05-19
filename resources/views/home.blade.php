@@ -42,7 +42,7 @@
 
                     <div class="card-azienda">
                     <img src={{ $azienda->logo }} >
-                    <a href="{{ route('azienda', ['partita_iva' => $azienda->partita_iva] ) }}">{{ $azienda->nome }}</a>
+                    <a href="{{ route('azienda', [ 'partita_iva' => $azienda->partita_iva ] ) }}">{{ $azienda->nome }}</a>
                     </div>
 
                 @endforeach
@@ -70,7 +70,7 @@
             <div class="card">
 
                 <div class="img-container">
-                    <img src="img/amazon.png" alt="logo offerta" >
+                    <img src="{{ asset( $catalogoOfferte->getLogoAziendaByOfferta($offerta)) }}" alt="logo offerta" >
                 </div>
 
                 <div class="info">
@@ -103,7 +103,7 @@
             <div class="card">
 
                 <div class="img-container">
-                    <img src="img/amazon.png" alt="logo offerta" >
+                    <img src="{{ asset( $catalogoOfferte->getLogoAziendaByOfferta($offerta)) }}" alt="logo offerta" >
                 </div>
 
                 <div class="info">

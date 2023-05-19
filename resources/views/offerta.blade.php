@@ -4,12 +4,12 @@
 
 @section('content')
 
-    @isset($offerta, $azienda)
+    @isset($gestoreOfferte, $offerta, $azienda)
         <div class="container-offerta_completa">
 
             <div>
                 <h1> {{ $offerta->categoria }} </h1>
-                <img src="{{ asset('img/amazon.png') }}">
+                <img src="{{ asset($gestoreOfferte->getLogoAziendaByOfferta($offerta)) }}">
             </div>
 
 
@@ -25,7 +25,7 @@
                     <div class="container-prezzo_scontato">
                         <h2 class="sconto_offerta"> -{{ $offerta->percentuale_sconto }}% </h2>
 
-                        <h2 class="prezzo_scontato"> &#8364<span>{{ $offerta->prezzo_pieno }}</span> </h2>
+                        <h2 class="prezzo_scontato"> &#8364<span>{{ $gestoreOfferte->getPrezzoScontato($offerta) }}</span> </h2>
                     </div>
 
                     <h6> Prezzo iniziale: &#8364<span>{{ $offerta->prezzo_pieno }}</span></h6>
@@ -39,10 +39,10 @@
             <div class="container-acquisizione_offerta">
 
                 <!-- Modalità di fruizione dell'offerta -->
-                <p class="modalita-fruizione_offerta"> {{ $offerta->modalita_fruizione }} </p>
-                <p class="data-scadenza_offerta"> {{ $offerta->data_scadenza }} </p>
+                <p class="modalita-fruizione_offerta"> Modalità di fruizione: <br>{{ $offerta->modalita_fruizione }} </p>
+                <p class="data-scadenza_offerta"> Data di scadenza: <br>{{ $offerta->data_scadenza }} </p>
 
-                <h3> &#8364<span>{{ $offerta->prezzo_pieno }}</span></h3>
+                <h3> &#8364<span>Prezzo scontato: <br>{{ $gestoreOfferte->getPrezzoScontato($offerta) }}</span></h3>
 
                 <div class="bottone-acquisizione">
                     <a href="{{ route('login') }}">ottieni</a>

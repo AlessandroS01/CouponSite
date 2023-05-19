@@ -2,6 +2,7 @@
 
 namespace App\Models;
 
+use App\Models\Resources\Azienda;
 use App\Models\Resources\Offerta;
 use Illuminate\Database\Eloquent\Model;
 
@@ -31,18 +32,42 @@ class CatalogoOfferte extends Model {
     }
 
     /**
-     * @param $azienda rappresenta l'azienda di cui si vogliono ritrovare le offerte
-     * @return la lista delle offerte dell'azienda passata come parametro
+     * @param $partita_iva rappresenta la partita iva dell'azienda di cui si vogliono ritrovare le offerte
+     * @return la lista delle offerte dell'azienda che ha la partita iva passata come parametro
      */
     public function getOfferteByAzienda($partita_iva){
-        return Offerta::where('azienda', $partita_iva)->get();
+
+        $offerte = Offerta::where('azienda', $partita_iva)
+            ->orderBy('percentuale_sconto', 'desc')
+            ->get();
+
+        return $offerte;
+    }
+
+    /**
+     * @param $offerta rappresenta l'offerta da cui si vuole ricercare il logo dell'azienda
+     * @return il logo dell'azienda
+     */
+    public function getLogoAziendaByOfferta($offerta){
+
+        $azienda = Azienda::where('partita_iva', $offerta->azienda)->first();
+
+        return $azienda->logo;
+
+    }
+
+    /**
+     * @param $offerta rappresenta l'offerta di cui si vuole calcolare il prezzo
+     * @return il prezzo scontato del prodotto
+     */
+    public function getPrezzoScontato($offerta){
+
+        return $offerta->prezzo_pieno - ( $offerta->prezzo_pieno * ( $offerta->percentuale_sconto / 100) ) ;
+
     }
 
     public function getOffertaByProdotto($prodotto) {
         return Offerta::where('oggetto_offerta', 'like', "%{$prodotto}%")->get();
-    }
-    public function getPrezzoScontato($offerta){
-
     }
 
     public function getOfferteByName() {

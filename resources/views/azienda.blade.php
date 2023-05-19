@@ -34,7 +34,7 @@
                     <div class="card">
 
                         <div class="img-container">
-                            <img src='{{ asset("img/amazon.png") }}' alt="logo offerta" >
+                            <img src='{{ asset( $azienda->logo) }}' alt="logo offerta" >
                         </div>
 
                         <div class="info">
@@ -47,7 +47,7 @@
                         </div>
 
                         <div class="badge">
-                            <p>{{ $offerta->percentuale_sconto }}</p>
+                            <p>{{ $offerta->percentuale_sconto }}%</p>
                         </div>
 
                     </div>

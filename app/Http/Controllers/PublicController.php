@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 use App\Models\CatalogoAziende;
 use App\Models\CatalogoOfferte;
-use App\Models\Resources\Azienda;
 use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Log;
 
@@ -67,6 +66,7 @@ class PublicController extends Controller
         $offerta = $this->catalogoOfferte->getOffertaByID($offertaId);
 
         return view('offerta')
+                    ->with('gestoreOfferte', $this->catalogoOfferte)
                     ->with('offerta', $offerta )
                     ->with('azienda', $this->catalogoAziende->getAziendaByOfferta($offerta));
     }
@@ -74,7 +74,8 @@ class PublicController extends Controller
     public function showAzienda($partita_iva) {
 
         $azienda = $this->catalogoAziende->getAziendaByPartitaIva($partita_iva);
-        $offerte = $this->catalogoOfferte->getOfferteByAzienda($partita_iva);
+
+        $offerte = $this->catalogoOfferte->getOfferteByAzienda($azienda->partita_iva);
 
         return view('azienda')
                         ->with('azienda', $azienda)
