@@ -12,10 +12,10 @@ use Illuminate\Support\Facades\Log;
 class PublicController extends Controller
 {
 
-    protected $catalogoAzienda;
+    protected $catalogoAziende;
     protected $catalogoOfferte;
 
-    public function _construct(){
+    public function __construct(){
         $this->catalogoAziende = new CatalogoAziende;
         $this->catalogoOfferte = new CatalogoOfferte;
     }
@@ -60,7 +60,7 @@ class PublicController extends Controller
 
     public function showOfferta($offertaId) {
         return view('offerta')
-                    ->with('offerta', $this->catalogoOfferte->getOffertaByID($offertaId));
+                    ->with('offerta', $this->catalogoOfferte->getOffertaByID($offertaId) );
     }
 
     public function showAzienda() {

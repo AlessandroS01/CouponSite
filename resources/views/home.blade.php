@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="button">
-                    <a href="{{ route('offerta', [$offerta->codice]) }}">ottieni</a>
+                    <a href="{{ route('offerta', ['offertaId' => $offerta->codice]) }}">ottieni</a>
                 </div>
 
                 <div class="badge">
@@ -112,7 +112,7 @@
                 </div>
 
                 <div class="button">
-                    <a href="{{ route('offerta') }}">ottieni</a>
+                    <a href="{{ route('offerta', ['offertaId' => $offerta->codice]) }}">ottieni</a>
                 </div>
 
                 <div class="badge">

@@ -3,17 +3,18 @@
 @section('title', 'Offerta')
 
 @section('content')
+
     @isset($offerta)
         <div class="container-offerta_completa">
 
             <div>
-                <h1> Categoria del prodotto</h1>
+                <h1> {{ $offerta->categoria }} </h1>
                 <img src="img/amazon.png">
             </div>
 
 
             <div class="container-dettagli-offerta">
-                <h1> Prodotto in offerta</h1>
+                <h1> {{ $offerta->oggetto_offerta }}</h1>
                 <!-- l'href va puntato alla pagina dell'azienda -->
                 <a class="ancora_azienda"href=" {{ route('azienda') }}">
                     Azienda riferimento
