@@ -42,7 +42,7 @@
 
                     <div class="card-azienda">
                     <img src={{ $azienda->logo }} >
-                    <a href="{{ route('azienda') }}">{{ $azienda->nome }}</a>
+                    <a href="{{ route('azienda', ['nome' => $azienda->nome] ) }}">{{ $azienda->nome }}</a>
                     </div>
 
                 @endforeach
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="button">
-                    <a href="{{ route('offerta', ['offertaId' => $offerta->codice]) }}">ottieni</a>
+                    <a href="{{ route('offerta', ['offertaId' => $offerta->codice] ) }}">ottieni</a>
                 </div>
 
                 <div class="badge">
