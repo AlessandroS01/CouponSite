@@ -29,9 +29,11 @@ class PublicController extends Controller
     }
 
     public function showCatalogoOfferte() {
+
         $offerte = $this->catalogoOfferte->getOfferteByName();
+
         return view('catalogo_offerte')
-                    -> with('offerte', $offerte);
+                            -> with('offerte', $offerte);
     }
 
     public function showCatalogoAziende() {
@@ -61,12 +63,22 @@ class PublicController extends Controller
 
 
     public function showOfferta($offertaId) {
+
+        $offerta = $this->catalogoOfferte->getOffertaByID($offertaId);
+
         return view('offerta')
-                    ->with('offerta', $this->catalogoOfferte->getOffertaByID($offertaId) );
+                    ->with('offerta', $offerta )
+                    ->with('azienda', $this->catalogoAziende->getAziendaByOfferta($offerta));
     }
 
-    public function showAzienda() {
-        return view('azienda');
+    public function showAzienda($partita_iva) {
+
+        $azienda = $this->catalogoAziende->getAziendaByPartitaIva($partita_iva);
+        $offerte = $this->catalogoOfferte->getOfferteByAzienda($partita_iva);
+
+        return view('azienda')
+                        ->with('azienda', $azienda)
+                        ->with('offerte', $offerte);
     }
 
     public function showSearchOfferta() {

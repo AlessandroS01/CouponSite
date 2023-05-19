@@ -94,7 +94,7 @@ Route::get('/offerta/{offertaId}', [PublicController::class, 'showOfferta'])
         ->name('offerta');
 
 // rotta per visualizzare un'azienda dopo il click su una di esse
-Route::get('/azienda', [PublicController::class, 'showAzienda'])
+Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
         ->name('azienda');
 
 // rotta per accedere alla sezione del cliente

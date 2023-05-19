@@ -4,20 +4,20 @@
 
 @section('content')
 
-    @isset($offerta)
+    @isset($offerta, $azienda)
         <div class="container-offerta_completa">
 
             <div>
                 <h1> {{ $offerta->categoria }} </h1>
-                <img src="img/amazon.png">
+                <img src="{{ asset('img/amazon.png') }}">
             </div>
 
 
             <div class="container-dettagli-offerta">
                 <h1> {{ $offerta->oggetto_offerta }}</h1>
                 <!-- l'href va puntato alla pagina dell'azienda -->
-                <a class="ancora_azienda"href=" {{ route('azienda') }}">
-                    Azienda riferimento
+                <a class="ancora_azienda"href=" {{ route('azienda', ['nome' => $azienda->nome] ) }}">
+                    {{ $azienda->nome }}
                 </a>
 
                 <div class="container-prezzo_offerta">
@@ -53,6 +53,6 @@
 
 
         </div>
-    @endisset
+    @endif()
 
 @endsection

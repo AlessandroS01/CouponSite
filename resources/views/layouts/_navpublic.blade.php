@@ -1,5 +1,5 @@
     <div class="logo-section">
-            <a href="{{ route('home') }}"> <img src="img/logo.png" alt="site logo"> </a>
+            <a href="{{ route('home') }}"> <img src="{{ asset('img/logo.png') }}" alt="site logo"> </a>
     </div>
 
     <ul id="center-links">

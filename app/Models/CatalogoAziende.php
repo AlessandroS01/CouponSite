@@ -23,10 +23,18 @@ class CatalogoAziende extends Model {
     }
 
     /**
+     * @return l'azienda con la partita iva data come parametro
+     */
+    public function getAziendaByPartitaIva($partita_iva) {
+        return Azienda::where('partita_iva', $partita_iva)->first();
+    }
+
+    /**
+     * @param $offerta rappresenta l'offerta da cui si può riprendere la partita iva dell'azienda
      * @return l'azienda di una determinata offerta
      */
     public function getAziendaByOfferta(Offerta $offerta) {
-        return Azienda::where('partita_iva', $offerta->azienda)->get();
+        return Azienda::where('partita_iva', $offerta->azienda)->first();
     }
 
 
