@@ -59,4 +59,10 @@ class PublicController extends Controller
         return view('azienda');
     }
 
+    public function showSearchOfferta() {
+        return view('catalogo_offerte')
+            ->with('prodotto', request('prodotto'))
+            ->with('azienda', request('azienda'));
+    }
+
 }

@@ -90,6 +90,10 @@ Route::get('/azienda', [PublicController::class, 'showAzienda'])
 Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
 
+// rotta per visualizzare le aziende ricercate
+Route::get('/catalogo-offerte/search', [PublicController::class, 'showSearchOfferta'])
+        ->name('catalogo_offerte_search');
+
 
 
 
