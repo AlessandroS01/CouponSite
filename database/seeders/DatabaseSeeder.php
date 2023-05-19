@@ -21,6 +21,9 @@ class DatabaseSeeder extends Seeder {
             ["domanda" => "I coupon hanno una scadenza?", "risposta" => "- Sì, i coupon hanno una data di scadenza."]
             ]);
 
+        /*
+         *
+         */
         DB::table('utente')->insert([
             [ 'username' => 'useruser', 'password' => 'nYvpLFCp',
                 'nome' => 'Utente', 'cognome' => 'Registrato', 'genere' => 'M', 'eta' => 25, 'email' => 'user@example.com', 'telefono' => 1234567890,

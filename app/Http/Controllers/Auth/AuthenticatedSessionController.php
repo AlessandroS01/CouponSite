@@ -8,6 +8,9 @@ use App\Providers\RouteServiceProvider;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
+/*
+ * Controller di autenticazione
+ */
 class AuthenticatedSessionController extends Controller {
 
     /**
@@ -26,6 +29,7 @@ class AuthenticatedSessionController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function store(LoginRequest $request) {
+        // authenticate gestisce il controllo tra le credenziali passate e quelle presenti nel db
         $request->authenticate();
 
         $request->session()->regenerate();
@@ -35,7 +39,11 @@ class AuthenticatedSessionController extends Controller {
          */
 //        return redirect()->intended(RouteServiceProvider::HOME);
 
+        // estraiamo dall'utente autenticato il suo ruolo
         $role = auth()->user()->role;
+        /*
+         * In base al ruolo, l'utente viene reindirizzato in rotte diverse
+         */
         switch ($role) {
             case 'admin': return redirect()->route('admin');
                 break;

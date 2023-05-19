@@ -20,10 +20,10 @@
 
             @foreach($catalogoAziende->getPrimiTreElementi() as $index => $singolaAzienda )
 
-            <div class="slide fade">
-                <div class="numbertext">{{ $index + 1 }} / 3</div>
-                <img src={{ $singolaAzienda->logo }} style="width:100%">
-            </div>
+                <div class="slide fade">
+                    <div class="numbertext">{{ $index + 1 }} / 3</div>
+                    <img src={{ $singolaAzienda->logo }} style="width:100%">
+                </div>
 
             @endforeach
 
@@ -44,10 +44,12 @@
             <div id="aziende-container">
 
                 @foreach($catalogoAziende->getPrimiTreElementi() as $singolaAzienda)
-                <div class="card-azienda">
-                <img src={{ $singolaAzienda->logo }} >
-                <a href="{{ route('azienda') }}">{{ $singolaAzienda->nome }}</a>
-                </div>
+
+                    <div class="card-azienda">
+                    <img src={{ $singolaAzienda->logo }} >
+                    <a href="{{ route('azienda') }}">{{ $singolaAzienda->nome }}</a>
+                    </div>
+
                 @endforeach
 
             </div>

@@ -9,6 +9,9 @@ use Illuminate\Support\Facades\RateLimiter;
 use Illuminate\Support\Str;
 use Illuminate\Validation\ValidationException;
 
+/*
+ * Definisce le regole per l'autenticazione
+ */
 class LoginRequest extends FormRequest
 {
     /**
@@ -30,6 +33,7 @@ class LoginRequest extends FormRequest
     {
         return [
 //            'email' => ['required', 'string', 'email'],
+
             'username' => ['required', 'string'],
             'password' => ['required', 'string'],
         ];

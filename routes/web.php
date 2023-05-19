@@ -17,7 +17,7 @@ use App\Http\Controllers\UserController;
 */
 
 
-/*
+/* Rotte del prof
 Route::get('/', [PublicController::class, 'showCatalog1'])
         ->name('catalog1');
 
@@ -36,6 +36,8 @@ Route::get('/admin/newproduct', [AdminController::class, 'addProduct'])
 Route::post('/admin/newproduct', [AdminController::class, 'storeProduct'])
         ->name('newproduct.store');
 
+
+// la rotta ha in coda il meccanismo di autorizzazione per gli user
 Route::get('/user', [UserController::class, 'index'])
         ->name('user')->middleware('can:isUser');
 
@@ -46,14 +48,6 @@ Route::view('/where', 'where')
 Route::view('/who', 'who')
         ->name('who');
 */
-
-
-
-
-
-
-
-
 
 
 // rotta che riporta alla home
@@ -80,7 +74,6 @@ Route::get('/faq', [PublicController::class, 'showFaq'])
 Route::get('/login', [PublicController::class, 'showLogin'])
         ->name('login');
 
-
 // rotta che riporta alla pagina di registrazione
 Route::get('/signup', [PublicController::class, 'showSignup'])
         ->name('signup');
@@ -98,16 +91,8 @@ Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
 
 
-
-
-
-
-
-
-
-
-
-
+// aggiunge le rotte che si trovano all'interno di auth.php
+require __DIR__.'/auth.php';
 
 /*  Rotte aggiunte da Breeze
 
@@ -119,5 +104,7 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-*/
-require __DIR__.'/auth.php';
+/*
+
+
+
