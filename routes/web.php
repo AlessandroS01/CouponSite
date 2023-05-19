@@ -91,8 +91,7 @@ Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
 
 
-// aggiunge le rotte che si trovano all'interno di auth.php
-require __DIR__.'/auth.php';
+
 
 /*  Rotte aggiunte da Breeze
 
@@ -104,7 +103,11 @@ Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware(['auth', 'verified'])->name('dashboard');
 
-/*
+*/
+
+// aggiunge le rotte che si trovano all'interno di auth.php
+require __DIR__.'/auth.php';
+
 
 
 

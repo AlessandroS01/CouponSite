@@ -33,7 +33,7 @@ return new class extends Migration
 
             $table->foreign('staff')
                 ->references('username')
-                ->on('utente')
+                ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
 
