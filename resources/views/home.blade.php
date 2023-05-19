@@ -65,71 +65,31 @@
 
     <div class="container-offerte">
 
-        <div class="card">
+        @foreach($catalogoOfferte->getPrimiTreElementi() as $offerta)
 
-            <div class="img-container">
-                <img src="img/amazon.png" alt="logo offerta" >
+            <div class="card">
+
+                <div class="img-container">
+                    <img src="img/amazon.png" alt="logo offerta" >
+                </div>
+
+                <div class="info">
+                    <h1>Offerta</h1>
+                    <p>{{ $offerta->descrizione }}</p>
+                </div>
+
+                <div class="button">
+                    <a href="{{ route('offerta') }}">ottieni</a>
+                </div>
+
+                <div class="badge">
+                    <p>{{ $offerta -> percentuale_sconto }} %</p>
+                </div>
+
             </div>
 
-            <div class="info">
-                <h1>Offerta</h1>
-                <p>Descrizione offerta</p>
-            </div>
+        @endforeach
 
-            <div class="button">
-                <a href="{{ route('offerta') }}">ottieni</a>
-            </div>
-
-            <div class="badge">
-                <p>50%</p>
-            </div>
-
-
-        </div>
-
-        <div class="card">
-
-            <div class="img-container">
-                <img src="img/amazon.png" alt="logo offerta" >
-            </div>
-
-            <div class="info">
-                <h1>Offerta</h1>
-                <p>Descrizione offerta</p>
-            </div>
-
-            <div class="button">
-                <a href="{{ route('offerta') }}">ottieni</a>
-            </div>
-
-            <div class="badge">
-                <p>50%</p>
-            </div>
-
-
-        </div>
-
-        <div class="card">
-
-            <div class="img-container">
-                <img src="img/amazon.png" alt="logo offerta" >
-            </div>
-
-            <div class="info">
-                <h1>Offerta</h1>
-                <p>Descrizione offerta</p>
-            </div>
-
-            <div class="button">
-                <a href="{{ route('offerta') }}">ottieni</a>
-            </div>
-
-            <div class="badge">
-                <p>50%</p>
-            </div>
-
-
-        </div>
 
     </div>
 
@@ -139,27 +99,29 @@
 
     <div class="container-offerte">
 
-        <div class="card">
+        @foreach($catalogoOfferte->getElementiDataScadenza() as $offerta)
+            <div class="card">
 
-            <div class="img-container">
-                <img src="img/amazon.png" alt="logo offerta" >
+                <div class="img-container">
+                    <img src="img/amazon.png" alt="logo offerta" >
+                </div>
+
+                <div class="info">
+                    <h1>Offerta</h1>
+                    <p>Descrizione offerta</p>
+                </div>
+
+                <div class="button">
+                    <a href="{{ route('offerta') }}">ottieni</a>
+                </div>
+
+                <div class="badge">
+                    <p>50%</p>
+                </div>
+
+
             </div>
-
-            <div class="info">
-                <h1>Offerta</h1>
-                <p>Descrizione offerta</p>
-            </div>
-
-            <div class="button">
-                <a href="{{ route('offerta') }}">ottieni</a>
-            </div>
-
-            <div class="badge">
-                <p>50%</p>
-            </div>
-
-
-        </div>
+        @endforeach
 
 
         <div class="card">
