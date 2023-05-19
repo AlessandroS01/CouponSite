@@ -24,6 +24,8 @@ return new class extends Migration
             $table->string('azienda', 11);
             $table->string('staff', 50);
             $table->string('categoria', 50);
+            $table->text('descrizione');
+
 
             $table->foreign('azienda')
                 ->references('partita_iva')

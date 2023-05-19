@@ -90,7 +90,7 @@ Route::get('/admin', [AdminController::class, 'index'])
 //        ->name('signup');
 
 // rotta per visualizzare un'offerta dopo il click su ottieni
-Route::get('/offerta', [PublicController::class, 'showOfferta'])
+Route::get('/offerta/{offertaId}', [PublicController::class, 'showOfferta'])
         ->name('offerta');
 
 // rotta per visualizzare un'azienda dopo il click su una di esse
@@ -100,6 +100,10 @@ Route::get('/azienda', [PublicController::class, 'showAzienda'])
 // rotta per accedere alla sezione del cliente
 Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
+
+// rotta per visualizzare le aziende ricercate
+Route::get('/catalogo-offerte/search', [PublicController::class, 'showSearchOfferta'])
+        ->name('catalogo_offerte_search');
 
 
 

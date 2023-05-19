@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\CatalogoAziende;
+use App\Models\CatalogoOfferte;
 use App\Models\Resources\Azienda;
 use App\Models\Resources\Faq;
 use Illuminate\Support\Facades\Log;
@@ -11,15 +12,26 @@ use Illuminate\Support\Facades\Log;
 class PublicController extends Controller
 {
 
+    protected $catalogoAziende;
+    protected $catalogoOfferte;
+
+    public function __construct(){
+        $this->catalogoAziende = new CatalogoAziende;
+        $this->catalogoOfferte = new CatalogoOfferte;
+    }
+
+
     //passare alla view i prodotti da visualizzare nella home contenuti in Models/prodotti.php
     public function showHome() {
-        $catalogoAziende = new CatalogoAziende;
         return view('home')
-                    ->with('catalogoAziende', $catalogoAziende);
+                    ->with('catalogoAziende', $this->catalogoAziende)
+                    ->with('catalogoOfferte', $this->catalogoOfferte);
     }
 
     public function showCatalogoOfferte() {
-        return view('catalogo_offerte');
+        $offerte = $this->catalogoOfferte->getOfferteByName();
+        return view('catalogo_offerte')
+                    -> with('offerte', $offerte);
     }
 
     public function showCatalogoAziende() {
@@ -48,12 +60,21 @@ class PublicController extends Controller
     }
 
 
-    public function showOfferta() {
-        return view('offerta');
+    public function showOfferta($offertaId) {
+        return view('offerta')
+                    ->with('offerta', $this->catalogoOfferte->getOffertaByID($offertaId) );
     }
 
     public function showAzienda() {
         return view('azienda');
+    }
+
+    public function showSearchOfferta() {
+        $prodotto = request('prodotto');
+        $offerte = $this->catalogoOfferte->getOffertaByProdotto($prodotto);
+        return view('catalogo_offerte')
+            ->with('offerte', $offerte)
+            ->with('azienda', request('azienda'));
     }
 
 }
