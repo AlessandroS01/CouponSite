@@ -90,10 +90,6 @@ class DatabaseSeeder extends Seeder {
             ["staff"=> "staffstaff", "azienda" => "00011122234"],
             ["staff"=> "staffstaff", "azienda" => "00011122235"]
         ]);
-
-
-
-
     }
 
 }

@@ -13,9 +13,6 @@
 
     <div class="container">
 
-
-
-
         <div class="slideshow-container">
 
             @foreach($catalogoAziende->getPrimiTreElementi() as $index => $singolaAzienda )
@@ -36,14 +33,12 @@
             <span class="dot" onclick="currentSlide(3)"></span>
             </div>
 
-
         </div>
 
         <div id="row-aziende">
-
             <div id="aziende-container">
 
-                @foreach($catalogoAziende->getPrimiTreElementi() as $singolaAzienda)
+                @foreach($catalogoAziende->getPrimiCinqueElementi() as $singolaAzienda)
 
                     <div class="card-azienda">
                     <img src={{ $singolaAzienda->logo }} >
@@ -53,13 +48,7 @@
                 @endforeach
 
             </div>
-
-
         </div>
-
-
-
-
     </div>
 
 </section>
