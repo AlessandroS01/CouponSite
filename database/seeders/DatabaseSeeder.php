@@ -23,13 +23,13 @@ class DatabaseSeeder extends Seeder {
          *
          */
         DB::table('users')->insert([
-            [ 'username' => 'useruser', 'password' => 'nYvpLFCp',
+            [ 'username' => 'useruser', 'password' => Hash::make('nYvpLFCp') ,
                 'nome' => 'Utente', 'cognome' => 'Registrato', 'genere' => 'M', 'eta' => 25, 'email' => 'user@example.com',
                 'telefono' => 1234567890, 'via' => 'Via Utente Registrato', 'numero_civico' => 1,
                 'citta' => 'Città Utente Registrato', 'livello' => 1,
                 'remember_token' => Str::random(10), 'created_at' => now(), 'updated_at' => now()],
             [ 'username' => 'staffstaff',
-                'password' => 'nYvpLFCp',
+                'password' => Hash::make('nYvpLFCp') ,
                 'nome' => 'Membro',
                 'cognome' => 'Staff',
                 'genere' => 'M',
@@ -45,7 +45,7 @@ class DatabaseSeeder extends Seeder {
                 'updated_at' => now(),
             ],
             [ 'username' => 'adminadmin',
-                'password' => 'nYvpLFCp',
+                'password' => Hash::make('nYvpLFCp') ,
                 'nome' => 'Amministratore',
                 'cognome' => 'Admin',
                 'genere' => 'M',

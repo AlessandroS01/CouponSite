@@ -70,13 +70,24 @@ Route::get('/contatti', [PublicController::class, 'showContatti'])
 Route::get('/faq', [PublicController::class, 'showFaq'])
         ->name('faqs');
 
+
+Route::get('/user', [UserController::class, 'index'])
+    //viene fatto il riferimento al middelware e quindi alla richiesta al gate direttamente dalla rotta
+    ->name('user')->middleware('can:isUser');
+
+Route::get('/staff', [AdminController::class, 'index'])
+    ->name('staff')->middleware('can:isStaff');
+
+Route::get('/admin', [AdminController::class, 'index'])
+    ->name('admin')->middleware('can:isAdmin');
+
 // rotta che riporta alla pagina del login
-Route::get('/login', [PublicController::class, 'showLogin'])
-        ->name('login');
+//Route::get('/login', [PublicController::class, 'showLogin'])
+//        ->name('login');
 
 // rotta che riporta alla pagina di registrazione
-Route::get('/signup', [PublicController::class, 'showSignup'])
-        ->name('signup');
+//Route::get('/signup', [PublicController::class, 'showSignup'])
+//        ->name('signup');
 
 // rotta per visualizzare un'offerta dopo il click su ottieni
 Route::get('/offerta', [PublicController::class, 'showOfferta'])

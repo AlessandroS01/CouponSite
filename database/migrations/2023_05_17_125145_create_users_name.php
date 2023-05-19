@@ -14,8 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('users', function (Blueprint $table) {
-            $table->string('username', 50)->primary();
-            $table->string('password', 50);
+            $table->bigIncrements('id');
+            $table->string('username', 50)->unique();
+            $table->string('password');
             $table->string('nome', 50);
             $table->string('cognome', 50);
             $table->char('genere', 1);
@@ -25,7 +26,8 @@ return new class extends Migration
             $table->text('via');
             $table->integer('numero_civico');
             $table->string('citta', 50);
-            $table->integer('livello');
+            $table->integer('livello')->default('1');
+            $table->timestamp('email_verified_at')->nullable();
 
             $table->rememberToken();
             $table->timestamps();

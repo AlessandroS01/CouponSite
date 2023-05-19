@@ -43,22 +43,31 @@ class RegisteredUserController extends Controller
 
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
-            // TODO da modificare tutti questi parametri
-            'name' => ['required', 'string', 'max:255'],
-            'surname' => ['required', 'string', 'max:255'],
-            // unique:users -> definisce l'unicità di tutti i vari record di users di email e username
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'username' => ['required', 'string', 'min:8', 'unique:users'],
-
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
+            'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],
+            'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()],
+            'nome' => ['required', 'string', 'max:50'],
+            'cognome' => ['required', 'string', 'max:50'],
+            'genere' => ['required', 'char', 'max:1'],
+            'eta' => ['required', 'int', 'max:3'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'via' => ['required', 'string', 'max:100'],
+            'numero_civico' => ['required', 'int', 'max:3'],
+            'citta' => ['required', 'string', 'max:50'],
         ]);
 
         $user = User::create([
-            'name' => $request->name,
-            'surname' => $request->surname,
-            'email' => $request->email,
             'username' => $request->username,
             'password' => Hash::make($request->password),
+            'nome' => $request->nome,
+            'cognome' => $request->cognome,
+            'genere'=>$request->genere,
+            'eta'=>$request->eta,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'via' => $request->via,
+            'numero_civico' => $request->numero_civico,
+            'citta' => $request->citta,
         ]);
 
         // viene generata una nuova tupla dell'utente

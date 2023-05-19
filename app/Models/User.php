@@ -19,12 +19,19 @@ class User extends Authenticatable
      *
      * @var array<int, string>
      */
+    //agiungo i campi che lo user dovrà specificare per la registrazione
     protected $fillable = [
-        'name',
-        'surname',
-        'email',
         'username',
         'password',
+        'nome',
+        'cognome',
+        'genere',
+        'eta',
+        'email',
+        'telefono',
+        'via',
+        'numero_civico',
+        'citta',
     ];
 
     /**
@@ -51,11 +58,14 @@ class User extends Authenticatable
      * @param $role passato durante l'attivazione
      * @return bool quando il ruolo associato a quell'utente è uguale al parametro che gli passo
      */
-    public function hasRole($role) {
+
+    //funzione che mi permette di verificare il livello a cui l'utente appartiene
+    //viene passato il livello e ricevo un valore di  verità
+    public function hasLevel($livello) {
         // crea un array
-        $role = (array)$role;
+        $livello = (array)$livello;
         // ricerca il valore di $role all'interno di un array
-        return in_array($this->role, $role);
+        return in_array($this->livello, $livello);
     }
 
 }

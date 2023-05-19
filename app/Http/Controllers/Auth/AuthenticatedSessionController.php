@@ -19,7 +19,7 @@ class AuthenticatedSessionController extends Controller {
      * @return \Illuminate\View\View
      */
     public function create() {
-        return view('login');
+        return view('auth.login');
     }
 
     /**
@@ -40,14 +40,16 @@ class AuthenticatedSessionController extends Controller {
 //        return redirect()->intended(RouteServiceProvider::HOME);
 
         // estraiamo dall'utente autenticato il suo ruolo
-        $role = auth()->user()->role;
+        $livello = auth()->user()->livello;
         /*
          * In base al ruolo, l'utente viene reindirizzato in rotte diverse
          */
-        switch ($role) {
-            case 'admin': return redirect()->route('admin');
+        switch ($livello) {
+            case '3': return redirect()->route('admin');
                 break;
-            case 'user': return redirect()->route('user');
+            case '2': return redirect()->route('staff');
+                break;
+            case '1': return redirect()->route('user');
                 break;
             default: return redirect('/');
         }
