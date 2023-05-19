@@ -1,14 +1,16 @@
 @extends('layouts.public')
 
-@section('title', 'Registrazione')
+@section('title', 'Login')
 
 @section('content')
 <div class="static">
-    <h3>Login</h3>
-    <p>Utilizza questa form per autenticarti al sito</p>
 
-    <div class="container-contact">
-        <div class="wrap-contact1">
+
+    <div class="container-login">
+
+        <h1>Login: Utilizza questa form per autenticarti al sito</h1>
+
+        <div class="container-auth">
             {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
 
              <div  class="wrap-input">
@@ -16,7 +18,7 @@
              </div>
 
 
-             <div  class="wrap-input">
+             <div  class="container-dati-login">
                 {{ Form::label('username', 'Nome Utente', ['class' => 'label-input']) }}
                 {{ Form::text('username', '', ['class' => 'input','id' => 'username']) }}
                 @if ($errors->first('username'))
@@ -28,7 +30,7 @@
                 @endif
             </div>
 
-             <div  class="wrap-input">
+             <div  class="container-dati-login">
                 {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
                 {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
                 @if ($errors->first('password'))
@@ -40,7 +42,7 @@
                 @endif
             </div>
 
-            <div class="container-form-btn">
+            <div class="container-autenticazione_button">
                 {{ Form::submit('Login', ['class' => 'form-btn1']) }}
             </div>
 
