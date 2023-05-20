@@ -52,6 +52,8 @@
                                 <span class="label-text">Alimentari</span>
                             </label>
 
+                        {{ Form::submit('Submit') }}
+
                         {{ Form::close() }}
 
                     </div>
@@ -90,16 +92,8 @@
             </div>
 
             <div class="container-offerte">
-                <div class="offerte">
-
-                    <div class="offerte">
 
                         @yield('ricercaOfferte')
-
-                    </div>
-
-                </div>
-
 
             </div>
 

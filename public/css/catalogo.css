@@ -152,3 +152,66 @@
     width: 250px;
     margin-top: 20px ;
 }
+
+/* Classe per il contenitore del paginator */
+.paginator {
+    display: flex;
+    justify-content: center;
+    margin-top: 20px;
+}
+
+/* Classe per il wrapper dei link di navigazione */
+.paginator .pagination {
+    display: flex;
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    justify-content: center;
+}
+
+/* Classe per i singoli link di navigazione */
+.paginator .pagination li {
+    margin-right: 8px;
+}
+
+/* Classe per i link di navigazione attivi */
+.paginator .pagination li.active a {
+    color: #ffffff;
+    background-color: #3490dc;
+    border-color: #3490dc;
+}
+
+/* Classe per i link di navigazione */
+.paginator .pagination li a {
+    color: #3490dc;
+    padding: 8px 12px;
+    border-radius: 4px;
+    text-decoration: none;
+    transition: background-color 0.3s ease;
+}
+
+/* Classe per i link di navigazione al passaggio del mouse */
+.paginator .pagination li a:hover {
+    background-color: #3490dc;
+    color: #ffffff;
+}
+
+/* Classe per il link "Precedente" */
+.paginator .pagination .prev:before {
+    content: '\2190';
+    margin-right: 4px;
+}
+
+/* Classe per il link "Successivo" */
+.paginator .pagination .next:after {
+    content: '\2192';
+    margin-left: 4px;
+}
+
+.paginator svg{
+    display: none;
+}
+
+.paginator .text-sm div .text-gray-700 leading-5{
+    display: none;
+}

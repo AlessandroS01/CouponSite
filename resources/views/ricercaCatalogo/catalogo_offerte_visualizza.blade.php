@@ -27,8 +27,13 @@
 
             @endforeach
 
-        @endisset
+
 
     </div>
+
+    <div class="paginator">
+        {{ $offerte->links() }}
+    </div>
+    @endisset
 
 @endsection

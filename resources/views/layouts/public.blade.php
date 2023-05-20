@@ -4,6 +4,9 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/faq.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/contatti.css') }}" >
@@ -17,7 +20,7 @@
     <!-- Riga di codica che serve ad importare il font -->
     <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
 
-    
+
     <title>@yield('title', 'Coupon')</title>
 </head>
 
@@ -30,10 +33,10 @@
     <section id="contenuto">
         @yield('content')
     </section>
-    
+
     <footer>
         <div class="container-footer">
-            
+
             <div>
                 <h3>Il nostro sito di coupon</h3>
                 <p>Scopri le migliori offerte e risparmia!</p>
@@ -42,11 +45,11 @@
             <ul class="container-navbar-footer">
                 @include('layouts/_foopublic')
             </ul>
-            
+
         </div>
     </footer>
 
-    
+
 </body>
 <script src="{{ asset('js/slideshow.js') }}" ></script>
 <script src="{{ asset('js/faqs.js') }}"></script>

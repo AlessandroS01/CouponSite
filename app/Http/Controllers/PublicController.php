@@ -37,13 +37,16 @@ class PublicController extends Controller
      */
     public function showCatalogoOfferte() {
 
-        $offerte = $this->catalogoOfferte->getOfferteOrdinateByAzienda();
+        $offerte = $this->catalogoOfferte->getAll();
 
         return view('ricercaCatalogo.catalogo_offerte_visualizza')
                             -> with('offerte', $offerte)
                             -> with('gestioneOfferte', $this->catalogoOfferte);
     }
 
+    /**
+     * @return @View che permette di visualizzare il catalogo delle offerte a seguito della ricerca
+     */
     public function searchOfferta() {
 
         $offertaInput = $_POST['offerta'];
@@ -89,6 +92,7 @@ class PublicController extends Controller
         return view('ricercaCatalogo.catalogo_offerte_visualizza')
                     ->with('offerte', $offerte)
                     ->with('gestioneOfferte', $this->catalogoOfferte);
+
     }
 
     /**

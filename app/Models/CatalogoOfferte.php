@@ -13,7 +13,7 @@ class CatalogoOfferte extends Model {
      * @return tutte le offerte
      */
     public function getAll() {
-        return Offerta::orderBy('percentuale_sconto', 'desc')->get();
+        return Offerta::orderBy('percentuale_sconto', 'desc')->paginate(3);
     }
 
     /**
