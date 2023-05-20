@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Resources\Azienda;
 use App\Models\Resources\Offerta;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Log;
 
 class CatalogoOfferte extends Model {
 
@@ -57,9 +58,16 @@ class CatalogoOfferte extends Model {
      */
     public function getOfferteByAziendeRicercate($aziende){
 
-        $offerte = Offerta::where('azienda', $aziende->partita_iva)
-            ->orderBy('percentuale_sconto', 'desc')
-            ->get();
+        $offerte = array();
+
+        foreach ($aziende as $azienda) {
+            $offerte = array_merge($offerte, Offerta::where('azienda', $azienda->partita_iva)
+                ->orderBy('percentuale_sconto', 'desc')
+                ->get()
+                ->toArray());
+        }
+
+        log::info($offerte);
 
         return $offerte;
     }

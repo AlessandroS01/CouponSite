@@ -50,19 +50,20 @@ class PublicController extends Controller
 
         $aziendaInput = $_POST['azienda'];
 
-        if ( isset($offertaInput) and isset($aziendaInput) )
+
+        if ( !empty($offertaInput) and !empty($aziendaInput) )
+            {
+
+            }
+        else if ( empty($offertaInput) and !empty($aziendaInput)  )
             {
                 $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
-                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($offertaInput);
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziende);
             }
-        else if ( !isset($offertaInput) and isset($aziendaInput) )
-            {
-                $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
-                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($offertaInput);
-            }
-        else if ( isset($offertaInput) and !isset($aziendaInput) )
+        else if ( !empty($offertaInput) and empty($aziendaInput) )
             $offerte = $this->catalogoOfferte->getOffertaByRicerca($offertaInput);
         else $offerte = $this->catalogoOfferte->getAll();
+
 
 
         return view('ricercaCatalogo.catalogo_offerte_visualizza')

@@ -39,7 +39,7 @@ class CatalogoAziende extends Model {
      * @return l'azienda con il nome data come parametro se esiste
      */
     public function getAziendeByNome($nome) {
-        // Non restituisce il valore dell'oggetto azienda se levassimo like e %
+
         return Azienda::where('nome', 'like', '%'.$nome.'%')->get();
 
     }

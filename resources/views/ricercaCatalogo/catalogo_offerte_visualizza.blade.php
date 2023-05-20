@@ -6,6 +6,7 @@
     <div class="offerte">
 
         @isset($offerte, $gestioneOfferte)
+
             @foreach ($offerte as $offerta)
                 <div class="card">
                     <div class="img-container">
@@ -23,6 +24,7 @@
                     </div>
                 </div>
             @endforeach
+
         @endisset
 
     </div>
