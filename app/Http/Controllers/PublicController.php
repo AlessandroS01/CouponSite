@@ -99,7 +99,11 @@ class PublicController extends Controller
      * @return @View che permette di visualizzare il catalogo delle aziende
      */
     public function showCatalogoAziende() {
-        return view('catalogo_aziende');
+
+        $aziende = $this->catalogoAziende->getAll();
+
+        return view('catalogo_aziende')
+                    ->with('aziende', $aziende);
     }
 
     /**

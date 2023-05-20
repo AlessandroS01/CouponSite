@@ -7,8 +7,8 @@ for (i = 0; i < acc.length; i++) {
   // aggiunge la funzione per ogni elemento di acc
   acc[i].addEventListener("click", function() {
     // aggiunge ed elimina la classe active agli elementi della lista acc a seguito del click
-    this.classList.toggle("active");
-    // prende l'elemento immediatamente successivo nel codice html 
+    this.classList.toggle("active-accordion");
+    // prende l'elemento immediatamente successivo nel codice html
     var risposta = this.nextElementSibling;
     // controlla se il valore di maxHeight dell'elemento successivo è settato o meno.
       if (risposta.style.maxHeight) {
@@ -17,7 +17,7 @@ for (i = 0; i < acc.length; i++) {
       } else {
         // altrimenti setta l'altezza massima uguale all'altezza del contenuto e ci aggiunge l'unità di misura
         risposta.style.maxHeight = risposta.scrollHeight + "px";
-      } 
+      }
   });
 }
 

@@ -11,6 +11,14 @@ use Illuminate\Support\Facades\Log;
 class CatalogoAziende extends Model {
 
     /**
+     * @return tutti gli elementi della relazione Azienda
+     */
+    public function getAll() {
+        return Azienda::orderBy('nome', 'asc')->paginate(3);
+    }
+
+
+    /**
      * @return i primi 3 elementi della relazione Azienda
      */
     public function getPrimiTreElementi() {

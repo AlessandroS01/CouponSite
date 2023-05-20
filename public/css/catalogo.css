@@ -137,7 +137,7 @@
 
 .offerte {
     display: grid;
-    grid-template-columns: auto auto auto;
+    grid-template-columns: repeat(3, calc(770px/ 3));
     width: 100%;
     margin: auto;
 }
@@ -153,6 +153,7 @@
     margin-top: 20px ;
 }
 
+/*pagination*/
 /* Classe per il contenitore del paginator */
 .paginator {
     display: flex;
@@ -167,11 +168,12 @@
     padding: 0;
     margin: 0;
     justify-content: center;
+    align-items: center;
 }
 
 /* Classe per i singoli link di navigazione */
 .paginator .pagination li {
-    margin-right: 8px;
+    margin: 0 4px;
 }
 
 /* Classe per i link di navigazione attivi */
@@ -182,36 +184,43 @@
 }
 
 /* Classe per i link di navigazione */
-.paginator .pagination li a {
+.paginator .pagination li a,
+.paginator .pagination li span
+{
     color: #3490dc;
     padding: 8px 12px;
     border-radius: 4px;
     text-decoration: none;
     transition: background-color 0.3s ease;
+    border: 1px solid black;
+}
+
+.paginator .pagination li span{
+    color: black;
+
 }
 
 /* Classe per i link di navigazione al passaggio del mouse */
 .paginator .pagination li a:hover {
-    background-color: #3490dc;
-    color: #ffffff;
+    background-color: black;
+    color: white;
 }
 
-/* Classe per il link "Precedente" */
-.paginator .pagination .prev:before {
-    content: '\2190';
-    margin-right: 4px;
-}
 
-/* Classe per il link "Successivo" */
-.paginator .pagination .next:after {
-    content: '\2192';
-    margin-left: 4px;
-}
-
-.paginator svg{
+/* Nascondi tutto tranne i numeri delle pagine e i pulsanti */
+.paginator .pagination li {
     display: none;
 }
 
-.paginator .text-sm div .text-gray-700 leading-5{
-    display: none;
+.paginator .pagination li:active {
+
+
+}
+
+.paginator .pagination li:first-child,
+.paginator .pagination li:last-child,
+.paginator .pagination li.active,
+.paginator .pagination li.active ~ li {
+    display: inline;
+    padding: 8px 0;
 }
