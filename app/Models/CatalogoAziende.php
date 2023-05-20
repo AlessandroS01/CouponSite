@@ -29,9 +29,8 @@ class CatalogoAziende extends Model {
      * @return l'azienda con la partita iva data come parametro
      */
     public function getAziendaByPartitaIva($partita_iva) {
-
         // Non restituisce il valore dell'oggetto azienda se levassimo like e %
-        return Azienda::where('partita_iva', 'like', "%{$partita_iva}")->first();
+        return Azienda::where('partita_iva', $partita_iva)->first();
 
     }
 
