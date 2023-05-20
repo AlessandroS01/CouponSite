@@ -49,24 +49,33 @@ Route::view('/who', 'who')
         ->name('who');
 */
 
-
-// rotta che riporta alla home
+/**
+ * rotta che riporta alla home del sito
+ */
 Route::get('/', [PublicController::class, 'showHome'])
         ->name('home');
 
-// rotta che riporta alla pagina in cui sono contenute tutte le offerte
-Route::get('/catalogo', [PublicController::class, 'showCatalogoOfferte'])
+/**
+ * rotta che riporta alla pagina in cui è contenuto il catalogo delle offerte
+ */
+Route::get('/catalogo/offerte', [PublicController::class, 'showCatalogoOfferte'])
         ->name('catalogo offerte');
 
-// rotta che riporta alla pagina in cui sono contenute tutte le aziende
-Route::get('/aziende', [PublicController::class, 'showCatalogoAziende'])
+/**
+ * rotta che riporta alla pagina in cui è contenuto il catalogo delle aziende
+ */
+Route::get('/catalogo/aziende', [PublicController::class, 'showCatalogoAziende'])
         ->name('catalogo aziende');
 
-// rotta che riporta alla pagina dei contatti
+/**
+ * rotta che riporta alla pagina dei contatti del sito
+ */
 Route::get('/contatti', [PublicController::class, 'showContatti'])
         ->name('contatti');
 
-// rotta che riporta alla pagina della FAQ
+/**
+ * rotta che riporta alla pagina della FAQ del sito
+ */
 Route::get('/faq', [PublicController::class, 'showFaq'])
         ->name('faqs');
 
@@ -89,11 +98,19 @@ Route::get('/admin', [AdminController::class, 'index'])
 //Route::get('/signup', [PublicController::class, 'showSignup'])
 //        ->name('signup');
 
-// rotta per visualizzare un'offerta dopo il click su ottieni
+/**
+ * Rotta per visualizzare un'offerta dopo il click su ottieni.
+ * {offertaId} rappresenta il parametro che viene passato direttamente dalla vista quando viene
+ * richiamata la rotta.
+ */
 Route::get('/offerta/{offertaId}', [PublicController::class, 'showOfferta'])
         ->name('offerta');
 
-// rotta per visualizzare un'azienda dopo il click su una di esse
+/**
+ * Rotta per visualizzare un'azienda specifica con tutte le sue offerte.
+ * {partita_iva} rappresenta il parametro che viene passato direttamente dalla vista quando viene
+ * richiamata la rotta.
+ */
 Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
         ->name('azienda');
 
@@ -102,8 +119,8 @@ Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
 
 // rotta per visualizzare le aziende ricercate
-Route::get('/catalogo-offerte/search', [PublicController::class, 'showSearchOfferta'])
-        ->name('catalogo_offerte_search');
+Route::get('/catalogo/offerte/ricerca', [PublicController::class, 'showSearchOfferta'])
+        ->name('catalogo offerte search');
 
 
 

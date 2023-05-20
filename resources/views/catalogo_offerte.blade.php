@@ -6,11 +6,14 @@
 
     <div class="container-barra_ricerca">
         <div class="barra-ricerca">
+
             <input class="ricerca-prodotto" type="search" name="prodotto" placeholder="Prodotto">
             <input class="ricerca-azienda" type="search" name="azienda" placeholder="Azienda">
+
             <a href="{{ route('catalogo_offerte_search', ['prodotto' => request('prodotto'), 'azienda' => request('azienda')]) }}">
                 <img class="lente-ricerca" src="{{asset("img/search_icon.svg")}}">
             </a>
+
         </div>
     </div>
 

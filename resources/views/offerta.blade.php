@@ -8,7 +8,7 @@
         <div class="container-offerta_completa">
 
             <div>
-                <h1> {{ $offerta->categoria }} </h1>
+                <h1> {{ ucfirst($offerta->categoria) }} </h1>
                 <img src="{{ asset($gestoreOfferte->getLogoAziendaByOfferta($offerta)) }}">
             </div>
 
@@ -42,7 +42,7 @@
                 <p class="modalita-fruizione_offerta"> Modalità di fruizione: <br>{{ $offerta->modalita_fruizione }} </p>
                 <p class="data-scadenza_offerta"> Data di scadenza: <br>{{ $offerta->data_scadenza }} </p>
 
-                <h3> &#8364<span>Prezzo scontato: <br>{{ $gestoreOfferte->getPrezzoScontato($offerta) }}</span></h3>
+                <h3> Prezzo scontato: <br>&#8364<span>{{ $gestoreOfferte->getPrezzoScontato($offerta) }}</span></h3>
 
                 <div class="bottone-acquisizione">
                     <a href="{{ route('login') }}">ottieni</a>
