@@ -103,8 +103,8 @@ class PublicController extends Controller
      * e $offerte che rappresenta una lista di offerte emesse da quella specifica azienda.
      */
     public function showAzienda($partita_iva) {
-        $azienda = $this->catalogoAziende->getAziendaByPartitaIva($partita_iva);
 
+        $azienda = $this->catalogoAziende->getAziendaByPartitaIva($partita_iva);
         $offerte = $this->catalogoOfferte->getOfferteByAzienda($azienda->partita_iva);
 
         return view('azienda')
