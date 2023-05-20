@@ -36,6 +36,16 @@ class CatalogoAziende extends Model {
     }
 
     /**
+     * @param $nome rappresenta il nome dell'azienda che si vuole ricercare
+     * @return l'azienda con il nome data come parametro se esiste
+     */
+    public function getAziendeByNome($nome) {
+        // Non restituisce il valore dell'oggetto azienda se levassimo like e %
+        return Azienda::where('nome', 'like', '%'.$nome.'%')->get();
+
+    }
+
+    /**
      * @param $offerta rappresenta l'offerta da cui si può riprendere la partita iva dell'azienda
      * @return l'azienda di una determinata offerta
      */

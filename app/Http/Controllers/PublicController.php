@@ -37,10 +37,37 @@ class PublicController extends Controller
      */
     public function showCatalogoOfferte() {
 
-        $offerte = $this->catalogoOfferte->getOfferteByName();
+        $offerte = $this->catalogoOfferte->getOfferteOrdinateByAzienda();
 
-        return view('catalogo_offerte')
-                            -> with('offerte', $offerte);
+        return view('ricercaCatalogo.catalogo_offerte_visualizza')
+                            -> with('offerte', $offerte)
+                            -> with('gestioneOfferte', $this->catalogoOfferte);
+    }
+
+    public function searchOfferta() {
+
+        $offertaInput = $_POST['offerta'];
+
+        $aziendaInput = $_POST['azienda'];
+
+        if ( isset($offertaInput) and isset($aziendaInput) )
+            {
+                $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($offertaInput);
+            }
+        else if ( !isset($offertaInput) and isset($aziendaInput) )
+            {
+                $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($offertaInput);
+            }
+        else if ( isset($offertaInput) and !isset($aziendaInput) )
+            $offerte = $this->catalogoOfferte->getOffertaByRicerca($offertaInput);
+        else $offerte = $this->catalogoOfferte->getAll();
+
+
+        return view('ricercaCatalogo.catalogo_offerte_visualizza')
+                    ->with('offerte', $offerte)
+                    ->with('gestioneOfferte', $this->catalogoOfferte);
     }
 
     /**
@@ -115,15 +142,6 @@ class PublicController extends Controller
 
 
 
-    public function showSearchOfferta(Request $request) {
 
-        $prodotto = $request->input('prodotto');
-        $azienda = $request->input('azienda');
-
-        $offerte = $this->catalogoOfferte->getOffertaByProdotto($prodotto);
-        return view('catalogo_offerte')
-            ->with('offerte', $offerte)
-            ->with('azienda', $azienda);
-    }
 
 }

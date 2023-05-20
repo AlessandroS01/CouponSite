@@ -9,6 +9,13 @@ use Illuminate\Database\Eloquent\Model;
 class CatalogoOfferte extends Model {
 
     /**
+     * @return tutte le offerte
+     */
+    public function getAll() {
+        return Offerta::all();
+    }
+
+    /**
      * @return i primi 3 elementi della relazione Offerta
      */
     public function getPrimiTreElementi() {
@@ -45,6 +52,19 @@ class CatalogoOfferte extends Model {
     }
 
     /**
+     * @param $aziende rappresenta un array di aziende di cui si vogliono ritrovare le offerte
+     * @return la lista delle offerte delle aziende inserite come parametro nella ricerca
+     */
+    public function getOfferteByAziendeRicercate($aziende){
+
+        $offerte = Offerta::where('azienda', $aziende->partita_iva)
+            ->orderBy('percentuale_sconto', 'desc')
+            ->get();
+
+        return $offerte;
+    }
+
+    /**
      * @param $offerta rappresenta l'offerta da cui si vuole ricercare il logo dell'azienda
      * @return il logo dell'azienda
      */
@@ -66,11 +86,11 @@ class CatalogoOfferte extends Model {
 
     }
 
-    public function getOffertaByProdotto($prodotto) {
-        return Offerta::where('oggetto_offerta', 'like', "%{$prodotto}%")->get();
+    public function getOffertaByRicerca($offertaRicercata) {
+        return Offerta::where('oggetto_offerta', 'like', '%'.$offertaRicercata.'%')->get();
     }
 
-    public function getOfferteByName() {
+    public function getOfferteOrdinateByAzienda() {
         return Offerta::orderBy('azienda')->get();
     }
 

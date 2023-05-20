@@ -5,14 +5,20 @@
 @section('content')
 
     <div class="container-barra_ricerca">
+
         <div class="barra-ricerca">
 
-            <input class="ricerca-prodotto" type="search" name="prodotto" placeholder="Prodotto">
-            <input class="ricerca-azienda" type="search" name="azienda" placeholder="Azienda">
+            {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'post', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
-            <a href="{{ route('catalogo_offerte_search', ['prodotto' => request('prodotto'), 'azienda' => request('azienda')]) }}">
-                <img class="lente-ricerca" src="{{asset("img/search_icon.svg")}}">
-            </a>
+
+                {{ Form::text('offerta', '', ['class' => 'ricerca-offerta', 'id' => 'queryOfferta', 'placeholder' => 'Offerta']) }}
+
+                {{ Form::text('azienda', '', ['class' => 'ricerca-azienda', 'id' => 'queryAzienda', 'placeholder' => 'Azienda']) }}
+
+
+                {{ Form::image( asset('img/search_icon.svg') , '', ['class' => "lente-ricerca", 'type' => 'submit']) }}
+
+            {{ Form::close() }}
 
         </div>
     </div>
@@ -87,25 +93,8 @@
                 <div class="offerte">
 
                     <div class="offerte">
-                        @if(isset($parametro))
-                            @foreach ($offerte as $offerte)
-                                <div class="card">
-                                    <div class="img-container">
-                                        <img src="{{ asset('img/amazon.png') }}" alt="logo offerta">
-                                    </div>
-                                    <div class="info">
-                                        <h1>{{ $offerte->titolo }}</h1>
-                                        <p>{{ $offerte->descrizione }}</p>
-                                    </div>
-                                    <div class="button">
-                                        <a href="{{ route('offerta'), ['offertaId' => $offerte->titolo] }}">ottieni</a>
-                                    </div>
-                                    <div class="badge">
-                                        <p>{{ $offerte->sconto }}%</p>
-                                    </div>
-                                </div>
-                            @endforeach
-                        @endif
+
+                        @yield('ricercaOfferte')
 
                     </div>
 

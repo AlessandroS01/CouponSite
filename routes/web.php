@@ -61,6 +61,10 @@ Route::get('/', [PublicController::class, 'showHome'])
 Route::get('/catalogo/offerte', [PublicController::class, 'showCatalogoOfferte'])
         ->name('catalogo offerte');
 
+// rotta per visualizzare le aziende ricercate
+Route::post('/catalogo/offerte/ricerca', [PublicController::class, 'searchOfferta'])
+    ->name('catalogo offerte ricerca');
+
 /**
  * rotta che riporta alla pagina in cui è contenuto il catalogo delle aziende
  */
@@ -90,14 +94,6 @@ Route::get('/staff', [AdminController::class, 'index'])
 Route::get('/admin', [AdminController::class, 'index'])
     ->name('admin')->middleware('can:isAdmin');
 
-// rotta che riporta alla pagina del login
-//Route::get('/login', [PublicController::class, 'showLogin'])
-//        ->name('login');
-
-// rotta che riporta alla pagina di registrazione
-//Route::get('/signup', [PublicController::class, 'showSignup'])
-//        ->name('signup');
-
 /**
  * Rotta per visualizzare un'offerta dopo il click su ottieni.
  * {offertaId} rappresenta il parametro che viene passato direttamente dalla vista quando viene
@@ -118,9 +114,7 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
 Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
 
-// rotta per visualizzare le aziende ricercate
-Route::get('/catalogo/offerte/ricerca', [PublicController::class, 'showSearchOfferta'])
-        ->name('catalogo offerte search');
+
 
 
 
