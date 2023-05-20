@@ -35,24 +35,24 @@
 
                     <div id="categoria" class="filter-items">
 
-                        <label>
-                            <input type="radio" name="categoria" />
-                            <span class="label-text">Informatica</span>
-                        </label>
+                        {{ Form::open(['route' => 'catalogo offerte ricerca', 'method' => 'post', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
+                            <label>
+                                {{ Form::checkBox('categoriaInformatica', 'Informatica') }}
+                                <span class="label-text">Informatica</span>
+                            </label>
 
+                            <label>
+                                {{ Form::checkBox('categoriaAbbigliamento', 'Abbigliamento') }}
+                                <span class="label-text">Abbigliamento</span>
+                            </label>
 
-                        <label>
-                            <input type="radio" name="categoria" />
-                            <span class="label-text">Abbigliamento</span>
-                        </label>
+                            <label>
+                                {{ Form::checkBox('categoriaAlimentari', 'Alimentari') }}
+                                <span class="label-text">Alimentari</span>
+                            </label>
 
-
-
-                        <label>
-                            <input type="radio" name="categoria" />
-                            <span class="label-text">Alimentari</span>
-                        </label>
+                        {{ Form::close() }}
 
                     </div>
 

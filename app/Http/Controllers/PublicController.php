@@ -67,7 +67,6 @@ class PublicController extends Controller
                     // Il controllo si fa tra le stringhe in lowercase per una ricerca migliore
                     if(str_contains(strtolower($singolaOfferta->oggetto_offerta), strtolower($offertaInput)) )
                         $offerte = $offerte->add($singolaOfferta);
-
                 }
 
             }

@@ -112,8 +112,12 @@
 
 }
 
-.filter-items label{
-  margin-top: 10px;
+.filter-items form{
+    display: flex;
+    flex-direction: column;
+}
+.filter-items form label{
+    margin-top: 10px;
 }
 
 .offerte{
