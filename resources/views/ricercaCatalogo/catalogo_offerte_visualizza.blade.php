@@ -8,6 +8,7 @@
         @isset($offerte, $gestioneOfferte)
 
             @foreach ($offerte as $offerta)
+
                 <div class="card">
                     <div class="img-container">
                         <img src="{{ asset($gestioneOfferte->getLogoAziendaByOfferta($offerta)) }}" alt="logo offerta">
@@ -23,6 +24,7 @@
                         <p>{{ $offerta->percentuale_sconto }}%</p>
                     </div>
                 </div>
+
             @endforeach
 
         @endisset

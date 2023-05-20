@@ -13,7 +13,7 @@ class CatalogoOfferte extends Model {
      * @return tutte le offerte
      */
     public function getAll() {
-        return Offerta::all();
+        return Offerta::orderBy('percentuale_sconto', 'desc')->get();
     }
 
     /**
@@ -58,16 +58,23 @@ class CatalogoOfferte extends Model {
      */
     public function getOfferteByAziendeRicercate($aziende){
 
-        $offerte = array();
+        // crea una nuova collezione di dati
+        $offerte = collect();
 
         foreach ($aziende as $azienda) {
-            $offerte = array_merge($offerte, Offerta::where('azienda', $azienda->partita_iva)
+            // alla collezione di oggetti vengono aggiunte tutte le offerte cha hanno come azienda quella
+            // ripresa dalla variabile $azienda.
+            // Viene eseguito quindi il merge di una nuovo array all'interno della collezione
+            $offerte = $offerte->merge(Offerta::where('azienda', $azienda->partita_iva)
                 ->orderBy('percentuale_sconto', 'desc')
                 ->get()
                 ->toArray());
         }
 
-        log::info($offerte);
+        // serve a prendere il contenuto della collezione e trasformarlo in una collezione di oggetti.
+        // L'encode codifica la collezione in json mentre il decode lo decodifica per creare la collezione
+        // di oggetti da passare alla vista tramite il controller.
+        $offerte = json_decode(json_encode($offerte));
 
         return $offerte;
     }
