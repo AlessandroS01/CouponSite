@@ -49,7 +49,7 @@ class PublicController extends Controller
     /**
      * @return @View che permette di visualizzare il catalogo delle offerte a seguito della ricerca
      */
-    public function searchOfferta(Request $request) {
+    public function searchOfferta() {
 
         $offertaInput = $_POST['offerta'];
 

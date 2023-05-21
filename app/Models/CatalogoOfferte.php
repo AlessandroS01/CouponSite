@@ -6,7 +6,11 @@ use App\Models\Resources\Azienda;
 use App\Models\Resources\Offerta;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
+use Symfony\Component\Console\Input\Input;
 
 class CatalogoOfferte extends Model {
 
@@ -77,8 +81,20 @@ class CatalogoOfferte extends Model {
         // di oggetti da passare alla vista tramite il controller.
         $offerte = json_decode(json_encode($offerte));
 
+
+        $offerte = $this->paginate($offerte, 3, 1);
+        log::info($offerte);
+
         return $offerte;
 
+
+
+    }
+    public function paginate($items, $perPage = 3, $page = null, $options = [])
+    {
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => URL::full()]);
     }
 
     /**
