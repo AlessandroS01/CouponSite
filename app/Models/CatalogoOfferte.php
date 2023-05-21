@@ -5,6 +5,7 @@ namespace App\Models;
 use App\Models\Resources\Azienda;
 use App\Models\Resources\Offerta;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 class CatalogoOfferte extends Model {
@@ -77,6 +78,7 @@ class CatalogoOfferte extends Model {
         $offerte = json_decode(json_encode($offerte));
 
         return $offerte;
+
     }
 
     /**
@@ -102,7 +104,7 @@ class CatalogoOfferte extends Model {
     }
 
     public function getOffertaByRicerca($offertaRicercata) {
-        return Offerta::where('oggetto_offerta', 'like', '%'.$offertaRicercata.'%')->get();
+        return Offerta::where('oggetto_offerta', 'like', '%'.$offertaRicercata.'%')->paginate(3);
     }
 
     public function getOfferteOrdinateByAzienda() {

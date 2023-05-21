@@ -18,7 +18,7 @@ class AppServiceProvider extends ServiceProvider
     }
 
     /**
-     * Bootstrap any application services.
+     * Permette di modificare lo stile grafico del paginator
      *
      * @return void
      */

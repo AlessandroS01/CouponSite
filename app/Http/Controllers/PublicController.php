@@ -5,6 +5,8 @@ namespace App\Http\Controllers;
 use App\Models\CatalogoAziende;
 use App\Models\CatalogoOfferte;
 use App\Models\Resources\Faq;
+use Illuminate\Http\Request;
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 
 
@@ -47,7 +49,7 @@ class PublicController extends Controller
     /**
      * @return @View che permette di visualizzare il catalogo delle offerte a seguito della ricerca
      */
-    public function searchOfferta() {
+    public function searchOfferta(Request $request) {
 
         $offertaInput = $_POST['offerta'];
 
@@ -59,25 +61,16 @@ class PublicController extends Controller
                 // vengono selezionate tutte le aziende che hanno un nome che contiene l'input dato dalla ricerca
                 $aziendeSelezionate = $this->catalogoAziende->getAziendeByNome($aziendaInput);
                 // vengono prese tutte le offerte delle aziende selezionate nella riga sopra
-                $offerteSelezionate = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziendeSelezionate);
-
-                // viene creata una nuova collezione di oggetti
-                $offerte = collect();
-
-                foreach ($offerteSelezionate as $singolaOfferta){
-                    // tra tutte le offerte selezionate vengono aggiunte alla lista solo quelle che all'interno
-                    // del campo oggetto_offerta contengono il valore della ricerca delle offerte.
-                    // Il controllo si fa tra le stringhe in lowercase per una ricerca migliore
-                    if(str_contains(strtolower($singolaOfferta->oggetto_offerta), strtolower($offertaInput)) )
-                        $offerte = $offerte->add($singolaOfferta);
-                }
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziendeSelezionate);
 
             }
         // caso in cui si immette solo l'azienda come campo di ricerca
         else if ( empty($offertaInput) and !empty($aziendaInput)  )
             {
+
                 $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
                 $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziende);
+
             }
         // caso in cui si immette solo l'offerta come campo di ricerca
         else if ( !empty($offertaInput) and empty($aziendaInput) )

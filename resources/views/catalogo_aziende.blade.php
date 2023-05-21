@@ -4,6 +4,22 @@
 
 @section('content')
 
+    <div class="container-barra_ricerca">
+
+        <div class="barra-ricerca-aziende">
+
+            {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'post', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
+
+            {{ Form::text('azienda', '', ['class' => 'ricerca-azienda', 'id' => 'queryAzienda', 'placeholder' => 'Azienda']) }}
+
+
+            {{ Form::image( asset('img/search_icon.svg') , '', ['class' => "lente-ricerca", 'type' => 'submit']) }}
+
+            {{ Form::close() }}
+
+        </div>
+    </div>
+
 <section class="catalogo">
         <div class="catalogo-offerte">
 
