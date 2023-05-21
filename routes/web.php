@@ -123,10 +123,6 @@ Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
 
 
-
-
-
-
 /*  Rotte aggiunte da Breeze
 
 Route::get('/', function () {
