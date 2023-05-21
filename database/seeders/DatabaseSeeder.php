@@ -64,11 +64,11 @@ class DatabaseSeeder extends Seeder {
         ]);
 
         DB::table('azienda')->insert([
-            ["partita_iva"=>"00011122233", "nome" => "Mediaworld", "localita" => "Ancona", "tipologia" =>"elettronica", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"img/Media_World_Logo.jpg", "ragione_sociale" => "S.p.a"],
-            ["partita_iva"=>"00011122234", "nome" => "Euronics", "localita" => "Pescara", "tipologia" =>"elettronica", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"img/euronics.jpg", "ragione_sociale" => "S.p.a"],
-            ["partita_iva"=>"00011122235", "nome" => "H&M", "localita" => "Ancona", "tipologia" =>"abbigliamento", "descrizione" => "negozio di abbigliamento", "logo"=>"img/HM-Share-Image.jpg", "ragione_sociale" => "S.p.a"],
-            ["partita_iva"=>"00011122236", "nome" => "Zara", "localita" => "Ancona", "tipologia" =>"abbigliamento", "descrizione" => "negozio di abbigliamento", "logo"=>"img/zara.png", "ragione_sociale" => "S.p.a"],
-            ["partita_iva"=>"00011122237", "nome" => "Nike", "localita" => "Firenze", "tipologia" =>"abbigliamento", "descrizione" => "negozio di abbigliamento", "logo"=>"img/nike.png", "ragione_sociale" => "S.p.a"]
+            ["partita_iva"=>"00011122233", "nome" => "Mediaworld", "localita" => "Ancona", "tipologia" =>"elettronica", "email"=>"mediaworld@gmail.com", "telefono" => "071234556", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"img/Media_World_Logo.jpg", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122234", "nome" => "Euronics", "localita" => "Pescara", "tipologia" =>"elettronica", "email"=>"euronics@gmail.com", "telefono" => "071234557", "descrizione" => "negozio di elettronica e tecnologia", "logo"=>"img/euronics.jpg", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122235", "nome" => "H&M", "localita" => "Ancona", "tipologia" =>"abbigliamento", "email"=>"h&m@gmail.com", "telefono" => "071234558", "descrizione" => "negozio di abbigliamento", "logo"=>"img/HM-Share-Image.jpg", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122236", "nome" => "Zara", "localita" => "Ancona", "tipologia" =>"abbigliamento", "email"=>"zara@gmail.com", "telefono" => "071234559", "descrizione" => "negozio di abbigliamento", "logo"=>"img/zara.png", "ragione_sociale" => "S.p.a"],
+            ["partita_iva"=>"00011122237", "nome" => "Nike", "localita" => "Firenze", "tipologia" =>"abbigliamento", "email"=>"nike@gmail.com", "telefono" => "071234560", "descrizione" => "negozio di abbigliamento", "logo"=>"img/nike.png", "ragione_sociale" => "S.p.a"]
 
         ]);
 

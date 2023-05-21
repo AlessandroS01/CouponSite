@@ -18,6 +18,8 @@ return new class extends Migration
             $table->string('nome', 50);
             $table->longText('localita');
             $table->string('tipologia', 50);
+            $table->string('email', 50);
+            $table->string('telefono', 10);
             $table->longText('descrizione');
             $table->longText('logo');
             $table->string('ragione_sociale', 20)->nullable();
