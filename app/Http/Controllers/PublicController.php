@@ -8,6 +8,7 @@ use App\Models\Resources\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 
 class PublicController extends Controller
@@ -29,6 +30,7 @@ class PublicController extends Controller
      * per ricercare i dati su db.
      */
     public function showHome() {
+
         return view('home')
                     ->with('catalogoAziende', $this->catalogoAziende)
                     ->with('catalogoOfferte', $this->catalogoOfferte);
@@ -49,11 +51,11 @@ class PublicController extends Controller
     /**
      * @return @View che permette di visualizzare il catalogo delle offerte a seguito della ricerca
      */
-    public function searchOfferta() {
+    public function searchOfferteRicerca(Request $request) {
 
-        $offertaInput = $_GET['offerta'];
+        $offertaInput = $request['offerta'];
 
-        $aziendaInput = $_GET['azienda'];
+        $aziendaInput = $request['azienda'];
 
         // caso in cui si immettono entrambi i parametri di ricerca
         if ( !empty($offertaInput) and !empty($aziendaInput) )
@@ -93,10 +95,46 @@ class PublicController extends Controller
      */
     public function showCatalogoAziende() {
 
-        $aziende = $this->catalogoAziende->getAll();
+        // vengono selezionate tutte le aziende
+        $aziendeSelezionate = $this->catalogoAziende->getAll();
+        // le aziende selezionate vengono poi impaginate tramite il metodo paginate della classe CatalogoAziende
+        $aziende = $this->catalogoAziende->paginate($aziendeSelezionate, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
-        return view('catalogo_aziende')
+
+        return view('ricercaCatalogo.catalogo_aziende_visualizza')
                     ->with('aziende', $aziende);
+    }
+
+
+    /**
+     * @return @View che permette di visualizzare il catalogo delle aziende a seguito della ricerca
+     */
+    public function searchAziendeRicerca() {
+
+        $aziendaInput = $_GET['azienda'];
+
+        // caso in cui si immettono entrambi i parametri di ricerca
+        if ( !empty($aziendaInput) )
+        {
+            // vengono selezionate tutte le aziende che hanno un nome che contiene l'input dato dalla ricerca
+            $aziendeSelezionate = $this->catalogoAziende->getAziendeByNome($aziendaInput);
+
+            // le aziende selezionate vengono poi impaginate tramite il metodo paginate della classe CatalogoAziende
+            $aziende = $this->catalogoAziende->paginate($aziendeSelezionate, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+
+        }
+        else {
+            // vengono selezionate tutte le aziende
+            $aziendeSelezionate = $this->catalogoAziende->getAll();
+            // le aziende selezionate vengono poi impaginate tramite il metodo paginate della classe CatalogoAziende
+            $aziende = $this->catalogoAziende->paginate($aziendeSelezionate, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+        }
+
+
+
+        return view('ricercaCatalogo.catalogo_aziende_visualizza')
+                    ->with('aziende', $aziende);
+
     }
 
     /**

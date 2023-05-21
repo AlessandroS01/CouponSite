@@ -8,12 +8,12 @@
 
         <div class="barra-ricerca-aziende">
 
-            {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'post', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
+            {{ Form::open(['route' => 'catalogo aziende ricerca', 'method'=>'get', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
-            {{ Form::text('azienda', '', ['class' => 'ricerca-azienda', 'id' => 'queryAzienda', 'placeholder' => 'Azienda']) }}
+                {{ Form::text('azienda', '', ['class' => 'ricerca-azienda', 'id' => 'queryAzienda', 'placeholder' => 'Azienda']) }}
 
 
-            {{ Form::image( asset('img/search_icon.svg') , '', ['class' => "lente-ricerca", 'type' => 'submit']) }}
+                {{ Form::image( asset('img/search_icon.svg') , '', ['class' => "lente-ricerca", 'type' => 'submit']) }}
 
             {{ Form::close() }}
 
@@ -58,33 +58,9 @@
             </div>
 
             <div class="container-offerte">
-                @isset($aziende)
-                    <div class="offerte">
 
+                @yield('ricercaAziende')
 
-                            @foreach ($aziende as $azienda)
-                                <div class="card">
-
-                                    <div class="img-container">
-                                        <img src="{{ asset($azienda->logo) }}" alt="logo offerta" >
-                                    </div>
-
-                                    <div class="info">
-                                        <h1>{{$azienda->nome}}</h1>
-                                        <p>{{$azienda->descrizione}}</p>
-                                    </div>
-
-                                    <div class="button">
-                                        <a href="{{ route('azienda', ['partita_iva' => $azienda->partita_iva]) }}">Visualizza</a>
-                                    </div>
-
-                                </div>
-                            @endforeach
-                    </div>
-                <div class="paginator">
-                    {{$aziende->links()}}
-                </div>
-                @endisset
             </div>
 
         </div>

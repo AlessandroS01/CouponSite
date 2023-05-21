@@ -11,12 +11,12 @@
             {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'get', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
 
-                {{ Form::text('offerta', '', ['class' => 'ricerca-offerta', 'id' => 'queryOfferta', 'placeholder' => 'Offerta']) }}
+            {{ Form::text('offerta', '', ['class' => 'ricerca-offerta', 'id' => 'queryOfferta', 'placeholder' => 'Offerta']) }}
 
-                {{ Form::text('azienda', '', ['class' => 'ricerca-azienda', 'id' => 'queryAzienda', 'placeholder' => 'Azienda']) }}
+            {{ Form::text('azienda', '', ['class' => 'ricerca-azienda', 'id' => 'queryAzienda', 'placeholder' => 'Azienda']) }}
 
 
-                {{ Form::image( asset('img/search_icon.svg') , '', ['class' => "lente-ricerca", 'type' => 'submit']) }}
+            {{ Form::image( asset('img/search_icon.svg') , '', ['class' => "lente-ricerca", 'type' => 'submit']) }}
 
             {{ Form::close() }}
 
@@ -30,62 +30,32 @@
             <div class="filters">
                 <h2>Filtri</h2>
 
-                <button class="accordion" id="first-filter">Categoria</button>
+                <button class="accordion" id="first-filter">% sconto</button>
+
                 <div class="accordion-panel">
 
-                    <div id="categoria" class="filter-items">
-
+                    <div id="scontistica" class="filter-items">
                         {{ Form::open(['route' => 'catalogo offerte ricerca', 'method' => 'get', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
-                            <label>
-                                {{ Form::checkBox('categoriaInformatica', 'Informatica') }}
-                                <span class="label-text">Informatica</span>
-                            </label>
-
-                            <label>
-                                {{ Form::checkBox('categoriaAbbigliamento', 'Abbigliamento') }}
-                                <span class="label-text">Abbigliamento</span>
-                            </label>
-
-                            <label>
-                                {{ Form::checkBox('categoriaAlimentari', 'Alimentari') }}
-                                <span class="label-text">Alimentari</span>
-                            </label>
-
-                        {{ Form::submit('Submit') }}
-
-                        {{ Form::close() }}
-
-                    </div>
-
-                </div>
-
-                <button class="accordion " id="second-filter">% sconto</button>
-                <div class="accordion-panel">
-
-                    <div id="tipologia" class="filter-items">
-
                         <label>
-                            <input type="radio" name="tipologia" />
+                            {{ Form::checkbox('sconto', 'sotto_10', isset($_GET['sconto']) && $_GET['sconto'] === 'sotto_10', ['id' => 'checkbox_sotto_10']) }}
                             <span class="label-text">fino al 10%</span>
                         </label>
 
-
-
                         <label>
-                            <input type="radio" name="tipologia" />
+                            {{ Form::checkbox('sconto', 'tra_10_e_20', isset($_GET['sconto']) && $_GET['sconto'] === 'tra_10_e_20', ['id' => 'checkbox_tra_10_e_20']) }}
                             <span class="label-text">dal 10% al 20%</span>
                         </label>
 
-
-
                         <label>
-                            <input type="radio" name="tipologia" />
+                            {{ Form::checkbox('sconto', 'sopra_20', isset($_GET['sconto']) && $_GET['sconto'] === 'sopra_20', ['id' => 'checkbox_sopra_20']) }}
                             <span class="label-text">sopra 20%</span>
                         </label>
 
-                    </div>
+                        {{ Form::submit('Applica', ['class' => 'submit_scontistica']) }}
 
+                        {{ Form::close() }}
+                    </div>
 
                 </div>
 
@@ -93,7 +63,7 @@
 
             <div class="container-offerte">
 
-                        @yield('ricercaOfferte')
+                @yield('ricercaOfferte')
 
             </div>
 
