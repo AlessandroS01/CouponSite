@@ -62,7 +62,7 @@ Route::get('/catalogo/offerte', [PublicController::class, 'showCatalogoOfferte']
         ->name('catalogo offerte');
 
 // rotta per visualizzare le aziende ricercate
-Route::post('/catalogo/offerte/ricerca', [PublicController::class, 'searchOfferta'])
+Route::get('/catalogo/offerte/ricerca', [PublicController::class, 'searchOfferta'])
     ->name('catalogo offerte ricerca');
 
 /**

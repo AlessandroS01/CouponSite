@@ -51,9 +51,9 @@ class PublicController extends Controller
      */
     public function searchOfferta() {
 
-        $offertaInput = $_POST['offerta'];
+        $offertaInput = $_GET['offerta'];
 
-        $aziendaInput = $_POST['azienda'];
+        $aziendaInput = $_GET['azienda'];
 
         // caso in cui si immettono entrambi i parametri di ricerca
         if ( !empty($offertaInput) and !empty($aziendaInput) )

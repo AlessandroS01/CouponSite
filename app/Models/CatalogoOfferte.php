@@ -18,7 +18,13 @@ class CatalogoOfferte extends Model {
      * @return tutte le offerte
      */
     public function getAll() {
-        return Offerta::orderBy('percentuale_sconto', 'desc')->paginate(3);
+
+        $offerte = Offerta::orderBy('percentuale_sconto', 'desc')->get();
+
+        $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+
+        return $offerte;
+
     }
 
     /**
@@ -71,7 +77,6 @@ class CatalogoOfferte extends Model {
             // ripresa dalla variabile $azienda.
             // Viene eseguito quindi il merge di una nuovo array all'interno della collezione
             $offerte = $offerte->merge(Offerta::where('azienda', $azienda->partita_iva)
-                ->orderBy('percentuale_sconto', 'desc')
                 ->get()
                 ->toArray());
         }
@@ -81,21 +86,24 @@ class CatalogoOfferte extends Model {
         // di oggetti da passare alla vista tramite il controller.
         $offerte = json_decode(json_encode($offerte));
 
+        // Estrae la lista delle percentuali sconto all'interno dell'array ritrovato
+        $sconti = array_column($offerte, 'percentuale_sconto');
 
-        $offerte = $this->paginate($offerte, 3, 1);
-        log::info($offerte);
+        // Ordina l'array $offerte secondo il valore della colonna $sconti per valori discendenti
+        array_multisort($sconti, SORT_DESC, $offerte);
+
+        // richiama il metodo per impaginare la lista di oggetti.
+        // La variabile path, settato al valore dell'URL corrente tramite il metodo full della Facade URL, serve a
+        // rappresentare l'url per la generazione della paginazione per mantenere intatti i parametri passati tramite il
+        // metodo GET. La variabile pageName invece rappresenta il valore corrente della pagina visualizzata tramite
+        // paginazione che prende il valore di $page all'interno del metodo per la creazione della paginazione stessa.
+        $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
         return $offerte;
 
 
+    }
 
-    }
-    public function paginate($items, $perPage = 3, $page = null, $options = [])
-    {
-        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
-        $items = $items instanceof Collection ? $items : Collection::make($items);
-        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, ['path' => URL::full()]);
-    }
 
     /**
      * @param $offerta rappresenta l'offerta da cui si vuole ricercare il logo dell'azienda
@@ -110,7 +118,8 @@ class CatalogoOfferte extends Model {
     }
 
     /**
-     * @param $offerta rappresenta l'offerta di cui si vuole calcolare il prezzo
+     * Viene utilizzato per calcolare il valore della prezzo scontato nella pagina di visualizzazione di una singola offerta
+     * @param $offerta rappresenta l'offerta di cui si vuole calcolare il prezzo scontato
      * @return il prezzo scontato del prodotto
      */
     public function getPrezzoScontato($offerta){
@@ -120,11 +129,36 @@ class CatalogoOfferte extends Model {
     }
 
     public function getOffertaByRicerca($offertaRicercata) {
-        return Offerta::where('oggetto_offerta', 'like', '%'.$offertaRicercata.'%')->paginate(3);
+
+        $offerte = Offerta::where('oggetto_offerta', 'like', '%'.$offertaRicercata.'%')->orderBy('percentuale_sconto', 'desc')->get();
+
+        $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+
+        return $offerte;
     }
 
-    public function getOfferteOrdinateByAzienda() {
-        return Offerta::orderBy('azienda')->get();
+    /**
+     * Metodo usato per creare una paginazione
+     * @param $items rappresenta l'array o la lista degli elementi passati
+     * @param $perPage rappresenta il numero di elementi di $items che si vogliono visualizzare per pagina. Assume come
+     *      valore predefinito null se non viene passato direttamente al richiamo del metodo
+     * @param $page rappresenta il numero della pagina corrente
+     * @param $options rappresenta una lista di altre opzioni da dare al nuovo elemento di paginazione
+     * @return LengthAwarePaginator ovvero una nuova lista di elementi di $items ma paginata
+     */
+    public function paginate($items, $perPage = 3, $page = null, $options = [])
+    {
+        // il valore della pagina, se non viene passato come input al richiamo del metodo, viene richiamato un metodo della
+        // Facade Paginator per risolvere il problema della pagina corrente. Se non si riesce a stabilire il valore viene settato ad 1
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        // $items viene convertito in una collezione se al passaggio della funzione $items non è di per sè una collezione
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        // crea un nuovo oggetto di LengthAwarePaginator passandogli la collezione $items divisa per pagine, dove ad ogni pagina
+        // si trovano 3 elementi della collezione, poi il totale degli elementi della collezione, il numero di elementi per
+        // ogni pagina, il valore della pagina corrente e tutte le opzioni aggiuntive passate al richiamo del metodo.
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
 

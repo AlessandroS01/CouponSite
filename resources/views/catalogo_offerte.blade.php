@@ -8,7 +8,7 @@
 
         <div class="barra-ricerca">
 
-            {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'post', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
+            {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'get', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
 
                 {{ Form::text('offerta', '', ['class' => 'ricerca-offerta', 'id' => 'queryOfferta', 'placeholder' => 'Offerta']) }}
@@ -35,7 +35,7 @@
 
                     <div id="categoria" class="filter-items">
 
-                        {{ Form::open(['route' => 'catalogo offerte ricerca', 'method' => 'post', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
+                        {{ Form::open(['route' => 'catalogo offerte ricerca', 'method' => 'get', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
                             <label>
                                 {{ Form::checkBox('categoriaInformatica', 'Informatica') }}
