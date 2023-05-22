@@ -2,8 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
-use App\Http\Controllers\AdminController;
-use App\Http\Controllers\UserController;
+use App\Http\Controllers\ClientController;
 
 /*
 |--------------------------------------------------------------------------
@@ -108,8 +107,8 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
         ->name('azienda');
 
 // rotta per accedere alla sezione del cliente
-Route::get('/client', [PublicController::class, 'showClientHome'])
-        ->name('homeClient');
+Route::get('/coupon/{codice}', [ClientController::class, 'showCouponGenerato'])
+        ->name('generazione coupon');
 
 
 /*  Rotte aggiunte da Breeze

@@ -152,17 +152,6 @@ class PublicController extends Controller
         return view('faqs', [ 'faqs' => Faq::all()] );
     }
 
-    public function showLogin() {
-        return view('login');
-    }
-
-    public function showSignup() {
-        return view('signup');
-    }
-
-    public function showClientHome() {
-        return view('homeClient');
-    }
 
     /**
      * @param $offertaId è il paramatro passato direttamente dalla rotta e rappresenta il codice dell'offerta

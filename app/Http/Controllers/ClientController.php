@@ -2,20 +2,29 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\CatalogoOfferte;
 use Illuminate\Support\Facades\Log;
 use App\Models\Faq;
 
 
 class ClientController extends Controller
 {
-    // TODO GUARDARE I METODI SCRITTI DENTRO ADMINCONTROLLER IN LARAPROJ 5
 
-    // TODO I MECCANISMI SI TROVANO DENTRO AUTHSERVICEPROVIDER
+    protected $catalogoOfferte;
 
-    // definisce un metodo di autorizzazione all'interno del construct
-    // per testare se l'utente è un admin
+    public function __construct()
+    {
+        $this->catalogoOfferte = New CatalogoOfferte();
+    }
 
-    // se quel metodo non viene verificato viene generato un errore sullo schermo
+
+    public function showCouponGenerato($idOfferta) {
+
+        $offertaSelezionata = $this->catalogoOfferte->getOffertaByID($idOfferta);
+
+        return view('coupon')
+                        ->with('offertaSelezionata', $offertaSelezionata);
+    }
 
 
 

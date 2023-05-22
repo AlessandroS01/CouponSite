@@ -1,0 +1,34 @@
+:root {
+    --main-color: /*#AB8F6D*/ /* #252850*/ #363945;
+    --color-white: white;
+}
+
+
+body {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+    min-height: 100vh;
+    display:flex;
+    flex-direction:column;
+}
+
+
+
+.barra-superiore_coupon{
+    top: 0;
+    right: 0;
+    height: 100px;
+    background-color: var(--main-color);
+    display: flex;
+    align-content: center;
+}
+
+.barra-superiore_coupon .container-logo_sito a{
+    display: flex;
+    justify-content: center;
+
+}
+
+.barra-superiore_coupon img{
+    width: 8%;
+}

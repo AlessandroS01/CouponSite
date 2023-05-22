@@ -44,9 +44,22 @@
 
                 <h3> Prezzo scontato: <br>&#8364<span>{{ $gestoreOfferte->getPrezzoScontato($offerta) }}</span></h3>
 
-                <div class="bottone-acquisizione">
-                    <a href="{{ route('login') }}">ottieni</a>
-                </div>
+
+                @auth
+
+                    <div class="bottone-acquisizione">
+                        <a href="{{ route('generazione coupon', ['codice' => $offerta->codice ]) }}">ottieni</a>
+                    </div>
+
+                @endauth
+
+                @guest
+
+                    <div class="bottone-acquisizione">
+                        <a href="{{ route('login') }}">ottieni</a>
+                    </div>
+
+                @endguest
 
             </div>
 
