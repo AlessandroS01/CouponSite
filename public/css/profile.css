@@ -1,0 +1,28 @@
+.container-profile{
+    max-width: 800px;
+    width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0px #00000085;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    margin: auto;
+    margin-top: 20px;
+}
+
+.container-logouser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+    margin-top: 20px;
+}
+.container-logouser i {
+    font-size: 70px;
+}
+
+.container-profile .data {
+    padding: 20px;
+}

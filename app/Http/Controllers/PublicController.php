@@ -111,6 +111,7 @@ class PublicController extends Controller
      */
     public function searchAziendeRicerca() {
 
+        //prende quello che è stato scritto nella ricerca dell'azienda
         $aziendaInput = $_GET['azienda'];
 
         // caso in cui si immettono entrambi i parametri di ricerca

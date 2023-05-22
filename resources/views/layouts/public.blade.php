@@ -14,6 +14,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/offerta.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/autenticazione.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/azienda.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" >
     <!-- Riga di codica che importa una libreria che contiene le icone.
     In base al tipo di icona che si vuole utilizzare si cambia il codice della classe css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
