@@ -56,6 +56,7 @@ class RegisteredUserController extends Controller
             'citta' => ['required', 'string', 'max:50'],
         ]);
 
+        // crea la nuova tupla da aggiungere al database
         $user = User::create([
             'username' => $request->username,
             'password' => Hash::make($request->password),
@@ -70,7 +71,7 @@ class RegisteredUserController extends Controller
             'citta' => $request->citta,
         ]);
 
-        // viene generata una nuova tupla dell'utente
+        // definisce l'evento della creazione di un nuovo utente registrato
         event(new Registered($user));
         // viene fatto il login del nuovo utente
         Auth::login($user);

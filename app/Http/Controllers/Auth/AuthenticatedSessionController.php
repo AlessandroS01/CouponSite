@@ -31,13 +31,9 @@ class AuthenticatedSessionController extends Controller {
     public function store(LoginRequest $request) {
         // authenticate gestisce il controllo tra le credenziali passate e quelle presenti nel db
         $request->authenticate();
-
+        // ricrea la sessione con un nuovo id per l'utente che si è autenticato
         $request->session()->regenerate();
 
-        /**
-         * Redirezione su diverse Home Page in base alla classe d'utenza.
-         */
-//        return redirect()->intended(RouteServiceProvider::HOME);
 
         // estraiamo dall'utente autenticato il suo ruolo
         $livello = auth()->user()->livello;
@@ -60,12 +56,13 @@ class AuthenticatedSessionController extends Controller {
      * @return \Illuminate\Http\RedirectResponse
      */
     public function destroy(Request $request) {
+        // effettua il logout dell'user autenticato e pulisce lo stato dell'autenticazione
         Auth::guard('web')->logout();
-
+        // invalida la sessione dell'utente che era rpima autenticato
         $request->session()->invalidate();
-
+        // regenera il token per la sessione dell'utente a seguito del logout
         $request->session()->regenerateToken();
-
+        // reindirizza l'utente alla rotta definita tramite '/', cioè la home
         return redirect('/');
     }
 
