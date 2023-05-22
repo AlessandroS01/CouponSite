@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('prezzo_pieno');
             $table->string('oggetto_offerta', 50);
             $table->string('azienda', 11);
-            $table->string('staff', 50);
+            $table->bigInteger('staff');
             $table->string('categoria', 50);
             $table->text('descrizione');
 
@@ -34,7 +34,7 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('staff')
-                ->references('username')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

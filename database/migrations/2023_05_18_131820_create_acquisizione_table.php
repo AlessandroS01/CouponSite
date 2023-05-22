@@ -16,7 +16,7 @@ return new class extends Migration
         Schema::create('acquisizione', function (Blueprint $table) {
             $table->string('codice_coupon', 20)->unique();
             $table->unsignedBigInteger('offerta');
-            $table->string('cliente', 50);
+            $table->bigInteger('cliente');
 
             $table->primary(['offerta', 'cliente']);
 
@@ -27,7 +27,7 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('cliente')
-                ->references('username')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

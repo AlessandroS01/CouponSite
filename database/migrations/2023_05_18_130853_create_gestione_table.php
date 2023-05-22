@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('gestione', function (Blueprint $table) {
-            $table->string('staff', 50);
+            $table->bigInteger('staff');
             $table->string('azienda', 11);
 
             $table->primary(['staff', 'azienda']);
@@ -26,7 +26,7 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('staff')
-                ->references('username')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

@@ -16,10 +16,10 @@ return new class extends Migration
         Schema::create('pacchetto', function (Blueprint $table) {
             $table->bigIncrements('codice');
             $table->integer('sconto_ulteriore');
-            $table->string('staff', 50);
+            $table->bigInteger('staff');
 
             $table->foreign('staff')
-                ->references('username')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');
