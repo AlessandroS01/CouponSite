@@ -14,9 +14,9 @@ return new class extends Migration
     public function up()
     {
         Schema::create('pacchetto', function (Blueprint $table) {
-            $table->bigIncrements('codice');
+            $table->integer('codice', 1);
             $table->integer('sconto_ulteriore');
-            $table->bigInteger('staff');
+            $table->integer('staff');
 
             $table->foreign('staff')
                 ->references('id')

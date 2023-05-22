@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('gestione', function (Blueprint $table) {
-            $table->bigInteger('staff');
+            $table->bigIncrements('id');
+            $table->integer('staff');
             $table->string('azienda', 11);
 
-            $table->primary(['staff', 'azienda']);
+            $table->unique(['staff', 'azienda']);
 
             $table->foreign('azienda')
                 ->references('partita_iva')

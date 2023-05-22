@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\CatalogoAziende;
 use App\Models\CatalogoOfferte;
 use App\Models\GestioneAcquisizioneCoupon;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 use App\Models\Faq;
 
@@ -22,10 +23,14 @@ class ClientController extends Controller
     }
 
 
-    public function showCouponGenerato($idOfferta) {
+    public function showCouponGenerato(Request $request) {
 
-        $offertaSelezionata = $this->catalogoOfferte->getOffertaByID($idOfferta);
-        $this->gestioneAcquisizioneCoupon->createCoupon($offertaSelezionata);
+        $codiceOfferta = $request['codiceOfferta'];
+
+
+        $offertaSelezionata = $this->catalogoOfferte->getOffertaByID($codiceOfferta);
+        if($this->gestioneAcquisizioneCoupon->checkClienteOfferta($request))
+            $this->gestioneAcquisizioneCoupon->createCoupon($request);
 
         return view('coupon')
                         ->with('offertaSelezionata', $offertaSelezionata)

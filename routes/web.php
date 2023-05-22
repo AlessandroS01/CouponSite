@@ -107,7 +107,7 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
         ->name('azienda');
 
 // rotta per accedere alla sezione del cliente
-Route::get('/coupon/{codice}', [ClientController::class, 'showCouponGenerato'])
+Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
         ->name('generazione coupon');
 
 

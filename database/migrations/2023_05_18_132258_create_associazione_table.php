@@ -14,10 +14,11 @@ return new class extends Migration
     public function up()
     {
         Schema::create('associazione', function (Blueprint $table) {
-            $table->unsignedBigInteger('offerta');
-            $table->unsignedBigInteger('pacchetto');
+            $table->bigIncrements('id');
+            $table->integer('offerta');
+            $table->integer('pacchetto');
 
-            $table->primary(['offerta', 'pacchetto']);
+            $table->unique(['offerta', 'pacchetto']);
 
             $table->foreign('offerta')
                 ->references('codice')

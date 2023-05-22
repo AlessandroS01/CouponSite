@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('offerta', function (Blueprint $table) {
-            $table->bigIncrements('codice');
+            $table->integer('codice', 1);
             $table->date('data_scadenza');
             $table->string('luogo_fruizione', 50);
             $table->string('modalita_fruizione', 50);
@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('prezzo_pieno');
             $table->string('oggetto_offerta', 50);
             $table->string('azienda', 11);
-            $table->bigInteger('staff');
+            $table->integer('staff');
             $table->string('categoria', 50);
             $table->text('descrizione');
 

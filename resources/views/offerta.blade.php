@@ -46,16 +46,27 @@
 
 
                 @auth
+                    <div class="container-form-acquisizione">
 
-                    <div class="bottone-acquisizione">
-                        <a href="{{ route('generazione coupon', ['codice' => $offerta->codice ]) }}">ottieni</a>
+                        {{ Form::open(['route' => 'generazione coupon', 'method' => 'post', 'id' => 'ottenimento-coupon', 'class' => 'form']) }}
+
+                        <div class="bottone-acquisizione">
+                            {{ Form::submit('Ottieni', ['class' => 'btn']) }}
+                        </div>
+
+
+                        {{ Form::hidden('codiceOfferta',  $offerta->codice  ) }}
+
+                        {{ Form::close() }}
+
                     </div>
-
                 @endauth
 
                 @guest
 
+
                     <div class="bottone-acquisizione">
+                        {{ Form::open( ) }}
                         <a href="{{ route('login') }}">ottieni</a>
                     </div>
 
