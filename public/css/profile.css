@@ -17,7 +17,12 @@
     width: 100px;
     height: 100px;
     margin: auto;
+    margin-top: 20px;
 }
 .container-logouser i {
     font-size: 70px;
+}
+
+.container-profile .data {
+    padding: 20px;
 }

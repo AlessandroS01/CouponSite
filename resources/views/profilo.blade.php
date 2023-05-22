@@ -10,9 +10,8 @@
         </div>
 
         <div class="container-profile">
-            <div>
+            <div class="data">
 
-{{--                <img src="{{ asset('public/img/') }}" alt="Immagine Profilo">--}}
 
                 <h3>Username:</h3>
                 <p>{{$user->username}}</p>
@@ -28,7 +27,7 @@
 
             </div>
 
-            <div>
+            <div class="data">
                 <h3>Nome:</h3>
                 <p>{{$user->nome}}</p>
 
