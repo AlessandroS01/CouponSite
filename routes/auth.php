@@ -17,7 +17,7 @@ Route::middleware('guest')->group(function () {
                 ->name('register');
 
     /*
-     * Genera una richeista per l'invio dei dati immessi nella form di registrazione
+     * Genera una richiesta per l'invio dei dati immessi nella form di registrazione
      */
     Route::post('register', [RegisteredUserController::class, 'store']);
 
