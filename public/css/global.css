@@ -482,6 +482,7 @@ position: relative;
 .info{
   text-align: center;
   color: var(--color-white);
+  height: 100px;
 
 
 }

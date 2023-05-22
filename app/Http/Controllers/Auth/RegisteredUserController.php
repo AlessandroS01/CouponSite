@@ -50,14 +50,13 @@ class RegisteredUserController extends Controller
             'nome' => ['required', 'string', 'max:50'],
             'cognome' => ['required', 'string', 'max:50'],
             'genere' => ['required', 'string', 'max:1'],
-            'eta' => ['required', 'int', 'max:3'],
+            'eta' => ['required', 'int'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],
             'via' => ['required', 'string', 'max:100'],
-            'numero_civico' => ['required', 'int', 'max:3'],
+            'numero_civico' => ['required', 'int'],
             'citta' => ['required', 'string', 'max:50'],
         ]);
-
         // crea la nuova tupla da aggiungere al database
         $user = User::create([
             'username' => $request->username,
