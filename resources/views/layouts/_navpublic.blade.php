@@ -10,7 +10,7 @@
         <li><a href="{{ route('contatti') }}" title="Contattaci">Contatti</a></li>
         <li><a href="{{ route('faqs') }}" title="Domande frequenti">FAQs</a></li>
         @canany(['isAdmin', 'isStaff'])
-            <li><a href="#" class="highlight" title="Pannello di gestione">Gestione</a></li>
+            <li><a href="{{ route('pannello_admin') }}" class="highlight" title="Pannello di gestione">Gestione</a></li>
         @endcanany
 
     </ul>
@@ -28,7 +28,7 @@
 
         <ul id="right-links">
 
-            <li><a href="#" class="highlight" title="Home Admin">Profilo</a></li>
+            <li><a href="{{ route('profilo') }}" class="highlight" title="Home Admin">Profilo</a></li>
             <li><a href="#" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

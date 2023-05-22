@@ -1,8 +1,10 @@
 <?php
 
+use App\Http\Controllers\AdminController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ClientController;
+use App\Http\Controllers\UserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -110,6 +112,12 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
 Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
         ->name('generazione coupon');
 
+Route::get('/profilo', [UserController::class, 'showProfilo'])
+        ->name('profilo');
+
+Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
+    ->name('pannello_admin')
+    ->middleware(['auth', 'can:isAdmin']);
 
 /*  Rotte aggiunte da Breeze
 
