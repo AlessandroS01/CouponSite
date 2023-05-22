@@ -13,8 +13,8 @@
                     <p>{{ $azienda->nome }}</p>
                     <p class="contatti-azienda"> Contatti azienda</p>
                     <div class="container-contatti_azienda">
-                        <p><i class="fa fa-phone"></i>+39 327-8124810</p>
-                        <p><i class="fa fa-envelope"></i>coupon-fantastici@gmail.com</p>
+                        <p><i class="fa fa-phone"></i>{{ $azienda->telefono }}</p>
+                        <p><i class="fa fa-envelope"></i>{{ $azienda->email }}</p>
                         <p><i class="fa fa-map-marker"></i>{{ ucfirst($azienda->localita) }}</p>
                         <p><i class="fas fa-building"></i>{{ ucfirst($azienda->descrizione) }}</p>
                     </div>

@@ -61,8 +61,10 @@ Route::get('/', [PublicController::class, 'showHome'])
 Route::get('/catalogo/offerte', [PublicController::class, 'showCatalogoOfferte'])
         ->name('catalogo offerte');
 
-// rotta per visualizzare le aziende ricercate
-Route::post('/catalogo/offerte/ricerca', [PublicController::class, 'searchOfferta'])
+/**
+ * rotta che permette di visualizzare le offerte cha "matchano" con i campi di ricerca inseriti nel catalogo
+ */
+Route::get('/catalogo/offerte/ricerca', [PublicController::class, 'searchOfferteRicerca'])
     ->name('catalogo offerte ricerca');
 
 /**
@@ -70,6 +72,12 @@ Route::post('/catalogo/offerte/ricerca', [PublicController::class, 'searchOffert
  */
 Route::get('/catalogo/aziende', [PublicController::class, 'showCatalogoAziende'])
         ->name('catalogo aziende');
+
+/**
+ * rotta che permette di visualizzare le aziende cha "matchano" con i campi di ricerca inseriti nel catalogo
+ */
+Route::get('/catalogo/aziende/ricerca', [PublicController::class, 'searchAziendeRicerca'])
+    ->name('catalogo aziende ricerca');
 
 /**
  * rotta che riporta alla pagina dei contatti del sito
@@ -113,10 +121,6 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
 // rotta per accedere alla sezione del cliente
 Route::get('/client', [PublicController::class, 'showClientHome'])
         ->name('homeClient');
-
-
-
-
 
 
 /*  Rotte aggiunte da Breeze

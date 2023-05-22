@@ -14,8 +14,24 @@
     border: 2px solid var(--main-color);
     align-items: center;
 }
+.barra-ricerca form button{
+    border: none;
+    cursor: pointer;
+}
 
-.barra-ricerca form:hover{
+.barra-ricerca-aziende form{
+    display: grid;
+    grid-template-columns: 85% 15%;
+    padding: 5px;
+
+    margin-top: 20px;
+    border-radius: 20px;
+    border: 2px solid var(--main-color);
+    align-items: center;
+}
+
+.barra-ricerca form:hover,
+.barra-ricerca-aziende form:hover{
     box-shadow: 1px 1px 3px var(--main-color);
 }
 
@@ -31,19 +47,18 @@
 }
 
 
-.barra-ricerca input {
+.barra-ricerca input ,
+.barra-ricerca-aziende input{
     font-size: 15px;
     padding: 5px;
     background-color: transparent;
 }
 
-.barra-ricerca input:focus{
+.barra-ricerca input:focus,
+.barra-ricerca-aziende input:focus{
     outline: none;
 }
 
-#ricerca_offerte{
-
-}
 .ricerca-offerta{
     border-top: none ;
     border-bottom: none ;
@@ -98,7 +113,6 @@
     max-height: 0;
     transition: max-height 0.2s ease-out;
     color: white;
-    margin: 0;
 }
 
 .catalogo .accordion{
@@ -132,7 +146,20 @@
 }
 
 .filter-items label{
-    margin-top: 10px;
+    margin-top: 20px;
+}
+
+.filter-items .submit_scontistica{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    color: var(--main-color);
+    padding: 2px 0;
+}
+
+.filter-items .submit_scontistica:hover{
+    cursor: pointer;
 }
 
 .offerte {

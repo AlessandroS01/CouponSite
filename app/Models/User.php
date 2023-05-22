@@ -55,16 +55,15 @@ class User extends Authenticatable
     ];
 
     /**
+     * funzione che mi permette di verificare il livello a cui l'utente appartiene
+     * viene passato il livello e ricevo un valore di verità
      * @param $role passato durante l'attivazione
-     * @return bool quando il ruolo associato a quell'utente è uguale al parametro che gli passo
+     * @return bool true quando il ruolo associato a quell'utente è uguale al parametro che gli passo
      */
-
-    //funzione che mi permette di verificare il livello a cui l'utente appartiene
-    //viene passato il livello e ricevo un valore di  verità
     public function hasLevel($livello) {
         // crea un array
         $livello = (array)$livello;
-        // ricerca il valore di $role all'interno di un array
+        // ricerca il valore di $livello all'interno di un array
         return in_array($this->livello, $livello);
     }
 

@@ -28,17 +28,20 @@ class AuthServiceProvider extends ServiceProvider
     {
         $this->registerPolicies();
 
-        Gate::define('isAdmin', function ($user) {
-            // $user è una tupla che identifica l'utente su cui si può richiamare il metodo hasRole()
-            return $user->hasLevel('3');
+        // gate per verificare se l'utente è un semplice cliente
+        Gate::define('isUser', function ($user) {
+            return $user->hasLevel('1');
         });
 
+        // gate per verificare se l'utente fa parte dello staff
         Gate::define('isStaff', function ($user) {
             return $user->hasLevel('2');
         });
 
-        Gate::define('isUser', function ($user) {
-            return $user->hasLevel('1');
+        // gate per verificare se l'utente è l'admin del sito
+        Gate::define('isAdmin', function ($user) {
+            // $user è una tupla che identifica l'utente su cui si può richiamare il metodo hasRole()
+            return $user->hasLevel('3');
         });
 
 

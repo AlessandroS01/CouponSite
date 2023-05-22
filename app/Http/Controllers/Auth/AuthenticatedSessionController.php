@@ -45,11 +45,9 @@ class AuthenticatedSessionController extends Controller {
          * In base al ruolo, l'utente viene reindirizzato in rotte diverse
          */
         switch ($livello) {
-            case '3': return redirect()->route('admin');
-                break;
-            case '2': return redirect()->route('staff');
-                break;
-            case '1': return redirect()->route('user');
+            case '2':
+            case '1':
+            case '3': return redirect()->route('home');
                 break;
             default: return redirect('/');
         }
