@@ -1,15 +1,26 @@
-.container-login{
+.container-login,
+.container-register{
     display: flex;
     flex-direction: column;
     align-items: center;
     margin-top: 50px;
 }
 
-.container-login h1{
-    color: var(--main-color);
-    display: inline-block;
+.container-register{
+    margin-bottom: 50px;
 }
 
+.container-login h1,
+.container-register h1{
+    color: var(--main-color);
+}
+
+.container-register h1 {
+    margin-bottom: 0;
+}
+.container-register p{
+    margin-top: 10px;
+}
 
 
 .container-auth{
@@ -22,7 +33,8 @@
 }
 
 
-.container-dati-login{
+.container-dati-login,
+.container-dati-registrazione{
     height: 45px;
     margin-top: 10px;
     padding: 10px 20px;
@@ -45,14 +57,16 @@
     padding: 0;
 }
 
-.container-dati-login label{
+.container-dati-login label, .container-dati-registrazione label{
     position: absolute;
     margin-left: 11px;
     margin-top: 2px;
     font-size: 15px;
 }
 
-.container-dati-login input{
+.container-dati-login input,
+.container-dati-registrazione .input
+{
     font-size: 17px;
     padding-top: 20px;
     border: 2px solid var(--main-color);
@@ -63,14 +77,17 @@
 
 
 .container-dati-login input:focus,
-.container-dati-login input:hover{
+.container-dati-login input:hover,
+.container-dati-registrazione .input:focus,
+.container-dati-registrazione .input:hover{
     box-shadow: 0px 0px 10px #7b7e9d;
     outline: none;
     background-color: rgb(232, 240, 254);
 }
 
 
-.container-dati-login span{
+.container-dati-login span,
+.container-dati-registrazione span{
     color: var(--main-color);
     position: absolute;
     left: 20px;
@@ -94,13 +111,16 @@
     color: #1877f2;
 }
 
-.container-auth form .container-autenticazione_button {
+.container-auth form .container-autenticazione_button,
+.form-registrazione .container-autenticazione_button
+{
     display: flex;
     justify-content: center;
     margin: 20px 0;
 }
 
-.container-auth form .container-autenticazione_button .submit-button {
+.container-auth form .container-autenticazione_button .submit-button,
+.form-registrazione .container-autenticazione_button .submit-button{
     display: inline-block;
     width: 25%;
     background-color: var(--main-color);
@@ -115,3 +135,20 @@
 }
 
 
+.container-form-register{
+    width: 800px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    margin: auto;
+}
+
+.form-registrazione{
+    border: 5px solid var(--main-color);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: auto;
+}

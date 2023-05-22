@@ -35,6 +35,8 @@ class RegisteredUserController extends Controller
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    /*Quando un client invia una richiesta HTTP POST al percorso 'register', Laravel si occupa automaticamente di creare un oggetto Request
+    che rappresenta la richiesta e lo passa come argomento al metodo*/
     public function store(Request $request)
     {
         /*
@@ -47,7 +49,7 @@ class RegisteredUserController extends Controller
             'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()],
             'nome' => ['required', 'string', 'max:50'],
             'cognome' => ['required', 'string', 'max:50'],
-            'genere' => ['required', 'char', 'max:1'],
+            'genere' => ['required', 'string', 'max:1'],
             'eta' => ['required', 'int', 'max:3'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],

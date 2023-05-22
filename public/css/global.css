@@ -8,14 +8,14 @@ body {
     margin: 0;
     font-family: Arial, Helvetica, sans-serif;
     min-height: 100vh;
-    display:flex; 
+    display:flex;
     flex-direction:column;
   }
-  
+
 #contenuto{
   flex: 1;
 }
-  
+
 .icon-menu {
     display: none;
 }
@@ -55,24 +55,24 @@ body {
     padding: 0 2%;
     -webkit-tap-highlight-color: transparent;
     cursor: pointer;
-    
+
 }
 
 .topnav ul .active {
   text-decoration: underline;
-  
+
 }
 
 .topnav ul {
   text-align: center;
   margin: 0;
   padding: 0;
-  
+
 }
 
 .topnav ul li {
   display: inline;
-  
+
 }
 
 .topnav ul li a{
@@ -84,7 +84,7 @@ body {
 
 .topnav #center-links li a {
   padding: 8px 10px;
-  
+
 }
 
 
@@ -92,12 +92,12 @@ body {
   border-radius: 15px;
   background-color: black;
   padding: 8px 20px;
-  
+
 }
 
 /* stile footer */
 footer{
-  background-color: var(--main-color); 
+  background-color: var(--main-color);
   padding: 15px;
   min-height:50px;
   margin: 0;
@@ -107,11 +107,11 @@ footer{
 }
 
 .container-footer{
-  margin: 0; 
+  margin: 0;
   height: 150px;
   display: flex;
   width: 100%;
-  padding: 0; 
+  padding: 0;
   color: var(--color-white);
   justify-content: space-between;
   align-items: center;
@@ -146,7 +146,7 @@ footer{
     color: var(--color-white);
     margin-top: 10px;
     margin: 5px;
-    padding: right 0; 
+    padding: right 0;
 }
 
 #footer-right_links p i{
@@ -186,7 +186,7 @@ footer p{
   font-size: 28px;
   padding: 20px 0 10px 0 ;
   color: black;
-  margin: 20px 0; 
+  margin: 20px 0;
 }
 
 #aziende .title-section-aziende {
@@ -289,7 +289,7 @@ footer p{
 
 
 @keyframes fade {
-  from {opacity: .4} 
+  from {opacity: .4}
   to {opacity: 1}
 }
 
@@ -392,7 +392,7 @@ font-size: 28px;
   height: 100%;
   object-fit: cover;
   border-radius: 50%;
-  
+
 }
 
 .card .card-content{
@@ -434,7 +434,7 @@ font-size: 28px;
 .button{
   text-align: center;
   margin-top: 10px;
-  
+
 }
 .button a{
   padding: 10px 30px;
@@ -444,7 +444,7 @@ font-size: 28px;
   text-decoration: none;
   text-transform: uppercase;
   font-weight: bold;
-  
+
 
 }*/
 
@@ -452,7 +452,7 @@ font-size: 28px;
 
 .card{
 display: flex;
-flex-direction: column;  
+flex-direction: column;
 background-color: var(--main-color);
 border-radius: 20px;
 margin-right: 10px;
@@ -483,7 +483,11 @@ position: relative;
   text-align: center;
   color: var(--color-white);
 
-  
+
+}
+
+.card .info p {
+    padding: 0 10px;
 }
 
 .card .button a {
