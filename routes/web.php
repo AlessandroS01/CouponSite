@@ -91,17 +91,6 @@ Route::get('/contatti', [PublicController::class, 'showContatti'])
 Route::get('/faq', [PublicController::class, 'showFaq'])
         ->name('faqs');
 
-
-Route::get('/user', [UserController::class, 'index'])
-    //viene fatto il riferimento al middelware e quindi alla richiesta al gate direttamente dalla rotta
-    ->name('user')->middleware('can:isUser');
-
-Route::get('/staff', [AdminController::class, 'index'])
-    ->name('staff')->middleware('can:isStaff');
-
-Route::get('/admin', [AdminController::class, 'index'])
-    ->name('admin')->middleware('can:isAdmin');
-
 /**
  * Rotta per visualizzare un'offerta dopo il click su ottieni.
  * {offertaId} rappresenta il parametro che viene passato direttamente dalla vista quando viene
