@@ -154,7 +154,7 @@
         </div>
 
         <div class="container-autenticazione_button">
-                {{ Form::submit('Registra', ['class' => 'submit-button']) }}
+                {{ Form::submit('Registrati', ['class' => 'submit-button']) }}
         </div>
 
 
