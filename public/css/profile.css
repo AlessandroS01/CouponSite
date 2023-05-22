@@ -26,3 +26,7 @@
 .container-profile .data {
     padding: 20px;
 }
+
+.container-profile .data p {
+    margin-right: 10px;
+}
