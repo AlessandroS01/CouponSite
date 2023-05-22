@@ -10,6 +10,14 @@
     margin-top: 20px;
 }
 
-.container-profile .data {
-    padding: 20px;
+.container-logouser {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 100px;
+    margin: auto;
+}
+.container-logouser i {
+    font-size: 70px;
 }
