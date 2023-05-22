@@ -85,7 +85,7 @@
             <div>
                 <div class="container-dati-registrazione ">
                     {{ Form::label('genere', 'Genere', ['class' => 'label-input']) }}
-                    {{ Form::select('genere', ['M' , 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
+                    {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
 
                 </div>
                 @if ($errors->first('genere'))
