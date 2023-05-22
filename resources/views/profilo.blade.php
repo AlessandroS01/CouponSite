@@ -6,7 +6,7 @@
 
     @isset($user)
     <div class="container-profile">
-        <div>
+        <div class="data">
             <h3>Username:</h3>
             <p>{{$user->username}}</p>
 
@@ -19,11 +19,9 @@
             <h3>Indirizzo:</h3>
             <p>{{$user->citta}}, {{$user->via}} {{$user->numero_civico}}</p>
 
+        </div >
 
-
-        </div>
-
-        <div>
+        <div class="data">
 
             <h3>Nome:</h3>
             <p>{{$user->nome}}</p>
