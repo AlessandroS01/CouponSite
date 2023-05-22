@@ -74,21 +74,23 @@ class DatabaseSeeder extends Seeder {
 
         DB::table('offerta')->insert([
 
-        ["data_scadenza"=> "2023/06/20", "luogo_fruizione"=> "mediaworld", "modalita_fruizione"=>"online", "percentuale_sconto"=> 20, "prezzo_pieno" => 300, "oggetto_offerta"=>"AirPods 2 Pro", "azienda"=>"00011122233", "staff"=>"staffstaff", "categoria" => "elettronica", "descrizione" => "Cuffie bluetooth"],
-        ["data_scadenza"=> "2023/07/23", "luogo_fruizione"=> "euronics", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 10, "prezzo_pieno" => 800, "oggetto_offerta"=>"laptop ASUS", "azienda"=>"00011122234", "staff"=>"staffstaff", "categoria" => "elettronica", "descrizione" => "Cavo hdmi incluso"],
-        ["data_scadenza"=> "2023/08/21", "luogo_fruizione"=> "H&M", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 15, "prezzo_pieno" => 50, "oggetto_offerta"=>"Maglioncino Cropp", "azienda"=>"00011122235", "staff"=>"staffstaff", "categoria" => "abbigliamento", "descrizione" => "Colletto alto"],
-        ["data_scadenza"=> "2023/09/20", "luogo_fruizione"=> "mediaworld", "modalita_fruizione"=>"online", "percentuale_sconto"=> 10, "prezzo_pieno" => 120, "oggetto_offerta"=>"Apple pen", "azienda"=>"00011122233", "staff"=>"staffstaff", "categoria" => "elettronica", "descrizione" => "Prima generazione"],
-        ["data_scadenza"=> "2023/08/12", "luogo_fruizione"=> "euronics", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 30, "prezzo_pieno" => 900, "oggetto_offerta"=>"laptop MSI", "azienda"=>"00011122234", "staff"=>"staffstaff", "categoria" => "elettronica", "descrizione" => "Processore Intel i7"],
-        ["data_scadenza"=> "2023/11/10", "luogo_fruizione"=> "Zara", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 15, "prezzo_pieno" => 50, "oggetto_offerta"=>"T-Shirt", "azienda"=>"00011122235", "staff"=>"staffstaff", "categoria" => "abbigliamento", "descrizione" => "Pacco da 3"]
+        ["data_scadenza"=> "2023/06/20", "luogo_fruizione"=> "mediaworld", "modalita_fruizione"=>"online", "percentuale_sconto"=> 20, "prezzo_pieno" => 300, "oggetto_offerta"=>"AirPods 2 Pro", "azienda"=>"00011122233", "staff"=>2, "categoria" => "elettronica", "descrizione" => "Cuffie bluetooth"],
+        ["data_scadenza"=> "2023/07/23", "luogo_fruizione"=> "euronics", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 10, "prezzo_pieno" => 800, "oggetto_offerta"=>"laptop ASUS", "azienda"=>"00011122234", "staff"=>2, "categoria" => "elettronica", "descrizione" => "Cavo hdmi incluso"],
+        ["data_scadenza"=> "2023/08/21", "luogo_fruizione"=> "H&M", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 15, "prezzo_pieno" => 50, "oggetto_offerta"=>"Maglioncino Cropp", "azienda"=>"00011122235", "staff"=>2, "categoria" => "abbigliamento", "descrizione" => "Colletto alto"],
+        ["data_scadenza"=> "2023/09/20", "luogo_fruizione"=> "mediaworld", "modalita_fruizione"=>"online", "percentuale_sconto"=> 10, "prezzo_pieno" => 120, "oggetto_offerta"=>"Apple pen", "azienda"=>"00011122233", "staff"=>2, "categoria" => "elettronica", "descrizione" => "Prima generazione"],
+        ["data_scadenza"=> "2023/08/12", "luogo_fruizione"=> "euronics", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 30, "prezzo_pieno" => 900, "oggetto_offerta"=>"laptop MSI", "azienda"=>"00011122234", "staff"=>2, "categoria" => "elettronica", "descrizione" => "Processore Intel i7"],
+        ["data_scadenza"=> "2023/11/10", "luogo_fruizione"=> "Zara", "modalita_fruizione"=>"negozio fisico", "percentuale_sconto"=> 15, "prezzo_pieno" => 50, "oggetto_offerta"=>"T-Shirt", "azienda"=>"00011122235", "staff"=>2, "categoria" => "abbigliamento", "descrizione" => "Pacco da 3"]
 
         ]);
 
 
 
         DB::table('gestione')->insert([
-            ["staff"=> "staffstaff", "azienda" => "00011122233"],
-            ["staff"=> "staffstaff", "azienda" => "00011122234"],
-            ["staff"=> "staffstaff", "azienda" => "00011122235"]
+            ["staff"=> 2, "azienda" => "00011122233"],
+            ["staff"=> 2, "azienda" => "00011122234"],
+            ["staff"=> 2, "azienda" => "00011122235"],
+            ["staff"=> 2, "azienda" => "00011122236"],
+            ["staff"=> 2, "azienda" => "00011122237"]
         ]);
     }
 

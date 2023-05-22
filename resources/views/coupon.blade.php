@@ -13,15 +13,40 @@
 
         <div class="barra-superiore_coupon">
 
-            <div class="container-logo_sito">
-                <a href="{{ route('home') }}"> <img src="{{ asset('img/logo.png') }}" alt="site logo"> </a>
-            </div>
+
+            <a href="{{ route('home') }}"> <img src="{{ asset('img/logo.png') }}" title="Home" alt="site logo"> </a>
+
 
         </div>
 
-        @isset($offertaSelezionata)
+        @isset($offertaSelezionata, $gestoreOfferte)
+            <div class="container">
 
-            <p> {{ $offertaSelezionata->codice }}</p>
+                <div class="container-coupon_string">
+
+                    <h1> Codice del coupon generato </h1>
+
+                </div>
+
+
+                <div class="container-offerta">
+
+                    <div class="container-logo_azienda">
+                        <img src="{{asset( $gestoreOfferte->getLogoAziendaByOfferta($offertaSelezionata))}}">
+                    </div>
+
+                    <div class="container-offerta_dati">
+                        <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+                    </div>
+
+                    <div class="container-modalita_uso">
+                        <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+                        <p>{{ $offertaSelezionata->luogo_fruizione }}</p>
+                    </div>
+
+                </div>
+            </div>
+
 
         @endisset
 

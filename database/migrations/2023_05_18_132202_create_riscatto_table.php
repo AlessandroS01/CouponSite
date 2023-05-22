@@ -14,7 +14,7 @@ return new class extends Migration
     public function up()
     {
         Schema::create('riscatto', function (Blueprint $table) {
-            $table->string('cliente', 50);
+            $table->bigInteger('cliente');
             $table->unsignedBigInteger('pacchetto');
             $table->string('codice_coupon', 20)->unique();
 
@@ -27,7 +27,7 @@ return new class extends Migration
                 ->onUpdate('cascade');
 
             $table->foreign('cliente')
-                ->references('username')
+                ->references('id')
                 ->on('users')
                 ->onDelete('cascade')
                 ->onUpdate('cascade');

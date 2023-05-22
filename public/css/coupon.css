@@ -13,22 +13,40 @@ body {
 }
 
 
-
 .barra-superiore_coupon{
     top: 0;
     right: 0;
     height: 100px;
     background-color: var(--main-color);
     display: flex;
-    align-content: center;
+    align-items: center;
 }
 
-.barra-superiore_coupon .container-logo_sito a{
+.barra-superiore_coupon  a{
     display: flex;
     justify-content: center;
 
 }
 
 .barra-superiore_coupon img{
-    width: 8%;
+    width: 6%;
+}
+
+.container{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    margin-top: 50px;
+}
+
+.container-offerta{
+    width: 1000px;
+    display: grid;
+    grid-template-columns: 43% 1fr 1fr;
+    grid-gap: 50px;
+    margin-top: 100px;
+}
+
+.container-offerta .container-logo_azienda img{
+    width: 100%;
 }
