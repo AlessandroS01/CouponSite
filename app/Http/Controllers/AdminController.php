@@ -16,6 +16,9 @@ class AdminController extends Controller {
 //        //la chiamata al gate viene fatta in questo modo can:isAdmin abbiamo messo al sicuro le funzionalità dell'amministratore
 //
 //    }
+    public function showPannelloAdmin() {
+        return view('Admin.pannello_admin');
+    }
 
     public function index() {
         return view('admin');
