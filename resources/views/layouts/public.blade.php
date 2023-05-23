@@ -15,6 +15,7 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/autenticazione.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/azienda.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pannelli_gestione.css') }}" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <!-- Riga di codica che importa una libreria che contiene le icone.

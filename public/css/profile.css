@@ -42,3 +42,49 @@
 .container-profile .data p i {
 float: right;
 }
+
+.container-coupon-riscattati{
+    max-width:800px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 50px;
+
+}
+.container-coupon-riscattati table {
+    width: 800px;
+    border-spacing: 0;
+    border-radius: 10px;
+    border-collapse: separate;
+    background-color: white;
+    border: 1px solid black;
+    overflow: hidden;
+
+
+}
+
+
+
+table th:not(:last-child),
+table td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+
+table>tbody>tr:not(:last-child)>th,
+table>tbody>tr:not(:last-child)>td
+ {
+    border-bottom: 1px solid black;
+}
+
+table th, table td{
+    padding: 10px;
+    text-align: center;
+}
+table tr:nth-child(1){
+    background-color: var(--main-color);
+    color: white;
+}
+
+
+
