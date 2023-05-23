@@ -67,30 +67,15 @@ class CatalogoOfferte extends Model {
      * @param $aziende rappresenta un array di aziende di cui si vogliono ritrovare le offerte
      * @return la lista delle offerte delle aziende inserite come parametro nella ricerca
      */
-    public function getOfferteByAziendeRicercate($aziende){
+    public function getOfferteByAziendeRicercate($aziendaInput){
 
         // crea una nuova collezione di dati
-        $offerte = collect();
+        $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
+            ->where('azienda.nome', 'like', '%'.$aziendaInput.'%')
+            ->select('offerta.*')
+            ->orderBy('offerta.percentuale_sconto', 'desc')
+            ->get();
 
-        foreach ($aziende as $azienda) {
-            // alla collezione di oggetti vengono aggiunte tutte le offerte cha hanno come azienda quella
-            // ripresa dalla variabile $azienda.
-            // Viene eseguito quindi il merge di una nuovo array all'interno della collezione
-            $offerte = $offerte->merge(Offerta::where('azienda', $azienda->partita_iva)
-                ->get()
-                ->toArray());
-        }
-
-        // serve a prendere il contenuto della collezione e trasformarlo in una collezione di oggetti.
-        // L'encode codifica la collezione in json mentre il decode lo decodifica per creare la collezione
-        // di oggetti da passare alla vista tramite il controller.
-        $offerte = json_decode(json_encode($offerte));
-
-        // Estrae la lista delle percentuali sconto all'interno dell'array ritrovato
-        $sconti = array_column($offerte, 'percentuale_sconto');
-
-        // Ordina l'array $offerte secondo il valore della colonna $sconti per valori discendenti
-        array_multisort($sconti, SORT_DESC, $offerte);
 
         // richiama il metodo per impaginare la lista di oggetti.
         // La variabile path, settato al valore dell'URL corrente tramite il metodo full della Facade URL, serve a
@@ -99,36 +84,22 @@ class CatalogoOfferte extends Model {
         // paginazione che prende il valore di $page all'interno del metodo per la creazione della paginazione stessa.
         $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
+
         return $offerte;
 
 
     }
 
-    public function getOfferteByAziendeEProdotto($aziende, $prodotto){
+    public function getOfferteByAziendeEProdotto($aziendaInput, $offertaInput){
 
         // crea una nuova collezione di dati
-        $offerte = collect();
+        $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
+                    ->where('azienda.nome', 'like', '%'.$aziendaInput.'%')
+                    ->where('offerta.oggetto_offerta', 'like', '%'.$offertaInput.'%')
+                    ->select('offerta.*')
+                    ->orderBy('offerta.percentuale_sconto', 'desc')
+                    ->get();
 
-        foreach ($aziende as $azienda) {
-            // alla collezione di oggetti vengono aggiunte tutte le offerte cha hanno come azienda quella
-            // ripresa dalla variabile $azienda.
-            // Viene eseguito quindi il merge di una nuovo array all'interno della collezione
-            $offerte = $offerte->merge(Offerta::where('azienda', $azienda->partita_iva)
-                ->where('oggetto_offerta', 'LIKE', '%' . $prodotto . '%')
-                ->get()
-                ->toArray());
-        }
-
-        // serve a prendere il contenuto della collezione e trasformarlo in una collezione di oggetti.
-        // L'encode codifica la collezione in json mentre il decode lo decodifica per creare la collezione
-        // di oggetti da passare alla vista tramite il controller.
-        $offerte = json_decode(json_encode($offerte));
-
-        // Estrae la lista delle percentuali sconto all'interno dell'array ritrovato
-        $sconti = array_column($offerte, 'percentuale_sconto');
-
-        // Ordina l'array $offerte secondo il valore della colonna $sconti per valori discendenti
-        array_multisort($sconti, SORT_DESC, $offerte);
 
         // richiama il metodo per impaginare la lista di oggetti.
         // La variabile path, settato al valore dell'URL corrente tramite il metodo full della Facade URL, serve a
@@ -168,10 +139,20 @@ class CatalogoOfferte extends Model {
 
     }
 
-    public function getOffertaByRicerca($offertaRicercata) {
+    public function getOffertaByRicerca($offertaInput) {
 
-        $offerte = Offerta::where('oggetto_offerta', 'like', '%'.$offertaRicercata.'%')->orderBy('percentuale_sconto', 'desc')->get();
+        $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
+            ->where('offerta.oggetto_offerta', 'like', '%'.$offertaInput.'%')
+            ->select('offerta.*')
+            ->orderBy('offerta.percentuale_sconto', 'desc')
+            ->get();
 
+
+        // richiama il metodo per impaginare la lista di oggetti.
+        // La variabile path, settato al valore dell'URL corrente tramite il metodo full della Facade URL, serve a
+        // rappresentare l'url per la generazione della paginazione per mantenere intatti i parametri passati tramite il
+        // metodo GET. La variabile pageName invece rappresenta il valore corrente della pagina visualizzata tramite
+        // paginazione che prende il valore di $page all'interno del metodo per la creazione della paginazione stessa.
         $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
         return $offerte;

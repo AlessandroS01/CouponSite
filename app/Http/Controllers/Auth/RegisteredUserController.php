@@ -39,10 +39,6 @@ class RegisteredUserController extends Controller
     che rappresenta la richiesta e lo passa come argomento al metodo*/
     public function store(Request $request)
     {
-        /*
-         * Aggiunta di tutti i parametri definiti all'interno del model di Utenti
-         */
-
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
             'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],

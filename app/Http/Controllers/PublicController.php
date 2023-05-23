@@ -60,18 +60,15 @@ class PublicController extends Controller
         // caso in cui si immettono entrambi i parametri di ricerca
         if ( !empty($offertaInput) and !empty($aziendaInput) )
             {
-                // vengono selezionate tutte le aziende che hanno un nome che contiene l'input dato dalla ricerca
-                $aziendeSelezionate = $this->catalogoAziende->getAziendeByNome($aziendaInput);
-                // vengono prese tutte le offerte delle aziende selezionate nella riga sopra
-                $offerte = $this->catalogoOfferte->getOfferteByAziendeEProdotto($aziendeSelezionate, $offertaInput);
+
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeEProdotto($aziendaInput, $offertaInput);
 
             }
         // caso in cui si immette solo l'azienda come campo di ricerca
         else if ( empty($offertaInput) and !empty($aziendaInput)  )
             {
 
-                $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
-                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziende);
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziendaInput);
 
             }
         // caso in cui si immette solo l'offerta come campo di ricerca

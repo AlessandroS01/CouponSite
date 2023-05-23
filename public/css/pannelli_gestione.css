@@ -29,24 +29,27 @@
     color: var(--main-color);
 }
 .container-gestione_pacchetto,
-.container-gestione_promozioni{
+.container-gestione_offerte {
+
     display: flex;
     flex-direction: column;
     align-items: center;
+
 }
 
-.container-gestione_pacchetto h4,
-.container-gestione_promozioni h4{
+.container-gestione_pacchetto h4 a,
+.container-gestione_offerte h4 a{
 
     color: var(--main-color);
     cursor: pointer;
     padding: 5px 5px;
     transition: all 0.3s;
+    text-decoration: none;
 
 }
 
-.container-gestione_pacchetto h4:hover,
-.container-gestione_promozioni h4:hover{
+.container-gestione_pacchetto h4:hover a,
+.container-gestione_offerte h4:hover a{
 
     background-color: var(--main-color);
     color: white;

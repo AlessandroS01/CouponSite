@@ -120,6 +120,14 @@ Route::get('/pannello_staff', [StaffController::class, 'showPannelloStaff'])
     ->name('pannello_staff')
     ->middleware(['auth', 'can:isStaff']);
 
+Route::get('/creazione_offerte', [StaffController::class, 'showCreazioneOfferta'])
+    ->name('creazione offerte')
+    ->middleware(['auth', 'can:isStaff']);
+
+Route::post('/creazione_offerte', [StaffController::class, 'storeNewOfferta'])
+    ->name('creazione offerte')
+    ->middleware(['auth', 'can:isStaff']);
+
 Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
     ->middleware(['auth', 'can:isAdmin']);
