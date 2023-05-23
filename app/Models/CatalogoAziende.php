@@ -10,6 +10,7 @@ use Illuminate\Pagination\Paginator;
 use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class CatalogoAziende extends Model {
 
@@ -18,7 +19,11 @@ class CatalogoAziende extends Model {
      */
     public function getAll() {
 
-        return Azienda::orderBy('nome', 'asc')->get();
+        $aziende = Azienda::orderBy('nome', 'asc')->get();
+
+        $aziende = $this->paginate($aziende, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+
+        return $aziende;
 
     }
 
@@ -53,7 +58,11 @@ class CatalogoAziende extends Model {
      */
     public function getAziendeByNome($nome) {
 
-        return Azienda::where('nome', 'like', '%'.$nome.'%')->get();
+        $aziende = Azienda::where('nome', 'like', '%'.$nome.'%')->get();
+
+        $aziende = $this->paginate($aziende, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+
+        return $aziende;
 
     }
 

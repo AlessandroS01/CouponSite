@@ -93,9 +93,7 @@ class PublicController extends Controller
     public function showCatalogoAziende() {
 
         // vengono selezionate tutte le aziende
-        $aziendeSelezionate = $this->catalogoAziende->getAll();
-        // le aziende selezionate vengono poi impaginate tramite il metodo paginate della classe CatalogoAziende
-        $aziende = $this->catalogoAziende->paginate($aziendeSelezionate, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+        $aziende = $this->catalogoAziende->getAll();
 
 
         return view('ricercaCatalogo.catalogo_aziende_visualizza')
@@ -115,20 +113,13 @@ class PublicController extends Controller
         if ( !empty($aziendaInput) )
         {
             // vengono selezionate tutte le aziende che hanno un nome che contiene l'input dato dalla ricerca
-            $aziendeSelezionate = $this->catalogoAziende->getAziendeByNome($aziendaInput);
-
-            // le aziende selezionate vengono poi impaginate tramite il metodo paginate della classe CatalogoAziende
-            $aziende = $this->catalogoAziende->paginate($aziendeSelezionate, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+            $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
 
         }
         else {
             // vengono selezionate tutte le aziende
-            $aziendeSelezionate = $this->catalogoAziende->getAll();
-            // le aziende selezionate vengono poi impaginate tramite il metodo paginate della classe CatalogoAziende
-            $aziende = $this->catalogoAziende->paginate($aziendeSelezionate, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
+            $aziende = $this->catalogoAziende->getAll();
         }
-
-
 
         return view('ricercaCatalogo.catalogo_aziende_visualizza')
                     ->with('aziende', $aziende);
