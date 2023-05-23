@@ -60,4 +60,30 @@
         </div>
     @endisset
 
+
+    @isset($coupons)
+
+        <div class="container-coupon-riscattati">
+            <table>
+                <tr>
+                    <th>ID offerta</th>
+                    <th>Nome offerta</th>
+                    <th>Azienda</th>
+                    <th>Coupon</th>
+                    <th>Data acquisizione</th>
+                </tr>
+
+                @foreach($coupons as $coupon)
+                    <tr>
+                        <td>{{$coupon->id}} </td>
+                        <td>{{$coupon->nome_offerta}} </td>
+                        <td>{{$coupon->azienda}}</td>
+                        <td>{{$coupon->codice}}</td>
+                        <td>{{$coupon->data}}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
+
+    @endisset
 @endsection

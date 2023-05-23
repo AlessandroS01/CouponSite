@@ -61,7 +61,7 @@ class GestioneAcquisizioneCoupon extends Model {
         while ( Acquisizione::where('codice_coupon', $codiceCoupon )->get()->count() != 0 ){
             $codiceCoupon = Str::random(20);
         }
-
+        Log::info(sprintf("prova %s %s %s", $codiceCoupon, $codiceOfferta, $userId));
         // crea una nuova istanza per la relazione Acquisizione
         $acquisizione = new Acquisizione();
         // setta i parametri della relazione alla nuova istanza
