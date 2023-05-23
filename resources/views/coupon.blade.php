@@ -20,7 +20,9 @@
         </div>
 
         @isset($validita_promozione)
-            <p>WEEEEEEEEEEEEEEEEEEEEEEEE</p>
+            <div class="container-errore_generazione">
+                <h1> L'offerta richiesta è scaduta</h1>
+            </div>
         @endisset
 
         @isset($offertaSelezionata, $gestoreOfferte, $coupon, $flagCoupon)
@@ -31,7 +33,7 @@
 
                     <div class="container-coupon_string">
 
-                        <h1> Codice del coupon generato </h1>
+                        <h1> Codice del coupon : {{ $coupon->codice_coupon }} </h1>
 
                     </div>
 
@@ -54,7 +56,34 @@
                 </div>
 
             @else
-                <p>Ciao</p>
+
+                <div class="container">
+
+                    <div class="container-coupon_string">
+
+                        <h1> Il coupon risulta già erogato. </h1>
+
+                        <h4> Codice del coupon : {{ $coupon->codice_coupon }} </h4>
+
+                    </div>
+
+
+                    <div class="container-offerta">
+                        <div class="container-logo_azienda">
+                            <img src="{{asset( $gestoreOfferte->getLogoAziendaByOfferta($offertaSelezionata))}}">
+                        </div>
+
+                        <div class="container-offerta_dati">
+                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+                        </div>
+
+                        <div class="container-modalita_uso">
+                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+                            <p>{{ $offertaSelezionata->luogo_fruizione }}</p>
+                        </div>
+
+                    </div>
+                </div>
             @endif
 
 

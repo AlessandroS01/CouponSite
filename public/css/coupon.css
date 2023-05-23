@@ -12,6 +12,13 @@ body {
     flex-direction:column;
 }
 
+.container-errore_generazione{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 100px;
+}
+
 
 .barra-superiore_coupon{
     top: 0;
@@ -37,6 +44,13 @@ body {
     align-items: center;
     flex-direction: column;
     margin-top: 50px;
+    color: var(--main-color);
+}
+
+.container-coupon_string h4{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
 }
 
 .container-offerta{
@@ -45,6 +59,7 @@ body {
     grid-template-columns: 43% 1fr 1fr;
     grid-gap: 50px;
     margin-top: 100px;
+    color: var(--main-color);
 }
 
 .container-offerta .container-logo_azienda img{

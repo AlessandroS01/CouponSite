@@ -32,6 +32,7 @@ class ClientController extends Controller
 
             return view('coupon')
                 ->with('validita_promozione', false);
+
         }
         else if($this->gestioneAcquisizioneCoupon->checkClienteOfferta($request)){
 
@@ -50,14 +51,9 @@ class ClientController extends Controller
 
         }
 
-
-        log::info($offertaSelezionata);
-        log::info($coupon);
-        log::info($nuovoCoupon);
-
         return view('coupon')
             ->with('offertaSelezionata', $offertaSelezionata)
-            ->with('$gestoreOfferte', $this->catalogoOfferte)
+            ->with('gestoreOfferte', $this->catalogoOfferte)
             ->with('coupon', $coupon)
             ->with('flagCoupon', $nuovoCoupon);
 
