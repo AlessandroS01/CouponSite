@@ -25,7 +25,7 @@
             </div>
         @endisset
 
-        @isset($offertaSelezionata, $gestoreOfferte, $coupon, $azienda, $flagCoupon)
+        @isset($offertaSelezionata, $gestoreOfferte, $coupon, $user, $flagCoupon)
 
             @if($flagCoupon)
 
@@ -34,6 +34,13 @@
                     <div class="container-coupon_string">
 
                         <h1 class="coupon_string"> Codice del coupon : {{ $coupon->codice_coupon }} </h1>
+
+                        <div class="container-dati_utente">
+
+                            <p> Nome cliente: {{ $user->nome }}</p>
+                            <p> Cognome cliente: {{ $user->cognome }}</p>
+
+                        </div>
 
                     </div>
 
@@ -56,7 +63,6 @@
 
                             <h4> Modalità di fruizione: {{ $offertaSelezionata->modalita_fruizione }} </h4>
                             <h4> Luogo di fruizione: {{ $offertaSelezionata->luogo_fruizione }}</h4>
-                            <h5> Azienda di riferimento: {{ ucfirst($azienda->nome) }}</h5>
 
                         </div>
 
@@ -78,6 +84,13 @@
 
                         <h4 class="coupon_string"> Codice del coupon : {{ $coupon->codice_coupon }} </h4>
 
+                        <div class="container-dati_utente">
+
+                            <p> Nome cliente: {{ $user->nome }}</p>
+                            <p> Cognome cliente: {{ $user->cognome }}</p>
+
+                        </div>
+
                     </div>
 
 
@@ -99,7 +112,6 @@
 
                             <h4> Modalità di fruizione: {{ $offertaSelezionata->modalita_fruizione }} </h4>
                             <h4> Luogo di fruizione: {{ $offertaSelezionata->luogo_fruizione }}</h4>
-                            <h5> Azienda di riferimento: {{ ucfirst($azienda->nome) }}</h5>
 
                         </div>
 
