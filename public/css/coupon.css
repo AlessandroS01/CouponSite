@@ -12,6 +12,13 @@ body {
     flex-direction:column;
 }
 
+.container-errore_generazione{
+    display: flex;
+    justify-content: center;
+    align-content: center;
+    margin-top: 100px;
+}
+
 
 .barra-superiore_coupon{
     top: 0;
@@ -37,6 +44,24 @@ body {
     align-items: center;
     flex-direction: column;
     margin-top: 50px;
+    color: var(--main-color);
+}
+
+.container-coupon_string .coupon_string{
+    border: solid 2px var(--main-color);
+    padding: 5px;
+    border-radius: 5px;
+}
+
+.container-coupon_string h4{
+    display: flex;
+    justify-content: center;
+    color: var(--main-color);
+}
+
+.container-dati_utente p{
+    color: var(--main-color);
+    font-size: large;
 }
 
 .container-offerta{
@@ -44,9 +69,17 @@ body {
     display: grid;
     grid-template-columns: 43% 1fr 1fr;
     grid-gap: 50px;
-    margin-top: 100px;
+    margin-top: 50px;
+    color: var(--main-color);
 }
 
 .container-offerta .container-logo_azienda img{
     width: 100%;
 }
+
+
+.container-offerta_dati {
+    display: flex;
+    flex-direction: column;
+}
+

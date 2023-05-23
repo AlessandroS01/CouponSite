@@ -119,6 +119,26 @@
     border: none;
 }
 
+.bottone-acquisizione_guest{
+    display: flex;
+    justify-content: center;
+    margin: 10px;
+    align-self: center;
+}
+
+.bottone-acquisizione_guest a{
+    text-decoration: none;
+    text-transform: uppercase;
+    padding: 10px 30px;
+    background-color: var(--main-color);
+    color: white;
+    border-radius: 15px;
+    font-weight: bold;
+    cursor: pointer;
+    border: none;
+
+}
+
 
 
 

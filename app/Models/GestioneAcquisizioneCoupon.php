@@ -73,6 +73,24 @@ class GestioneAcquisizioneCoupon extends Model {
 
     }
 
+    /**
+     * @param Request $request inviata tramite form
+     * @return @View coupon che ha come offerta il codice inviato tramite metodo POST e user id pari allo user che ha
+     *  richiesto il coupon
+     */
+    public function getCoupon(Request $request){
+
+        // prende l'id dell'utente autenticato
+        $userId = Auth::id();
+        // determina il codice dell'offerta inviato tramite la submit della form
+        $codiceOfferta = $request['codiceOfferta'];
+
+        return Acquisizione::query()
+            ->where('offerta', $codiceOfferta)
+            ->where('cliente', $userId)
+            ->first();
+
+    }
 
 
 

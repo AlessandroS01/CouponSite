@@ -15,6 +15,9 @@
     <link rel="stylesheet" type="text/css" href="{{ asset('css/autenticazione.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/azienda.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pannelli_gestione.css') }}" >
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
     <!-- Riga di codica che importa una libreria che contiene le icone.
     In base al tipo di icona che si vuole utilizzare si cambia il codice della classe css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />

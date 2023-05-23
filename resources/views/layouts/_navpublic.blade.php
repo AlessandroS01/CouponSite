@@ -9,9 +9,14 @@
         <li><a href="{{ route('catalogo aziende') }}" title="Le nostre aziende">Aziende</a></li>
         <li><a href="{{ route('contatti') }}" title="Contattaci">Contatti</a></li>
         <li><a href="{{ route('faqs') }}" title="Domande frequenti">FAQs</a></li>
-        @canany(['isAdmin', 'isStaff'])
+
+        @can('isStaff')
+            <li><a href="{{ route('pannello_staff') }}" class="highlight" title="Pannello di gestione">Gestione</a></li>
+        @endcan
+
+        @can('isAdmin')
             <li><a href="{{ route('pannello_admin') }}" class="highlight" title="Pannello di gestione">Gestione</a></li>
-        @endcanany
+        @endcan
 
     </ul>
 
