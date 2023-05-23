@@ -19,33 +19,43 @@
 
         </div>
 
-        @isset($offertaSelezionata, $gestoreOfferte)
-            <div class="container">
+        @isset($validita_promozione)
+            <p>WEEEEEEEEEEEEEEEEEEEEEEEE</p>
+        @endisset
 
-                <div class="container-coupon_string">
+        @isset($offertaSelezionata, $gestoreOfferte, $coupon, $flagCoupon)
 
-                    <h1> Codice del coupon generato </h1>
+            @if($flagCoupon)
 
+                <div class="container">
+
+                    <div class="container-coupon_string">
+
+                        <h1> Codice del coupon generato </h1>
+
+                    </div>
+
+
+                    <div class="container-offerta">
+                        <div class="container-logo_azienda">
+                            <img src="{{asset( $gestoreOfferte->getLogoAziendaByOfferta($offertaSelezionata))}}">
+                        </div>
+
+                        <div class="container-offerta_dati">
+                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+                        </div>
+
+                        <div class="container-modalita_uso">
+                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+                            <p>{{ $offertaSelezionata->luogo_fruizione }}</p>
+                        </div>
+
+                    </div>
                 </div>
 
-
-                <div class="container-offerta">
-
-                    <div class="container-logo_azienda">
-                        <img src="{{asset( $gestoreOfferte->getLogoAziendaByOfferta($offertaSelezionata))}}">
-                    </div>
-
-                    <div class="container-offerta_dati">
-                        <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
-                    </div>
-
-                    <div class="container-modalita_uso">
-                        <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
-                        <p>{{ $offertaSelezionata->luogo_fruizione }}</p>
-                    </div>
-
-                </div>
-            </div>
+            @else
+                <p>Ciao</p>
+            @endif
 
 
         @endisset

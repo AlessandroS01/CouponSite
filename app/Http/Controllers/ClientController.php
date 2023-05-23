@@ -2,12 +2,11 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\CatalogoAziende;
+
 use App\Models\CatalogoOfferte;
 use App\Models\GestioneAcquisizioneCoupon;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
-use App\Models\Faq;
 
 
 class ClientController extends Controller
@@ -27,14 +26,41 @@ class ClientController extends Controller
 
         $codiceOfferta = $request['codiceOfferta'];
 
-
         $offertaSelezionata = $this->catalogoOfferte->getOffertaByID($codiceOfferta);
-        if($this->gestioneAcquisizioneCoupon->checkClienteOfferta($request))
+
+        if($offertaSelezionata->data_scadenza < date('Y-m-d') ){
+
+            return view('coupon')
+                ->with('validita_promozione', false);
+        }
+        else if($this->gestioneAcquisizioneCoupon->checkClienteOfferta($request)){
+
             $this->gestioneAcquisizioneCoupon->createCoupon($request);
 
+            $coupon = $this->gestioneAcquisizioneCoupon->getCoupon($request);
+
+            $nuovoCoupon = true;
+
+        }
+        else{
+
+            $coupon = $this->gestioneAcquisizioneCoupon->getCoupon($request);
+
+            $nuovoCoupon = false;
+
+        }
+
+
+        log::info($offertaSelezionata);
+        log::info($coupon);
+        log::info($nuovoCoupon);
+
         return view('coupon')
-                        ->with('offertaSelezionata', $offertaSelezionata)
-                        ->with('gestoreOfferte', $this->catalogoOfferte);
+            ->with('offertaSelezionata', $offertaSelezionata)
+            ->with('$gestoreOfferte', $this->catalogoOfferte)
+            ->with('coupon', $coupon)
+            ->with('flagCoupon', $nuovoCoupon);
+
     }
 
 

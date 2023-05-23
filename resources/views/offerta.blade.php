@@ -65,8 +65,7 @@
                 @guest
 
 
-                    <div class="bottone-acquisizione">
-                        {{ Form::open( ) }}
+                    <div class="bottone-acquisizione_guest">
                         <a href="{{ route('login') }}">ottieni</a>
                     </div>
 
