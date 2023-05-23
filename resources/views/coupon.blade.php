@@ -25,7 +25,7 @@
             </div>
         @endisset
 
-        @isset($offertaSelezionata, $gestoreOfferte, $coupon, $flagCoupon)
+        @isset($offertaSelezionata, $gestoreOfferte, $coupon, $azienda, $flagCoupon)
 
             @if($flagCoupon)
 
@@ -33,26 +33,39 @@
 
                     <div class="container-coupon_string">
 
-                        <h1> Codice del coupon : {{ $coupon->codice_coupon }} </h1>
+                        <h1 class="coupon_string"> Codice del coupon : {{ $coupon->codice_coupon }} </h1>
 
                     </div>
 
 
                     <div class="container-offerta">
+
                         <div class="container-logo_azienda">
                             <img src="{{asset( $gestoreOfferte->getLogoAziendaByOfferta($offertaSelezionata))}}">
                         </div>
 
                         <div class="container-offerta_dati">
-                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+
+                            <h2> {{ $offertaSelezionata->oggetto_offerta }}</h2>
+                            <h3> Prezzo coupon: {{ $gestoreOfferte->getPrezzoScontato($offertaSelezionata) }}&#8364</h3>
+                            <h5> {{ $offertaSelezionata-> descrizione }}</h5>
+
                         </div>
 
                         <div class="container-modalita_uso">
-                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
-                            <p>{{ $offertaSelezionata->luogo_fruizione }}</p>
+
+                            <h4> Modalità di fruizione: {{ $offertaSelezionata->modalita_fruizione }} </h4>
+                            <h4> Luogo di fruizione: {{ $offertaSelezionata->luogo_fruizione }}</h4>
+                            <h5> Azienda di riferimento: {{ ucfirst($azienda->nome) }}</h5>
+
                         </div>
 
                     </div>
+
+                    <div class="container-data_scadenza">
+                        <h5> Da usufruire prima del {{ $offertaSelezionata->data_scadenza }} </h5>
+                    </div>
+
                 </div>
 
             @else
@@ -63,25 +76,37 @@
 
                         <h1> Il coupon risulta già erogato. </h1>
 
-                        <h4> Codice del coupon : {{ $coupon->codice_coupon }} </h4>
+                        <h4 class="coupon_string"> Codice del coupon : {{ $coupon->codice_coupon }} </h4>
 
                     </div>
 
 
                     <div class="container-offerta">
+
                         <div class="container-logo_azienda">
                             <img src="{{asset( $gestoreOfferte->getLogoAziendaByOfferta($offertaSelezionata))}}">
                         </div>
 
                         <div class="container-offerta_dati">
-                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
+
+                            <h2> {{ $offertaSelezionata->oggetto_offerta }}</h2>
+                            <h3> Prezzo coupon: {{ $gestoreOfferte->getPrezzoScontato($offertaSelezionata) }}&#8364</h3>
+                            <h5> {{ $offertaSelezionata-> descrizione }}</h5>
+
                         </div>
 
                         <div class="container-modalita_uso">
-                            <p>{{ $offertaSelezionata->modalita_fruizione }}</p>
-                            <p>{{ $offertaSelezionata->luogo_fruizione }}</p>
+
+                            <h4> Modalità di fruizione: {{ $offertaSelezionata->modalita_fruizione }} </h4>
+                            <h4> Luogo di fruizione: {{ $offertaSelezionata->luogo_fruizione }}</h4>
+                            <h5> Azienda di riferimento: {{ ucfirst($azienda->nome) }}</h5>
+
                         </div>
 
+                    </div>
+
+                    <div class="container-data_scadenza">
+                        <h5> Da usufruire prima del {{ $offertaSelezionata->data_scadenza }} </h5>
                     </div>
                 </div>
             @endif

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 
+use App\Models\CatalogoAziende;
 use App\Models\CatalogoOfferte;
 use App\Models\GestioneAcquisizioneCoupon;
 use Illuminate\Http\Request;
@@ -14,11 +15,13 @@ class ClientController extends Controller
 
     protected $catalogoOfferte;
     protected $gestioneAcquisizioneCoupon;
+    protected $catalogoAziende;
 
     public function __construct()
     {
         $this->catalogoOfferte = New CatalogoOfferte();
         $this->gestioneAcquisizioneCoupon = New GestioneAcquisizioneCoupon();
+        $this->catalogoAziende = New CatalogoAziende();
     }
 
 
@@ -27,6 +30,8 @@ class ClientController extends Controller
         $codiceOfferta = $request['codiceOfferta'];
 
         $offertaSelezionata = $this->catalogoOfferte->getOffertaByID($codiceOfferta);
+
+        $azienda = $this->catalogoAziende->getAziendaByOfferta($offertaSelezionata);
 
         if($offertaSelezionata->data_scadenza < date('Y-m-d') ){
 
@@ -55,6 +60,7 @@ class ClientController extends Controller
             ->with('offertaSelezionata', $offertaSelezionata)
             ->with('gestoreOfferte', $this->catalogoOfferte)
             ->with('coupon', $coupon)
+            ->with('azienda', $azienda)
             ->with('flagCoupon', $nuovoCoupon);
 
     }

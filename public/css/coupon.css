@@ -47,6 +47,12 @@ body {
     color: var(--main-color);
 }
 
+.container-coupon_string .coupon_string{
+    border: solid 2px var(--main-color);
+    padding: 5px;
+    border-radius: 5px;
+}
+
 .container-coupon_string h4{
     display: flex;
     justify-content: center;
@@ -66,4 +72,9 @@ body {
     width: 100%;
 }
 
+
+.container-offerta_dati {
+    display: flex;
+    flex-direction: column;
+}
 
