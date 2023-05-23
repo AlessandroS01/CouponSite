@@ -30,4 +30,11 @@
 
 .container-profile .data p {
     margin-right: 10px;
+    padding: 10px;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0px #00000085;
+}
+
+.container-profile .data p i {
+float: right;
 }
