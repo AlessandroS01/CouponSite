@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\AdminController;
+use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
 use App\Http\Controllers\ClientController;
@@ -114,6 +115,10 @@ Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
 
 Route::get('/profilo', [UserController::class, 'showProfilo'])
         ->name('profilo');
+
+Route::get('/pannello_staff', [StaffController::class, 'showPannelloStaff'])
+    ->name('pannello_staff')
+    ->middleware(['auth', 'can:isStaff']);
 
 Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
