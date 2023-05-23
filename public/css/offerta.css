@@ -95,14 +95,19 @@
     color: #565959;
 }
 
-.bottone-acquisizione{
+.container-form-acquisizione{
+    display: flex;
+    align-self: center;
+}
+
+.container-form-acquisizione .bottone-acquisizione {
     display: flex;
     justify-content: center;
     margin: 10px;
     align-self: center;
 }
 
-.bottone-acquisizione a{
+.bottone-acquisizione input{
     text-decoration: none;
     text-transform: uppercase;
     padding: 10px 30px;
@@ -110,6 +115,8 @@
     color: white;
     border-radius: 15px;
     font-weight: bold;
+    cursor: pointer;
+    border: none;
 }
 
 

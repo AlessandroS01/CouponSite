@@ -14,11 +14,12 @@ return new class extends Migration
     public function up()
     {
         Schema::create('riscatto', function (Blueprint $table) {
-            $table->bigInteger('cliente');
-            $table->unsignedBigInteger('pacchetto');
+            $table->bigIncrements('id');
+            $table->integer('cliente');
+            $table->integer('pacchetto');
             $table->string('codice_coupon', 20)->unique();
 
-            $table->primary(['pacchetto', 'cliente']);
+            $table->unique(['cliente', 'pacchetto']);
 
             $table->foreign('pacchetto')
                 ->references('codice')

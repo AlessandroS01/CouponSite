@@ -17,8 +17,8 @@
              <div  class="container-dati-login">
                 {{ Form::label('username', 'Username', ['class' => 'label-input']) }}
                 {{ Form::text('username', '', ['class' => 'input','id' => 'username']) }}
-
             </div>
+
             <div class="container-dati-login_errors">
 
                 @if ($errors->first('username'))

@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 class Riscatto extends Model {
 
     protected $table = 'acquisizione';
-    protected $primaryKey = ['cliente', 'pacchetto'];
+    protected $primaryKey = 'id';
 
     // primary key non modificabile da un HTTP Request (Mass Assignment)
     protected $guarded = ['cliente', 'pacchetto'];
