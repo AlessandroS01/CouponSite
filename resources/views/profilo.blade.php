@@ -13,11 +13,16 @@
             <div class="data">
 
                 <h3>Username:</h3>
-                <p id="username">{{$user->username}}</p>
-                <span>
-                    <i class="fas fa-pen edit-icon"></i>
-                    <button class="saveButton" style="display: none;">Salva</button>
-                </span>
+                <p id="username">{{$user->username}} <i id="hide" class="fas fa-pen edit-icon"></i></p>
+                {{ Form::open(array('route' => 'profilo', 'class' => 'form-username', 'id' => 'modifica-username')) }}
+                <div class="input-modifica-profilo">
+                    {{ Form::text('username', '', ['class' => 'input','id' => 'username']) }}
+                    {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                </div>
+
+                {{ Form::close() }}
+
+
 
                 <h3>Email:</h3>
                 <p id="email">{{$user->email}}</p>
@@ -73,52 +78,6 @@
             </div>
         </div>
 
-
-        <script>
-            $(document).ready(function() {
-                // Aggiungi un gestore di eventi a tutte le icone di modifica
-                $('.edit-icon').on('click', function() {
-                    // Ottieni il campo corrispondente da modificare
-                    var field = $(this).parent().prev();
-                    toggleEditMode(field, $(this));
-                });
-
-                // Aggiungi un gestore di eventi a tutti i pulsanti di salvataggio
-                $('.saveButton').on('click', function() {
-                    // Ottieni il campo da salvare
-                    var field = $(this).parent().prev();
-                    saveField(field, $(this));
-                });
-            });
-
-            function toggleEditMode(field, icon) {
-                var saveButton = icon.next('.saveButton');
-
-                if (field.attr('contenteditable') === 'true') {
-                    // Se il campo è già modificabile, disabilita la modifica
-                    field.attr('contenteditable', 'false');
-                    saveButton.hide(); // Nascondi il pulsante di salvataggio
-                    icon.show(); // Mostra l'icona di modifica
-                } else {
-                    // Se il campo non è modificabile, abilita la modifica
-                    field.attr('contenteditable', 'true');
-                    saveButton.show(); // Mostra il pulsante di salvataggio
-                    icon.hide(); // Nascondi l'icona di modifica
-                    field.focus(); // Fai focus sul campo per facilitare la modifica
-                }
-            }
-
-            function saveField(field, saveButton) {
-                var value = field.text();
-                // Esegui l'azione per salvare il valore modificato
-                field.attr('contenteditable', 'false');
-
-                saveButton.hide(); // Nascondi il pulsante di salvataggio
-                var icon = saveButton.prev('.edit-icon');
-                icon.show(); // Mostra l'icona di modifica
-            }
-        </script>
-
     @endisset
 
 
@@ -147,4 +106,16 @@
         </div>
 
     @endisset
+
+
+    <script>
+
+    $(document).ready(function() {
+    $('#hide').click(function() {
+        $('#username').hide();
+        $('#modifica-username').show();
+    });
+    });
+
+    </script>
 @endsection

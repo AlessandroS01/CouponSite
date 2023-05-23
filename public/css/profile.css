@@ -33,7 +33,6 @@
 }
 
 .container-profile .data p {
-    margin-right: 10px;
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0 0 10px 0px #00000085;
@@ -86,5 +85,31 @@ table tr:nth-child(1){
     color: white;
 }
 
+#modifica-username{
+    display: none;
+}
+#modifica-username .input{
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0px #00000085;
+}
 
+#modifica-username .submit-button{
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+
+.input-modifica-profilo{
+    position: relative;
+}
 
