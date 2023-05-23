@@ -63,7 +63,7 @@ class PublicController extends Controller
                 // vengono selezionate tutte le aziende che hanno un nome che contiene l'input dato dalla ricerca
                 $aziendeSelezionate = $this->catalogoAziende->getAziendeByNome($aziendaInput);
                 // vengono prese tutte le offerte delle aziende selezionate nella riga sopra
-                $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziendeSelezionate);
+                $offerte = $this->catalogoOfferte->getOfferteByAziendeEProdotto($aziendeSelezionate, $offertaInput);
 
             }
         // caso in cui si immette solo l'azienda come campo di ricerca
