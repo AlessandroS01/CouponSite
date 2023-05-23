@@ -73,7 +73,11 @@ class GestioneAcquisizioneCoupon extends Model {
 
     }
 
-
+    /**
+     * @param Request $request inviata tramite form
+     * @return @View coupon che ha come offerta il codice inviato tramite metodo POST e user id pari allo user che ha
+     *  richiesto il coupon
+     */
     public function getCoupon(Request $request){
 
         // prende l'id dell'utente autenticato
