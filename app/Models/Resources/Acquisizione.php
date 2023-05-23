@@ -10,6 +10,7 @@ class Acquisizione extends Model {
     protected $table = 'acquisizione';
     protected $primaryKey = 'id';
 
+
     protected $fillable = [
         'codice_coupon',
         'offerta',
@@ -20,7 +21,7 @@ class Acquisizione extends Model {
     // primary key non modificabile da un HTTP Request (Mass Assignment)
     protected $guarded = ['offerta', 'cliente'];
 
-    public $timestamps = false;
+    public $timestamps = true;
 
 
 }

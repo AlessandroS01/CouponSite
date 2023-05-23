@@ -28,8 +28,11 @@
     padding: 20px;
 }
 
+.container-profile i{
+    cursor: pointer;
+}
+
 .container-profile .data p {
-    margin-right: 10px;
     padding: 10px;
     border-radius: 20px;
     box-shadow: 0 0 10px 0px #00000085;
@@ -38,3 +41,75 @@
 .container-profile .data p i {
 float: right;
 }
+
+.container-coupon-riscattati{
+    max-width:800px;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    margin-bottom: 50px;
+
+}
+.container-coupon-riscattati table {
+    width: 800px;
+    border-spacing: 0;
+    border-radius: 10px;
+    border-collapse: separate;
+    background-color: white;
+    border: 1px solid black;
+    overflow: hidden;
+
+
+}
+
+
+
+table th:not(:last-child),
+table td:not(:last-child) {
+    border-right: 1px solid black;
+}
+
+
+table>tbody>tr:not(:last-child)>th,
+table>tbody>tr:not(:last-child)>td
+ {
+    border-bottom: 1px solid black;
+}
+
+table th, table td{
+    padding: 10px;
+    text-align: center;
+}
+table tr:nth-child(1){
+    background-color: var(--main-color);
+    color: white;
+}
+
+#modifica-username{
+    display: none;
+}
+#modifica-username .input{
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0px #00000085;
+}
+
+#modifica-username .submit-button{
+    position: absolute;
+    right: 0;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+
+}
+
+.input-modifica-profilo{
+    position: relative;
+}
+

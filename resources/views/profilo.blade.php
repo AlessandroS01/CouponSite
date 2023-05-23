@@ -12,106 +12,110 @@
         <div class="container-profile">
             <div class="data">
 
-
                 <h3>Username:</h3>
-                <p id="username">{{$user->username}}</p>
-                <span>
-                    <i class="fas fa-pen edit-icon" onclick="toggleEditMode('username')"></i>
-                    <button id="saveButton" onclick="saveField('username')" style="display: none;">Salva</button>
-                </span>
+                <p id="username">{{$user->username}} <i id="hide" class="fas fa-pen edit-icon"></i></p>
+                {{ Form::open(array('route' => 'profilo', 'class' => 'form-username', 'id' => 'modifica-username')) }}
+                <div class="input-modifica-profilo">
+                    {{ Form::text('username', '', ['class' => 'input','id' => 'username']) }}
+                    {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                </div>
+
+                {{ Form::close() }}
+
 
 
                 <h3>Email:</h3>
-                <p>{{$user->email}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="email">{{$user->email}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
 
                 <h3>Telefono:</h3>
-                <p>{{$user->telefono}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="telefono">{{$user->telefono}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
 
                 <h3>Indirizzo:</h3>
-                <p>{{$user->citta}}, {{$user->via}} {{$user->numero_civico}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="indirizzo">{{$user->citta}}, {{$user->via}} {{$user->numero_civico}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
 
             </div>
 
             <div class="data">
                 <h3>Nome:</h3>
-                <p>{{$user->nome}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="nome">{{$user->nome}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
 
                 <h3>Cognome:</h3>
-                <p>{{$user->cognome}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="cognome">{{$user->cognome}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
 
                 <h3>Genere:</h3>
-                <p> {{$user->genere}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="genere">{{$user->genere}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
 
                 <h3>Età:</h3>
-                <p> {{$user->eta}}
-                    <i class="fas fa-pen"></i>
-                </p>
+                <p id="eta">{{$user->eta}}</p>
+                <span>
+                    <i class="fas fa-pen edit-icon"></i>
+                    <button class="saveButton" style="display: none;">Salva</button>
+                </span>
             </div>
         </div>
 
+    @endisset
 
-        <script>
-            $(document).ready(function() {
-                // Quando viene cliccata l'icona di modifica
-                $('.edit-icon').on('click', function() {
-                    // Ottieni il campo corrispondente da modificare
-                    var field = $(this).parent().prev();
-                    toggleEditMode(field);
-                });
 
-                // Quando viene cliccato il pulsante di salvataggio
-                $('#saveButton').on('click', function() {
-                    // Ottieni il campo da salvare
-                    var field = $(this).parent().prev();
-                    saveField(field);
-                });
-            });
+    @isset($coupons)
 
-            function toggleEditMode(field) {
-                // Trova l'icona e il pulsante di salvataggio correlati al campo
-                var icon = field.parent().find('.edit-icon');
-                var saveButton = field.parent().find('#saveButton');
+        <div class="container-coupon-riscattati">
+            <table>
+                <tr>
+                    <th>ID offerta</th>
+                    <th>Nome offerta</th>
+                    <th>Azienda</th>
+                    <th>Coupon</th>
+                    <th>Data acquisizione</th>
+                </tr>
 
-                if (field.attr('contenteditable') === 'true') {
-                    // Se il campo è già modificabile, disabilita la modifica
-                    field.attr('contenteditable', 'false');
-                    saveButton.hide(); // Nascondi il pulsante di salvataggio
-                    icon.show(); // Mostra l'icona di modifica
-                } else {
-                    // Se il campo non è modificabile, abilita la modifica
-                    field.attr('contenteditable', 'true');
-                    saveButton.show(); // Mostra il pulsante di salvataggio
-                    icon.hide(); // Nascondi l'icona di modifica
-                    field.focus(); // Fai focus sul campo per facilitare la modifica
-                }
-            }
-
-            function saveField(field) {
-                var value = field.text();
-                // Esegui l'azione per salvare il valore modificato
-                field.attr('contenteditable', 'false');
-
-                var saveButton = field.parent().find('#saveButton');
-                saveButton.hide(); // Nascondi il pulsante di salvataggio
-
-                var icon = field.parent().find('.edit-icon');
-                icon.show(); // Mostra l'icona di modifica
-            }
-        </script>
-
+                @foreach($coupons as $coupon)
+                    <tr>
+                        <td>{{$coupon->id}} </td>
+                        <td>{{$coupon->nome_offerta}} </td>
+                        <td>{{$coupon->azienda}}</td>
+                        <td>{{$coupon->codice}}</td>
+                        <td>{{$coupon->data}}</td>
+                    </tr>
+                @endforeach
+            </table>
+        </div>
 
     @endisset
 
+
+    <script>
+
+    $(document).ready(function() {
+    $('#hide').click(function() {
+        $('#username').hide();
+        $('#modifica-username').show();
+    });
+    });
+
+    </script>
 @endsection
