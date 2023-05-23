@@ -19,6 +19,7 @@ class ClientController extends Controller
     protected $gestioneAcquisizioneCoupon;
     protected $catalogoAziende;
 
+
     public function __construct()
     {
         $this->catalogoOfferte = New CatalogoOfferte();
