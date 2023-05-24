@@ -8,6 +8,7 @@ use App\Models\CatalogoOfferte;
 use App\Models\ProfileUser;
 use App\Models\Resources\Product;
 use App\Http\Requests\NewProductRequest;
+use GuzzleHttp\Psr7\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;

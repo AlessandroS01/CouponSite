@@ -143,17 +143,8 @@ Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
     ->middleware(['auth', 'can:isAdmin']);
 
-/*  Rotte aggiunte da Breeze
+Route::post('/profilo', [UserController::class, 'modificaProfilo']);
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
-
-*/
 
 // aggiunge le rotte che si trovano all'interno di auth.php
 require __DIR__.'/auth.php';
