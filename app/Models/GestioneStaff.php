@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use App\Models\Resources\Acquisizione;
+use App\Models\Resources\Azienda;
 use App\Models\Resources\Gestione;
 use App\Models\Resources\Offerta;
 use Brick\Math\BigInteger;
@@ -49,7 +50,7 @@ class GestioneStaff extends Model {
     }
 
     /**
-     * @return tutte le offerte che lo staff può gestire
+     * @return i nomi di tutte le offerte che lo staff può gestire
      */
     public function getNomeOfferteByStaff(){
         $staffId = Auth::id();
@@ -62,6 +63,9 @@ class GestioneStaff extends Model {
 
         return $oggettoOfferte;
     }
+
+
+
 
 
 

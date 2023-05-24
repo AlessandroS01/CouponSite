@@ -92,7 +92,10 @@ class StaffController extends Controller {
         return redirect('/');
     }
 
-
+    /**
+     * @return @View passandogli i parametri per visualizzare tutte le offerte, tutti gli oggetti delle singole offerte
+     *  passate e la lista delle aziende.
+     */
     public function showModificaOfferta()
     {
         $offerte = $this->gestioneStaff->getOfferteByStaff();
@@ -108,7 +111,7 @@ class StaffController extends Controller {
 
 
     /**
-     * Implementa la possibilità di creare una nuova offerta ad un membro dello staff su una determinata azienda
+     * Implementa la possibilità di modificare un'offerta ad un membro dello staff
      * @param $request rappresenta la richiesta di tipo post inviata all'atto di invio della form
     */
     public function storeNewOffertaModificata(Request $request)
@@ -127,10 +130,10 @@ class StaffController extends Controller {
             'descrizione' => ['required', 'string', 'max:100'],
         ]);
 
-        // Find the record by ID
+        // trova qual'è l'offerta da modificare
         $offertaDaModificare = Offerta::find($request->codiceOfferta);
 
-        // Update the attributes
+        // aggiorna tutti gli attributi dell'offerta ritrovata
         $offertaDaModificare->codice = $request->codiceOfferta;
         $offertaDaModificare->data_scadenza = $request->data_scadenza;
         $offertaDaModificare->luogo_fruizione = $request->luogo_fruizione;
@@ -138,12 +141,16 @@ class StaffController extends Controller {
         $offertaDaModificare->percentuale_sconto = $request->percentuale_sconto;
         $offertaDaModificare->prezzo_pieno = $request->prezzo_pieno;
         $offertaDaModificare->oggetto_offerta = $request->oggetto_offerta;
+        // determina il nome dell'azienda poichè con il submit della form viene inviata la partita_iva e non il nome
         $offertaDaModificare->azienda = Azienda::where('nome', 'like', '%'.$request->azienda.'%')->pluck('partita_iva')->first();
+        // la modifica dell'offerta modifica anche lo staff che ha generato quell'offerta all'interno del db
         $offertaDaModificare->staff = Auth::id();
         $offertaDaModificare->categoria = $request->categoria;
         $offertaDaModificare->descrizione = $request->descrizione;
 
+        // salva le informazioni dell'offerta modificata
         $offertaDaModificare->save();
+
         // ritorna alla home
         return redirect('/');
     }
