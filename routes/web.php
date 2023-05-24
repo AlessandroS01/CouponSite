@@ -116,6 +116,9 @@ Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
 Route::get('/profilo', [UserController::class, 'showProfilo'])
         ->name('profilo');
 
+Route::post('/profilo', [UserController::class, 'updateData'])
+    ->name('profilo');
+
 Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])
     ->name('pannello staff')
     ->middleware(['auth', 'can:isStaff']);
