@@ -8,7 +8,8 @@ use App\Models\CatalogoOfferte;
 use App\Models\ProfileUser;
 use App\Models\Resources\Product;
 use App\Http\Requests\NewProductRequest;
-use GuzzleHttp\Psr7\Request;
+use App\Models\User;
+use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Log;
@@ -43,16 +44,13 @@ function showProfilo(){
     public function updateData(Request $request)
     {
         $username = $request->input('username');
+        Log::info($username);
 
         if (!empty($username)) {
-            $validator = Validator::make($request->all(), [
-                'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users']
+            $request->validate([
+                'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],
             ]);
 
-            if ($validator->fails()) {
-                // La validazione ha fallito, gestisci l'errore come desideri
-                return redirect()->back()->withErrors($validator)->withInput();
-            }
 
             // Validazione passata, esegui l'aggiornamento dello username nella tabella users
             $user = User::find(auth()->user()->id);
@@ -64,9 +62,6 @@ function showProfilo(){
                 ->with('message', 'Username aggiornato con successo');
         }
 
-        // Se il campo username è vuoto, puoi gestirlo come desideri
-        // Ad esempio, puoi restituire un messaggio di errore o reindirizzare l'utente a un'altra pagina
-        return redirect()->back()->withErrors(['username' => 'Il campo username è obbligatorio'])->withInput();
     }
 
 

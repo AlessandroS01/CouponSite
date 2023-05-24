@@ -143,7 +143,6 @@ Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
     ->middleware(['auth', 'can:isAdmin']);
 
-Route::post('/profilo', [UserController::class, 'modificaProfilo']);
 
 
 // aggiunge le rotte che si trovano all'interno di auth.php

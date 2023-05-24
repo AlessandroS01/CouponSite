@@ -14,7 +14,7 @@
 
                 <h3>Username:</h3>
                 <p id="username">{{$user->username}} <i id="username-edit" class="fas fa-pen edit-icon"></i></p>
-                {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-username')) }}
+                {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-username', 'method'=>'POST')) }}
                 <div class="input-modifica-profilo">
                     {{ Form::text('username', '', ['class' => 'input','id' => 'username-input', 'placeholder' => 'Modifica Username']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
