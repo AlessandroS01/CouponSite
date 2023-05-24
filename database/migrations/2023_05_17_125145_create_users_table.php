@@ -27,6 +27,7 @@ return new class extends Migration
             $table->integer('numero_civico');
             $table->string('citta', 50);
             $table->integer('livello')->default('1');
+            $table->boolean('flagCoupon')->default(false);
             $table->timestamp('email_verified_at')->nullable();
 
             $table->rememberToken();

@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Auth;
 
 /**
  * Model da usare per quanto riguarda l'utente.
@@ -65,6 +66,17 @@ class User extends Authenticatable
         $livello = (array)$livello;
         // ricerca il valore di $livello all'interno di un array
         return in_array($this->livello, $livello);
+    }
+
+    public function isStaffPacchetti($livello) {
+
+        if ( $livello == 2 ){
+            if( Auth::user()->flagCoupon ){
+                return true;
+            }
+            return false;
+        }
+        return false;
     }
 
 }

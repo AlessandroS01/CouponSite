@@ -6,6 +6,7 @@
 @section('content')
 <section id="aziende" class="slide-aziende">
 
+
     <div class="title-section-aziende">
         <h1 class="titolo-sezione-aziende">Aziende in evidenza</h1>
     </div>
