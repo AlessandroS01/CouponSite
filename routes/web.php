@@ -116,16 +116,24 @@ Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
 Route::get('/profilo', [UserController::class, 'showProfilo'])
         ->name('profilo');
 
-Route::get('/pannello_staff', [StaffController::class, 'showPannelloStaff'])
-    ->name('pannello_staff')
+Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])
+    ->name('pannello staff')
     ->middleware(['auth', 'can:isStaff']);
 
-Route::get('/creazione_offerte', [StaffController::class, 'showCreazioneOfferta'])
-    ->name('creazione offerte')
+Route::get('/creazione/offerta', [StaffController::class, 'showCreazioneOfferta'])
+    ->name('creazione offerta')
     ->middleware(['auth', 'can:isStaff']);
 
-Route::post('/creazione_offerte', [StaffController::class, 'storeNewOfferta'])
-    ->name('creazione offerte')
+Route::post('/creazione/offerta', [StaffController::class, 'storeNewOfferta'])
+    ->name('creazione offerta')
+    ->middleware(['auth', 'can:isStaff']);
+
+Route::get('/modifica/offerta', [StaffController::class, 'showModificaOfferta'])
+    ->name('modifica offerta')
+    ->middleware(['auth', 'can:isStaff']);
+
+Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModificata'])
+    ->name('modifica offerta')
     ->middleware(['auth', 'can:isStaff']);
 
 Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])

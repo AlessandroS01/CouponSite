@@ -15,7 +15,7 @@
             <div class="container-form-offerta">
 
                 <div>
-                    {{ Form::open(array('route' => 'creazione offerte', 'class' => 'contact-form', 'method' => 'POST')) }}
+                    {{ Form::open(array('route' => 'creazione offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('oggetto_offerta', 'Oggetto offerta', ['class' => 'label-input']) }}

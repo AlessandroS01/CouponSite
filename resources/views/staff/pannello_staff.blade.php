@@ -28,8 +28,8 @@
                 <div class="container-gestione_offerte">
                     <h2> Gestione Offerte</h2>
 
-                    <h4><a href="{{ route('creazione offerte') }}">+ Creazione offerta</a></h4>
-                    <h4><a href="#">+ Modifica offerta</a></h4>
+                    <h4><a href="{{ route('creazione offerta') }}">+ Creazione offerta</a></h4>
+                    <h4><a href="{{ route('modifica offerta') }}">+ Modifica offerta</a></h4>
                     <h4><a href="#">+ Elimina offerta</a></h4>
                 </div>
             </div>
@@ -41,8 +41,8 @@
                 <div class="container-gestione_offerte">
                     <h2> Gestione Offerte</h2>
 
-                    <h4><a href="{{ route('creazione offerte') }}">+ Creazione offerta</a></h4>
-                    <h4><a href="#">+ Modifica offerta</a></h4>
+                    <h4><a href="{{ route('creazione offerta') }}">+ Creazione offerta</a></h4>
+                    <h4><a href="{{ route('modifica offerta') }}">+ Modifica offerta</a></h4>
                     <h4><a href="#">+ Elimina offerta</a></h4>
                 </div>
             </div>

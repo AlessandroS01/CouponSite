@@ -11,7 +11,7 @@
         <li><a href="{{ route('faqs') }}" title="Domande frequenti">FAQs</a></li>
 
         @can('isStaff')
-            <li><a href="{{ route('pannello_staff') }}" class="highlight" title="Pannello di gestione">Gestione</a></li>
+            <li><a href="{{ route('pannello staff') }}" class="highlight" title="Pannello di gestione">Gestione</a></li>
         @endcan
 
         @can('isAdmin')
