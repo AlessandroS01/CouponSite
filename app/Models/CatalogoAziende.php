@@ -27,6 +27,17 @@ class CatalogoAziende extends Model {
 
     }
 
+    /**
+     * @return tutti gli elementi della relazione Azienda
+     */
+    public function getAllNoPaginate() {
+
+        $aziende = Azienda::orderBy('nome', 'asc')->get();
+
+        return $aziende;
+
+    }
+
 
     /**
      * @return i primi 3 elementi della relazione Azienda

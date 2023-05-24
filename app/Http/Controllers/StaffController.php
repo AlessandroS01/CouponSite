@@ -97,18 +97,20 @@ class StaffController extends Controller {
     {
         $offerte = $this->gestioneStaff->getOfferteByStaff();
         $oggettoOfferte = $this->gestioneStaff->getNomeOfferteByStaff();
+        $aziende = $this->gestioneAziende->getAllNoPaginate();
 
         return view('staff.gestione_offerte.modifica_offerta')
             ->with('offerte', $offerte)
-            ->with('oggetto_offerte', $oggettoOfferte);
+            ->with('oggetto_offerte', $oggettoOfferte)
+            ->with('aziende', $aziende);
     }
 
 
-/*
+
     /**
      * Implementa la possibilità di creare una nuova offerta ad un membro dello staff su una determinata azienda
      * @param $request rappresenta la richiesta di tipo post inviata all'atto di invio della form
-
+    */
     public function storeNewOffertaModificata(Request $request)
     {
 
@@ -125,36 +127,25 @@ class StaffController extends Controller {
             'descrizione' => ['required', 'string', 'max:100'],
         ]);
 
-        // determina la lista di tutte le aziende che l'utente staff può gestire
-        $listaAziende = $this->gestioneStaff->getNomeAziendeByStaff();
-        // tra tutte quelle selezionate trova quella alla posizione selezionata all'interno della form
-        $aziendaSelezionata = $listaAziende[$request->azienda];
+        // Find the record by ID
+        $offertaDaModificare = Offerta::find($request->codiceOfferta);
+        log::info($request);
+        // Update the attributes
+        $offertaDaModificare->codice = $request->codiceOfferta;
+        $offertaDaModificare->data_scadenza = $request->data_scadenza;
+        $offertaDaModificare->luogo_fruizione = $request->luogo_fruizione;
+        $offertaDaModificare->modalita_fruizione = $request->modalita_fruizione;
+        $offertaDaModificare->percentuale_sconto = $request->percentuale_sconto;
+        $offertaDaModificare->prezzo_pieno = $request->prezzo_pieno;
+        $offertaDaModificare->oggetto_offerta = $request->oggetto_offerta;
+        $offertaDaModificare->azienda = Azienda::where('nome', 'like', '%'.$request->azienda.'%')->pluck('partita_iva')->first();
+        $offertaDaModificare->staff = Auth::id();
+        $offertaDaModificare->categoria = $request->categoria;
+        $offertaDaModificare->descrizione = $request->descrizione;
 
-        // trova la partita iva dell'azienda selezionata
-        $partita_iva = Azienda::where('nome', $aziendaSelezionata)->pluck('partita_iva')->first();
-
-
-        // crea la nuova tupla da aggiungere al database
-        $offerta = Offerta::create([
-            'oggetto_offerta' => $request->oggetto_offerta,
-            'data_scadenza' => $request->data_scadenza,
-            'luogo_fruizione' => $request->luogo_fruizione,
-            'modalita_fruizione' => $request->modalita_fruizione,
-            'percentuale_sconto' => $request->percentuale_sconto,
-            'prezzo_pieno' => $request->prezzo_pieno,
-            'categoria' => $request->categoria,
-            'azienda' => $partita_iva,
-            'descrizione' => $request->descrizione,
-            'staff' => Auth::id(),
-        ]);
-
-        // registra la nuova offerta
-        event(new Registered($offerta));
-
+        $offertaDaModificare->save();
         // ritorna alla home
         return redirect('/');
     }
-*/
-
 
 }
