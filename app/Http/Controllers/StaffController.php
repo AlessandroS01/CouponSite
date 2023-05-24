@@ -129,7 +129,7 @@ class StaffController extends Controller {
 
         // Find the record by ID
         $offertaDaModificare = Offerta::find($request->codiceOfferta);
-        log::info($request);
+
         // Update the attributes
         $offertaDaModificare->codice = $request->codiceOfferta;
         $offertaDaModificare->data_scadenza = $request->data_scadenza;
