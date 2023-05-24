@@ -68,10 +68,15 @@ class User extends Authenticatable
         return in_array($this->livello, $livello);
     }
 
+    /**
+     * Metodo utilizzato per determinare se un membro dello staff può gestire o meno i pacchetti
+     * @param $livello rappresenta il livello dell'utente
+     * @return bool true quando la proprietà flagPacchetti è settata a true e false altrimenti
+     */
     public function isStaffPacchetti($livello) {
 
         if ( $livello == 2 ){
-            if( Auth::user()->flagCoupon ){
+            if( Auth::user()->flagPacchetti ){
                 return true;
             }
             return false;

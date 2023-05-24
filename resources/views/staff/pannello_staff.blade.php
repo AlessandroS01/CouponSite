@@ -11,27 +11,48 @@
 
     <div class="container-pannello">
 
-        <div class="container-pannello_staff">
+        @can('isStaffPacchetti')
 
-            <div class="container-gestione_pacchetto">
-                <h2> Gestione Pacchetti</h2>
+            <div class="container-pannello_staff">
 
-                <h4>+ Creazione pacchetto</h4>
-                <h4>+ Modifica pacchetto</h4>
-                <h4>+ Elimina pacchetto</h4>
+
+                <div class="container-gestione_pacchetto">
+                    <h2> Gestione Pacchetti</h2>
+
+                    <h4><a href="#">+ Creazione pacchetto</a></h4>
+                    <h4><a href="#">+ Modifica pacchetto</a></h4>
+                    <h4><a href="#">+ Elimina pacchetto</a></h4>
+                </div>
+
+
+                <div class="container-gestione_offerte">
+                    <h2> Gestione Offerte</h2>
+
+                    <h4><a href="{{ route('creazione offerte') }}">+ Creazione offerta</a></h4>
+                    <h4><a href="#">+ Modifica offerta</a></h4>
+                    <h4><a href="#">+ Elimina offerta</a></h4>
+                </div>
             </div>
 
-            <div class="container-gestione_offerte">
-                <h2> Gestione Offerte</h2>
+        @else
 
-                <h4><a href="{{ route('creazione offerte') }}">+ Creazione offerta</a></h4>
-                <h4><a href="#">+ Modifica offerta</a></h4>
-                <h4><a href="#">+ Elimina offerta</a></h4>
+            <div class="container-pannello_staff-noPacchetti">
+
+                <div class="container-gestione_offerte">
+                    <h2> Gestione Offerte</h2>
+
+                    <h4><a href="{{ route('creazione offerte') }}">+ Creazione offerta</a></h4>
+                    <h4><a href="#">+ Modifica offerta</a></h4>
+                    <h4><a href="#">+ Elimina offerta</a></h4>
+                </div>
             </div>
 
+        @endcan
 
 
-        </div>
+
+
+
     </div>
 
 

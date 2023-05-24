@@ -25,6 +25,14 @@
     justify-content: space-evenly;
 }
 
+.container-pannello_staff-noPacchetti{
+    display: flex;
+    justify-content: center;
+}
+.container-pannello_staff-noPacchetti div {
+    color: var(--main-color);
+}
+
 .container-pannello_staff h2 {
     color: var(--main-color);
 }
