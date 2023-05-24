@@ -85,10 +85,10 @@ table tr:nth-child(1){
     color: white;
 }
 
-#modifica-username{
+.form-modifica-dati{
     display: none;
 }
-#modifica-username .input{
+.form-modifica-dati .input{
     padding: 10px;
     border-radius: 20px;
     border: none;
@@ -97,7 +97,7 @@ table tr:nth-child(1){
     box-shadow: 0 0 10px 0px #00000085;
 }
 
-#modifica-username .submit-button{
+.form-modifica-dati .submit-button{
     position: absolute;
     right: 0;
     padding: 10px;
