@@ -54,6 +54,13 @@
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
                     {{ Form::close() }}
                 </div>
+                @if ($errors->first('telefono'))
+                    <ul class="errors">
+                        @foreach ($errors->get('telefono') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
                 <h3>Indirizzo:</h3>
                 <p id="indirizzo">{{$user->citta}}, {{$user->via}} - {{$user->numero_civico}} <i id="indirizzo-edit" class="fas fa-pen edit-icon"></i></p>
@@ -171,9 +178,9 @@
 
         $(document).ready(function() {
             $('.edit-icon').click(function() {
-                var $parent = $(this).parent('p'); // Elemento <p> genitore dell'icona di modifica
-                $parent.hide(); // Nascondi il primo tag <p> vicino all'icona
-                $parent.next('form').show(); // Mostra il form immediatamente successivo al tag <p>
+                var parent = $(this).parent('p'); // Elemento <p> genitore dell'icona di modifica
+                parent.hide(); // Nascondi il primo tag <p> vicino all'icona
+                parent.next('form').show(); // Mostra il form immediatamente successivo al tag <p>
 
                 // In alternativa, puoi usare il seguente codice per mostrare solo il form all'interno dello stesso blocco:
                 // $(this).closest('.data').find('form').show();

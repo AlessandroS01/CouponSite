@@ -3,54 +3,75 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\GestioneAdmin;
 use App\Models\Resources\Product;
+use Illuminate\Validation\Rules;
 use App\Http\Requests\NewProductRequest;
+use App\Models\User;
+use App\Providers\RouteServiceProvider;
+use Illuminate\Auth\Events\Registered;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 
 class AdminController extends Controller {
 
-//    protected $_adminModel;
+    protected $gestioneAdmin;
 
-//    public function __construct() {
-//        $this->_adminModel = new Admin;
-//        //aggiungiamo alla chiamata al middleware che richiama un gate
-//        //la chiamata al gate viene fatta in questo modo can:isAdmin abbiamo messo al sicuro le funzionalità dell'amministratore
-//
-//    }
+    public function __construct()
+    {
+        $this->gestioneAdmin = New GestioneAdmin();
+    }
+
     public function showPannelloAdmin() {
-        return view('Admin.pannello_admin');
+        return view('admin.pannello_admin');
     }
 
-    public function index() {
-        return view('admin');
+    public function showAggiuntaStaff() {
+
+        return view('admin.gestione_staff.aggiunta_staff');
     }
 
-//    public function addProduct() {
-//        $prodCats = $this->_adminModel->getProdsCats()->pluck('name', 'catId');
-//        return view('product.insert')
-//                        ->with('cats', $prodCats);
-//    }
+    public function storeNewStaff(Request $request) {
 
-//    public function storeProduct(NewProductRequest $request) {
-//
-//        if ($request->hasFile('image')) {
-//            $image = $request->file('image');
-//            $imageName = $image->getClientOriginalName();
-//        } else {
-//            $imageName = NULL;
-//        }
-//
-//        $product = new Product;
-//        $product->fill($request->validated());
-//        $product->image = $imageName;
-//        $product->save();
-//
-//        if (!is_null($imageName)) {
-//            $destinationPath = public_path() . '/images/products';
-//            $image->move($destinationPath, $imageName);
-//        };
-//
-//        return redirect()->action([AdminController::class, 'index']);
-//        ;
-//    }
+
+        // Prima verifica tutte le varie regole di validazione
+        $request->validate([
+            'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],
+            'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()],
+            'nome' => ['required', 'string', 'max:50'],
+            'cognome' => ['required', 'string', 'max:50'],
+            'genere' => ['required', 'string', 'max:1'],
+            'eta' => ['required', 'int', 'min:1', 'max:99'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'via' => ['required', 'string', 'max:100'],
+            'numero_civico' => ['required', 'int'],
+            'citta' => ['required', 'string', 'max:50'],
+        ]);
+
+        // crea la nuova tupla da aggiungere al database
+        $user = User::create([
+            'username' => $request->username,
+            'password' => Hash::make($request->password),
+            'nome' => $request->nome,
+            'cognome' => $request->cognome,
+            'genere'=>$request->genere,
+            'eta'=>$request->eta,
+            'email' => $request->email,
+            'telefono' => $request->telefono,
+            'via' => $request->via,
+            'numero_civico' => $request->numero_civico,
+            'citta' => $request->citta,
+            'livello' => '2',
+        ]);
+
+        // definisce l'evento della creazione di un nuovo utente registrato
+        event(new Registered($user));
+
+        return redirect('/');
+    }
+
 
 }

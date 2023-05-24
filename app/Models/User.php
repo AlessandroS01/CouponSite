@@ -33,10 +33,12 @@ class User extends Authenticatable
         'via',
         'numero_civico',
         'citta',
+        'livello',
+        'flagPacchetti'
     ];
 
     /**
-     * Protegge tutti questi valori durante l'atto di invio della forma
+     * Protegge tutti questi valori durante l'atto di invio della form
      *
      * @var array<int, string>
      */

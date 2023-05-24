@@ -143,6 +143,14 @@ Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
     ->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/aggiunta/staff', [AdminController::class, 'showAggiuntaStaff'])
+    ->name('aggiunta staff')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/aggiunta/staff', [AdminController::class, 'storeNewStaff'])
+    ->name('aggiunta staff')
+    ->middleware(['auth', 'can:isAdmin']);
+
 
 
 // aggiunge le rotte che si trovano all'interno di auth.php

@@ -25,7 +25,7 @@
             <div class="container-gestione_staff">
                 <h2> Gestione Staff</h2>
 
-                <h4><a href="#">+ Aggiunta staff</a></h4>
+                <h4><a href="{{ route('aggiunta staff') }}">+ Aggiunta staff</a></h4>
                 <h4><a href="#">+ Modifica staff</a></h4>
                 <h4><a href="#">+ Eliminazione staff</a></h4>
             </div>
@@ -33,7 +33,7 @@
             <div class="container-gestione_admin">
                 <h2> Gestione Generale</h2>
 
-                <h4><a href="#">+ Modifica faq</a></h4>
+                <h4><a href="#">+ Modifica FAQs</a></h4>
                 <h4><a href="#">+ Visualizzazione statistiche</a></h4>
                 <h4><a href="#">+ Eliminazione cliente</a></h4>
             </div>

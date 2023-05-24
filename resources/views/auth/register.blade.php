@@ -111,6 +111,13 @@
                     {{ Form::label('telefono', 'Telefono', ['class' => 'label-input']) }}
                     {{ Form::text('telefono', '', ['class' => 'input', 'id' => 'telefono']) }}
                 </div>
+                @if ($errors->first('telefono'))
+                    <ul class="errors">
+                        @foreach ($errors->get('telefono') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
                 <div class="container-dati-registrazione">
                     {{ Form::label('via', 'Via', ['class' => 'label-input']) }}

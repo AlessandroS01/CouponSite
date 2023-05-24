@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Creazione promozione')
+@section('title', 'Creazione offerta')
 
 @section('content')
 
