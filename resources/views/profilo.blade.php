@@ -54,13 +54,6 @@
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
                     {{ Form::close() }}
                 </div>
-                @if ($errors->first('telefono'))
-                    <ul class="errors">
-                        @foreach ($errors->get('telefono') as $telefono)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                @endif
 
                 <h3>Indirizzo:</h3>
                 <p id="indirizzo">{{$user->citta}}, {{$user->via}} - {{$user->numero_civico}} <i id="indirizzo-edit" class="fas fa-pen edit-icon"></i></p>

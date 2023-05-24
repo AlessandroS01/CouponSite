@@ -44,7 +44,13 @@ function showProfilo(){
     public function updateData(Request $request)
     {
         $username = $request->input('username');
-        Log::info($username);
+        $nome = $request->input('nome');
+        $cognome = $request->input('cognome');
+        $email = $request->input('email');
+        $telefono = $request->input('telefono');
+        $eta = $request->input('eta');
+
+
 
         if (!empty($username)) {
             $request->validate([
@@ -60,8 +66,84 @@ function showProfilo(){
             // Reindirizza all'azione successiva o alla pagina di conferma
             return redirect()->route('profilo')
                 ->with('message', 'Username aggiornato con successo');
+        } else if (!empty($nome)){
+            $request->validate([
+                'nome' => ['required', 'string', 'max:50'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->nome = $nome;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Nome aggiornato con successo');
+
+        } else if (!empty($cognome)){
+            $request->validate([
+                'cognome' => ['required', 'string', 'max:50'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->cognome = $cognome;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Cognome aggiornato con successo');
+
+        }else if (!empty($email)){
+            $request->validate([
+                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->email = $email;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Email aggiornato con successo');
+
+        }else if (!empty($telefono)){
+            $request->validate([
+                'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->telefono = $telefono;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Telefono aggiornato con successo');
+
+        }else if (!empty($eta)){
+            $request->validate([
+                'eta' => ['required', 'int', 'min:1', 'max:99'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->eta = $eta;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Eta aggiornata con successo');
+
         }
 
+        return redirect()->route('profilo');
     }
 
 
