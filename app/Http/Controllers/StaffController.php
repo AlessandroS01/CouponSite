@@ -15,6 +15,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Support\Facades\URL;
 
 class StaffController extends Controller {
 
@@ -94,8 +95,12 @@ class StaffController extends Controller {
 
     public function showModificaOfferta()
     {
+        $offerte = $this->gestioneStaff->getOfferteByStaff();
+        $oggettoOfferte = $this->gestioneStaff->getNomeOfferteByStaff();
+
         return view('staff.gestione_offerte.modifica_offerta')
-            ->with('aziende', $this->gestioneStaff->getNomeAziendeByStaff());
+            ->with('offerte', $offerte)
+            ->with('oggetto_offerte', $oggettoOfferte);
     }
 
 
