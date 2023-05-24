@@ -59,10 +59,11 @@
                 <p id="indirizzo">{{$user->citta}}, {{$user->via}} - {{$user->numero_civico}} <i id="indirizzo-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-indirizzo')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('citta', '', ['class' => 'input','id' => 'citta-input']) }}
-                    {{ Form::text('via', '', ['class' => 'input','id' => 'via-input']) }}
-                    {{ Form::text('numero_civico', '', ['class' => 'input','id' => 'numero_civico-input']) }}
-                    {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::text('citta', '', ['class' => 'input ','id' => 'citta-input', 'placeholder'=>'Modifica citta']) }}
+                    {{ Form::text('numero_civico', '', ['class' => 'input ','id' => 'numero_civico-input', 'placeholder'=>'Modifica numero civico']) }}
+                    {{ Form::text('via', '', ['class' => 'input','id' => 'via-input', 'placeholder'=>'Modifica via']) }}
+
+                    {{ Form::submit('Modifica', ['class' => 'submit-button', 'id'=>'submit-btn-indirizzo']) }}
                     {{ Form::close() }}
                 </div>
 
@@ -107,8 +108,8 @@
                 <p id="genere">{{$user->genere}} <i id="genere-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-genere')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('genere', '', ['class' => 'input','id' => 'genere-input', 'placeholder' => 'Modifica Genere']) }}
-                    {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], null, ['class' => 'select', 'id' => 'genere-input']) }}
+                    {{ Form::submit('Modifica', ['class' => 'submit-button-select']) }}
                     {{ Form::close() }}
                 </div>
                 @if ($errors->first('genere'))

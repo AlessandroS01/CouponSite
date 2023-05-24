@@ -97,6 +97,18 @@ table tr:nth-child(1){
     box-shadow: 0 0 10px 0px #00000085;
 }
 
+.form-modifica-dati .select{
+    padding: 10px;
+    border-radius: 20px;
+    border: none;
+    width: 100%;
+    box-sizing: border-box;
+    box-shadow: 0 0 10px 0px #00000085;
+    display: inline;
+    width: 78%;
+}
+
+
 .form-modifica-dati .submit-button{
     position: absolute;
     right: 0;
@@ -109,6 +121,35 @@ table tr:nth-child(1){
 
 }
 
+.form-modifica-dati .submit-button-select{
+    display: inline;
+    padding: 10px;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    width: 20%;
+
+}
+
+
+/*modifica indirizzo*/
+#citta-input{
+    width: 49%;
+    display: inline;
+}
+#numero_civico-input{
+    display: inline;
+    width: 49%;
+}
+#via-input{
+    margin-top: 10px;
+}
+#submit-btn-indirizzo{
+    bottom: 0;
+}
+/*fine modifica indirizzo*/
 .input-modifica-profilo{
     position: relative;
 }

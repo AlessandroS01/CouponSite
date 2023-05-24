@@ -49,6 +49,10 @@ function showProfilo(){
         $email = $request->input('email');
         $telefono = $request->input('telefono');
         $eta = $request->input('eta');
+        $genere = $request->input('genere');
+        $citta = $request->input('citta');
+        $via = $request->input('via');
+        $ncivico = $request->input('numero_civico');
 
 
 
@@ -140,6 +144,40 @@ function showProfilo(){
             // Reindirizza all'azione successiva o alla pagina di conferma
             return redirect()->route('profilo')
                 ->with('message', 'Eta aggiornata con successo');
+
+        }else if (!empty($genere)){
+            $request->validate([
+                'genere' => ['required', 'string', 'max:1'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->genere = $genere;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Genere aggiornato con successo');
+
+        }else if (!empty($citta) && !empty($via) && !empty($ncivico)){
+            $request->validate([
+                'via' => ['required', 'string', 'max:100'],
+                'numero_civico' => ['required', 'int'],
+                'citta' => ['required', 'string', 'max:50'],
+            ]);
+
+
+            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
+            $user = User::find(auth()->user()->id);
+            $user->citta = $citta;
+            $user->via = $via;
+            $user->numero_civico = $ncivico;
+            $user->save();
+
+            // Reindirizza all'azione successiva o alla pagina di conferma
+            return redirect()->route('profilo')
+                ->with('message', 'Indirizzo aggiornato con successo');
 
         }
 
