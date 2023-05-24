@@ -14,31 +14,53 @@
 
                 <h3>Username:</h3>
                 <p id="username">{{$user->username}} <i id="username-edit" class="fas fa-pen edit-icon"></i></p>
-                {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-username')) }}
+                {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-username', 'method'=>'POST')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('username', '', ['class' => 'input','id' => 'username-input']) }}
+                    {{ Form::text('username', '', ['class' => 'input','id' => 'username-input', 'placeholder' => 'Modifica Username']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
                     {{ Form::close() }}
                 </div>
+                @if ($errors->first('username'))
+                    <ul class="errors">
+                        @foreach ($errors->get('username') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
 
                 <h3>Email:</h3>
                 <p id="email">{{$user->email}} <i id="email-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-email')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('email', '', ['class' => 'input','id' => 'email-input']) }}
+                    {{ Form::text('email', '', ['class' => 'input','id' => 'email-input', 'placeholder' => 'Modifica Email']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+                @if ($errors->first('email'))
+                    <ul class="errors">
+                        @foreach ($errors->get('email') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
 
                 <h3>Telefono:</h3>
                 <p id="telefono">{{$user->telefono}} <i id="telefono-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-telefono')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('telefono', '', ['class' => 'input','id' => 'telefono-input']) }}
+                    {{ Form::text('telefono', '', ['class' => 'input','id' => 'telefono-input', 'placeholder' => 'Modifica Telefono']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+                @if ($errors->first('telefono'))
+                    <ul class="errors">
+                        @foreach ($errors->get('telefono') as $telefono)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
                 <h3>Indirizzo:</h3>
                 <p id="indirizzo">{{$user->citta}}, {{$user->via}} - {{$user->numero_civico}} <i id="indirizzo-edit" class="fas fa-pen edit-icon"></i></p>
@@ -48,8 +70,8 @@
                     {{ Form::text('via', '', ['class' => 'input','id' => 'via-input']) }}
                     {{ Form::text('numero_civico', '', ['class' => 'input','id' => 'numero_civico-input']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
 
             </div>
 
@@ -60,37 +82,64 @@
                 <p id="nome">{{$user->nome}} <i id="nome-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-nome')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('nome', '', ['class' => 'input','id' => 'nome-input']) }}
+                    {{ Form::text('nome', '', ['class' => 'input','id' => 'nome-input','placeholder' => 'Modifica Nome']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+                @if ($errors->first('nome'))
+                    <ul class="errors">
+                        @foreach ($errors->get('nome') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
                 <h3>Cognome:</h3>
                 <p id="cognome">{{$user->cognome}} <i id="cognome-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-cognome')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('cognome', '', ['class' => 'input','id' => 'cognome-input']) }}
+                    {{ Form::text('cognome', '', ['class' => 'input','id' => 'cognome-input','placeholder' => 'Modifica Cognome']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+                @if ($errors->first('cognome'))
+                    <ul class="errors">
+                        @foreach ($errors->get('cognome') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
 
                 <h3>Genere:</h3>
                 <p id="genere">{{$user->genere}} <i id="genere-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-genere')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('genere', '', ['class' => 'input','id' => 'genere-input']) }}
+                    {{ Form::text('genere', '', ['class' => 'input','id' => 'genere-input', 'placeholder' => 'Modifica Genere']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+                @if ($errors->first('genere'))
+                    <ul class="errors">
+                        <li>{{ $errors->first('genere') }}</li>
+                    </ul>
+                @endif
 
                 <h3>Età:</h3>
                 <p id="eta">{{$user->eta}} <i id="eta-edit" class="fas fa-pen edit-icon"></i></p>
                 {{ Form::open(array('route' => 'profilo', 'class' => 'form-modifica-dati', 'id' => 'modifica-eta')) }}
                 <div class="input-modifica-profilo">
-                    {{ Form::text('eta', '', ['class' => 'input','id' => 'eta-input']) }}
+                    {{ Form::text('eta', '', ['class' => 'input','id' => 'eta-input', 'placeholder' => 'Modifica Età']) }}
                     {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                    {{ Form::close() }}
                 </div>
-                {{ Form::close() }}
+                @if ($errors->first('eta'))
+                    <ul class="errors">
+                        @foreach ($errors->get('eta') as $message)
+                            <li>{{ $message }}</li>
+                        @endforeach
+                    </ul>
+                @endif
+
 
             </div>
         </div>

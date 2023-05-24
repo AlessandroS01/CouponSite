@@ -110,7 +110,6 @@
                 <div class="container-dati-registrazione">
                     {{ Form::label('telefono', 'Telefono', ['class' => 'label-input']) }}
                     {{ Form::text('telefono', '', ['class' => 'input', 'id' => 'telefono']) }}
-
                 </div>
 
                 <div class="container-dati-registrazione">
