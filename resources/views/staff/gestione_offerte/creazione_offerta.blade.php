@@ -116,13 +116,6 @@
 
 
                     </div>
-                    @if ($errors->first('eta'))
-                        <ul class="errors">
-                            @foreach ($errors->get('eta') as $message)
-                                <li>{{ $message }}</li>
-                            @endforeach
-                        </ul>
-                    @endif
 
                     <div class="container-dati-offerta">
                         {{ Form::label('descrizione', 'Descrizione', ['class' => 'label-input']) }}
