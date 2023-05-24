@@ -4,7 +4,7 @@
 
 @section('content')
 
-    @isset($offerte, $oggetto_offerte)
+    @isset($offerte, $oggetto_offerte, $aziende)
 
         <div class="container-offerta_dettagli">
             <h1> Modifica offerta</h1>
@@ -19,9 +19,11 @@
 
                     {{ Form::open(array('route' => 'modifica offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
 
+                        {{ Form::hidden('codiceOfferta', null, ['id' => 'hidden_param']) }}
+
                     <div class="container-dati-offerta">
                         {{ Form::label('offerta', 'Offerta', ['class' => 'label-input']) }}
-                        {{ Form::select('offerta', ['-' => '-'] + $oggetto_offerte , null, ['class' => 'input', 'id' => 'offerta', 'data-offerta' => $offerte]) }}
+                        {{ Form::select('offerta', ['-' => '-'] + $oggetto_offerte , null, ['class' => 'input', 'id' => 'offerta', 'data-offerta' => $offerte, 'data-aziende' => $aziende ]) }}
                     </div>
 
                     <div  class="container-dati-offerta">
@@ -120,7 +122,7 @@
 
                     <div class="container-dati-offerta ">
                         {{ Form::label('azienda', 'Azienda', ['class' => 'label-input']) }}
-                        {{ Form::text('azienda', '', ['class' => 'input', 'id' => 'categoria', 'readonly' => 'readonly']) }}
+                        {{ Form::text('azienda', '', ['class' => 'input', 'id' => 'azienda', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('azienda'))
@@ -166,6 +168,9 @@
         $(document).ready(function() {
             $('#offerta').change(function () {
 
+                var encodedAziende = '{!! json_encode($aziende) !!}'
+                var aziende = JSON.parse(encodedAziende);
+
                 // Get the JSON-encoded string from PHP
                 var encodedOfferte = '{!! json_encode($offerte) !!}';
                 var offerte = JSON.parse(encodedOfferte);
@@ -173,7 +178,15 @@
                 if ( $(this).val() !== '-') {
 
                     var oggettoOffertaSelezionata = offerte[$(this).val()];
+                    var azienda = null;
 
+                    for( var i = 0; i < aziende.length; i++){
+                        if(aziende[i].partita_iva == oggettoOffertaSelezionata.azienda){
+                            azienda = aziende[i].nome;
+                        }
+                    }
+
+                    $('#hidden_param').val(oggettoOffertaSelezionata.codice);
                     $('#oggetto_offerta').val(oggettoOffertaSelezionata.oggetto_offerta);
                     $('#data_scadenza').val(oggettoOffertaSelezionata.data_scadenza);
                     $('#luogo_fruizione').val(oggettoOffertaSelezionata.luogo_fruizione);
@@ -181,8 +194,20 @@
                     $('#percentuale_sconto').val(oggettoOffertaSelezionata.percentuale_sconto);
                     $('#prezzo_pieno').val(oggettoOffertaSelezionata.prezzo_pieno);
                     $('#categoria').val(oggettoOffertaSelezionata.categoria);
-                    $('#azienda').val(oggettoOffertaSelezionata.azienda).prop('readonly', true);
+                    $('#azienda').val(azienda).prop('readonly', true);
                     $('#descrizione').val(oggettoOffertaSelezionata.descrizione);
+
+                }else{
+                    $('#oggetto_offerta').val("");
+                    $('#data_scadenza').val("");
+                    $('#luogo_fruizione').val("");
+                    $('#modalita_fruizione').val("");
+                    $('#percentuale_sconto').val("");
+                    $('#prezzo_pieno').val("");
+                    $('#categoria').val("");
+                    $('#azienda').val("").prop('readonly', true);
+                    $('#descrizione').val("");
+                    $('#hidden_param').val("");
                 }
 
             });
