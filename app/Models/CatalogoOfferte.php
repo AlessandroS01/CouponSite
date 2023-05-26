@@ -55,8 +55,9 @@ class CatalogoOfferte extends Model {
      * @return ritorna l'offerta che ha come codice quello passato da parametro
      */
     public function getOffertaByID($offertaId){
-        return Offerta::where('codice',$offertaId)->first()
-            ->where('flagAttivo', '=', '1');
+        return Offerta::where('codice',$offertaId)
+            ->where('flagAttivo', '=', '1')
+            ->first();
     }
 
     /**
