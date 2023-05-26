@@ -51,6 +51,7 @@ class GestioneStaff extends Model {
         return $offerte;
     }
 
+
     /**
      * @return i nomi di tutte le offerte che lo staff può gestire
      */
