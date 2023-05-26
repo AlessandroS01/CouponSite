@@ -1,19 +1,13 @@
 @extends('layouts.public')
 
-@section('title', 'Modifica offerta')
+@section('title', 'Elimina offerta')
 
 @section('content')
 
-    <!--
-        $offerte => lista di tutte le offerte che il membro dello staff può gestire da utilizzare per riempire
-                i campi della form in modo automatico
-        $oggetto_offerte => lista di tutti gli oggetti delle offerte usate per riempire la select all'iterno della form
-        $aziende => lista di tutte le aziende che il membro dello staff può gestire
-    -->
     @isset($offerte, $oggetto_offerte, $aziende)
 
         <div class="container-offerta_dettagli">
-            <h1> Modifica offerta</h1>
+            <h1> Elimina offerta</h1>
         </div>
 
         <div class="form-offerta">
@@ -23,10 +17,9 @@
                 <div>
 
 
-                    {{ Form::open(array('route' => 'modifica offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
+                    {{ Form::open(array('route' => 'eliminazione offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
                     @csrf
                     {{ Form::hidden('codiceOfferta', null, ['id' => 'hidden_param']) }}
-                    {{ Form::hidden('flagAttivo', 1, ['id' => 'hidden_param']) }}
 
                     <div class="container-dati-offerta">
                         {{ Form::label('offerta', 'Offerta', ['class' => 'label-input']) }}
@@ -35,7 +28,7 @@
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('oggetto_offerta', 'Oggetto offerta', ['class' => 'label-input']) }}
-                        {{ Form::text('oggetto_offerta', '', ['class' => 'input', 'id' => 'oggetto_offerta']) }}
+                        {{ Form::text('oggetto_offerta', '', ['class' => 'input', 'id' => 'oggetto_offerta', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('oggetto_offerta'))
@@ -48,7 +41,7 @@
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('data_scadenza', 'Data di scadenza', ['class' => 'label-input']) }}
-                        {{ Form::date('data_scadenza', '', ['class' => 'input', 'id' => 'data_scadenza']) }}
+                        {{ Form::date('data_scadenza', '', ['class' => 'input', 'id' => 'data_scadenza', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('data_scadenza'))
@@ -61,7 +54,7 @@
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('luogo_fruizione', 'Luogo fruizione', ['class' => 'label-input']) }}
-                        {{ Form::text('luogo_fruizione', '', ['class' => 'input','id' => 'luogo_fruizione']) }}
+                        {{ Form::text('luogo_fruizione', '', ['class' => 'input','id' => 'luogo_fruizione', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('luogo_fruizione'))
@@ -74,7 +67,7 @@
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('modalita_fruizione', 'Modalita fruizione', ['class' => 'label-input']) }}
-                        {{ Form::text('modalita_fruizione', '', ['class' => 'input','id' => 'modalita_fruizione']) }}
+                        {{ Form::text('modalita_fruizione', '', ['class' => 'input','id' => 'modalita_fruizione', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('modalita_fruizione'))
@@ -91,7 +84,7 @@
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('percentuale_sconto', 'Percentuale sconto', ['class' => 'label-input']) }}
-                        {{ Form::text('percentuale_sconto', '', ['class' => 'input', 'id' => 'percentuale_sconto']) }}
+                        {{ Form::text('percentuale_sconto', '', ['class' => 'input', 'id' => 'percentuale_sconto', 'readonly' => 'readonly']) }}
 
 
                     </div>
@@ -105,7 +98,7 @@
 
                     <div  class="container-dati-offerta">
                         {{ Form::label('prezzo_pieno', 'Prezzo pieno', ['class' => 'label-input']) }}
-                        {{ Form::text('prezzo_pieno', '', ['class' => 'input', 'id' => 'prezzo_pieno']) }}
+                        {{ Form::text('prezzo_pieno', '', ['class' => 'input', 'id' => 'prezzo_pieno', 'readonly' => 'readonly']) }}
                     </div>
                     @if ($errors->first('prezzo_pieno'))
                         <ul class="errors">
@@ -116,7 +109,7 @@
                     @endif
                     <div class="container-dati-offerta ">
                         {{ Form::label('categoria', 'Categoria', ['class' => 'label-input']) }}
-                        {{ Form::text('categoria', '', ['class' => 'input', 'id' => 'categoria']) }}
+                        {{ Form::text('categoria', '', ['class' => 'input', 'id' => 'categoria', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('categoria'))
@@ -143,7 +136,7 @@
 
                     <div class="container-dati-offerta">
                         {{ Form::label('descrizione', 'Descrizione', ['class' => 'label-input']) }}
-                        {{ Form::text('descrizione', '', ['class' => 'input', 'id' => 'descrizione']) }}
+                        {{ Form::text('descrizione', '', ['class' => 'input', 'id' => 'descrizione', 'readonly' => 'readonly']) }}
 
                     </div>
                     @if ($errors->first('descrizione'))
@@ -160,12 +153,13 @@
             </div>
 
             <div class="container-offerta_button">
-                {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+                {{ Form::submit('Elimina', ['class' => 'submit-button']) }}
             </div>
 
 
             {{ Form::close() }}
         </div>
+
 
 
 
@@ -219,7 +213,7 @@
                     $('#azienda').val(azienda).prop('readonly', true);
                     $('#descrizione').val(oggettoOffertaSelezionata.descrizione);
 
-                // se invece si seleziona '-' tutti i campi vengono resettati
+                    // se invece si seleziona '-' tutti i campi vengono resettati
                 }else{
                     $('#oggetto_offerta').val("");
                     $('#data_scadenza').val("");

@@ -44,6 +44,7 @@ class GestioneStaff extends Model {
         $offerte = Gestione::join('azienda', 'gestione.azienda', '=', 'azienda.partita_iva')
             ->join('offerta', 'offerta.azienda', '=', 'azienda.partita_iva')
             ->where('gestione.staff', $staffId)
+            ->where('flagAttivo', '=', '1')
             ->select('offerta.*')
             ->get();
 
@@ -59,6 +60,7 @@ class GestioneStaff extends Model {
         $oggettoOfferte = Gestione::join('azienda', 'gestione.azienda', '=', 'azienda.partita_iva')
             ->join('offerta', 'offerta.azienda', '=', 'azienda.partita_iva')
             ->where('gestione.staff', $staffId)
+            ->where('flagAttivo', '=', '1')
             ->pluck('offerta.oggetto_offerta')
             ->toArray();
 
@@ -82,6 +84,7 @@ class GestioneStaff extends Model {
             'prezzo_pieno' => $request->prezzo_pieno,
             'categoria' => $request->categoria,
             'azienda' => $partita_iva,
+            'flagAttivo' => $request->flagAttivo,
             'descrizione' => $request->descrizione,
             'staff' => Auth::id(),
         ]);
@@ -109,9 +112,16 @@ class GestioneStaff extends Model {
         $offertaDaModificare->staff = Auth::id();
         $offertaDaModificare->categoria = $request->categoria;
         $offertaDaModificare->descrizione = $request->descrizione;
+        $offertaDaModificare->flagAttivo = $request->flagAttivo;
 
         // salva le informazioni dell'offerta modificata
         $offertaDaModificare->save();
+    }
+
+    public function eliminaOfferta(Request $request){
+        $offertaDaEliminare = Offerta::find($request->codiceOfferta);
+        $offertaDaEliminare->flagAttivo = 0;
+        $offertaDaEliminare->save();
     }
 
 

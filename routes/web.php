@@ -4,7 +4,6 @@ use App\Http\Controllers\AdminController;
 use App\Http\Controllers\StaffController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\PublicController;
-use App\Http\Controllers\ClientController;
 use App\Http\Controllers\UserController;
 
 /*
@@ -18,38 +17,6 @@ use App\Http\Controllers\UserController;
 |
 */
 
-
-/* Rotte del prof
-Route::get('/', [PublicController::class, 'showCatalog1'])
-        ->name('catalog1');
-
-Route::get('/selTopCat/{topCatId}', [PublicController::class, 'showCatalog2'])
-        ->name('catalog2');
-
-Route::get('/selTopCat/{topCatId}/selCat/{catId}', [PublicController::class, 'showCatalog3'])
-        ->name('catalog3');
-
-Route::get('/admin', [AdminController::class, 'index'])
-        ->name('admin');
-
-Route::get('/admin/newproduct', [AdminController::class, 'addProduct'])
-        ->name('newproduct');
-
-Route::post('/admin/newproduct', [AdminController::class, 'storeProduct'])
-        ->name('newproduct.store');
-
-
-// la rotta ha in coda il meccanismo di autorizzazione per gli user
-Route::get('/user', [UserController::class, 'index'])
-        ->name('user')->middleware('can:isUser');
-
-
-Route::view('/where', 'where')
-        ->name('where');
-
-Route::view('/who', 'who')
-        ->name('who');
-*/
 
 /**
  * rotta che riporta alla home del sito
@@ -110,7 +77,7 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
         ->name('azienda');
 
 // rotta per accedere alla sezione del cliente
-Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
+Route::post('/coupon', [UserController::class, 'showCouponGenerato'])
         ->name('generazione coupon');
 
 Route::get('/profilo', [UserController::class, 'showProfilo'])
@@ -137,6 +104,14 @@ Route::get('/modifica/offerta', [StaffController::class, 'showModificaOfferta'])
 
 Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModificata'])
     ->name('modifica offerta')
+    ->middleware(['auth', 'can:isStaff']);
+
+Route::get('/eliminazione/offerta', [StaffController::class, 'showEliminaOfferta'])
+    ->name('eliminazione offerta')
+    ->middleware(['auth', 'can:isStaff']);
+
+Route::post('/eliminazione/offerta', [StaffController::class, 'disattivaOfferta'])
+    ->name('eliminazione offerta')
     ->middleware(['auth', 'can:isStaff']);
 
 Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
