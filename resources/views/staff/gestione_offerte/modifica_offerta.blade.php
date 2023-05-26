@@ -29,7 +29,7 @@
 
                     <div class="container-dati-offerta">
                         {{ Form::label('offerta', 'Offerta', ['class' => 'label-input']) }}
-                        {{ Form::select('offerta', ['-' => '-'] + $oggetto_offerte , null, ['class' => 'input', 'id' => 'offerta', 'data-offerta' => $offerte, 'data-aziende' => $aziende ]) }}
+                        {{ Form::select('offerta', ['-' => '-'] + $oggetto_offerte , null, ['class' => 'input', 'id' => 'offerta']) }}
                     </div>
 
                     <div  class="container-dati-offerta">
@@ -176,12 +176,12 @@
             $('#offerta').change(function () {
 
                 // prende il valore di tutte le aziende codificate in JSON direttamente da php
-                var encodedAziende = '{!! $aziende !!}'
+                var encodedAziende = '{!! ($aziende) !!}'
                 // effettua il parsing del json per ottenere un array delle tuple contenente tutte le aziende
                 var aziende = JSON.parse(encodedAziende);
 
                 // prende il valore di tutte le offerte codificate in JSON direttamente da php
-                var encodedOfferte = '{!! $offerte !!}';
+                var encodedOfferte = '{!! ($offerte) !!}';
                 // effettua il parsing del json per ottenere un array delle tuple contenente tutte le offerte
                 var offerte = JSON.parse(encodedOfferte);
 
