@@ -120,33 +120,33 @@
 }
 
 
-.container-check-boxes-aziende form{
+.container-check-boxes-aziende{
+    padding: 10px 20px;
     display: flex;
     flex-direction: column;
-}
-.container-check-boxes-aziende form label{
-    margin-top: 10px;
+    justify-content: center;
 }
 
-.container-check-boxes-aziende{
+.container-check-boxes-aziende .label-input{
     padding: 10px 10px;
     display: flex;
     flex-direction: column;
+    font-size: 16px;
+    align-items: center;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    margin-top: 10px;
+    background-color: var(--main-color);
+    color: white;
 }
 
 .container-check-boxes-aziende label{
     margin-top: 20px;
 }
 
-.container-check-boxes-aziende .submit_scontistica{
-    margin-top: 20px;
-    background-color: white;
-    border-radius: 5px;
-    border: none;
-    color: var(--main-color);
-    padding: 2px 0;
+.container-aziende-check{
+    display: grid;
+    grid-template-columns: repeat(3, 33%);
+    justify-items: center;
 }
 
-.container-check-boxes-aziende .submit_scontistica:hover{
-    cursor: pointer;
-}

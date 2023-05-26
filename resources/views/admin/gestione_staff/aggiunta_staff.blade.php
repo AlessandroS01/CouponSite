@@ -164,27 +164,37 @@
                 </div>
 
                 <div>
-                    <div class="container-dati-creazione_staff ">
+                    <div class="container-dati-creazione_staff">
                         {{ Form::label('gestionePacchetti', 'Gestione pacchetti', ['class' => 'label-input']) }}
                         {{ Form::select('gestionePacchetti', ['No', 'Sì'], null, ['class' => 'input', 'id' => 'gestione_pacchetti']) }}
                     </div>
                 </div>
 
-
+                @isset($aziende)
                 <div class="container-check-boxes-aziende">
-                        <div class="container-dati-creazione_staff ">
-                            {{ Form::label('', 'Gestione aziende', ['class' => 'label-input']) }}
-                        </div>
+
+
+                    {{ Form::label('', 'Aziende da gestire', ['class' => 'label-input']) }}
+
+                    <div class="container-aziende-check">
+
+                        @foreach($aziende as $azienda)
+
+                            <label>
+                                {{ Form::checkbox('aziende[]', $azienda->partita_iva, false, ['class' => 'input', 'id' => $azienda->nome]) }}
+                                <span class="label-text">{{ $azienda->nome }} | {{ $azienda->partita_iva }}</span>
+                            </label>
+
+                        @endforeach
+
+                    </div>
+
+
                 </div>
-
-                    <label>
-                        {{ Form::checkbox('aziende', 'Mediaworld', false, ['class' => 'input', 'id' => 'Mediaworld']) }}
-                        <span class="label-text">Mediaworld</span>
-                    </label>
-
+                @endisset
 
                 <div class="container-creazione_staff_button">
-                    {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
+                    {{ Form::submit('Aggiungi staff', ['class' => 'submit-button']) }}
                 </div>
 
 
@@ -192,5 +202,24 @@
             </div>
 
         </div>
+
+
+    <script>
+        $(document).ready(function() {
+            $('.container-check-boxes-aziende').show();
+            // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+            $('#gestione_pacchetti').change(function () {
+                if ( $(this).val() == 0){
+                    $('.container-check-boxes-aziende').show();
+                    $('input[name="aziende[]"]').prop('checked', false);
+                }
+                if ( $(this).val() == 1){
+                    $('.container-check-boxes-aziende').hide();
+                    $('input[name="aziende[]"]').prop('checked', true);
+                }
+            });
+        })
+
+    </script>
 
 @endsection

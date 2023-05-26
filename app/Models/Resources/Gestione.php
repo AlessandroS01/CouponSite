@@ -9,6 +9,11 @@ class Gestione extends Model {
     protected $table = 'gestione';
     protected $primaryKey = 'id';
 
+    protected $fillable = [
+        'staff',
+        'azienda',
+    ];
+
     // primary key non modificabile da un HTTP Request (Mass Assignment)
     protected $guarded = ['staff', 'azienda'];
 
