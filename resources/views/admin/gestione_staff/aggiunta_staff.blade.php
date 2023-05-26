@@ -172,23 +172,16 @@
 
 
                 <div class="container-check-boxes-aziende">
-
                         <div class="container-dati-creazione_staff ">
                             {{ Form::label('', 'Gestione aziende', ['class' => 'label-input']) }}
                         </div>
-
-
                 </div>
-
-                <div>
 
                     <label>
                         {{ Form::checkbox('aziende', 'Mediaworld', false, ['class' => 'input', 'id' => 'Mediaworld']) }}
                         <span class="label-text">Mediaworld</span>
                     </label>
 
-
-                </div>
 
                 <div class="container-creazione_staff_button">
                     {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
