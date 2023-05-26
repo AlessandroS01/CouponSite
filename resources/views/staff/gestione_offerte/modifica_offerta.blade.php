@@ -24,7 +24,7 @@
 
 
                     {{ Form::open(array('route' => 'modifica offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
-
+                    @csrf
                     {{ Form::hidden('codiceOfferta', null, ['id' => 'hidden_param']) }}
 
                     <div class="container-dati-offerta">
@@ -176,12 +176,12 @@
             $('#offerta').change(function () {
 
                 // prende il valore di tutte le aziende codificate in JSON direttamente da php
-                var encodedAziende = '{!! json_encode($aziende) !!}'
+                var encodedAziende = '{!! $aziende !!}'
                 // effettua il parsing del json per ottenere un array delle tuple contenente tutte le aziende
                 var aziende = JSON.parse(encodedAziende);
 
                 // prende il valore di tutte le offerte codificate in JSON direttamente da php
-                var encodedOfferte = '{!! json_encode($offerte) !!}';
+                var encodedOfferte = '{!! $offerte !!}';
                 // effettua il parsing del json per ottenere un array delle tuple contenente tutte le offerte
                 var offerte = JSON.parse(encodedOfferte);
 
@@ -189,7 +189,7 @@
                 if ( $(this).val() !== '-') {
 
                     // prende l'offerta che si trova alla posizione i-esima
-                    var oggettoOffertaSelezionata = offerte[$(this).val()];
+                    var oggettoOffertaSelezionata = offerte[ $(this).val() ];
                     // variabile che serve a contenere il nome dell'azienda relativa a quell'offerta perchè
                     // all'interno della tabella Offerta è presente come chiave esterna la partita_iva e non il nome
                     var azienda = null;

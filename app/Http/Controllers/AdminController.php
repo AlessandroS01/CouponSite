@@ -51,24 +51,9 @@ class AdminController extends Controller {
             'citta' => ['required', 'string', 'max:50'],
         ]);
 
-        // crea la nuova tupla da aggiungere al database
-        $user = User::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'nome' => $request->nome,
-            'cognome' => $request->cognome,
-            'genere'=>$request->genere,
-            'eta'=>$request->eta,
-            'email' => $request->email,
-            'telefono' => $request->telefono,
-            'via' => $request->via,
-            'numero_civico' => $request->numero_civico,
-            'citta' => $request->citta,
-            'livello' => '2',
-        ]);
+        $this->gestioneAdmin->createStaff($request);
 
-        // definisce l'evento della creazione di un nuovo utente registrato
-        event(new Registered($user));
+
 
         return redirect('/');
     }

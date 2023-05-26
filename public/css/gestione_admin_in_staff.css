@@ -1,0 +1,152 @@
+.container-creazione_staff{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 50px;
+}
+
+.container-creazione_staff{
+    margin-bottom: 50px;
+}
+
+.container-creazione_staff h1{
+    color: var(--main-color);
+}
+
+.container-creazione_staff h1 {
+    margin-bottom: 0;
+}
+.container-creazione_staff p{
+    margin-top: 10px;
+}
+
+
+.container-dati-creazione_staff{
+    height: 45px;
+    margin-top: 10px;
+    padding: 10px 20px;
+    align-content: center;
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+}
+
+.container-dati-creazione_staff_errors ul{
+    display: flex;
+    justify-content: center;
+    margin: 2px 0 0 0;
+}
+
+.container-dati-creazione_staff_errors .errors{
+    font-size: 12px;
+    color: darkred;
+    padding: 0;
+}
+
+.container-dati-creazione_staff label{
+    position: absolute;
+    margin-left: 11px;
+    margin-top: 2px;
+    font-size: 15px;
+}
+
+.container-dati-creazione_staff .input
+{
+    font-size: 17px;
+    padding-top: 20px;
+    border: 2px solid var(--main-color);
+    border-radius: 10px;
+    padding-left: 10px;
+    color: var(--main-color);
+}
+
+
+.container-dati-creazione_staff input:focus,
+.container-dati-creazione_staff input:hover{
+    box-shadow: 0px 0px 10px #7b7e9d;
+    outline: none;
+    background-color: rgb(232, 240, 254);
+}
+
+
+.container-dati-creazione_staff span{
+    color: var(--main-color);
+    position: absolute;
+    left: 20px;
+    top: 13px;
+    pointer-events: none;
+    font-size: 13px;
+}
+
+.form-creazione_staff .container-creazione_staff_button
+{
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+}
+
+.form-creazione_staff .container-creazione_staff_button .submit-button{
+    display: inline-block;
+    width: 25%;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 5px;
+    padding: 5px 10px;
+    cursor: pointer;
+}
+.container-auth form .container-creazione_staff_button .submit-button:hover {
+    box-shadow: 0px 0px 10px #7b7e9d;
+}
+
+
+.container-form-creazione_staff{
+    width: 800px;
+    display: grid;
+    grid-template-columns: 50% 50%;
+    justify-content: center;
+    margin: auto;
+}
+
+.form-creazione_staff{
+    border: 5px solid var(--main-color);
+    border-radius: 40px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+    max-width: 800px;
+    margin: auto;
+}
+
+
+.container-check-boxes-aziende form{
+    display: flex;
+    flex-direction: column;
+}
+.container-check-boxes-aziende form label{
+    margin-top: 10px;
+}
+
+.container-check-boxes-aziende{
+    padding: 10px 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.container-check-boxes-aziende label{
+    margin-top: 20px;
+}
+
+.container-check-boxes-aziende .submit_scontistica{
+    margin-top: 20px;
+    background-color: white;
+    border-radius: 5px;
+    border: none;
+    color: var(--main-color);
+    padding: 2px 0;
+}
+
+.container-check-boxes-aziende .submit_scontistica:hover{
+    cursor: pointer;
+}

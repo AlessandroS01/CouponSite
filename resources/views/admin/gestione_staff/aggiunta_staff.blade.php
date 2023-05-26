@@ -9,13 +9,13 @@
             <h1> Aggiunta staff</h1>
         </div>
 
-        <div class="container-register">
-            <div class="form-registrazione">
-                <div class="container-form-register">
+        <div class="container-creazione_staff">
+            <div class="form-creazione_staff">
+                <div class="container-form-creazione_staff">
                     <div>
                         {{ Form::open(array('route' => 'aggiunta staff', 'class' => 'contact-form', 'method' => 'POST')) }}
 
-                        <div  class="container-dati-registrazione">
+                        <div  class="container-dati-creazione_staff">
                             {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                             {{ Form::text('nome', '', ['class' => 'input', 'id' => 'nome']) }}
 
@@ -28,7 +28,7 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-registrazione">
+                        <div  class="container-dati-creazione_staff">
                             {{ Form::label('cognome', 'Cognome', ['class' => 'label-input']) }}
                             {{ Form::text('cognome', '', ['class' => 'input', 'id' => 'cognome']) }}
 
@@ -41,7 +41,7 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-registrazione">
+                        <div  class="container-dati-creazione_staff">
                             {{ Form::label('email', 'Email', ['class' => 'label-input']) }}
                             {{ Form::text('email', '', ['class' => 'input','id' => 'email']) }}
 
@@ -54,7 +54,7 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-registrazione">
+                        <div  class="container-dati-creazione_staff">
                             {{ Form::label('username', 'Username', ['class' => 'label-input']) }}
                             {{ Form::text('username', '', ['class' => 'input','id' => 'username']) }}
 
@@ -67,7 +67,7 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-registrazione">
+                        <div  class="container-dati-creazione_staff">
                             {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
                             {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
 
@@ -80,14 +80,14 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-registrazione">
+                        <div  class="container-dati-creazione_staff">
                             {{ Form::label('password-confirm', 'Conferma password', ['class' => 'label-input']) }}
                             {{ Form::password('password_confirmation', ['class' => 'input', 'id' => 'password-confirm']) }}
                         </div>
                     </div>
 
                     <div>
-                        <div class="container-dati-registrazione ">
+                        <div class="container-dati-creazione_staff">
                             {{ Form::label('genere', 'Genere', ['class' => 'label-input']) }}
                             {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
 
@@ -98,7 +98,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-registrazione">
+                        <div class="container-dati-creazione_staff">
                             {{ Form::label('eta', 'Età', ['class' => 'label-input']) }}
                             {{ Form::text('eta', '', ['class' => 'input', 'id' => 'eta']) }}
 
@@ -111,7 +111,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-registrazione">
+                        <div class="container-dati-creazione_staff">
                             {{ Form::label('telefono', 'Telefono', ['class' => 'label-input']) }}
                             {{ Form::text('telefono', '', ['class' => 'input', 'id' => 'telefono']) }}
                         </div>
@@ -123,7 +123,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-registrazione">
+                        <div class="container-dati-creazione_staff">
                             {{ Form::label('via', 'Via', ['class' => 'label-input']) }}
                             {{ Form::text('via', '', ['class' => 'input', 'id' => 'via']) }}
 
@@ -135,7 +135,7 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <div class="container-dati-registrazione">
+                        <div class="container-dati-creazione_staff">
                             {{ Form::label('numero_civico', 'Numero Civico', ['class' => 'label-input']) }}
                             {{ Form::text('numero_civico', '', ['class' => 'input', 'id' => 'numero_civico']) }}
 
@@ -148,7 +148,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-registrazione">
+                        <div class="container-dati-creazione_staff">
                             {{ Form::label('citta', 'Città', ['class' => 'label-input']) }}
                             {{ Form::text('citta', '', ['class' => 'input', 'id' => 'citta']) }}
 
@@ -163,8 +163,35 @@
                     </div>
                 </div>
 
-                <div class="container-autenticazione_button">
-                    {{ Form::submit('Avanza', ['class' => 'submit-button']) }}
+                <div>
+                    <div class="container-dati-creazione_staff ">
+                        {{ Form::label('gestionePacchetti', 'Gestione pacchetti', ['class' => 'label-input']) }}
+                        {{ Form::select('gestionePacchetti', ['No', 'Sì'], null, ['class' => 'input', 'id' => 'gestione_pacchetti']) }}
+                    </div>
+                </div>
+
+
+                <div class="container-check-boxes-aziende">
+
+                        <div class="container-dati-creazione_staff ">
+                            {{ Form::label('', 'Gestione aziende', ['class' => 'label-input']) }}
+                        </div>
+
+
+                </div>
+
+                <div>
+
+                    <label>
+                        {{ Form::checkbox('aziende', 'Mediaworld', false, ['class' => 'input', 'id' => 'Mediaworld']) }}
+                        <span class="label-text">Mediaworld</span>
+                    </label>
+
+
+                </div>
+
+                <div class="container-creazione_staff_button">
+                    {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
                 </div>
 
 

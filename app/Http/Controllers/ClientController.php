@@ -81,7 +81,7 @@ class ClientController extends Controller
         }
 
         // determina qual'è l'user che ha fatto partire la richiesta
-        $user = User::where('id', Auth::id() )->first();
+        $user = Auth::user();
 
         /**
          * viene ritornata la vista coupon con 5 parametri.
