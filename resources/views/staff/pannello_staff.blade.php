@@ -30,7 +30,7 @@
 
                     <h4><a href="{{ route('creazione offerta') }}">+ Creazione offerta</a></h4>
                     <h4><a href="{{ route('modifica offerta') }}">+ Modifica offerta</a></h4>
-                    <h4><a href="#">+ Elimina offerta</a></h4>
+                    <h4><a href="{{ route('eliminazione offerta') }}">+ Elimina offerta</a></h4>
                 </div>
             </div>
 
@@ -43,7 +43,7 @@
 
                     <h4><a href="{{ route('creazione offerta') }}">+ Creazione offerta</a></h4>
                     <h4><a href="{{ route('modifica offerta') }}">+ Modifica offerta</a></h4>
-                    <h4><a href="#">+ Elimina offerta</a></h4>
+                    <h4><a href="{{ route('eliminazione offerta') }}">+ Elimina offerta</a></h4>
                 </div>
             </div>
 

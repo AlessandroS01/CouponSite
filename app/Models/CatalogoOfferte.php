@@ -19,7 +19,8 @@ class CatalogoOfferte extends Model {
      */
     public function getAll() {
 
-        $offerte = Offerta::orderBy('percentuale_sconto', 'desc')->get();
+        $offerte = Offerta::orderBy('percentuale_sconto', 'desc')->get()
+                ->where('flagAttivo', '=', '1');
 
         $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
@@ -31,7 +32,10 @@ class CatalogoOfferte extends Model {
      * @return i primi 3 elementi della relazione Offerta
      */
     public function getPrimiTreElementi() {
-        return Offerta::take(3)->get();
+        $offerte = Offerta::where('flagAttivo', '=', '1')
+            ->take(3)
+            ->get();
+        return $offerte;
     }
 
     /**
@@ -39,7 +43,11 @@ class CatalogoOfferte extends Model {
      * che hanno scadenza imminente
      */
     public function getElementiDataScadenza() {
-        return Offerta::orderBy('data_scadenza')->take(3)->get();
+        return Offerta::orderBy('data_scadenza')
+            ->where('flagAttivo', '=', '1')
+            ->take(3)
+            ->get();
+
     }
 
     /**
@@ -47,7 +55,8 @@ class CatalogoOfferte extends Model {
      * @return ritorna l'offerta che ha come codice quello passato da parametro
      */
     public function getOffertaByID($offertaId){
-        return Offerta::where('codice',$offertaId)->first();
+        return Offerta::where('codice',$offertaId)->first()
+            ->where('flagAttivo', '=', '1');
     }
 
     /**
@@ -57,6 +66,7 @@ class CatalogoOfferte extends Model {
     public function getOfferteByAzienda($partita_iva){
 
         $offerte = Offerta::where('azienda', $partita_iva)
+            ->where('flagAttivo', '=', '1')
             ->orderBy('percentuale_sconto', 'desc')
             ->get();
 
@@ -72,6 +82,7 @@ class CatalogoOfferte extends Model {
         // crea una nuova collezione di dati
         $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
             ->where('azienda.nome', 'like', '%'.$aziendaInput.'%')
+            ->where('flagAttivo', '=', '1')
             ->select('offerta.*')
             ->orderBy('offerta.percentuale_sconto', 'desc')
             ->get();
@@ -96,6 +107,7 @@ class CatalogoOfferte extends Model {
         $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
                     ->where('azienda.nome', 'like', '%'.$aziendaInput.'%')
                     ->where('offerta.oggetto_offerta', 'like', '%'.$offertaInput.'%')
+                    ->where('flagAttivo', '=', '1')
                     ->select('offerta.*')
                     ->orderBy('offerta.percentuale_sconto', 'desc')
                     ->get();
@@ -143,6 +155,7 @@ class CatalogoOfferte extends Model {
 
         $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
             ->where('offerta.oggetto_offerta', 'like', '%'.$offertaInput.'%')
+            ->where('flagAttivo', '=', '1')
             ->select('offerta.*')
             ->orderBy('offerta.percentuale_sconto', 'desc')
             ->get();

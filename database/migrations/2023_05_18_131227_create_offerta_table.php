@@ -25,6 +25,7 @@ return new class extends Migration
             $table->integer('staff');
             $table->string('categoria', 50);
             $table->text('descrizione');
+            $table->boolean('flagAttivo');
 
 
             $table->foreign('azienda')

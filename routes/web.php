@@ -139,6 +139,14 @@ Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModifi
     ->name('modifica offerta')
     ->middleware(['auth', 'can:isStaff']);
 
+Route::get('/eliminazione/offerta', [StaffController::class, 'showEliminaOfferta'])
+    ->name('eliminazione offerta')
+    ->middleware(['auth', 'can:isStaff']);
+
+Route::post('/eliminazione/offerta', [StaffController::class, 'disattivaOfferta'])
+    ->name('eliminazione offerta')
+    ->middleware(['auth', 'can:isStaff']);
+
 Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
     ->middleware(['auth', 'can:isAdmin']);

@@ -119,4 +119,22 @@ class StaffController extends Controller {
         return redirect('/');
     }
 
+    public function showEliminaOfferta()
+    {
+        $offerte = $this->gestioneStaff->getOfferteByStaff();
+        $oggettoOfferte = $this->gestioneStaff->getNomeOfferteByStaff();
+        $aziende = $this->gestioneAziende->getAllNoPaginate();
+
+        return view('staff.gestione_offerte.eliminazione_offerta')
+            ->with('offerte', $offerte)
+            ->with('oggetto_offerte', $oggettoOfferte)
+            ->with('aziende', $aziende);
+
+    }
+
+    public function disattivaOfferta(Request $request)
+    {
+        $this->gestioneStaff->eliminaOfferta($request);
+        return redirect('/');
+    }
 }
