@@ -66,21 +66,25 @@
 
 
 /* Gestione admin */
-.container-pannello_ad{
+.container-pannello_ad {
     display: flex;
     justify-content: center;
-    width: 1000px;
-    margin: 30px auto auto;
-
+    width: 800px;
+    margin: auto auto;
     border: solid 5px var(--main-color);
     border-radius: 10px;
-    padding: 30px 5px;
+    padding: 10px 5px;
 }
-.container-pannello_admin{
-    width: 100%;
+
+.container-pannello_ad .grid-item {
+    padding: 20px;
+}
+
+.container-pannello_ad {
     display: grid;
-    grid-template-columns: 300px 300px 300px;
-    justify-content: space-evenly;
+    grid-template-rows: repeat(2, 1fr);
+    grid-template-columns: repeat(2, 1fr);
+    justify-items: center;
 }
 
 .container-pannello_admin h2 {
