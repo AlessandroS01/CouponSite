@@ -43,7 +43,14 @@ class AdminController extends Controller {
     public function showAggiuntaAzienda() {
 
         return view('admin.gestione_aziende.creazione_azienda');
+
     }
+
+    public function showAggiuntaFAQ() {
+
+        return view('admin.gestione_faq.creazione_faq');
+    }
+
 
     public function storeNewStaff(Request $request) {
 
