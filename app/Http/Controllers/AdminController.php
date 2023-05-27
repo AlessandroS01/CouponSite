@@ -40,6 +40,18 @@ class AdminController extends Controller {
                 ->with('aziende', $aziende);
     }
 
+    public function showAggiuntaAzienda() {
+
+        return view('admin.gestione_aziende.creazione_azienda');
+
+    }
+
+    public function showAggiuntaFAQ() {
+
+        return view('admin.gestione_faq.creazione_faq');
+    }
+
+
     public function storeNewStaff(Request $request) {
 
         // Prima verifica tutte le varie regole di validazione
@@ -59,6 +71,29 @@ class AdminController extends Controller {
 
 
         $this->gestioneAdmin->createStaff($request);
+
+
+
+        return redirect('/');
+    }
+
+    public function storeNewCompany(Request $request) {
+
+
+        // Prima verifica tutte le varie regole di validazione
+        $request->validate([
+            'partita_iva' => ['required', 'string', 'min:8', 'max:50', 'unique:partita_iva'],
+            'nome' => ['required', 'string', 'max:50'],
+            'località' => ['required', 'string', 'max:50'],
+            'tipologia' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'descrizione' => ['required', 'string', 'max:255'],
+//            'logo' => ['', ''],
+            'ragione_sociale' => ['required', 'string', 'max:50'],
+        ]);
+
+        $this->gestioneAdmin->createAzienda($request);
 
 
 
