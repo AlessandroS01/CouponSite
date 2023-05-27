@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\CatalogoAziende;
 use App\Models\CatalogoOfferte;
+use App\Models\GestioneFaq;
 use App\Models\Resources\Faq;
 use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
@@ -17,9 +18,12 @@ class PublicController extends Controller
     protected $catalogoAziende;
     protected $catalogoOfferte;
 
+    protected $faqs;
+
     public function __construct(){
         $this->catalogoAziende = new CatalogoAziende;
         $this->catalogoOfferte = new CatalogoOfferte;
+        $this->faqs = new GestioneFaq;
     }
 
 
@@ -138,7 +142,7 @@ class PublicController extends Controller
      */
     public function showFaq() {
         // passa alla vista l'insieme di tutte le faq
-        return view('faqs', [ 'faqs' => Faq::all()] );
+        return view('faqs', [ 'faqs' => $this->faqs->getFaqs()] );
     }
 
 

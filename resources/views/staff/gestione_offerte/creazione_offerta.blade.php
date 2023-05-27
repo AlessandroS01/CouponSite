@@ -16,7 +16,8 @@
 
                 <div>
                     {{ Form::open(array('route' => 'creazione offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
-
+                    @csrf
+                    {{ Form::hidden('flagAttivo', 1, ['id' => 'hidden_param']) }}
                     <div  class="container-dati-offerta">
                         {{ Form::label('oggetto_offerta', 'Oggetto offerta', ['class' => 'label-input']) }}
                         {{ Form::text('oggetto_offerta', '', ['class' => 'input', 'id' => 'oggetto_offerta']) }}

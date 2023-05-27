@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\CatalogoAziende;
 use App\Models\GestioneAdmin;
 use App\Models\Resources\Product;
 use Illuminate\Validation\Rules;
@@ -18,10 +19,13 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller {
 
     protected $gestioneAdmin;
+    protected $catalogoAziende;
 
     public function __construct()
     {
         $this->gestioneAdmin = New GestioneAdmin();
+
+        $this->catalogoAziende = New CatalogoAziende();
     }
 
     public function showPannelloAdmin() {
@@ -30,11 +34,25 @@ class AdminController extends Controller {
 
     public function showAggiuntaStaff() {
 
-        return view('admin.gestione_staff.aggiunta_staff');
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+        return view('admin.gestione_staff.aggiunta_staff')
+                ->with('aziende', $aziende);
     }
 
-    public function storeNewStaff(Request $request) {
+    public function showAggiuntaAzienda() {
 
+        return view('admin.gestione_aziende.creazione_azienda');
+
+    }
+
+    public function showAggiuntaFAQ() {
+
+        return view('admin.gestione_faq.creazione_faq');
+    }
+
+
+    public function storeNewStaff(Request $request) {
 
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
@@ -51,27 +69,51 @@ class AdminController extends Controller {
             'citta' => ['required', 'string', 'max:50'],
         ]);
 
-        // crea la nuova tupla da aggiungere al database
-        $user = User::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'nome' => $request->nome,
-            'cognome' => $request->cognome,
-            'genere'=>$request->genere,
-            'eta'=>$request->eta,
-            'email' => $request->email,
-            'telefono' => $request->telefono,
-            'via' => $request->via,
-            'numero_civico' => $request->numero_civico,
-            'citta' => $request->citta,
-            'livello' => '2',
-        ]);
 
-        // definisce l'evento della creazione di un nuovo utente registrato
-        event(new Registered($user));
+        $this->gestioneAdmin->createStaff($request);
+
+
 
         return redirect('/');
     }
 
+    public function storeNewCompany(Request $request) {
+
+
+        // Prima verifica tutte le varie regole di validazione
+        $request->validate([
+            'partita_iva' => ['required', 'string', 'min:8', 'max:50', 'unique:partita_iva'],
+            'nome' => ['required', 'string', 'max:50'],
+            'località' => ['required', 'string', 'max:50'],
+            'tipologia' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'descrizione' => ['required', 'string', 'max:255'],
+//            'logo' => ['', ''],
+            'ragione_sociale' => ['required', 'string', 'max:50'],
+        ]);
+
+        $this->gestioneAdmin->createAzienda($request);
+
+
+
+        return redirect('/');
+    }
+
+
+
+    public function showModificaStaff() {
+        $usernameUtentiStaff = $this->gestioneAdmin->getUsernameUtentiStaff();
+
+        $staff = $this->gestioneAdmin->getUtentiStaff();
+
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+
+        return view('admin.gestione_staff.modifica_staff')
+                ->with('staff', $staff)
+                ->with('usernameUtentiStaff', $usernameUtentiStaff)
+                ->with('aziende', $aziende);
+    }
 
 }

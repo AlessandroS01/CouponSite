@@ -6,7 +6,9 @@
 
     <div class="container-barra_ricerca">
 
-        <div class="barra-ricerca">
+        <div class="
+
+        barra-ricerca">
 
             {{ Form::open(['route' => 'catalogo offerte ricerca', 'method'=>'get', 'id' => 'ricerca_offerte', 'class' => 'form']) }}
 
