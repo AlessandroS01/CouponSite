@@ -49,5 +49,23 @@ class GestioneAdmin extends Model {
         event(new Registered($user));
     }
 
+    public function createAzienda(Request $request){
+
+        // crea la nuova tupla da aggiungere al database
+        $azienda = Azienda::create([
+            'nome' => $request->nome,
+            'email' => $request->email,
+            'località' => $request->località,
+            'tipologia' => $request->tipologia,
+            'telefono' => $request->telefono,
+            'descrizione' => $request->descrizione,
+            'ragione_sociale' => $request->ragione_sociale,
+            'logo' => $request->logo
+        ]);
+
+        // definisce l'evento della creazione di un nuovo utente registrato
+        event(new Registered($azienda));
+    }
+
 
 }
