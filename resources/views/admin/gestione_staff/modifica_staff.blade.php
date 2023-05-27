@@ -32,9 +32,6 @@
                             {{ Form::text('nome', '', ['class' => 'input', 'id' => 'nome']) }}
 
                         </div>
-
-
-
                         @if ($errors->first('nome'))
                             <ul class="errors">
                                 @foreach ($errors->get('nome') as $message)
@@ -84,7 +81,7 @@
 
                         <div class="container-dati_form">
                             {{ Form::label('genere', 'Genere', ['class' => 'label-input']) }}
-                            {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
+                            {{ Form::select('genere', ['-'=> '-', 'M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
 
                         </div>
                         @if ($errors->first('genere'))
@@ -225,19 +222,48 @@
             // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
             $('#staffUsername').change(function () {
 
-                var utenti = ({!! $staff !!});
-                console.log(utenti);
+                var utentiStaff = {!! $staff !!};
 
                 // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
                 if ( $(this).val() !== '-') {
 
                     // prende l'offerta che si trova alla posizione i-esima
-                    var usernameStaffSelezionato = utenti[ $(this).val() ];
+                    var staffSelezionato = utentiStaff[ $(this).val() ];
 
-                    console.log(usernameStaffSelezionato);
+                    // popola tutti i campi della form
+                    $('#nome').val(staffSelezionato.nome);
+                    $('#cognome').val(staffSelezionato.cognome);
+                    $('#email').val(staffSelezionato.email);
+                    $('#username').val(staffSelezionato.username);
+                    $('#genere').val(staffSelezionato.genere);
+                    $('#eta').val(staffSelezionato.eta);
+                    $('#telefono').val(staffSelezionato.telefono);
+                    $('#via').val(staffSelezionato.via);
+                    $('#numero_civico').val(staffSelezionato.numero_civico);
+                    $('#citta').val(staffSelezionato.citta);
+                    if(staffSelezionato.flagPacchetti == 0){
+                        $('#gestione_pacchetti').val(0).change();
+                    }
+                    else{
+                        $('#gestione_pacchetti').val(1).change();
+                    }
+
+
+
 
                     // se invece si seleziona '-' tutti i campi vengono resettati
                 }else{
+                    $('#nome').val("");
+                    $('#cognome').val("");
+                    $('#email').val("");
+                    $('#username').val("");
+                    $('#genere').val("");
+                    $('#eta').val("");
+                    $('#telefono').val("");
+                    $('#via').val("");
+                    $('#numero_civico').val("");
+                    $('#citta').val("");
+                    $('#gestione_pacchetti').val(0).change();
                 }
 
             });

@@ -109,6 +109,7 @@ class AdminController extends Controller {
 
         $aziende = $this->catalogoAziende->getAllNoPaginate();
 
+
         return view('admin.gestione_staff.modifica_staff')
                 ->with('staff', $staff)
                 ->with('usernameUtentiStaff', $usernameUtentiStaff)
