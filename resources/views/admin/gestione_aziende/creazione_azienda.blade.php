@@ -135,16 +135,17 @@
                     {{ Form::label('descrizione', 'Descrizione', ['class' => 'label-input']) }}
                     {{ Form::textarea('descrizione', '', ['class' => 'input_descrizione']) }}
 
-                </div>
-                @if ($errors->first('descrizione'))
-                    <ul class="errors">
-                        @foreach ($errors->get('descrizione') as $message)
-                            <li>{{ $message }}</li>
-                        @endforeach
-                    </ul>
-                @endif
-            </div>
 
+                    @if ($errors->first('descrizione'))
+                        <ul class="errors">
+                            @foreach ($errors->get('descrizione') as $message)
+                                <li>{{ $message }}</li>
+                            @endforeach
+                        </ul>
+                    @endif
+
+                </div>
+            </div>
 
             <div class="container-form_button">
                 {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
