@@ -66,4 +66,18 @@ class AdminController extends Controller {
     }
 
 
+
+    public function showModificaStaff() {
+        $usernameUtentiStaff = $this->gestioneAdmin->getUsernameUtentiStaff();
+
+        $staff = $this->gestioneAdmin->getUtentiStaff();
+
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+        return view('admin.gestione_staff.modifica_staff')
+                ->with('staff', $staff)
+                ->with('usernameUtentiStaff', $usernameUtentiStaff)
+                ->with('aziende', $aziende);
+    }
+
 }

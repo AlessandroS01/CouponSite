@@ -126,6 +126,14 @@ Route::post('/aggiunta/staff', [AdminController::class, 'storeNewStaff'])
     ->name('aggiunta staff')
     ->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/modifica/staff', [AdminController::class, 'showModificaStaff'])
+    ->name('modifica staff')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/modifica/staff', [AdminController::class, 'storeModifiedStaff'])
+    ->name('modifica staff')
+    ->middleware(['auth', 'can:isAdmin']);
+
 
 
 // aggiunge le rotte che si trovano all'interno di auth.php

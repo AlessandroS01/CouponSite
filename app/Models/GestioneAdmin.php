@@ -22,9 +22,16 @@ use Illuminate\Support\Str;
 class GestioneAdmin extends Model {
 
 
-    public function getUsernames(){
+    public function getUtentiStaff(){
 
-        return User::query()->pluck('username')->toArray();
+        $utenti = User::where('livello', 2)->get();
+        return $utenti;
+    }
+
+    public function getUsernameUtentiStaff(){
+
+        $utenti = User::where('livello', 2)->pluck('username')->toArray();
+        return $utenti;
     }
 
     public function createStaff(Request $request){
