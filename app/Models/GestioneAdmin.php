@@ -29,24 +29,85 @@ class GestioneAdmin extends Model {
 
     public function createStaff(Request $request){
 
-        // crea la nuova tupla da aggiungere al database
-        $user = User::create([
-            'username' => $request->username,
-            'password' => Hash::make($request->password),
-            'nome' => $request->nome,
-            'cognome' => $request->cognome,
-            'genere'=>$request->genere,
-            'eta'=>$request->eta,
-            'email' => $request->email,
-            'telefono' => $request->telefono,
-            'via' => $request->via,
-            'numero_civico' => $request->numero_civico,
-            'citta' => $request->citta,
-            'livello' => '2',
-        ]);
+        switch ($request->gestionePacchetti){
+            case '0': {
+                // crea la nuova tupla da aggiungere al database
+                $user = User::create([
+                    'username' => $request->username,
+                    'password' => Hash::make($request->password),
+                    'nome' => $request->nome,
+                    'cognome' => $request->cognome,
+                    'genere'=>$request->genere,
+                    'eta'=>$request->eta,
+                    'email' => $request->email,
+                    'telefono' => $request->telefono,
+                    'via' => $request->via,
+                    'numero_civico' => $request->numero_civico,
+                    'citta' => $request->citta,
+                    'livello' => '2',
+                ]);
 
-        // definisce l'evento della creazione di un nuovo utente registrato
-        event(new Registered($user));
+                // definisce l'evento della creazione di un nuovo utente registrato
+                event(new Registered($user));
+
+                $aziende = $request->aziende;
+
+                foreach ($aziende as $azienda){
+                    $nuovaGestione = Gestione::create([
+                            'staff' => $user->id,
+                            'azienda' => $azienda
+                        ]);
+
+                    event(new Registered($nuovaGestione));
+                }
+
+                break;
+            }
+
+            case '1': {
+                $vecchioUserPacchetti = User::where('flagPacchetti', true)->first();
+
+                $vecchioUserPacchetti->flagPacchetti = false;
+
+                $vecchioUserPacchetti->save();
+
+                // crea la nuova tupla da aggiungere al database
+                $user = User::create([
+                    'username' => $request->username,
+                    'password' => Hash::make($request->password),
+                    'nome' => $request->nome,
+                    'cognome' => $request->cognome,
+                    'genere'=>$request->genere,
+                    'eta'=>$request->eta,
+                    'email' => $request->email,
+                    'telefono' => $request->telefono,
+                    'via' => $request->via,
+                    'numero_civico' => $request->numero_civico,
+                    'citta' => $request->citta,
+                    'livello' => '2',
+                    'flagPacchetti' => true
+                ]);
+
+                // definisce l'evento della creazione di un nuovo utente registrato
+                event(new Registered($user));
+
+                $aziende = $request->aziende;
+
+
+                foreach ($aziende as $azienda){
+                    $nuovaGestione = Gestione::create([
+                        'staff' => $user->id,
+                        'azienda' => $azienda
+                    ]);
+
+                    event(new Registered($nuovaGestione));
+
+                }
+
+                break;
+            }
+
+        }
     }
 
     public function createAzienda(Request $request){

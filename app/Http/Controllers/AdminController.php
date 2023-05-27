@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Admin;
+use App\Models\CatalogoAziende;
 use App\Models\GestioneAdmin;
 use App\Models\Resources\Product;
 use Illuminate\Validation\Rules;
@@ -18,10 +19,13 @@ use Illuminate\Support\Facades\Log;
 class AdminController extends Controller {
 
     protected $gestioneAdmin;
+    protected $catalogoAziende;
 
     public function __construct()
     {
         $this->gestioneAdmin = New GestioneAdmin();
+
+        $this->catalogoAziende = New CatalogoAziende();
     }
 
     public function showPannelloAdmin() {
@@ -30,7 +34,10 @@ class AdminController extends Controller {
 
     public function showAggiuntaStaff() {
 
-        return view('admin.gestione_staff.aggiunta_staff');
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+        return view('admin.gestione_staff.aggiunta_staff')
+                ->with('aziende', $aziende);
     }
 
     public function showAggiuntaAzienda() {
@@ -39,7 +46,6 @@ class AdminController extends Controller {
     }
 
     public function storeNewStaff(Request $request) {
-
 
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
@@ -55,6 +61,7 @@ class AdminController extends Controller {
             'numero_civico' => ['required', 'int'],
             'citta' => ['required', 'string', 'max:50'],
         ]);
+
 
         $this->gestioneAdmin->createStaff($request);
 
