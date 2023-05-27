@@ -12,7 +12,9 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Contracts\Auth\Authenticatable;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rules;
 
 class UserController extends Controller {
 
@@ -33,156 +35,96 @@ function showProfilo(){
 
      $user= Auth::user();
      $coupons = $this->ProfileUser->getCoupons($user->id);
-     Log::info($coupons);
-     return view('profilo')
+     return view('updateProfile.profilo_visualizza_dati')
         ->with('user', $user)
         ->with('coupons', $coupons);
+
+}
+
+function ShowModificaDati(){
+
+    $user= Auth::user();
+    return view('updateProfile.profilo_modifica_dati')
+        ->with('user', $user);
+
+}
+
+function ShowModificaPassword(){
+
+    $user= Auth::user();
+    return view('updateProfile.profilo_modifica_password')
+        ->with('user', $user);
 
 }
 
 
     public function updateData(Request $request)
     {
-        $username = $request->input('username');
-        $nome = $request->input('nome');
-        $cognome = $request->input('cognome');
-        $email = $request->input('email');
-        $telefono = $request->input('telefono');
-        $eta = $request->input('eta');
-        $genere = $request->input('genere');
-        $citta = $request->input('citta');
-        $via = $request->input('via');
-        $ncivico = $request->input('numero_civico');
+        $user = User::find(Auth::id());
 
+        $request->validate([
+            'nome' => ['required', 'string', 'max:50'],
+            'cognome' => ['required', 'string', 'max:50'],
+            'genere' => ['required', 'string', 'max:1'],
+            'eta' => ['required', 'int', 'min:1', 'max:99'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'via' => ['required', 'string', 'max:100'],
+            'numero_civico' => ['required', 'int'],
+            'citta' => ['required', 'string', 'max:50'],
+        ]);
 
+        $user->nome = $request->nome;
+        $user->cognome = $request->cognome;
+        $user->genere = $request->genere;
+        $user->eta = $request->eta;
+        $user->email = $request->email;
+        $user->telefono = $request->telefono;
+        $user->via = $request->via;
+        $user->numero_civico = $request->numero_civico;
+        $user->citta = $request->citta;
 
-        if (!empty($username)) {
+        $user->save();
+
+        return redirect()->route('profilo')
+            ->with('message', "Dati modificati con successo");
+
+    }
+
+    public function updatePassword(Request $request)
+    {
+        $user = User::find(Auth::id());
+        Log::info("entro qua ".Hash::make($request->oldpassword));
+        Log::info("password ".$user->password);
+        if(Hash::check($request->oldpassword, $user->password)){
+            Log::info("confronto andato a buon fine");
             $request->validate([
-                'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],
+                'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()]
             ]);
 
+            $user->password = Hash::make($request->password);
 
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->username = $username;
             $user->save();
 
-            // Reindirizza all'azione successiva o alla pagina di conferma
             return redirect()->route('profilo')
-                ->with('message', 'Username aggiornato con successo');
-        } else if (!empty($nome)){
+                ->with('message', "Password modificata con successo");
+        }else{
+
             $request->validate([
-                'nome' => ['required', 'string', 'max:50'],
+                'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()]
             ]);
 
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->nome = $nome;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Nome aggiornato con successo');
-
-        } else if (!empty($cognome)){
-            $request->validate([
-                'cognome' => ['required', 'string', 'max:50'],
-            ]);
-
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->cognome = $cognome;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Cognome aggiornato con successo');
-
-        }else if (!empty($email)){
-            $request->validate([
-                'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
-            ]);
-
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->email = $email;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Email aggiornato con successo');
-
-        }else if (!empty($telefono)){
-            $request->validate([
-                'telefono' => ['required', 'numeric', 'digits_between:10,20'],
-            ]);
-
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->telefono = $telefono;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Telefono aggiornato con successo');
-
-        }else if (!empty($eta)){
-            $request->validate([
-                'eta' => ['required', 'int', 'min:1', 'max:99'],
-            ]);
-
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->eta = $eta;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Eta aggiornata con successo');
-
-        }else if (!empty($genere)){
-            $request->validate([
-                'genere' => ['required', 'string', 'max:1'],
-            ]);
-
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->genere = $genere;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Genere aggiornato con successo');
-
-        }else if (!empty($citta) && !empty($via) && !empty($ncivico)){
-            $request->validate([
-                'via' => ['required', 'string', 'max:100'],
-                'numero_civico' => ['required', 'int'],
-                'citta' => ['required', 'string', 'max:50'],
-            ]);
-
-
-            // Validazione passata, esegui l'aggiornamento dello username nella tabella users
-            $user = User::find(auth()->user()->id);
-            $user->citta = $citta;
-            $user->via = $via;
-            $user->numero_civico = $ncivico;
-            $user->save();
-
-            // Reindirizza all'azione successiva o alla pagina di conferma
-            return redirect()->route('profilo')
-                ->with('message', 'Indirizzo aggiornato con successo');
-
+            return redirect()->route('profilo-modifica-password')
+                ->with('message', "vecchia password incorretta");
         }
 
-        return redirect()->route('profilo');
+
     }
+
+
+
+
+
 
 
 }

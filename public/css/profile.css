@@ -1,16 +1,39 @@
+.container-generale-profile {
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0px #00000085;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.container-generale-password{
+    max-width: 400px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin: auto;
+    border-radius: 20px;
+    box-shadow: 0 0 10px 0px #00000085;
+    margin-top: 20px;
+    margin-bottom: 20px;
+    padding: 10px;
+}
 .container-profile{
     max-width: 800px;
     width: 100%;
-    border-radius: 20px;
-    box-shadow: 0 0 10px 0px #00000085;
     display: grid;
     grid-template-columns: 50% 50%;
     justify-content: center;
     margin: auto;
-    margin-top: 20px;
-    margin-bottom: 50px;
-}
 
+}
+/*logo pagina profilo */
 .container-logouser {
     display: flex;
     justify-content: center;
@@ -19,18 +42,17 @@
     height: 100px;
     margin: auto;
     margin-top: 20px;
+    margin-bottom: 20px;
 }
 .container-logouser i {
     font-size: 70px;
 }
+/*fine logo pagina profilo*/
 
 .container-profile .data {
     padding: 20px;
 }
 
-.container-profile i{
-    cursor: pointer;
-}
 
 .container-profile .data p {
     padding: 10px;
@@ -38,9 +60,6 @@
     box-shadow: 0 0 10px 0px #00000085;
 }
 
-.container-profile .data p i {
-float: right;
-}
 
 .container-coupon-riscattati{
     max-width:800px;
@@ -85,9 +104,7 @@ table tr:nth-child(1){
     color: white;
 }
 
-.form-modifica-dati{
-    display: none;
-}
+
 .form-modifica-dati .input{
     padding: 10px;
     border-radius: 20px;
@@ -105,34 +122,54 @@ table tr:nth-child(1){
     box-sizing: border-box;
     box-shadow: 0 0 10px 0px #00000085;
     display: inline;
-    width: 78%;
 }
 
 
 .form-modifica-dati .submit-button{
-    position: absolute;
-    right: 0;
+    display: flex;
+    justify-content: center;
+    margin: auto;
     padding: 10px;
+    width: 50%;
     background-color: var(--main-color);
     color: white;
     border: none;
     border-radius: 20px;
     cursor: pointer;
+    margin-bottom: 10px;
+    font-size: 15px;
 
 }
 
-.form-modifica-dati .submit-button-select{
+
+
+.container-generale-password form .submit-button{
+    margin-top: 20px;
+}
+/*bottoni per la modifica vista visualizza profilo  */
+.options-user{
+    max-width: 800px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin: auto;
+}
+
+.options-user a {
+    padding: 10px;
+    background-color: var(--main-color);
+    border-radius: 15px;
+    color: white;
     display: inline;
-    padding: 10px;
-    background-color: var(--main-color);
-    color: white;
+    width: 48%;
     border: none;
-    border-radius: 20px;
     cursor: pointer;
-    width: 20%;
+    margin: 0 2%;
+    text-decoration: none;
+    text-align: center;
 
 }
-
+/*fine bottoni per la modifica vista visualizza profilo */
 
 /*modifica indirizzo*/
 #citta-input{
@@ -146,11 +183,39 @@ table tr:nth-child(1){
 #via-input{
     margin-top: 10px;
 }
-#submit-btn-indirizzo{
-    bottom: 0;
-}
+
 /*fine modifica indirizzo*/
-.input-modifica-profilo{
-    position: relative;
+
+.container-generale-profile .back-button,
+.container-generale-password .back-button{
+    display: flex;
+    justify-content: center;
+    margin: auto;
+    padding: 10px 0;
+    width: 50%;
+    background-color: var(--main-color);
+    color: white;
+    border: none;
+    border-radius: 20px;
+    cursor: pointer;
+    margin-bottom: 20px;
+    text-decoration: none;
+    font-size: 15px;
+
 }
 
+.message-modifica-password-fail{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: red;
+    font-weight: bold;
+}
+
+.message-modifica-password-success{
+    text-align: center;
+    margin-top: 5px;
+    margin-bottom: 0;
+    color: green;
+    font-weight: bold;
+}

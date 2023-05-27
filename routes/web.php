@@ -116,8 +116,18 @@ Route::post('/coupon', [ClientController::class, 'showCouponGenerato'])
 Route::get('/profilo', [UserController::class, 'showProfilo'])
         ->name('profilo');
 
-Route::post('/profilo', [UserController::class, 'updateData'])
-    ->name('profilo');
+Route::get('/profilo/modifica', [UserController::class, 'ShowModificaDati'])
+    ->name('profilo-modifica-dati');
+
+Route::post('/profilo/modifica', [UserController::class, 'updateData'])
+    ->name('profilo-modifica-dati');
+
+Route::get('/profilo/modifica/password', [UserController::class, 'ShowModificaPassword'])
+    ->name('profilo-modifica-password');
+
+Route::post('/profilo/modifica/password', [UserController::class, 'updatePassword'])
+    ->name('profilo-modifica-password');
+
 
 Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])
     ->name('pannello staff')
