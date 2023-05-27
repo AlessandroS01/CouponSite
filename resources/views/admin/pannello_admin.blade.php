@@ -11,7 +11,7 @@
     <div class="container-pannello_ad">
         <div class="container-gestione_aziende grid-item">
             <h2>Gestione Aziende</h2>
-            <h4><a href="#">+ Creazione azienda</a></h4>
+            <h4><a href="{{ route('aggiunta azienda') }}">+ Creazione azienda</a></h4>
             <h4><a href="#">+ Modifica azienda</a></h4>
             <h4><a href="#">+ Elimina azienda</a></h4>
         </div>
@@ -35,6 +35,7 @@
             <h4><a href="#">+ Modifica FAQ</a></h4>
             <h4><a href="#">+ Elimina FAQ</a></h4>
         </div>
+
     </div>
 
 
