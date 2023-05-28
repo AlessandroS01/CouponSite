@@ -13,7 +13,7 @@
         <div class="form">
             <div class="container-form-gestione">
                 <div>
-                    {{ Form::open(array('route' => 'aggiunta azienda', 'class' => 'contact-form', 'method' => 'POST', 'enctype' => 'multipart/form-data')) }}
+                    {{ Form::open(array('route' => 'aggiunta azienda', 'class' => 'contact-form', 'method' => 'POST', 'files' => true, 'enctype' => 'multipart/form-data')) }}
 
                     <div  class="container-dati_form">
                         {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
@@ -29,13 +29,13 @@
 
 
                     <div class="container-dati_form">
-                        {{ Form::label('località', 'Località', ['class' => 'label-input']) }}
-                        {{ Form::text('località', '', ['class' => 'input']) }}
+                        {{ Form::label('localita', 'Località', ['class' => 'label-input']) }}
+                        {{ Form::text('localita', '', ['class' => 'input']) }}
 
                     </div>
-                    @if ($errors->first('località'))
+                    @if ($errors->first('localita'))
                         <ul class="errors">
-                            @foreach ($errors->get('località') as $message)
+                            @foreach ($errors->get('localita') as $message)
                                 <li>{{ $message }}</li>
                             @endforeach
                         </ul>
@@ -44,7 +44,7 @@
 
                     <div  class="container-dati_form">
                         {{ Form::label('partita_iva', 'Partita Iva', ['class' => 'label-input']) }}
-                        {{ Form::text('partita_iva', '', ['class' => 'input']) }}
+                        {{ Form::text('partita_iva','', ['class' => 'input']) }}
 
                     </div>
                     @if ($errors->first('partita_iva'))
@@ -99,13 +99,13 @@
 
 
                     <div class="container-dati_form">
-                        {{ Form::label('Tipologia', 'Tipologia', ['class' => 'label-input']) }}
-                        {{ Form::text('Tipologia', '', ['class' => 'input']) }}
+                        {{ Form::label('tipologia', 'Tipologia', ['class' => 'label-input']) }}
+                        {{ Form::text('tipologia', '', ['class' => 'input']) }}
 
                     </div>
-                    @if ($errors->first('Tipologia'))
+                    @if ($errors->first('tipologia'))
                         <ul class="errors">
-                            @foreach ($errors->get('Tipologia') as $message)
+                            @foreach ($errors->get('tipologia') as $message)
                                 <li>{{ $message }}</li>
                             @endforeach
                         </ul>
@@ -126,8 +126,6 @@
                     @endif
 
                 </div>
-
-
             </div>
 
             <div class="form_descrizione">

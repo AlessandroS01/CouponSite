@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Admin;
 use App\Models\CatalogoAziende;
 use App\Models\GestioneAdmin;
+use App\Models\Resources\Azienda;
 use App\Models\Resources\Product;
 use Illuminate\Validation\Rules;
 use App\Http\Requests\NewProductRequest;
@@ -77,42 +78,31 @@ class AdminController extends Controller {
         return redirect('/');
     }
 
-    public function storeNewCompany(Request $request) {
-
-
+    public function storeNewCompany(Request $request)
+    {
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
-            'partita_iva' => ['required', 'string', 'min:8', 'max:50', 'unique:partita_iva'],
+            'partita_iva' => ['required', 'string', 'min:8', 'max:50', 'unique:azienda'],
             'nome' => ['required', 'string', 'max:50'],
-            'località' => ['required', 'string', 'max:50'],
+            'localita' => ['required', 'string', 'max:50'],
             'tipologia' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:email'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:azienda'],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],
             'descrizione' => ['required', 'string', 'max:255'],
-            'logo' => ['required','image'], // Regola di validazione per l'immagine
+            'logo' => ['required', 'image'], // Regola di validazione per l'immagine
             'ragione_sociale' => ['required', 'string', 'max:50'],
         ]);
 
-        if ($request->hasFile('image')) {
-            $image = $request->file('image');
+        $imageName = null;
+
+        if ($request->hasFile('logo')) {
+            $image = $request->file('logo');
             $imageName = $image->getClientOriginalName();
-        } else {
-            $imageName = NULL;
+            $destinationPath = public_path('img');
+            $image->move($destinationPath, $imageName);
         }
 
-        $product = new Product;
-        $product->fill($request->validated());
-        $product->image = $imageName;
-        $product->save();
-
-        if (!is_null($imageName)) {
-            $destinationPath = public_path() . '/images/products';
-            $image->move($destinationPath, $imageName);
-        };
-
-        $this->gestioneAdmin->createAzienda($request);
-
-
+        $this->gestioneAdmin->createAzienda($request, $imageName);
 
         return redirect('/');
     }
