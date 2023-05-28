@@ -1,6 +1,6 @@
 @extends('layouts.public')
 
-@section('title', 'Aggiunta staff')
+@section('title', 'Modifica staff')
 
 @section('content')
 
@@ -9,13 +9,29 @@
             <h1> Modifica staff</h1>
         </div>
 
-        <div class="container-creazione_staff">
-            <div class="form-creazione_staff">
-                <div class="container-form-gestione-admin_staff">
-                    <div>
-                        {{ Form::open(array('route' => 'aggiunta staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+        @isset($staff)
+        <div class="container-form">
+            <div class="form">
 
-                        <div  class="container-dati-creazione_staff">
+                {{ Form::open(array('route' => 'modifica staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+
+                {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
+
+                <div>
+                    @isset($usernameUtentiStaff)
+                        <div  class="container-dati_form">
+                            {{ Form::label('staff', 'Staff', ['class' => 'label-input']) }}
+
+                            {{ Form::select('staff', [ '-' => '-'] + $usernameUtentiStaff, null, ['class' => 'input', 'id' => 'staffUsername']) }}
+                        </div>
+                    @endisset
+                </div>
+
+                <div class="container-form-gestione">
+                    <div>
+
+
+                        <div  class="container-dati_form">
                             {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                             {{ Form::text('nome', '', ['class' => 'input', 'id' => 'nome']) }}
 
@@ -28,7 +44,7 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-creazione_staff">
+                        <div  class="container-dati_form">
                             {{ Form::label('cognome', 'Cognome', ['class' => 'label-input']) }}
                             {{ Form::text('cognome', '', ['class' => 'input', 'id' => 'cognome']) }}
 
@@ -41,7 +57,7 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-creazione_staff">
+                        <div  class="container-dati_form">
                             {{ Form::label('email', 'Email', ['class' => 'label-input']) }}
                             {{ Form::text('email', '', ['class' => 'input','id' => 'email']) }}
 
@@ -54,9 +70,9 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-creazione_staff">
+                        <div  class="container-dati_form">
                             {{ Form::label('username', 'Username', ['class' => 'label-input']) }}
-                            {{ Form::text('username', '', ['class' => 'input','id' => 'username']) }}
+                            {{ Form::text('username', '', ['class' => 'input','id' => 'username', 'readonly' => 'readonly']) }}
 
                         </div>
                         @if ($errors->first('username'))
@@ -67,29 +83,9 @@
                             </ul>
                         @endif
 
-                        <div  class="container-dati-creazione_staff">
-                            {{ Form::label('password', 'Password', ['class' => 'label-input']) }}
-                            {{ Form::password('password', ['class' => 'input', 'id' => 'password']) }}
-
-                        </div>
-                        @if ($errors->first('password'))
-                            <ul class="errors">
-                                @foreach ($errors->get('password') as $message)
-                                    <li>{{ $message }}</li>
-                                @endforeach
-                            </ul>
-                        @endif
-
-                        <div  class="container-dati-creazione_staff">
-                            {{ Form::label('password-confirm', 'Conferma password', ['class' => 'label-input']) }}
-                            {{ Form::password('password_confirmation', ['class' => 'input', 'id' => 'password-confirm']) }}
-                        </div>
-                    </div>
-
-                    <div>
-                        <div class="container-dati-creazione_staff">
+                        <div class="container-dati_form">
                             {{ Form::label('genere', 'Genere', ['class' => 'label-input']) }}
-                            {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
+                            {{ Form::select('genere', ['-'=> '-', 'M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere']) }}
 
                         </div>
                         @if ($errors->first('genere'))
@@ -97,8 +93,12 @@
                                 <li>{{ $errors->first('genere') }}</li>
                             </ul>
                         @endif
+                    </div>
 
-                        <div class="container-dati-creazione_staff">
+                    <div>
+
+
+                        <div class="container-dati_form">
                             {{ Form::label('eta', 'Età', ['class' => 'label-input']) }}
                             {{ Form::text('eta', '', ['class' => 'input', 'id' => 'eta']) }}
 
@@ -111,7 +111,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-creazione_staff">
+                        <div class="container-dati_form">
                             {{ Form::label('telefono', 'Telefono', ['class' => 'label-input']) }}
                             {{ Form::text('telefono', '', ['class' => 'input', 'id' => 'telefono']) }}
                         </div>
@@ -123,7 +123,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-creazione_staff">
+                        <div class="container-dati_form">
                             {{ Form::label('via', 'Via', ['class' => 'label-input']) }}
                             {{ Form::text('via', '', ['class' => 'input', 'id' => 'via']) }}
 
@@ -135,7 +135,7 @@
                                 @endforeach
                             </ul>
                         @endif
-                        <div class="container-dati-creazione_staff">
+                        <div class="container-dati_form">
                             {{ Form::label('numero_civico', 'Numero Civico', ['class' => 'label-input']) }}
                             {{ Form::text('numero_civico', '', ['class' => 'input', 'id' => 'numero_civico']) }}
 
@@ -148,7 +148,7 @@
                             </ul>
                         @endif
 
-                        <div class="container-dati-creazione_staff">
+                        <div class="container-dati_form">
                             {{ Form::label('citta', 'Città', ['class' => 'label-input']) }}
                             {{ Form::text('citta', '', ['class' => 'input', 'id' => 'citta']) }}
 
@@ -164,13 +164,14 @@
                 </div>
 
                 <div>
-                    <div class="container-dati-creazione_staff">
+                    <div class="container-dati_form">
                         {{ Form::label('gestionePacchetti', 'Gestione pacchetti', ['class' => 'label-input']) }}
                         {{ Form::select('gestionePacchetti', ['No', 'Sì'], null, ['class' => 'input', 'id' => 'gestione_pacchetti']) }}
                     </div>
                 </div>
 
                 @isset($aziende)
+
                 <div class="container-check-boxes-aziende">
 
 
@@ -193,8 +194,8 @@
                 </div>
                 @endisset
 
-                <div class="container-creazione_staff_button">
-                    {{ Form::submit('Aggiungi staff', ['class' => 'submit-button']) }}
+                <div class="container-form_button">
+                    {{ Form::submit('Modifica staff', ['class' => 'submit-button']) }}
                 </div>
 
 
@@ -202,12 +203,14 @@
             </div>
 
         </div>
+        @endisset
+
 
 
     <script>
 
         $(document).ready(function() {
-            $('.container-check-boxes-aziende').show();
+
             // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
             $('#gestione_pacchetti').change(function () {
                 if ( $(this).val() == 0){
@@ -218,6 +221,57 @@
                     $('.container-check-boxes-aziende').hide();
                     $('input[name="aziende[]"]').prop('checked', true);
                 }
+            });
+
+            // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+            $('#staffUsername').change(function () {
+
+                var utentiStaff = {!! $staff !!};
+
+                // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
+                if ( $(this).val() !== '-') {
+
+                    // prende l'offerta che si trova alla posizione i-esima
+                    var staffSelezionato = utentiStaff[ $(this).val() ];
+
+                    // popola tutti i campi della form
+                    $('#staffId').val(staffSelezionato.id);
+                    $('#nome').val(staffSelezionato.nome);
+                    $('#cognome').val(staffSelezionato.cognome);
+                    $('#email').val(staffSelezionato.email);
+                    $('#username').val(staffSelezionato.username);
+                    $('#genere').val(staffSelezionato.genere);
+                    $('#eta').val(staffSelezionato.eta);
+                    $('#telefono').val(staffSelezionato.telefono);
+                    $('#via').val(staffSelezionato.via);
+                    $('#numero_civico').val(staffSelezionato.numero_civico);
+                    $('#citta').val(staffSelezionato.citta);
+                    if(staffSelezionato.flagPacchetti == 0){
+                        $('#gestione_pacchetti').val(0).change();
+                    }
+                    else{
+                        $('#gestione_pacchetti').val(1).change();
+                    }
+
+
+
+
+                    // se invece si seleziona '-' tutti i campi vengono resettati
+                }else{
+                    $('#staffId').val("");
+                    $('#nome').val("");
+                    $('#cognome').val("");
+                    $('#email').val("");
+                    $('#username').val("");
+                    $('#genere').val("");
+                    $('#eta').val("");
+                    $('#telefono').val("");
+                    $('#via').val("");
+                    $('#numero_civico').val("");
+                    $('#citta').val("");
+                    $('#gestione_pacchetti').val(0).change();
+                }
+
             });
         })
 
