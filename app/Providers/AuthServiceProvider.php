@@ -43,10 +43,16 @@ class AuthServiceProvider extends ServiceProvider
             return $user->isStaffPacchetti('2');
         });
 
+
         // gate per verificare se l'utente è l'admin del sito
         Gate::define('isAdmin', function ($user) {
             // $user è una tupla che identifica l'utente su cui si può richiamare il metodo hasRole()
             return $user->hasLevel('3');
+        });
+
+        Gate::define('isUserStaff', function ($user) {
+            // $user è una tupla che identifica l'utente su cui si può richiamare il metodo hasRole()
+            return $user->hasLevel('1') || $user->hasLevel('2');
         });
 
 

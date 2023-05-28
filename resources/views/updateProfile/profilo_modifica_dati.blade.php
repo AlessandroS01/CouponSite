@@ -118,17 +118,21 @@
                 </div>
             </div>
 
-            {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
+            {{ Form::submit('Modifica', ['class' => 'submit-button', 'id'=>'submit-modifica']) }}
             {{ Form::close() }}
             <a class="back-button" href="{{route('profilo')}}"> Annulla </a>
         </div>
 
-<script>
 
-    $(document).ready(function() {
-        $('#username-input').prop('disabled', true);
-    });
 
-</script>
+@endsection
 
+@section('scriptprofilo')
+    @can('isUser')
+        <script src="{{ asset('js/ModificaDatiUser.js') }}"></script>
+    @endcan
+
+    @can('isStaff')
+        <script src="{{ asset('js/ModificaDatiStaff.js') }}"></script>
+    @endcan
 @endsection

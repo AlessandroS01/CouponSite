@@ -57,6 +57,7 @@
 
 
 </body>
+@yield('script')
 <script src="{{ asset('js/slideshow.js') }}" ></script>
 <script src="{{ asset('js/faqs.js') }}"></script>
 </html>

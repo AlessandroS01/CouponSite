@@ -14,3 +14,7 @@
 
 
 @endsection
+
+@section('script')
+    @yield('scriptprofilo')
+@endsection

@@ -64,24 +64,7 @@ class DatabaseSeeder extends Seeder {
                 'remember_token' => Str::random(10),
                 'created_at' => now(),
                 'updated_at' => now(),
-            ],
-            [ 'username' => 'staffpstaffp',
-            'password' => Hash::make('nYvpLFCp') ,
-            'nome' => 'Membro',
-            'cognome' => 'Staff',
-            'genere' => 'M',
-            'eta' => 30,
-            'email' => 'staff@example.com',
-            'telefono' => 9876543210,
-            'via' => 'Via Membro Staff',
-            'numero_civico' => 2,
-            'citta' => 'Città Membro Staff',
-            'livello' => 2,
-            'flagPacchetti' => false,
-            'remember_token' => Str::random(10),
-            'created_at' => now(),
-            'updated_at' => now(),
-        ]
+            ]
 
         ]);
 

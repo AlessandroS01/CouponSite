@@ -21,7 +21,11 @@ use Illuminate\Support\Str;
 
 class GestioneAdmin extends Model {
 
+    public function getUtentiRegistrati(){
 
+        $utenti = User::where('livello', 1)->get();
+        return $utenti;
+    }
     public function getUtentiStaff(){
 
         $utenti = User::where('livello', 2)->get();
@@ -31,6 +35,12 @@ class GestioneAdmin extends Model {
     public function getUsernameUtentiStaff(){
 
         $utenti = User::where('livello', 2)->pluck('username')->toArray();
+        return $utenti;
+    }
+
+    public function getUsernameUtentiRegistrati(){
+
+        $utenti = User::where('livello', 1)->pluck('username')->toArray();
         return $utenti;
     }
 

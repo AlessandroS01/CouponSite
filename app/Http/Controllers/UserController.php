@@ -13,6 +13,7 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Log;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 
 class UserController extends Controller {
@@ -64,11 +65,12 @@ function ShowModificaPassword(){
         $user = User::find(Auth::id());
 
         $request->validate([
+            'username' => ['required', 'string', 'min:8', 'max:50', Rule::unique('users')->ignore($user),],
             'nome' => ['required', 'string', 'max:50'],
             'cognome' => ['required', 'string', 'max:50'],
             'genere' => ['required', 'string', 'max:1'],
             'eta' => ['required', 'int', 'min:1', 'max:99'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$user->id],
+            'email' => ['required', 'string', 'email', 'max:50', Rule::unique('users')->ignore($user),],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],
             'via' => ['required', 'string', 'max:100'],
             'numero_civico' => ['required', 'int'],
