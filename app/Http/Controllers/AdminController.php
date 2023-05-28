@@ -86,12 +86,29 @@ class AdminController extends Controller {
             'nome' => ['required', 'string', 'max:50'],
             'località' => ['required', 'string', 'max:50'],
             'tipologia' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:email'],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],
             'descrizione' => ['required', 'string', 'max:255'],
-//            'logo' => ['', ''],
+            'logo' => ['required','image'], // Regola di validazione per l'immagine
             'ragione_sociale' => ['required', 'string', 'max:50'],
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+        } else {
+            $imageName = NULL;
+        }
+
+        $product = new Product;
+        $product->fill($request->validated());
+        $product->image = $imageName;
+        $product->save();
+
+        if (!is_null($imageName)) {
+            $destinationPath = public_path() . '/images/products';
+            $image->move($destinationPath, $imageName);
+        };
 
         $this->gestioneAdmin->createAzienda($request);
 

@@ -13,7 +13,7 @@
         <div class="form">
             <div class="container-form-gestione">
                 <div>
-                    {{ Form::open(array('route' => 'aggiunta azienda', 'class' => 'contact-form', 'method' => 'POST')) }}
+                    {{ Form::open(array('route' => 'aggiunta azienda', 'class' => 'contact-form', 'method' => 'POST', 'enctype' => 'multipart/form-data')) }}
 
                     <div  class="container-dati_form">
                         {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
@@ -85,10 +85,9 @@
                     @endif
 
 
-                    <div  class="container-dati_form">
+                    <div class="container-dati_form">
                         {{ Form::label('logo', 'Logo', ['class' => 'label-input']) }}
-                        {{ Form::text('logo', '', ['class' => 'input']) }}
-
+                        {{ Form::file('logo', ['class' => 'input']) }}
                     </div>
                     @if ($errors->first('logo'))
                         <ul class="errors">
@@ -97,6 +96,7 @@
                             @endforeach
                         </ul>
                     @endif
+
 
                     <div class="container-dati_form">
                         {{ Form::label('Tipologia', 'Tipologia', ['class' => 'label-input']) }}
