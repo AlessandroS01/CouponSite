@@ -116,4 +116,26 @@ class AdminController extends Controller {
                 ->with('aziende', $aziende);
     }
 
+    public function storeModificaStaff(Request $request) {
+
+
+        // Prima verifica tutte le varie regole di validazione
+        $request->validate([
+            'nome' => ['required', 'string', 'max:50'],
+            'cognome' => ['required', 'string', 'max:50'],
+            'genere' => ['required', 'string', 'max:1'],
+            'eta' => ['required', 'int', 'min:1', 'max:99'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$request->staffId],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'via' => ['required', 'string', 'max:100'],
+            'numero_civico' => ['required', 'int'],
+            'citta' => ['required', 'string', 'max:50'],
+        ]);
+
+
+        $this->gestioneAdmin->storeStaffModificato($request);
+
+        return redirect('/');
+    }
+
 }

@@ -140,7 +140,7 @@ Route::get('/modifica/staff', [AdminController::class, 'showModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
 
-Route::post('/modifica/staff', [AdminController::class, 'storeModifiedStaff'])
+Route::post('/modifica/staff', [AdminController::class, 'storeModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
 
