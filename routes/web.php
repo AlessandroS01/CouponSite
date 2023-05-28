@@ -149,7 +149,7 @@ Route::get('/modifica/staff', [AdminController::class, 'showModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
 
-Route::post('/modifica/staff', [AdminController::class, 'storeModifiedStaff'])
+Route::post('/modifica/staff', [AdminController::class, 'storeModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
 
@@ -168,6 +168,23 @@ Route::get('/aggiunta/FAQ', [AdminController::class, 'showAggiuntaFAQ'])
 Route::post('/aggiunta/FAQ', [AdminController::class, 'storeNewFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);
+
+Route::get('/eliminazione/staff', [AdminController::class, 'showEliminazioneStaff'])
+    ->name('eliminazione staff')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/eliminazione/staff', [AdminController::class, 'deleteStaff'])
+    ->name('eliminazione staff')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::get('/eliminazione/utente', [AdminController::class, 'showEliminazioneUtente'])
+    ->name('eliminazione utente')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/eliminazione/utente', [AdminController::class, 'deleteUtente'])
+    ->name('eliminazione utente')
+    ->middleware(['auth', 'can:isAdmin']);
+
 
 
 

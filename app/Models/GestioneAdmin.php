@@ -21,7 +21,11 @@ use Illuminate\Support\Str;
 
 class GestioneAdmin extends Model {
 
+    public function getUtentiRegistrati(){
 
+        $utenti = User::where('livello', 1)->get();
+        return $utenti;
+    }
     public function getUtentiStaff(){
 
         $utenti = User::where('livello', 2)->get();
@@ -34,11 +38,18 @@ class GestioneAdmin extends Model {
         return $utenti;
     }
 
+    public function getUsernameUtentiRegistrati(){
+
+        $utenti = User::where('livello', 1)->pluck('username')->toArray();
+        return $utenti;
+    }
+
 
     public function createStaff(Request $request){
 
         switch ($request->gestionePacchetti){
             case '0': {
+
                 // crea la nuova tupla da aggiungere al database
                 $user = User::create([
                     'username' => $request->username,
@@ -58,15 +69,17 @@ class GestioneAdmin extends Model {
                 // definisce l'evento della creazione di un nuovo utente registrato
                 event(new Registered($user));
 
-                $aziende = $request->aziende;
+                if( $request->aziende){
+                    $aziende = $request->aziende;
 
-                foreach ($aziende as $azienda){
-                    $nuovaGestione = Gestione::create([
+                    foreach ($aziende as $azienda){
+                        $nuovaGestione = Gestione::create([
                             'staff' => $user->id,
                             'azienda' => $azienda
                         ]);
 
-                    event(new Registered($nuovaGestione));
+                        event(new Registered($nuovaGestione));
+                    }
                 }
 
                 break;
@@ -74,10 +87,10 @@ class GestioneAdmin extends Model {
 
             case '1': {
                 $vecchioUserPacchetti = User::where('flagPacchetti', true)->first();
-
-                $vecchioUserPacchetti->flagPacchetti = false;
-
-                $vecchioUserPacchetti->save();
+                if ($vecchioUserPacchetti) {
+                    $vecchioUserPacchetti->flagPacchetti = false;
+                    $vecchioUserPacchetti->save();
+                }
 
                 // crea la nuova tupla da aggiungere al database
                 $user = User::create([
@@ -99,23 +112,107 @@ class GestioneAdmin extends Model {
                 // definisce l'evento della creazione di un nuovo utente registrato
                 event(new Registered($user));
 
-                $aziende = $request->aziende;
 
+                if( $request->aziende){
+                    $aziende = $request->aziende;
 
-                foreach ($aziende as $azienda){
-                    $nuovaGestione = Gestione::create([
-                        'staff' => $user->id,
-                        'azienda' => $azienda
-                    ]);
+                    foreach ($aziende as $azienda){
+                        $nuovaGestione = Gestione::create([
+                            'staff' => $user->id,
+                            'azienda' => $azienda
+                        ]);
 
-                    event(new Registered($nuovaGestione));
-
+                        event(new Registered($nuovaGestione));
+                    }
                 }
 
                 break;
             }
 
         }
+    }
+
+    public function storeStaffModificato(Request $request){
+
+        $membroStaff = User::find($request->staffId);
+
+        switch ($request->gestionePacchetti){
+            case '0': {
+
+                Gestione::where('staff', $request->staffId)->delete();
+
+                // effettua l'update della tupla di user
+                $membroStaff->nome = $request->nome;
+                $membroStaff->cognome = $request->cognome;
+                $membroStaff->email = $request->email;
+                $membroStaff->genere = $request->genere;
+                $membroStaff->eta = $request->eta;
+                $membroStaff->telefono = $request->telefono;
+                $membroStaff->via = $request->via;
+                $membroStaff->numero_civico = $request->numero_civico;
+                $membroStaff->citta = $request->citta;
+                $membroStaff->flagPacchetti = $request->gestionePacchetti;
+
+                $membroStaff->save();
+
+                if( $request->aziende){
+                    $aziende = $request->aziende;
+
+                    foreach ($aziende as $azienda){
+                        $nuovaGestione = Gestione::create([
+                            'staff' => $membroStaff->id,
+                            'azienda' => $azienda
+                        ]);
+
+                        event(new Registered($nuovaGestione));
+                    }
+                }
+
+                break;
+            }
+
+            case '1': {
+
+                $vecchioUserPacchetti = User::where('flagPacchetti', true)->first();
+                if ($vecchioUserPacchetti) {
+                    $vecchioUserPacchetti->flagPacchetti = false;
+                    $vecchioUserPacchetti->save();
+                }
+
+
+                Gestione::where('staff', $request->staffId)->delete();
+
+                // effettua l'update della tupla di user
+                $membroStaff->nome = $request->nome;
+                $membroStaff->cognome = $request->cognome;
+                $membroStaff->email = $request->email;
+                $membroStaff->genere = $request->genere;
+                $membroStaff->eta = $request->eta;
+                $membroStaff->telefono = $request->telefono;
+                $membroStaff->via = $request->via;
+                $membroStaff->numero_civico = $request->numero_civico;
+                $membroStaff->citta = $request->citta;
+                $membroStaff->flagPacchetti = $request->gestionePacchetti;
+
+                $membroStaff->save();
+
+                if( $request->aziende){
+                    $aziende = $request->aziende;
+
+                    foreach ($aziende as $azienda){
+                        $nuovaGestione = Gestione::create([
+                            'staff' => $membroStaff->id,
+                            'azienda' => $azienda
+                        ]);
+
+                        event(new Registered($nuovaGestione));
+                    }
+                }
+                break;
+            }
+
+        }
+
     }
 
     public function createAzienda(Request $request){

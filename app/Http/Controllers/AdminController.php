@@ -86,12 +86,29 @@ class AdminController extends Controller {
             'nome' => ['required', 'string', 'max:50'],
             'località' => ['required', 'string', 'max:50'],
             'tipologia' => ['required', 'string', 'max:50'],
-            'email' => ['required', 'string', 'email', 'max:50', 'unique:users'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:email'],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],
             'descrizione' => ['required', 'string', 'max:255'],
-//            'logo' => ['', ''],
+            'logo' => ['required','image'], // Regola di validazione per l'immagine
             'ragione_sociale' => ['required', 'string', 'max:50'],
         ]);
+
+        if ($request->hasFile('image')) {
+            $image = $request->file('image');
+            $imageName = $image->getClientOriginalName();
+        } else {
+            $imageName = NULL;
+        }
+
+        $product = new Product;
+        $product->fill($request->validated());
+        $product->image = $imageName;
+        $product->save();
+
+        if (!is_null($imageName)) {
+            $destinationPath = public_path() . '/images/products';
+            $image->move($destinationPath, $imageName);
+        };
 
         $this->gestioneAdmin->createAzienda($request);
 
@@ -114,6 +131,63 @@ class AdminController extends Controller {
                 ->with('staff', $staff)
                 ->with('usernameUtentiStaff', $usernameUtentiStaff)
                 ->with('aziende', $aziende);
+    }
+
+    public function storeModificaStaff(Request $request) {
+
+
+        // Prima verifica tutte le varie regole di validazione
+        $request->validate([
+            'nome' => ['required', 'string', 'max:50'],
+            'cognome' => ['required', 'string', 'max:50'],
+            'genere' => ['required', 'string', 'max:1'],
+            'eta' => ['required', 'int', 'min:1', 'max:99'],
+            'email' => ['required', 'string', 'email', 'max:50', 'unique:users,email,'.$request->staffId],
+            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'via' => ['required', 'string', 'max:100'],
+            'numero_civico' => ['required', 'int'],
+            'citta' => ['required', 'string', 'max:50'],
+        ]);
+
+
+        $this->gestioneAdmin->storeStaffModificato($request);
+
+        return redirect('/');
+    }
+
+    public function showEliminazioneStaff() {
+
+        $usernameUtentiStaff = $this->gestioneAdmin->getUsernameUtentiStaff();
+
+        $staff = $this->gestioneAdmin->getUtentiStaff();
+
+
+        return view('admin.gestione_staff.eliminazione_staff')
+            ->with('staff', $staff)
+            ->with('usernameUtentiStaff', $usernameUtentiStaff);
+    }
+
+    public function deleteStaff(Request $request) {
+        $staffDaEliminare = User::find($request->staffId);
+        $staffDaEliminare->delete();
+        return redirect('/');
+    }
+
+    public function showEliminazioneUtente() {
+        $usernameUtentiRegistrati = $this->gestioneAdmin->getUsernameUtentiRegistrati();
+
+        $utente = $this->gestioneAdmin->getUtentiRegistrati();
+
+
+        return view('admin.eliminazione_utente')
+            ->with('utente', $utente)
+            ->with('usernameUtentiRegistrati', $usernameUtentiRegistrati);
+    }
+
+    public function deleteUtente(Request $request) {
+        $utenteDaEliminare = User::find($request->utenteId);
+        $utenteDaEliminare->delete();
+        return redirect('/');
     }
 
 }

@@ -13,6 +13,10 @@
         <div class="container-form">
             <div class="form">
 
+                {{ Form::open(array('route' => 'modifica staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+
+                {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
+
                 <div>
                     @isset($usernameUtentiStaff)
                         <div  class="container-dati_form">
@@ -25,7 +29,7 @@
 
                 <div class="container-form-gestione">
                     <div>
-                        {{ Form::open(array('route' => 'modifica staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+
 
                         <div  class="container-dati_form">
                             {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
@@ -231,6 +235,7 @@
                     var staffSelezionato = utentiStaff[ $(this).val() ];
 
                     // popola tutti i campi della form
+                    $('#staffId').val(staffSelezionato.id);
                     $('#nome').val(staffSelezionato.nome);
                     $('#cognome').val(staffSelezionato.cognome);
                     $('#email').val(staffSelezionato.email);
@@ -253,6 +258,7 @@
 
                     // se invece si seleziona '-' tutti i campi vengono resettati
                 }else{
+                    $('#staffId').val("");
                     $('#nome').val("");
                     $('#cognome').val("");
                     $('#email').val("");
