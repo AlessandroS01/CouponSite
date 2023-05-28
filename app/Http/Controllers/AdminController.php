@@ -138,4 +138,19 @@ class AdminController extends Controller {
         return redirect('/');
     }
 
+    public function showEliminazioneStaff() {
+
+        $usernameUtentiStaff = $this->gestioneAdmin->getUsernameUtentiStaff();
+
+        $staff = $this->gestioneAdmin->getUtentiStaff();
+
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+
+        return view('admin.gestione_staff.eliminazione_staff')
+            ->with('staff', $staff)
+            ->with('usernameUtentiStaff', $usernameUtentiStaff)
+            ->with('aziende', $aziende);
+    }
+
 }

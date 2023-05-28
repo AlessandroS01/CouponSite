@@ -20,7 +20,7 @@
                 <h2>Gestione Staff</h2>
                 <h4><a href="{{ route('aggiunta staff') }}">+ Aggiunta staff</a></h4>
                 <h4><a href="{{ route('modifica staff') }}">+ Modifica staff</a></h4>
-                <h4><a href="#">+ Eliminazione staff</a></h4>
+                <h4><a href="{{ route('eliminazione staff') }}">+ Eliminazione staff</a></h4>
             </div>
 
             <div class="container-gestione_admin grid-item">
