@@ -161,13 +161,33 @@ class AdminController extends Controller {
 
         $staff = $this->gestioneAdmin->getUtentiStaff();
 
-        $aziende = $this->catalogoAziende->getAllNoPaginate();
-
 
         return view('admin.gestione_staff.eliminazione_staff')
             ->with('staff', $staff)
-            ->with('usernameUtentiStaff', $usernameUtentiStaff)
-            ->with('aziende', $aziende);
+            ->with('usernameUtentiStaff', $usernameUtentiStaff);
+    }
+
+    public function deleteStaff(Request $request) {
+        $staffDaEliminare = User::find($request->staffId);
+        $staffDaEliminare->delete();
+        return redirect('/');
+    }
+
+    public function showEliminazioneUtente() {
+        $usernameUtentiRegistrati = $this->gestioneAdmin->getUsernameUtentiRegistrati();
+
+        $utente = $this->gestioneAdmin->getUtentiRegistrati();
+
+
+        return view('admin.eliminazione_utente')
+            ->with('utente', $utente)
+            ->with('usernameUtentiRegistrati', $usernameUtentiRegistrati);
+    }
+
+    public function deleteUtente(Request $request) {
+        $utenteDaEliminare = User::find($request->utenteId);
+        $utenteDaEliminare->delete();
+        return redirect('/');
     }
 
 }

@@ -164,7 +164,17 @@ Route::get('/eliminazione/staff', [AdminController::class, 'showEliminazioneStaf
     ->name('eliminazione staff')
     ->middleware(['auth', 'can:isAdmin']);
 
+Route::post('/eliminazione/staff', [AdminController::class, 'deleteStaff'])
+    ->name('eliminazione staff')
+    ->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/eliminazione/utente', [AdminController::class, 'showEliminazioneUtente'])
+    ->name('eliminazione utente')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/eliminazione/utente', [AdminController::class, 'deleteUtente'])
+    ->name('eliminazione utente')
+    ->middleware(['auth', 'can:isAdmin']);
 
 
 
