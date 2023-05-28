@@ -80,20 +80,29 @@ Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
 Route::post('/coupon', [UserController::class, 'showCouponGenerato'])
         ->name('generazione coupon');
 
+
+//rotte per il profilo
 Route::get('/profilo', [UserController::class, 'showProfilo'])
-        ->name('profilo');
+        ->name('profilo')
+        ->middleware(['auth', 'can:isUserStaff']);
+
 
 Route::get('/profilo/modifica', [UserController::class, 'ShowModificaDati'])
-    ->name('profilo-modifica-dati');
+    ->name('profilo-modifica-dati')
+    ->middleware(['auth', 'can:isUserStaff']);
 
 Route::post('/profilo/modifica', [UserController::class, 'updateData'])
-    ->name('profilo-modifica-dati');
+    ->name('profilo-modifica-dati')
+    ->middleware(['auth', 'can:isUserStaff']);
 
 Route::get('/profilo/modifica/password', [UserController::class, 'ShowModificaPassword'])
-    ->name('profilo-modifica-password');
+    ->name('profilo-modifica-password')
+    ->middleware(['auth', 'can:isUserStaff']);
 
 Route::post('/profilo/modifica/password', [UserController::class, 'updatePassword'])
-    ->name('profilo-modifica-password');
+    ->name('profilo-modifica-password')
+    ->middleware(['auth', 'can:isUserStaff']);
+//fine rotte per il profilo
 
 
 Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])
