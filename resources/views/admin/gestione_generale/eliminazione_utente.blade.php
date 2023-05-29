@@ -4,7 +4,7 @@
 
 @section('content')
 
-    <div class="container-offerta_dettagli">
+    <div class="container-titolo_form">
     <h1> Elimina utente</h1>
     </div>
 

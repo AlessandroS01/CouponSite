@@ -2,6 +2,11 @@
 
 @section('title', 'Modifica offerta')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_promozioni.css') }}" >
+@show
+
 @section('content')
 
     <!--
@@ -12,7 +17,7 @@
     -->
     @isset($offerte, $oggetto_offerte, $aziende)
 
-        <div class="container-offerta_dettagli">
+        <div class="container-titolo_form">
             <h1> Modifica offerta</h1>
         </div>
 

@@ -2,11 +2,16 @@
 
 @section('title', 'Creazione offerta')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_promozioni.css') }}" >
+@show
+
 @section('content')
 
 
     @isset($aziende)
-        <div class="container-offerta_dettagli">
+        <div class="container-titolo_form">
             <h1> Creazione offerta</h1>
         </div>
 

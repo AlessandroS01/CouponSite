@@ -12,12 +12,13 @@
 
     @section('link')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}" >
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_form.css') }}" >
         <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
     @show
 
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_promozioni.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_staff_in_admin.css') }}" >
+
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/admin_gestione_faq.css') }}" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 

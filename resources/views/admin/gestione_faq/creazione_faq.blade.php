@@ -5,7 +5,7 @@
 @section('content')
 
 
-    <div class="container-offerta_dettagli">
+    <div class="container-titolo_form">
         <h1> Creazione FAQ</h1>
     </div>
 
