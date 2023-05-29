@@ -40,7 +40,7 @@
                 <h2>Gestione FAQ</h2>
                 <h4><a href="{{ route('aggiunta FAQ') }}">+ Aggiungi FAQ</a></h4>
                 <h4><a href="{{route('modifica FAQ')}}">+ Modifica FAQ</a></h4>
-                <h4><a href="#">+ Elimina FAQ</a></h4>
+                <h4><a href="{{route('elimina FAQ')}}">+ Elimina FAQ</a></h4>
             </div>
 
 

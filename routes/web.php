@@ -161,6 +161,16 @@ Route::post('/modifica/faq', [AdminController::class, 'storeModificaFaq'])
     ->name('modifica FAQ')
     ->middleware(['auth', 'can:isAdmin']);
 
+
+Route::get('/elimina/faq', [AdminController::class, 'showEliminazioneFaq'])
+    ->name('elimina FAQ')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/elimina/faq', [AdminController::class, 'deleteFaq'])
+    ->name('elimina FAQ')
+    ->middleware(['auth', 'can:isAdmin']);
+
+
 Route::get('/aggiunta/azienda', [AdminController::class, 'showAggiuntaAzienda'])
     ->name('aggiunta azienda')
     ->middleware(['auth', 'can:isAdmin']);

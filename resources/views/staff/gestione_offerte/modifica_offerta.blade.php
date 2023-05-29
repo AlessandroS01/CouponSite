@@ -176,9 +176,6 @@
 
     @endisset
 
-    <script>
-
-    </script>
 @endsection
 
 

@@ -16,6 +16,7 @@
 
         @can('isAdmin')
             <li><a href="{{ route('pannello_admin') }}" class="highlight" title="Pannello di gestione">Gestione</a></li>
+
         @endcan
 
     </ul>
@@ -32,9 +33,10 @@
     @auth
 
         <ul id="right-links">
-
-            <li><a href="{{ route('profilo') }}" class="highlight" title="Home Admin">Profilo</a></li>
-            <li><a href="#" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
+            @canany(['isStaff', 'isUser'])
+                <li><a href="{{ route('profilo') }}" class="highlight" title="Home Admin">Profilo</a></li>
+            @endcanany
+                <li><a href="#" title="Esci dal sito" class="highlight" onclick="event.preventDefault(); document.getElementById('logout-form').submit();">Logout</a></li>
 
             <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                 {{ csrf_field() }}
