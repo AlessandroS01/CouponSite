@@ -153,6 +153,14 @@ Route::post('/modifica/staff', [AdminController::class, 'storeModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/modifica/faq', [AdminController::class, 'showModificaFaq'])
+    ->name('modifica FAQ')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/modifica/faq', [AdminController::class, 'storeModificaFaq'])
+    ->name('modifica FAQ')
+    ->middleware(['auth', 'can:isAdmin']);
+
 Route::get('/aggiunta/azienda', [AdminController::class, 'showAggiuntaAzienda'])
     ->name('aggiunta azienda')
     ->middleware(['auth', 'can:isAdmin']);

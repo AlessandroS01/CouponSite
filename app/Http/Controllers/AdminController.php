@@ -135,6 +135,14 @@ class AdminController extends Controller {
                 ->with('aziende', $aziende);
     }
 
+    public function showModificaFaq(){
+        return view('admin.gestione_faq.modifica_faq');
+    }
+
+    public function storeModificaFaq(){
+
+    }
+
     public function storeModificaStaff(Request $request) {
 
 
