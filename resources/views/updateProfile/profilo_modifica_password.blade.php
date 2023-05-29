@@ -34,9 +34,4 @@
             <a class="back-button" href="{{route('profilo')}}"> Annulla </a>
         </div>
 
-<script>
-
-
-</script>
-
 @endsection
