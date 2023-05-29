@@ -177,3 +177,23 @@
     justify-items: center;
 }
 
+.container-logo-modifica_azienda div{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-top: 30px;
+}
+
+
+.container-logo-modifica_azienda .input {
+    margin: 0;
+    width: 300px;
+}
+
+.container-logo-modifica_azienda .input img{
+    width: 100%;
+
+    border: solid 2px var(--main-color);
+    padding: 5px;
+}
+

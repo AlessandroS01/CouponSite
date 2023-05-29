@@ -248,6 +248,24 @@ class GestioneAdmin extends Model {
 
     }
 
+    public function modificaAzienda(Request $request, $imageName)
+    {
+
+        $azienda = Azienda::find($request->partita_iva);
+
+        $azienda->nome = $request->nome;
+        $azienda->localita = $request->localita;
+        $azienda->email = $request->email;
+        $azienda->telefono = $request->telefono;
+        $azienda->logo = $imageName;
+        $azienda->tipologia = $request->tipologia;
+        $azienda->ragione_sociale = $request->ragione_sociale;
+        $azienda->descrizione = $request->descrizione;
+
+        $azienda->save();
+
+    }
+
     public function createFAQ(Request $request){
         $faq = Faq::create([
             'domanda'=>$request->domanda,

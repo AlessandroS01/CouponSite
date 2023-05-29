@@ -7,6 +7,8 @@ use App\Models\CatalogoAziende;
 use App\Models\GestioneAdmin;
 use App\Models\Resources\Azienda;
 use App\Models\Resources\Product;
+use Illuminate\Support\Facades\File;
+use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use App\Http\Requests\NewProductRequest;
 use App\Models\User;
@@ -44,6 +46,18 @@ class AdminController extends Controller {
     public function showAggiuntaAzienda() {
 
         return view('admin.gestione_aziende.creazione_azienda');
+
+    }
+
+    public function showModificaAzienda() {
+
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+        $partitaIvaAziende = $this->catalogoAziende->getAllPartiteIvaAziende();
+
+        return view('admin.gestione_aziende.modifica_azienda')
+                ->with('aziende', $aziende)
+                ->with('partitaIvaAziende', $partitaIvaAziende);
 
     }
 
@@ -117,6 +131,53 @@ class AdminController extends Controller {
         $this->gestioneAdmin->createAzienda($request, $imageName);
 
         return redirect('/');
+    }
+
+    public function storeAziendaModificata(Request $request)
+    {
+
+        $azienda = Azienda::find($request->partita_iva);
+
+        // Prima verifica tutte le varie regole di validazione
+        $request->validate([
+            'nome' => ['required', 'string', 'max:50'],
+            'localita' => ['required', 'string', 'max:50'],
+            'tipologia' => ['required', 'string', 'max:50'],
+            'email' => ['required', 'string', 'email', 'max:50', Rule::unique('azienda')->ignore($azienda)],
+            'telefono' => ['required', 'numeric', 'digits:10'],
+            'descrizione' => ['required', 'string', 'max:255'],
+            'logo' => ['image'], // Regola di validazione per l'immagine
+            'ragione_sociale' => ['required', 'string', 'max:50'],
+        ]);
+
+        $imageName = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
+        $cambioPathImmagine = false;
+
+        if ($request->hasFile('logo')) {
+            $cambioPathImmagine = true;
+
+            $imagePath = public_path($imageName);
+            if (File::exists($imagePath)) {
+                // Delete the image file
+                File::delete($imagePath);
+            }
+
+            $image = $request->file('logo');
+            $imageName = $image->getClientOriginalName();
+            $imageNamePublic = 'img/'.$imageName;
+            $destinationPath = public_path('img');
+            $image->move($destinationPath, $imageName);
+        }
+
+        if($cambioPathImmagine){
+            $this->gestioneAdmin->modificaAzienda($request, $imageNamePublic);
+        }
+        else{
+            $this->gestioneAdmin->modificaAzienda($request, $imageName);
+        }
+
+        return redirect('/');
+
     }
 
 

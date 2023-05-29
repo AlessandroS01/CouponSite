@@ -6,8 +6,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
-
-
     @section('link')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_form.css') }}" >

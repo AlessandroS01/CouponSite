@@ -168,6 +168,14 @@ Route::get('/aggiunta/azienda', [AdminController::class, 'showAggiuntaAzienda'])
 Route::post('/aggiunta/azienda', [AdminController::class, 'storeNewCompany'])
     ->name('aggiunta azienda')
     ->middleware(['auth', 'can:isAdmin']);
+
+Route::get('/modifica/azienda', [AdminController::class, 'showModificaAzienda'])
+    ->name('modifica azienda')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/modifica/azienda', [AdminController::class, 'storeAziendaModificata'])
+    ->name('modifica azienda')
+    ->middleware(['auth', 'can:isAdmin']);
 //rotte FAQ
 
 Route::get('/aggiunta/FAQ', [AdminController::class, 'showAggiuntaFAQ'])

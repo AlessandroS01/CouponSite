@@ -32,7 +32,29 @@ class CatalogoAziende extends Model {
      */
     public function getAllNoPaginate() {
 
-        $aziende = Azienda::orderBy('nome', 'asc')->get();
+        $aziende = Azienda::all();
+
+        return $aziende;
+
+    }
+
+    /**
+     * @return tutti gli elementi della relazione Azienda
+     */
+    public function getLogoAzienda($partita_iva) {
+
+        $logoAzienda = Azienda::where('partita_iva', $partita_iva)->pluck('logo')->first();
+
+        return $logoAzienda;
+
+    }
+
+    /**
+     * @return tutti i nomi delle tuple inerenti alle aziende
+     */
+    public function getAllPartiteIvaAziende() {
+
+        $aziende = Azienda::pluck('partita_iva')->toArray();
 
         return $aziende;
 
