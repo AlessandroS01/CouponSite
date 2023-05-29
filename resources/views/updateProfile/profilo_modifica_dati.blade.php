@@ -128,6 +128,7 @@
 @endsection
 
 @section('scriptprofilo')
+
     @can('isUser')
         <script src="{{ asset('js/ModificaDatiUser.js') }}"></script>
     @endcan
@@ -135,4 +136,5 @@
     @can('isStaff')
         <script src="{{ asset('js/ModificaDatiStaff.js') }}"></script>
     @endcan
+
 @endsection
