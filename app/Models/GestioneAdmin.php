@@ -88,6 +88,7 @@ class GestioneAdmin extends Model {
 
             case '1': {
                 $vecchioUserPacchetti = User::where('flagPacchetti', true)->first();
+
                 if ($vecchioUserPacchetti) {
                     $vecchioUserPacchetti->flagPacchetti = false;
                     $vecchioUserPacchetti->save();
@@ -233,6 +234,18 @@ class GestioneAdmin extends Model {
 
         // Definisce l'evento della creazione di un nuovo utente registrato
         event(new Registered($azienda));
+
+        $staffGestionePacchetti = User::where('flagPacchetti', true)->first();
+
+        if($staffGestionePacchetti){
+            $nuovaGestione = Gestione::create([
+                'staff' => $staffGestionePacchetti->id,
+                'azienda' => $request->partita_iva
+            ]);
+
+            event(new Registered($nuovaGestione));
+        }
+
     }
 
     public function createFAQ(Request $request){

@@ -2,6 +2,12 @@
 
 @section('title', 'Pannello')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pannelli_gestione.css') }}" >
+
+@endsection
+
 @section('content')
 
 

@@ -2,6 +2,12 @@
 
 @section('title', 'Catalogo offerte')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/catalogo.css') }}" >
+
+@endsection
+
 @section('content')
 
     <div class="container-barra_ricerca">

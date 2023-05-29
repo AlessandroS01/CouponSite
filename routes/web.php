@@ -187,6 +187,10 @@ Route::post('/eliminazione/utente', [AdminController::class, 'deleteUtente'])
     ->name('eliminazione utente')
     ->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/statistiche', [AdminController::class, 'visualizzaStatistiche'])
+    ->name('visualizza statistiche')
+    ->middleware(['auth', 'can:isAdmin']);
+
 
 
 
