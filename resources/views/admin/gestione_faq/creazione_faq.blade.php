@@ -10,20 +10,24 @@
     </div>
 
     <div class="container-form">
-        <div class="form">
-            <div class="container-form-gestione">
-                <div>
+        <div class="form faq-form">
+
+
                     {{ Form::open(array('route' => 'aggiunta FAQ', 'class' => 'contact-form', 'method' => 'POST')) }}
 
-                    <div  class="container-dati_form">
-                        {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
-                        {{ Form::textarea('nome', '', ['class' => 'input', 'id' => 'nome', 'rows' => 4, 'cols' => 50]) }}
+                    <div  class="container-dati_form_descrizione">
+                        {{ Form::label('domanda', 'Domanda:', ['class' => 'label-input']) }}
+                        {{ Form::textarea('domanda', '', ['class' => 'input_descrizione', 'id' => 'faq-input-text', 'rows' => 4, 'cols' => 50]) }}
 
                     </div>
 
-                </div>
+                    <div  class="container-dati_form_descrizione">
+                        {{ Form::label('risposta', 'Risposta:', ['class' => 'label-input']) }}
+                        {{ Form::textarea('risposta', '', ['class' => 'input_descrizione', 'id' => 'faq-input-text', 'rows' => 4, 'cols' => 50]) }}
 
-            </div>
+                    </div>
+
+
 
             <div class="container-form_button">
                 {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}

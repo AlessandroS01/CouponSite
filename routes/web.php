@@ -160,6 +160,7 @@ Route::get('/aggiunta/azienda', [AdminController::class, 'showAggiuntaAzienda'])
 Route::post('/aggiunta/azienda', [AdminController::class, 'storeNewCompany'])
     ->name('aggiunta azienda')
     ->middleware(['auth', 'can:isAdmin']);
+//rotte FAQ
 
 Route::get('/aggiunta/FAQ', [AdminController::class, 'showAggiuntaFAQ'])
     ->name('aggiunta FAQ')
@@ -169,6 +170,7 @@ Route::post('/aggiunta/FAQ', [AdminController::class, 'storeNewFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);
 
+//fine rotte FAQ
 Route::get('/eliminazione/staff', [AdminController::class, 'showEliminazioneStaff'])
     ->name('eliminazione staff')
     ->middleware(['auth', 'can:isAdmin']);

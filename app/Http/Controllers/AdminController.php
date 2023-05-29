@@ -52,6 +52,18 @@ class AdminController extends Controller {
         return view('admin.gestione_faq.creazione_faq');
     }
 
+    public function storeNewFAQ(Request $request){
+
+        $request->validate([
+            'domanda'=>['required', 'string', 'min:1'],
+            'risposta' =>['required', 'string', 'min:1']
+        ]);
+
+        $this->gestioneAdmin->createFAQ($request);
+
+        return redirect('/');
+
+    }
 
     public function storeNewStaff(Request $request) {
 

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use App\Models\Resources\Acquisizione;
 use App\Models\Resources\Azienda;
+use App\Models\Resources\Faq;
 use App\Models\Resources\Gestione;
 use App\Models\Resources\Offerta;
 use Brick\Math\BigInteger;
@@ -232,6 +233,16 @@ class GestioneAdmin extends Model {
 
         // Definisce l'evento della creazione di un nuovo utente registrato
         event(new Registered($azienda));
+    }
+
+    public function createFAQ(Request $request){
+        $faq = Faq::create([
+            'domanda'=>$request->domanda,
+            'risposta' =>$request->risposta
+
+        ]);
+
+        event(new Registered($faq));
     }
 
 
