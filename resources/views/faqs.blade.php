@@ -2,6 +2,10 @@
 
 @section('title', 'FAQ')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/faq.css') }}" >
+@endsection
 @section('content')
 
 <section id="faqs">

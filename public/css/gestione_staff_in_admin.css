@@ -50,6 +50,7 @@
 .form_descrizione{
     display: flex;
     justify-content: center;
+    flex-wrap: wrap;
 }
 
 
@@ -89,7 +90,6 @@
     outline: none;
     background-color: rgb(232, 240, 254);
 }
-
 
 .container-dati_form span{
     color: var(--main-color);
