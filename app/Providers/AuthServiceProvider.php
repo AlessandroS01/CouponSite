@@ -55,9 +55,5 @@ class AuthServiceProvider extends ServiceProvider
             return $user->hasLevel('1') || $user->hasLevel('2');
         });
 
-
-//        Gate::define('show-discount', function ($user) {
-//            return $user->hasLevel(['user', 'admin']);
-//        });
     }
 }
