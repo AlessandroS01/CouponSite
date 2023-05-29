@@ -9,6 +9,13 @@ class Faq extends Model {
     protected $table = 'faq';
     protected $primaryKey = 'id';
 
+
+    protected $fillable = [
+        'id',
+        'domanda',
+        'risposta',
+    ];
+
     // id non modificabile da un HTTP Request (Mass Assignment)
     protected $guarded = ['id'];
 

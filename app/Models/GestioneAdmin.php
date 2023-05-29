@@ -33,6 +33,17 @@ class GestioneAdmin extends Model {
         return $utenti;
     }
 
+    public function getFaq(){
+
+        $faq = Faq::all();
+        return $faq;
+    }
+    public function getFaqDomanda(){
+
+        $faqdomanda = Faq::pluck('domanda')->toArray();
+        return $faqdomanda;
+    }
+
     public function getUsernameUtentiStaff(){
 
         $utenti = User::where('livello', 2)->pluck('username')->toArray();
@@ -133,6 +144,19 @@ class GestioneAdmin extends Model {
 
         }
     }
+
+    public function storeFaqModificato(Request $request)
+    {
+        $faq = Faq::find($request->idFaq);
+
+        if ($faq) {
+            $faq->domanda = $request->domanda;
+            $faq->risposta = $request->risposta;
+            $faq->save();
+        }
+
+    }
+
 
     public function storeStaffModificato(Request $request){
 

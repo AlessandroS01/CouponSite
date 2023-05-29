@@ -6,6 +6,7 @@ use App\Models\Admin;
 use App\Models\CatalogoAziende;
 use App\Models\GestioneAdmin;
 use App\Models\Resources\Azienda;
+use App\Models\Resources\Faq;
 use App\Models\Resources\Product;
 use Illuminate\Validation\Rules;
 use App\Http\Requests\NewProductRequest;
@@ -136,11 +137,39 @@ class AdminController extends Controller {
     }
 
     public function showModificaFaq(){
-        return view('admin.gestione_faq.modifica_faq');
+        $faq = $this->gestioneAdmin->getFaq();
+        $faqdomanda = $this->gestioneAdmin->getFaqDomanda();
+
+
+        return view('admin.gestione_faq.modifica_faq')
+            ->with('faq',$faq)
+            ->with('faqdomanda',$faqdomanda);
     }
 
-    public function storeModificaFaq(){
+    public function showEliminazioneFaq(){
 
+        $faq = $this->gestioneAdmin->getFaq();
+        $faqdomanda = $this->gestioneAdmin->getFaqDomanda();
+
+        return view('admin.gestione_faq.elimina_faq')
+            ->with('faq',$faq)
+            ->with('faqdomanda',$faqdomanda);
+    }
+
+
+    public function deleteFaq(Request $request) {
+        $faqDaEliminare = Faq::find($request->idfaq);
+        Log::info('iuhpèij');
+        $faqDaEliminare->delete();
+        Log::info('iuhpèij');
+        return redirect('/');
+    }
+
+    public function storeModificaFaq(Request $request){
+
+        $this->gestioneAdmin->storeFaqModificato($request);
+
+        return redirect('/');
     }
 
     public function storeModificaStaff(Request $request) {
