@@ -2,6 +2,12 @@
 
 @section('title', 'Azienda')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/azienda.css') }}" >
+
+@endsection
+
 @section('content')
 
     @isset($azienda)

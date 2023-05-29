@@ -6,16 +6,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
 
+    @section('script')
 
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/faq.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/contatti.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/catalogo.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/offerta.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/autenticazione.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/azienda.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" >
-    <link rel="stylesheet" type="text/css" href="{{ asset('css/pannelli_gestione.css') }}" >
+    @show
+
+    @section('link')
+        <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}" >
+        <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+    @show
+
+
     <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_promozioni.css') }}" >
     <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_staff_in_admin.css') }}" >
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
@@ -24,7 +24,7 @@
     In base al tipo di icona che si vuole utilizzare si cambia il codice della classe css-->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" />
     <!-- Riga di codica che serve ad importare il font -->
-    <link href="https://fonts.googleapis.com/css?family=Open+Sans" rel="stylesheet">
+
 
 
     <title>@yield('title', 'Coupon')</title>

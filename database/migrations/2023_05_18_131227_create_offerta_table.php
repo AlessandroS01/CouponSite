@@ -22,7 +22,7 @@ return new class extends Migration
             $table->double('prezzo_pieno');
             $table->string('oggetto_offerta', 50);
             $table->string('azienda', 11);
-            $table->integer('staff');
+            $table->integer('staff')->nullable();
             $table->string('categoria', 50);
             $table->text('descrizione');
             $table->boolean('flagAttivo');
@@ -37,7 +37,7 @@ return new class extends Migration
             $table->foreign('staff')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')
+                ->onDelete('set null')
                 ->onUpdate('cascade');
 
             $table->timestamps();

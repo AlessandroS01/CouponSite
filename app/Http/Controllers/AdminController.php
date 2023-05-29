@@ -82,12 +82,12 @@ class AdminController extends Controller {
     {
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
-            'partita_iva' => ['required', 'string', 'min:8', 'max:50', 'unique:azienda'],
+            'partita_iva' => ['required', 'string', 'min:11', 'max:11', 'unique:azienda'],
             'nome' => ['required', 'string', 'max:50'],
             'localita' => ['required', 'string', 'max:50'],
             'tipologia' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:azienda'],
-            'telefono' => ['required', 'numeric', 'digits_between:10,20'],
+            'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
             'logo' => ['required', 'image'], // Regola di validazione per l'immagine
             'ragione_sociale' => ['required', 'string', 'max:50'],
@@ -169,7 +169,7 @@ class AdminController extends Controller {
         $utente = $this->gestioneAdmin->getUtentiRegistrati();
 
 
-        return view('admin.eliminazione_utente')
+        return view('admin.gestione_generale.eliminazione_utente')
             ->with('utente', $utente)
             ->with('usernameUtentiRegistrati', $usernameUtentiRegistrati);
     }
@@ -178,6 +178,12 @@ class AdminController extends Controller {
         $utenteDaEliminare = User::find($request->utenteId);
         $utenteDaEliminare->delete();
         return redirect('/');
+    }
+
+    public function visualizzaStatistiche() {
+
+
+        return view('admin.gestione_generale.visualizza_statistiche');
     }
 
 }

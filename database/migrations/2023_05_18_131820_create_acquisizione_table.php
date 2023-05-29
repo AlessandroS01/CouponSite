@@ -17,7 +17,7 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('codice_coupon', 20)->unique();
             $table->integer('offerta');
-            $table->integer('cliente');
+            $table->integer('cliente')->nullable();
 
             $table->unique(['offerta', 'cliente']);
 
@@ -31,7 +31,7 @@ return new class extends Migration
             $table->foreign('cliente')
                 ->references('id')
                 ->on('users')
-                ->onDelete('cascade')
+                ->onDelete('set null')
                 ->onUpdate('cascade');
 
             $table->timestamps();

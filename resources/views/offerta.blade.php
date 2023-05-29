@@ -2,6 +2,12 @@
 
 @section('title', 'Offerta')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/offerta.css') }}" >
+
+@endsection
+
 @section('content')
 
     @isset($gestoreOfferte, $offerta, $azienda)

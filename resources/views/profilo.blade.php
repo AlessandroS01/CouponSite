@@ -2,6 +2,12 @@
 
 @section('title', 'Profilo')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" >
+
+@endsection
+
 @section('content')
 
 

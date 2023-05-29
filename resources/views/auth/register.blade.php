@@ -2,6 +2,12 @@
 
 @section('title', 'Registrazione')
 
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/autenticazione.css') }}" >
+
+@endsection
+
 @section('content')
 <div class="container-register">
     <h1>Registrazione</h1>

@@ -1,5 +1,12 @@
 @extends('layouts.public')
 
+
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/pannelli_gestione.css') }}" >
+
+@endsection
+
 @section('title', 'Pannello')
 
     @section('content')
@@ -25,7 +32,7 @@
 
             <div class="container-gestione_admin grid-item">
                 <h2>Gestione Generale</h2>
-                <h4><a href="#">+ Visualizzazione statistiche</a></h4>
+                <h4><a href="{{ route('visualizza statistiche') }}">+ Visualizzazione statistiche</a></h4>
                 <h4><a href="{{ route('eliminazione utente') }}">+ Eliminazione cliente</a></h4>
             </div>
 
