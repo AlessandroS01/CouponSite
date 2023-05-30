@@ -290,6 +290,26 @@ class AdminController extends Controller {
         return redirect('/');
     }
 
+    public function deleteAzienda(Request $request) {
+        $aziendaDaEliminare = Azienda::find($request->partita_iva);
+        $percorsoLogo = public_path($aziendaDaEliminare->logo);
+        //unlink elimina il logo dell'azienda da eliminare dalla cartella img
+        unlink($percorsoLogo);
+        $aziendaDaEliminare->delete();
+        return redirect('/');
+    }
+
+    public function showEliminazioneAzienda() {
+
+        $aziende = $this->catalogoAziende->getAllNoPaginate();
+
+        $partitaIvaAziende = $this->catalogoAziende->getAllPartiteIvaAziende();
+
+        return view('admin.gestione_aziende.eliminazione_azienda')
+            ->with('aziende', $aziende)
+            ->with('partitaIvaAziende', $partitaIvaAziende);
+    }
+
     public function visualizzaStatistiche() {
 
 

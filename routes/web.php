@@ -218,6 +218,13 @@ Route::get('/statistiche', [AdminController::class, 'visualizzaStatistiche'])
     ->middleware(['auth', 'can:isAdmin']);
 
 
+Route::get('/eliminazione/azienda', [AdminController::class, 'showEliminazioneAzienda'])
+    ->name('eliminazione azienda')
+    ->middleware(['auth', 'can:isAdmin']);
+
+Route::post('/eliminazione/azienda', [AdminController::class, 'deleteAzienda'])
+    ->name('eliminazione azienda')
+    ->middleware(['auth', 'can:isAdmin']);
 
 
 // aggiunge le rotte che si trovano all'interno di auth.php

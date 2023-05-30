@@ -20,7 +20,7 @@
                 <h2>Gestione Aziende</h2>
                 <h4><a href="{{ route('aggiunta azienda') }}">+ Creazione azienda</a></h4>
                 <h4><a href="{{ route('modifica azienda') }}">+ Modifica azienda</a></h4>
-                <h4><a href="#">+ Elimina azienda</a></h4>
+                <h4><a href="{{ route('eliminazione azienda') }}">+ Elimina azienda</a></h4>
             </div>
 
             <div class="container-gestione_staff grid-item">
