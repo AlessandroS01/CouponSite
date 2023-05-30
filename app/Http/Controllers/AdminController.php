@@ -9,6 +9,7 @@ use App\Models\Resources\Azienda;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Product;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
 use App\Http\Requests\NewProductRequest;
@@ -116,20 +117,32 @@ class AdminController extends Controller {
             'email' => ['required', 'string', 'email', 'max:50', 'unique:azienda'],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
-            'logo' => ['required', 'image'], // Regola di validazione per l'immagine
-            'ragione_sociale' => ['required', 'string', 'max:50'],
+            'logo' => ['required', 'image', function ($attribute, $value, $fail) use ($request){
+                $fileName = $request->file($attribute)->getClientOriginalName();
+                    if (preg_match('/[!@#$%^&*(),?":{}|<>]/', $fileName)) {
+                        $fail("Non può contenere caratteri speciali.");
+                    }
+                },
+            ], // Regola di validazione per l'immagine
+            'ragione_sociale' => ['required', 'string', 'max:20'],
         ]);
 
-        $imageName = null;
+        $image = $request->file('logo');
 
-        if ($request->hasFile('logo')) {
-            $image = $request->file('logo');
-            $imageName = $image->getClientOriginalName();
-            $destinationPath = public_path('img');
-            $image->move($destinationPath, $imageName);
+        $destinationPath = public_path('img');
+
+        $imagePathRelativo = 'img/'.$image->getClientOriginalName();
+
+        $indiceImmagine = 1;
+        while(File::exists($imagePathRelativo)) {
+
+            $imagePathRelativo = 'img/'.'('.$indiceImmagine.')'.$image->getClientOriginalName();
+            $indiceImmagine ++;
+
         }
 
-        $this->gestioneAdmin->createAzienda($request, $imageName);
+        $image->move($destinationPath, $imagePathRelativo);
+        $this->gestioneAdmin->createAzienda($request, $imagePathRelativo);
 
         return redirect('/');
     }
@@ -147,35 +160,45 @@ class AdminController extends Controller {
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('azienda')->ignore($azienda)],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
-            'logo' => ['image'], // Regola di validazione per l'immagine
-            'ragione_sociale' => ['required', 'string', 'max:50'],
+            'logo' => ['image', function ($attribute, $value, $fail) use ($request){
+                $fileName = $request->file($attribute)->getClientOriginalName();
+                if (preg_match('/[!@#$%^&*(),?":{}|<>]/', $fileName)) {
+                    $fail("Non può contenere caratteri speciali.");
+                }
+            },
+            ], // Regola di validazione per l'immagine
+            'ragione_sociale' => ['required', 'string', 'max:20'],
         ]);
 
         $imageName = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
-        $cambioPathImmagine = false;
 
         if ($request->hasFile('logo')) {
-            $cambioPathImmagine = true;
-
-            $imagePath = public_path($imageName);
-            if (File::exists($imagePath)) {
-                // Delete the image file
-                File::delete($imagePath);
-            }
 
             $image = $request->file('logo');
-            $imageName = $image->getClientOriginalName();
-            $imageNamePublic = 'img/'.$imageName;
+
+            $imageName = 'img/'.$image->getClientOriginalName();
+
+            $indiceImmagine = 1;
+            while(File::exists($imageName)) {
+
+                $imageName = 'img/'.'('.$indiceImmagine.')'.$image->getClientOriginalName();
+                $indiceImmagine ++;
+
+            }
+
+            $logoAziendaPreesistente = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
+            if (File::exists($logoAziendaPreesistente)) {
+                // Delete the image file
+                File::delete($logoAziendaPreesistente);
+            }
+
             $destinationPath = public_path('img');
             $image->move($destinationPath, $imageName);
+
         }
 
-        if($cambioPathImmagine){
-            $this->gestioneAdmin->modificaAzienda($request, $imageNamePublic);
-        }
-        else{
-            $this->gestioneAdmin->modificaAzienda($request, $imageName);
-        }
+        $this->gestioneAdmin->modificaAzienda($request, $imageName);
+
 
         return redirect('/');
 
