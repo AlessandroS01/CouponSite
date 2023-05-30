@@ -93,7 +93,7 @@
                     <h3>Genere:</h3>
 
                     <div class="input-modifica-profilo">
-                        {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], $user->genere, ['class' => 'select', 'id' => 'genere-input']) }}
+                        {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], $user->genere, ['class' => 'select', 'id' => 'genere-input', 'disabled'=> 'disabled']) }}
                     </div>
                     @if ($errors->first('genere'))
                         <ul class="errors">
