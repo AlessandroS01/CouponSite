@@ -253,7 +253,7 @@ class GestioneAdmin extends Model {
             'telefono' => $request->telefono,
             'descrizione' => $request->descrizione,
             'ragione_sociale' => $request->ragione_sociale,
-            'logo' => $imageName ? 'img/'.$imageName : null
+            'logo' => $imageName
         ]);
 
         // Definisce l'evento della creazione di un nuovo utente registrato
