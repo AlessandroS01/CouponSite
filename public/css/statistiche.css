@@ -1,0 +1,62 @@
+.container-stats{
+    display: flex;
+    justify-content: center;
+}
+
+.container-statistiche_totali{
+    width: 1700px;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.container-statistiche_totali{
+    display: flex;
+    justify-content: center;
+}
+
+.container-coupon_totali{
+    display: flex;
+    justify-content: center;
+}
+
+.container-show_hide_stats{
+    margin-top: 50px;
+    display: flex;
+    justify-content: center;
+}
+
+.container-show_hide_stats div{
+    border: solid 2px var(--main-color);
+    border-radius: 10px;
+    display: grid;
+    grid-template-rows: 50px 50px;
+    align-items: center;
+    justify-items: center;
+    padding: 20px;
+
+    background-color: var(--main-color);
+    color: white;
+
+    transition: all 0.3s;
+}
+
+.container-show_hide_stats div:hover{
+    box-shadow: 0 0 20px #363945;
+}
+
+.container-offerta-Id,
+.container-cliente-Id{
+    cursor: pointer;
+    text-decoration: underline;
+    color: #2563eb;
+
+}
+
+.container-offerta-Id:hover,
+.container-cliente-Id:hover{
+    cursor: pointer;
+    text-decoration: none;
+    color: var(--main-color);
+}
+

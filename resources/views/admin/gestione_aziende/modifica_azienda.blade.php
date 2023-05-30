@@ -174,7 +174,7 @@
 
 
                 <div class="container-form_button">
-                    {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
+                    {{ Form::submit('Modifica', ['class' => 'submit-button']) }}
                 </div>
 
 

@@ -8,7 +8,11 @@ use App\Models\GestioneAdmin;
 use App\Models\Resources\Azienda;
 use App\Models\Resources\Faq;
 use App\Models\Resources\Product;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Pagination\Paginator;
+use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\File;
+use Illuminate\Support\Facades\URL;
 use Illuminate\Support\Str;
 use Illuminate\Validation\Rule;
 use Illuminate\Validation\Rules;
@@ -342,8 +346,32 @@ class AdminController extends Controller {
 
     public function visualizzaStatistiche() {
 
+        $numeroCouponEmessi = $this->gestioneAdmin->getNumeroCouponEmessi();
 
-        return view('admin.gestione_generale.visualizza_statistiche');
+        $listaCoupon = $this->gestioneAdmin->getAllCouponEmessi();
+
+
+        $listaCouponPaginated = $this->paginate($listaCoupon, 5, null, ['path' => URL::full(), 'pageName' => 'page']);
+
+        return view('admin.gestione_generale.visualizza_statistiche')
+                ->with('couponTotali', $numeroCouponEmessi)
+                ->with('listaCoupon', $listaCoupon)
+                ->with('listaCouponPaginated', $listaCouponPaginated);
+    }
+
+    public function paginate($items, $perPage = 3, $page = null, $options = [])
+    {
+        // il valore della pagina, se non viene passato come input al richiamo del metodo, viene richiamato un metodo della
+        // Facade Paginator per risolvere il problema della pagina corrente. Se non si riesce a stabilire il valore viene settato ad 1
+        $page = $page ?: (Paginator::resolveCurrentPage() ?: 1);
+
+        // $items viene convertito in una collezione se al passaggio della funzione $items non è di per sè una collezione
+        $items = $items instanceof Collection ? $items : Collection::make($items);
+
+        // crea un nuovo oggetto di LengthAwarePaginator passandogli la collezione $items divisa per pagine, dove ad ogni pagina
+        // si trovano 3 elementi della collezione, poi il totale degli elementi della collezione, il numero di elementi per
+        // ogni pagina, il valore della pagina corrente e tutte le opzioni aggiuntive passate al richiamo del metodo.
+        return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
 }

@@ -13,8 +13,13 @@
 
         <div class="barra-superiore_coupon">
 
+            @can('isUser')
+                <a href="{{ route('home') }}"> <img src="{{ asset('img/logo.png') }}" title="Home" alt="site logo"> </a>
+            @endcan
 
-            <a href="{{ route('home') }}"> <img src="{{ asset('img/logo.png') }}" title="Home" alt="site logo"> </a>
+            @can('isAdmin')
+                <a href="{{ route('#') }}"> <img src="{{ asset('img/logo.png') }}" title="Home" alt="site logo"> </a>
+            @endcan
 
         </div>
 
