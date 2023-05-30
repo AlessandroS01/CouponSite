@@ -15,7 +15,7 @@
     <div class="form-registrazione">
         <div class="container-form-register">
             <div>
-                {{ Form::open(array('route' => 'register', 'class' => 'contact-form', 'method' => 'POST')) }}
+                {{ Form::open(array('route' => 'register', 'class' => 'contact-form', 'method' => 'POST', 'id'=>'form_registrazione')) }}
 
                 <div  class="container-dati-registrazione">
                     {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
@@ -174,4 +174,119 @@
     </div>
 
 </div>
+
+
+
+
+<script>
+    $(function () {
+
+        var actionUrl = "{{ route('register') }}";
+        var formId = 'form_registrazione';
+
+        $(":input").on('blur', function (event) {
+            var formElementId = $(this).attr('id');
+            doElemValidation(formElementId, actionUrl, formId);
+        });
+        $("#form_registrazione").on('submit', function (event) {
+            event.preventDefault();
+            doFormValidation(actionUrl, formId);
+        });
+    });
+
+    function getErrorHtml(elemErrors) {
+        if (typeof elemErrors === 'undefined' || elemErrors.length < 1) {
+            return '';
+        }
+
+        var out = '<div><ul class="errors">';
+        for (var i = 0; i < elemErrors.length; i++) {
+            out += '<li>' + elemErrors[i] + '</li>';
+        }
+        out += '</ul></div>';
+        return out;
+    }
+
+    function doElemValidation(id, actionUrl, formId) {
+
+        var formElems;
+        var elem = $("#" + id);
+
+        if (elem.attr('type') === 'file') {
+            // elemento di input type=file valorizzato
+            if (elem.val() !== '') {
+                inputVal = elem.get(0).files[0];
+            } else {
+                inputVal = new File([""], "");
+            }
+        } else {
+            // elemento di input type != file
+            inputVal = elem.val();
+        }
+
+        formElems = new FormData();
+        formElems.append(id, inputVal);
+        addFormToken();
+        sendAjaxReq();
+
+        function addFormToken() {
+            var tokenVal = $("#" + formId + " input[name=_token]").val();
+            formElems.append('_token', tokenVal);
+        }
+
+        function sendAjaxReq() {
+
+            $.ajax({
+                type: 'POST',
+                url: actionUrl,
+                data: formElems,
+                dataType: "json",
+                error: function (data) {
+                    if (data.status === 422) {
+                        var errMsgs = JSON.parse(data.responseText);
+                        for (var field in errMsgs) {
+                            if (errMsgs.hasOwnProperty(field)) {
+                                var errors = errMsgs[field];
+                            }
+                        }
+                        console.log(id);
+                        $("#" + id).siblings('.errors').remove(); // Rimuovi gli errori precedenti
+                        console.log(getErrorHtml(errMsgs[id]));
+                        $("#" + id).after(getErrorHtml(errors[id]));
+                    }
+                },
+                contentType: false,
+                processData: false
+            });
+        }
+    }
+
+    function doFormValidation(actionUrl, formId) {
+        var form = new FormData(document.getElementById(formId));
+        $.ajax({
+            type: 'POST',
+            url: actionUrl,
+            data: form,
+            dataType: "json",
+            error: function (data) {
+                if (data.status === 422) {
+                    var errMsgs = JSON.parse(data.responseText);
+                    $.each(errMsgs, function (id) {
+                        $("#" + id).siblings('.errors').remove(); // Rimuovi gli errori precedenti
+                        $("#" + id).after(getErrorHtml(errMsgs[id]));
+                    });
+                }
+            },
+            success: function (data) {
+                window.location.replace(data.redirect);
+            },
+            contentType: false,
+            processData: false
+        });
+    }
+</script>
+
+
+
 @endsection
+

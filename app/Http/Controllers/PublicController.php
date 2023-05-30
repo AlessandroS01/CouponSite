@@ -10,6 +10,7 @@ use Illuminate\Http\Request;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\URL;
+use Illuminate\Support\Facades\Validator;
 
 
 class PublicController extends Controller
@@ -180,7 +181,6 @@ class PublicController extends Controller
                         ->with('azienda', $azienda)
                         ->with('offerte', $offerte);
     }
-
 
 
 

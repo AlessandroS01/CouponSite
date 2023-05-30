@@ -4,9 +4,11 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha384-Gqz4GsPTU2aRzajEVbUTLx7Z3+jHgcKYB4NKR3U8wxcVUQn/itPFkF8rCmThfiZ5" crossorigin="anonymous"></script>
 
 
-    @section('link')
+
+@section('link')
         <link rel="stylesheet" type="text/css" href="{{ asset('css/global.css') }}" >
         <link rel="stylesheet" type="text/css" href="{{ asset('css/gestione_form.css') }}" >
         <!-- Riga di codica che serve ad importare il font -->

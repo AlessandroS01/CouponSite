@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 
 /*
@@ -75,4 +76,6 @@ class RegisteredUserController extends Controller
         // reindirizza alla rotta definita su HOME -> bisogna ridefinire in maniera giusta la rotta
         return redirect(RouteServiceProvider::HOME);
     }
+
+
 }

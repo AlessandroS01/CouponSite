@@ -64,6 +64,20 @@
     font-size: 15px;
 }
 
+
+.errors {
+     color: red;
+     border: 1px solid red;
+     padding: 5px;
+     border-radius: 4px;
+     margin-top: 5px;
+}
+
+
+
+
+
+
 .container-dati-login input,
 .container-dati-registrazione .input
 {
