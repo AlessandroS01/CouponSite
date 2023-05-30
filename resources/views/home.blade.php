@@ -20,7 +20,7 @@
 
                 <div class="slide fade">
                     <div class="numbertext">{{ $index + 1 }} / 3</div>
-                    <img src={{ $azienda->logo }} style="width:100%">
+                    <img src="{{ asset($azienda->logo) }}" style="width:100%">
                 </div>
 
             @endforeach
@@ -42,7 +42,7 @@
                 @foreach($catalogoAziende->getPrimiCinqueElementi() as $azienda)
 
                     <div class="card-azienda">
-                    <img src={{ $azienda->logo }} >
+                    <img src="{{ asset($azienda->logo) }}" >
                     <a href="{{ route('azienda', [ 'partita_iva' => $azienda->partita_iva ] ) }}">{{ $azienda->nome }}</a>
                     </div>
 

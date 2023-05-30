@@ -14,7 +14,7 @@
         <div class="container-azienda_completa">
 
             <div class="container-header_azienda">
-                <img class="logo_azienda"src={{ asset( $azienda->logo )}}>
+                <img class="logo_azienda"src="{{ asset( $azienda->logo )}}">
                 <div class="container-informazioni_azienda">
                     <p>{{ $azienda->nome }}</p>
                     <p class="contatti-azienda"> Contatti azienda</p>
