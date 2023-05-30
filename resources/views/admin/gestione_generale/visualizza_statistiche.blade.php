@@ -1,121 +1,101 @@
 @extends('layouts.public')
 
-@section('title', 'Elimina utente')
+@section('title', 'Statistiche')
+
+@section('link')
+    @parent
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/statistiche.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/profile.css') }}" >
+    <link rel="stylesheet" type="text/css" href="{{ asset('css/catalogo.css') }}" >
+
+@endsection
+
+
 
 @section('content')
 
+    @isset($listaCoupon)
+    @endisset
     <div class="container-titolo_form">
-    <h1> Statistiche</h1>
+    <h1> Statistiche </h1>
     </div>
 
-    @isset($utente)
-    <div class="container-form">
-        <div class="form">
+    <div class="container-stats">
+        <div class="container-statistiche_totali">
 
-            {{ Form::open(array('route' => 'eliminazione utente', 'class' => 'contact-form', 'method' => 'POST')) }}
+            <div class="container-coupon_totali">
+                @isset($couponTotali)
+                    <h3> Numero coupon emessi: {{ $couponTotali }}</h3>
+                @endisset
+            </div>
 
-            {{ Form::hidden('utenteId', null, ['id' => 'utenteId']) }}
+            <div class="container-lista_coupon">
+                @isset($listaCouponPaginated)
+                    <div class="container-coupon-riscattati">
+                        <table>
+                            <tr>
+                                <th>ID offerta</th>
+                                <th>Nome offerta</th>
+                                <th>ID cliente</th>
+                                <th>Nome cliente</th>
+                                <th>Cognome cliente</th>
+                                <th>Coupon</th>
+                                <th>Data acquisizione</th>
+                            </tr>
 
-            <div>
-                @isset($usernameUtentiRegistrati)
-                    <div  class="container-dati_form">
-                        {{ Form::label('utente', 'utente', ['class' => 'label-input']) }}
-
-                        {{ Form::select('utente', [ '-' => '-'] + $usernameUtentiRegistrati, null, ['class' => 'input', 'id' => 'utenteUsername', 'readonly' => 'readonly']) }}
+                            @foreach($listaCouponPaginated as $coupon)
+                                @if($coupon->id_cliente === null)
+                                    <tr>
+                                        <td class="container-offerta-Id">{{$coupon->id_offerta}}</td>
+                                        <td>{{$coupon->nome_offerta}} </td>
+                                        <td>Utente cancellato </td>
+                                        <td>Utente cancellato</td>
+                                        <td>Utente cancellato</td>
+                                        <td>{{$coupon->codice}}</td>
+                                        <td>{{$coupon->data}}</td>
+                                    </tr>
+                                @else
+                                    <tr>
+                                        <td class="container-offerta-Id">{{$coupon->id_offerta}}</td>
+                                        <td>{{$coupon->nome_offerta}} </td>
+                                        <td class="container-cliente-Id">{{$coupon->id_cliente}} </td>
+                                        <td>{{$coupon->nome_cliente}}</td>
+                                        <td>{{$coupon->cognome_cliente}}</td>
+                                        <td>{{$coupon->codice}}</td>
+                                        <td>{{$coupon->data}}</td>
+                                    </tr>
+                                @endif
+                            @endforeach
+                        </table>
+                    </div>
+                    <div class="paginator">
+                        {{ $listaCouponPaginated->links() }}
                     </div>
                 @endisset
             </div>
 
-            <div class="container-form-gestione">
+            <div class="container-show_hide_stats">
                 <div>
-
-
-                    <div  class="container-dati_form">
-                        {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
-                        {{ Form::text('nome', '', ['class' => 'input', 'id' => 'nome', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div  class="container-dati_form">
-                        {{ Form::label('cognome', 'Cognome', ['class' => 'label-input']) }}
-                        {{ Form::text('cognome', '', ['class' => 'input', 'id' => 'cognome', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div  class="container-dati_form">
-                        {{ Form::label('email', 'Email', ['class' => 'label-input']) }}
-                        {{ Form::text('email', '', ['class' => 'input','id' => 'email', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div  class="container-dati_form">
-                        {{ Form::label('username', 'Username', ['class' => 'label-input']) }}
-                        {{ Form::text('username', '', ['class' => 'input','id' => 'username', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div class="container-dati_form">
-                        {{ Form::label('genere', 'Genere', ['class' => 'label-input']) }}
-                        {{ Form::select('genere', ['-'=> '-', 'M' => 'M', 'F' => 'F'], null, ['class' => 'input', 'id' => 'genere', 'disabled' => 'disabled']) }}
-
-                    </div>
-
-                </div>
-
-                <div>
-
-
-                    <div class="container-dati_form">
-                        {{ Form::label('eta', 'Età', ['class' => 'label-input']) }}
-                        {{ Form::text('eta', '', ['class' => 'input', 'id' => 'eta', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div class="container-dati_form">
-                        {{ Form::label('telefono', 'Telefono', ['class' => 'label-input']) }}
-                        {{ Form::text('telefono', '', ['class' => 'input', 'id' => 'telefono', 'readonly' => 'readonly']) }}
-                    </div>
-
-
-                    <div class="container-dati_form">
-                        {{ Form::label('via', 'Via', ['class' => 'label-input']) }}
-                        {{ Form::text('via', '', ['class' => 'input', 'id' => 'via', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div class="container-dati_form">
-                        {{ Form::label('numero_civico', 'Numero Civico', ['class' => 'label-input']) }}
-                        {{ Form::text('numero_civico', '', ['class' => 'input', 'id' => 'numero_civico', 'readonly' => 'readonly']) }}
-
-                    </div>
-
-
-                    <div class="container-dati_form">
-                        {{ Form::label('citta', 'Città', ['class' => 'label-input']) }}
-                        {{ Form::text('citta', '', ['class' => 'input', 'id' => 'citta', 'readonly' => 'readonly']) }}
-
-                    </div>
-
+                    <h3 id="codice-offerta_id-utente"></h3>
+                    <h3 id="numero_coupon"></h3>
                 </div>
             </div>
 
 
 
-            <div class="container-form_button">
-                {{ Form::submit('Elimina utente', ['class' => 'submit-button']) }}
-            </div>
 
-
-            {{ Form::close() }}
         </div>
-
     </div>
-    @endisset
+
 
 @endsection
+
+@section('script')
+    <script>
+        var listaCoupon = {!! $listaCoupon !!};
+    </script>
+
+    <script src="{{ asset('js/VisualizzaStatistiche.js') }}"></script>
+@endsection
+
+

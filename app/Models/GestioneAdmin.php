@@ -22,6 +22,23 @@ use Illuminate\Support\Str;
 
 class GestioneAdmin extends Model {
 
+
+    public function getNumeroCouponEmessi(){
+
+        $couponTotali = Acquisizione::all()->count();
+        return $couponTotali;
+    }
+
+    public function getAllCouponEmessi(){
+
+        $listaCoupon = Acquisizione::join('offerta', 'acquisizione.offerta', '=', 'offerta.codice')
+            ->leftJoin('users', 'users.id', '=', 'acquisizione.cliente')
+            ->select('acquisizione.offerta as id_offerta', 'offerta.oggetto_offerta as nome_offerta', 'users.nome as nome_cliente', 'users.id as id_cliente', 'users.cognome as cognome_cliente', 'acquisizione.codice_coupon as codice', 'acquisizione.created_at as data')
+            ->orderBy('offerta.codice', 'asc')
+            ->get();
+
+        return $listaCoupon;
+    }
     public function getUtentiRegistrati(){
 
         $utenti = User::where('livello', 1)->get();
