@@ -187,10 +187,9 @@ class AdminController extends Controller {
             }
 
             $logoAziendaPreesistente = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
-            if (File::exists($logoAziendaPreesistente)) {
-                // Delete the image file
-                File::delete($logoAziendaPreesistente);
-            }
+            unlink($logoAziendaPreesistente);
+
+
 
             $destinationPath = public_path('img');
             $image->move($destinationPath, $imageName);
@@ -242,10 +241,11 @@ class AdminController extends Controller {
 
 
     public function deleteFaq(Request $request) {
-        $faqDaEliminare = Faq::find($request->idfaq);
-        Log::info('iuhpèij');
-        $faqDaEliminare->delete();
-        Log::info('iuhpèij');
+        if($request->idfaq){
+            $faqDaEliminare = Faq::find($request->idfaq);
+            $faqDaEliminare->delete();
+        }
+
         return redirect('/');
     }
 
@@ -291,8 +291,10 @@ class AdminController extends Controller {
     }
 
     public function deleteStaff(Request $request) {
-        $staffDaEliminare = User::find($request->staffId);
-        $staffDaEliminare->delete();
+        if ($request->staffId){
+            $staffDaEliminare = User::find($request->staffId);
+            $staffDaEliminare->delete();
+        }
         return redirect('/');
     }
 
@@ -308,17 +310,22 @@ class AdminController extends Controller {
     }
 
     public function deleteUtente(Request $request) {
-        $utenteDaEliminare = User::find($request->utenteId);
-        $utenteDaEliminare->delete();
+        if($request->utenteId){
+            $utenteDaEliminare = User::find($request->utenteId);
+            $utenteDaEliminare->delete();
+        }
         return redirect('/');
     }
 
     public function deleteAzienda(Request $request) {
-        $aziendaDaEliminare = Azienda::find($request->partita_iva);
-        $percorsoLogo = public_path($aziendaDaEliminare->logo);
-        //unlink elimina il logo dell'azienda da eliminare dalla cartella img
-        unlink($percorsoLogo);
-        $aziendaDaEliminare->delete();
+        if($request->partita_iva){
+            $aziendaDaEliminare = Azienda::find($request->partita_iva);
+            $percorsoLogo = public_path($aziendaDaEliminare->logo);
+            //unlink elimina il logo dell'azienda da eliminare dalla cartella img
+            unlink($percorsoLogo);
+            $aziendaDaEliminare->delete();
+        }
+
         return redirect('/');
     }
 

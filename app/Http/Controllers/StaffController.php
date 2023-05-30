@@ -134,7 +134,9 @@ class StaffController extends Controller {
 
     public function disattivaOfferta(Request $request)
     {
-        $this->gestioneStaff->eliminaOfferta($request);
+        if($request->codiceOfferta){
+            $this->gestioneStaff->eliminaOfferta($request);
+        }
         return redirect('/');
     }
 }
