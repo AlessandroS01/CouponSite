@@ -44,8 +44,8 @@
                 </div>
 
                 <div  class="container-dati-registrazione">
-                    {{ Form::label('password-confirm', 'Conferma password', ['class' => 'label-input']) }}
-                    {{ Form::password('password_confirmation', ['class' => 'input', 'id' => 'password_confirm']) }}
+                    {{ Form::label('password_confirmation', 'Conferma password', ['class' => 'label-input']) }}
+                    {{ Form::password('password_confirmation', ['class' => 'input', 'id' => 'password_confirmation']) }}
                 </div>
             </div>
 
@@ -118,27 +118,44 @@
     });
 
     function getErrorHtml(id, elemErrors) {
+
         if (typeof elemErrors === 'undefined' || elemErrors.length < 1) {
             return '';
         }
 
-
-        var newUl = $('<ul>');
-
-
-        var newUlId = 'errors[' + id + ']';
+        var newUl = document.createElement('ul');
+        var newUlId = 'errors' + id;
         var newUlClass = 'errors';
 
-        newUl.attr('id', newUlId);
-        newUl.addClass(newUlClass);
-
+        newUl.id = newUlId;
+        newUl.className = newUlClass;
 
         for (var i = 0; i < elemErrors.length; i++) {
-            var listItem = $('<li>').text(elemErrors[i]);
-            newUl.append(listItem);
+
+            if( id === 'password'){
+                if( $("#password").val() !== $("#password_confirmation").val() ){
+
+                    var listItem = document.createElement('li');
+                    listItem.textContent = elemErrors[i];
+                    newUl.appendChild(listItem);
+                }
+                else{
+                    if( i !== 0){
+                        var listItem = document.createElement('li');
+                        listItem.textContent = elemErrors[i];
+                        newUl.appendChild(listItem);
+                    }
+                }
+            }
+            else{
+                var listItem = document.createElement('li');
+                listItem.textContent = elemErrors[i];
+                newUl.appendChild(listItem);
+            }
+
         }
 
-        return newUl;
+        return newUl.outerHTML;
     }
 
     function getErrorHtmlSubmit(elemErrors) {
@@ -146,13 +163,17 @@
             return '';
         }
 
+        // elimina tutti gli elementi in cui l'id inizia con "errors" ( tutte le liste degli errori)
+        $('[id^="errors"]').remove();
+
         var fields = Object.keys(elemErrors);
 
         for (var campo in fields) {
 
+            var campoValue = fields[campo];
+
             var newUl = $('<ul>');
 
-            var campoValue = fields[campo];
 
             if (elemErrors.hasOwnProperty(campoValue)) {
                 var errors = elemErrors[campoValue];
@@ -165,14 +186,14 @@
                 }
 
 
-                var newUlId = 'errors[' + campoValue + ']';
+                var newUlId = 'errors' + campoValue;
                 var newUlClass = 'errors';
 
                 newUl.attr('id', newUlId);
                 newUl.addClass(newUlClass);
             }
 
-            $('#errors\\[' + campoValue + '\\]').remove();
+
 
             $('.container-dati-registrazione input#' + campoValue).parent('.container-dati-registrazione').after(newUl);
 
@@ -210,20 +231,17 @@
                 error: function (data) {
                     if (data.status === 422) {
                         var errMsgs = JSON.parse(data.responseText);
+
+                        $('#errors' + id).remove();
+
                         for (var field in errMsgs) {
                             if (errMsgs.hasOwnProperty(field)) {
                                 var errors = errMsgs[field];
+
                             }
                         }
 
-                        $('#errors\\[' + id + '\\]').remove();
-
-
-                        if(id != 'password' || id != 'password_confirm'){
-                            $('.container-dati-registrazione input#' + id).parent('.container-dati-registrazione').after(getErrorHtml(id, errors[id]));
-                        }else{
-
-                        }
+                        $('.container-dati-registrazione input#' + id).parent('.container-dati-registrazione').after(getErrorHtml(id, errors[id]));
 
                     }
                 },
