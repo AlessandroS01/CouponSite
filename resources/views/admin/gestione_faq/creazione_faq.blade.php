@@ -14,7 +14,7 @@
 
 
                     {{ Form::open(array('route' => 'aggiunta FAQ', 'class' => 'contact-form', 'method' => 'POST')) }}
-
+                    @csrf
                     <div  class="container-dati_form_descrizione">
                         {{ Form::label('domanda', 'Domanda:', ['class' => 'label-input']) }}
                         {{ Form::textarea('domanda', '', ['class' => 'input_descrizione', 'id' => 'faq-input-text', 'rows' => 4, 'cols' => 50]) }}

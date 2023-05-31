@@ -13,7 +13,7 @@
         <div class="form">
 
             {{ Form::open(array('route' => 'eliminazione utente', 'class' => 'contact-form', 'method' => 'POST')) }}
-
+            @csrf
             {{ Form::hidden('utenteId', null, ['id' => 'utenteId']) }}
 
             <div>

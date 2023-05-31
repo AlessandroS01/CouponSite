@@ -14,7 +14,7 @@
                 <div class="container-form-gestione">
                     <div>
                         {{ Form::open(array('route' => 'aggiunta staff', 'class' => 'contact-form', 'method' => 'POST')) }}
-
+                        @csrf
                         <div  class="container-dati_form">
                             {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                             {{ Form::text('nome', '', ['class' => 'input', 'id' => 'nome']) }}

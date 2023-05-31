@@ -14,7 +14,7 @@
             <div class="form">
 
                 {{ Form::open(array('route' => 'modifica staff', 'class' => 'contact-form', 'method' => 'POST')) }}
-
+                @csrf
                 {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
 
                 <div>

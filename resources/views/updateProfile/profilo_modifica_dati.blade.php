@@ -9,6 +9,7 @@
 
 
             {{ Form::open(array('route' => 'profilo-modifica-dati', 'class' => 'form-modifica-dati','id'=>'modifica-dati-form', 'method' => 'POST')) }}
+            @csrf
             <div class="container-profile">
                 <div class="data">
 

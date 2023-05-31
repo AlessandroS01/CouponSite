@@ -66,11 +66,9 @@
 
 
 .errors {
-     color: red;
-     border: 1px solid red;
-     padding: 5px;
-     border-radius: 4px;
-     margin-top: 5px;
+    width: 80%;
+    min-height: 20px;
+    margin: auto;
 }
 
 

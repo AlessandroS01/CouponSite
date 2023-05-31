@@ -13,11 +13,11 @@
         <div class="container-form">
             <div class="form">
 
-                {{ Form::open(array('route' => 'eliminazione staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+                    {{ Form::open(array('route' => 'eliminazione staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+                @csrf
+                    {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
 
-                {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
-
-                <div>
+                    <div>
                     @isset($usernameUtentiStaff)
                         <div  class="container-dati_form">
                             {{ Form::label('staff', 'Staff', ['class' => 'label-input']) }}

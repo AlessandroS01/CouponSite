@@ -9,6 +9,7 @@ use Illuminate\Auth\Events\Registered;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Log;
 use Illuminate\Support\Facades\Validator;
 use Illuminate\Validation\Rules;
 
@@ -40,6 +41,7 @@ class RegisteredUserController extends Controller
     che rappresenta la richiesta e lo passa come argomento al metodo*/
     public function store(Request $request)
     {
+
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
             'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],

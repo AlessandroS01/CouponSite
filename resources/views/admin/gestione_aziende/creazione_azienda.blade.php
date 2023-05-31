@@ -14,7 +14,7 @@
             <div class="container-form-gestione">
                 <div>
                     {{ Form::open(array('route' => 'aggiunta azienda', 'class' => 'contact-form', 'method' => 'POST', 'files' => true, 'enctype' => 'multipart/form-data')) }}
-
+                    @csrf
                     <div  class="container-dati_form">
                         {{ Form::label('nome', 'Nome', ['class' => 'label-input']) }}
                         {{ Form::text('nome', '', ['class' => 'input']) }}

@@ -13,7 +13,7 @@
             <div class="form">
 
                 {{ Form::open(array('route' => 'modifica azienda', 'class' => 'contact-form', 'method' => 'POST', 'files' => true, 'enctype' => 'multipart/form-data')) }}
-
+                @csrf
                 @isset($partitaIvaAziende)
                     <div  class="container-dati_form">
                         {{ Form::label('azienda', 'Azienda', ['class' => 'label-input']) }}

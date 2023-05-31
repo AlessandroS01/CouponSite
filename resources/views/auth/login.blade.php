@@ -18,7 +18,7 @@
 
         <div class="container-auth">
             {{ Form::open(array('route' => 'login', 'class' => 'contact-form')) }}
-
+            @csrf
 
              <div  class="container-dati-login">
                 {{ Form::label('username', 'Username', ['class' => 'label-input']) }}
