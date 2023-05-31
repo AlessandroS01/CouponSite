@@ -13,18 +13,17 @@
         <div class="form faq-form">
 
 
-                    {{ Form::open(array('route' => 'aggiunta FAQ', 'class' => 'contact-form', 'method' => 'POST')) }}
+                    {{ Form::open(array('class' => 'contact-form', 'method' => 'POST', 'id'=>'form_creazione_faq' )) }}
                     @csrf
                     <div  class="container-dati_form_descrizione">
                         {{ Form::label('domanda', 'Domanda:', ['class' => 'label-input']) }}
-                        {{ Form::textarea('domanda', '', ['class' => 'input_descrizione', 'id' => 'faq-input-text', 'rows' => 4, 'cols' => 50]) }}
+                        {{ Form::textarea('domanda', '', ['class' => 'input_descrizione', 'id' => 'domanda', 'rows' => 4, 'cols' => 50]) }}
 
                     </div>
 
                     <div  class="container-dati_form_descrizione">
                         {{ Form::label('risposta', 'Risposta:', ['class' => 'label-input']) }}
-                        {{ Form::textarea('risposta', '', ['class' => 'input_descrizione', 'id' => 'faq-input-text', 'rows' => 4, 'cols' => 50]) }}
-
+                        {{ Form::textarea('risposta', '', ['class' => 'input_descrizione', 'id' => 'risposta', 'rows' => 4, 'cols' => 50]) }}
                     </div>
 
 
@@ -41,4 +40,13 @@
 
 
 
+@endsection
+
+@section('script')
+    <script>
+        var actionUrl = "{{ route('aggiunta FAQ') }}";
+        var formId = 'form_creazione_faq';
+    </script>
+
+    <script src="{{ asset('js/AjaxCreazioneFaq.js') }}"></script>
 @endsection

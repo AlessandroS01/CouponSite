@@ -76,7 +76,7 @@ class RegisteredUserController extends Controller
         // viene fatto il login del nuovo utente
         Auth::login($user);
         // reindirizza alla rotta definita su HOME -> bisogna ridefinire in maniera giusta la rotta
-        return redirect(RouteServiceProvider::HOME);
+        return redirect('/');
     }
 
 
