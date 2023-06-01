@@ -1,7 +1,5 @@
 $(function () {
 
-
-
     $(":input").on('blur', function (event) {
         event.preventDefault();
         var formElementId = $(this).attr('id');
@@ -143,16 +141,19 @@ function doFormValidation(actionUrl, formId) {
         url: actionUrl,
         data: form,
         dataType: "json",
+        success: window.location.href = homeRoute,
         error: function (data) {
             if (data.status === 422) {
                 var errMsgs = JSON.parse(data.responseText);
                 $.each(errMsgs, function (id) {
                     if(id === 'errors'){
                         getErrorHtmlSubmit(errMsgs[id]);
+                        console.log("AAAA")
                     }
                 });
             }
         },
+
         contentType: false,
         processData: false
     });

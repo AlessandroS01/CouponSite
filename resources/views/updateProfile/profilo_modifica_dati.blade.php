@@ -93,14 +93,16 @@
 
                     <h3>Genere:</h3>
 
+
                     <div class="input-modifica-profilo">
-                        {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], $user->genere, ['class' => 'select', 'id' => 'genere-input', 'disabled'=> 'disabled']) }}
+                        {{ Form::select('genere', ['M' => 'M', 'F' => 'F'], $user->genere, ['class' => 'select', 'id' => 'genere-input']) }}
                     </div>
                     @if ($errors->first('genere'))
                         <ul class="errors">
                             <li>{{ $errors->first('genere') }}</li>
                         </ul>
                     @endif
+
 
                     <h3>Età:</h3>
 

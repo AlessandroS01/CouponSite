@@ -46,6 +46,7 @@
     <script>
         var actionUrl = "{{ route('aggiunta FAQ') }}";
         var formId = 'form_creazione_faq';
+        var homeRoute = '{{ route('home') }}';
     </script>
 
     <script src="{{ asset('js/AjaxCreazioneFaq.js') }}"></script>

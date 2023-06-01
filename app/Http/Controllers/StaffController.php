@@ -69,7 +69,6 @@ class StaffController extends Controller {
 
         $this->gestioneStaff->createOfferta($request, $aziendaSelezionata);
 
-
         // ritorna alla home
         return redirect('/');
     }

@@ -27,7 +27,6 @@ $(document).ready(function() {
             $('.container-logo-modifica_azienda').show();
 
             var logo = public_url + '/' + aziendaSelezionata.logo;
-            console.log(logo);
             $("#logo-preview").attr("src", logo);
 
 

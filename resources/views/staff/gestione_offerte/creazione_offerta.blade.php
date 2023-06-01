@@ -104,6 +104,7 @@
     <script>
         var actionUrl = "{{ route('creazione offerta') }}";
         var formId = 'form_creazione_offerta';
+        var homeRoute = '{{ route('home') }}';
     </script>
 
     <script src="{{ asset('js/AjaxCreazioneOfferta.js') }}"></script>

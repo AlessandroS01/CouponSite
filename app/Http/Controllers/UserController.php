@@ -68,7 +68,7 @@ function ShowModificaPassword(){
             'username' => ['required', 'string', 'min:8', 'max:50', Rule::unique('users')->ignore($user),],
             'nome' => ['required', 'string', 'max:50'],
             'cognome' => ['required', 'string', 'max:50'],
-            'genere' => ['required', 'string', 'max:1'],
+            'genere' => ['string', 'max:1'],
             'eta' => ['required', 'int', 'min:1', 'max:99'],
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('users')->ignore($user),],
             'telefono' => ['required', 'numeric', 'digits_between:10,20'],
@@ -77,15 +77,28 @@ function ShowModificaPassword(){
             'citta' => ['required', 'string', 'max:50'],
         ]);
 
-        $user->nome = $request->nome;
-        $user->cognome = $request->cognome;
-        $user->genere = $request->genere;
-        $user->eta = $request->eta;
-        $user->email = $request->email;
-        $user->telefono = $request->telefono;
-        $user->via = $request->via;
-        $user->numero_civico = $request->numero_civico;
-        $user->citta = $request->citta;
+        if( $request->genere){
+            $user->nome = $request->nome;
+            $user->cognome = $request->cognome;
+            $user->genere = $request->genere;
+            $user->eta = $request->eta;
+            $user->email = $request->email;
+            $user->telefono = $request->telefono;
+            $user->via = $request->via;
+            $user->numero_civico = $request->numero_civico;
+            $user->citta = $request->citta;
+        }
+        else{
+            $user->nome = $request->nome;
+            $user->cognome = $request->cognome;
+            $user->eta = $request->eta;
+            $user->email = $request->email;
+            $user->telefono = $request->telefono;
+            $user->via = $request->via;
+            $user->numero_civico = $request->numero_civico;
+            $user->citta = $request->citta;
+        }
+
 
         $user->save();
 
