@@ -72,6 +72,11 @@ class AdminController extends Controller {
         return view('admin.gestione_faq.creazione_faq');
     }
 
+    /**
+     * Metodo che valida e crea una nuova faq
+     * @param Request $request
+     * @return \Illuminate\Http\JsonResponse
+     */
     public function storeNewFAQ(Request $request){
 
         $request->validate([
@@ -79,10 +84,13 @@ class AdminController extends Controller {
             'risposta' =>['required', 'string', 'min:1']
         ]);
 
+
         $this->gestioneAdmin->createFAQ($request);
 
-        return redirect('/');
-
+        // serve per far visualizzare al client che la richiesta è stata correttemente validata.
+        // In questo modo con ajax si può entrare all'interno del blocco success per fare il redirect
+        // alla rotta desiderata
+        return response()->json(['message' => 'FAQ creata con successo'], 200);
     }
 
     public function storeNewStaff(Request $request) {

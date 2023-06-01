@@ -308,6 +308,7 @@ class GestioneAdmin extends Model {
     }
 
     public function createFAQ(Request $request){
+
         $faq = Faq::create([
             'domanda'=>$request->domanda,
             'risposta' =>$request->risposta

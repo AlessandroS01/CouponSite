@@ -118,14 +118,24 @@ Route::post('/profilo/modifica/password', [UserController::class, 'updatePasswor
 /* Fine rotte profilo */
 
 
+/* Inizio rotte staff */
+/**
+ * Rotta per visualizzare il pannello di gestione dello staff.
+ * Il middleware permette solo agli utenti di livello 2 di
+ * richiamare la rotta.
+ */
 Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])
     ->name('pannello staff')
     ->middleware(['auth', 'can:isStaff']);
 
+/**
+ * Rotte per visualizzare la pagina per la creazione di una nuova offerta.
+ * Il middleware permette solo agli utenti di livello 2 di
+ * richiamare la rotta.
+ */
 Route::get('/creazione/offerta', [StaffController::class, 'showCreazioneOfferta'])
     ->name('creazione offerta')
     ->middleware(['auth', 'can:isStaff']);
-
 Route::post('/creazione/offerta', [StaffController::class, 'storeNewOfferta'])
     ->name('creazione offerta')
     ->middleware(['auth', 'can:isStaff']);
@@ -133,7 +143,6 @@ Route::post('/creazione/offerta', [StaffController::class, 'storeNewOfferta'])
 Route::get('/modifica/offerta', [StaffController::class, 'showModificaOfferta'])
     ->name('modifica offerta')
     ->middleware(['auth', 'can:isStaff']);
-
 Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModificata'])
     ->name('modifica offerta')
     ->middleware(['auth', 'can:isStaff']);
@@ -141,10 +150,10 @@ Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModifi
 Route::get('/eliminazione/offerta', [StaffController::class, 'showEliminaOfferta'])
     ->name('eliminazione offerta')
     ->middleware(['auth', 'can:isStaff']);
-
 Route::post('/eliminazione/offerta', [StaffController::class, 'disattivaOfferta'])
     ->name('eliminazione offerta')
     ->middleware(['auth', 'can:isStaff']);
+/* Fine rotte staff */
 
 Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
@@ -204,7 +213,6 @@ Route::post('/modifica/azienda', [AdminController::class, 'storeAziendaModificat
 Route::get('/aggiunta/FAQ', [AdminController::class, 'showAggiuntaFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);
-
 Route::post('/aggiunta/FAQ', [AdminController::class, 'storeNewFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);

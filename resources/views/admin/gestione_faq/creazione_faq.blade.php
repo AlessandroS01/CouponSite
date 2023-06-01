@@ -13,7 +13,7 @@
         <div class="form faq-form">
 
 
-                    {{ Form::open(array('class' => 'contact-form', 'method' => 'POST', 'id'=>'form_creazione_faq' )) }}
+                    {{ Form::open(array('route' => 'aggiunta FAQ','class' => 'contact-form', 'method' => 'POST', 'id'=>'form_creazione_faq' )) }}
                     @csrf
                     <div  class="container-dati_form_descrizione">
                         {{ Form::label('domanda', 'Domanda:', ['class' => 'label-input']) }}
@@ -28,9 +28,9 @@
 
 
 
-            <div class="container-form_button">
-                {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
-            </div>
+                    <div class="container-form_button">
+                        {{ Form::submit('Aggiungi', ['class' => 'submit-button']) }}
+                    </div>
 
 
             {{ Form::close() }}

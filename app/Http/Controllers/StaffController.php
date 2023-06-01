@@ -28,6 +28,10 @@ class StaffController extends Controller {
         $this->gestioneAziende = New CatalogoAziende();
     }
 
+    /**
+     * Metodo che ritorna il pannello di gestione dello staff
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
     public function showPannelloStaff() {
         return view('staff.pannello_staff');
     }
@@ -38,6 +42,8 @@ class StaffController extends Controller {
      */
     public function showCreazioneOfferta()
     {
+        // alla vista si passano i nomi di tutte le aziende che lo staff può gestire attraverso
+        // il metodo sotto nominato
         return view('staff.gestione_offerte.creazione_offerta')
                 ->with('aziende', $this->gestioneStaff->getNomeAziendeByStaff());
     }
@@ -69,8 +75,10 @@ class StaffController extends Controller {
 
         $this->gestioneStaff->createOfferta($request, $aziendaSelezionata);
 
-        // ritorna alla home
-        return redirect('/');
+        // serve per far visualizzare al client che la richiesta è stata correttemente validata.
+        // In questo modo con ajax si può entrare all'interno del blocco success per fare il redirect
+        // alla rotta desiderata
+        return response()->json(['message' => 'Offerta creata con successo'], 200);
     }
 
     /**

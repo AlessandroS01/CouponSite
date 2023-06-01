@@ -27,6 +27,8 @@ class GestioneStaff extends Model {
     public function getNomeAziendeByStaff(){
         $staffId = Auth::id();
 
+        // il metodo pluck ritorna un array chiave valore in cui il primo valore è la posizione all'interno dell'array
+        // e come valore i vari nomi delle aziende.
         $nomeAziende = Gestione::join('azienda', 'gestione.azienda', '=', 'azienda.partita_iva')
             ->where('gestione.staff', $staffId)
             ->pluck('azienda.nome')

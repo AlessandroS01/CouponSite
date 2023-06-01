@@ -102,9 +102,10 @@
 
 @section('script')
     <script>
-        var actionUrl = "{{ route('creazione offerta') }}";
-        var formId = 'form_creazione_offerta';
-        var homeRoute = '{{ route('home') }}';
+        // variabile definite per riprendere i valori all'interno del file 'js/AjaxCreazioneOfferta.js'
+        var actionUrl = "{{ route('creazione offerta') }}"; // rotta al submit della form
+        var formId = 'form_creazione_offerta'; // id della form
+        var homeRoute = '{{ route('home') }}'; // rotta per tornare alla home
     </script>
 
     <script src="{{ asset('js/AjaxCreazioneOfferta.js') }}"></script>
