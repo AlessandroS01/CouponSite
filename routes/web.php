@@ -76,33 +76,46 @@ Route::get('/offerta/{offertaId}', [PublicController::class, 'showOfferta'])
 Route::get('/azienda/{partita_iva}', [PublicController::class, 'showAzienda'])
         ->name('azienda');
 
-// rotta per accedere alla sezione del cliente
+/**
+ * Rotta che riporta alla pagina per la visualizzazione di un coupon.
+ */
 Route::post('/coupon', [UserController::class, 'showCouponGenerato'])
         ->name('generazione coupon');
 
-
-//rotte per il profilo
+/* Inizio rotte profilo */
+/**
+ * Rotta per visualizzare la pagina del profilo di un utente.
+ * Il middleware permette solo agli utenti di liello 1 e livello 2 di
+ * richiamare la rotta.
+ */
 Route::get('/profilo', [UserController::class, 'showProfilo'])
         ->name('profilo')
         ->middleware(['auth', 'can:isUserStaff']);
 
-
+/**
+ * Rotte per visualizzare la pagina per la modifica dei dati di un utente.
+ * Il middleware permette solo agli utenti di liello 1 e livello 2 di
+ * richiamare la rotta.
+ */
 Route::get('/profilo/modifica', [UserController::class, 'ShowModificaDati'])
     ->name('profilo-modifica-dati')
     ->middleware(['auth', 'can:isUserStaff']);
-
 Route::post('/profilo/modifica', [UserController::class, 'updateData'])
     ->name('profilo-modifica-dati')
     ->middleware(['auth', 'can:isUserStaff']);
 
+/**
+ * Rotte per visualizzare la pagina per la modifica della password di un utente.
+ * Il middleware permette solo agli utenti di liello 1 e livello 2 di
+ * richiamare la rotta.
+ */
 Route::get('/profilo/modifica/password', [UserController::class, 'ShowModificaPassword'])
     ->name('profilo-modifica-password')
     ->middleware(['auth', 'can:isUserStaff']);
-
 Route::post('/profilo/modifica/password', [UserController::class, 'updatePassword'])
     ->name('profilo-modifica-password')
     ->middleware(['auth', 'can:isUserStaff']);
-//fine rotte per il profilo
+/* Fine rotte profilo */
 
 
 Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])

@@ -19,47 +19,65 @@ use Illuminate\Validation\Rules;
 class UserController extends Controller {
 
 
-protected $ProfileUser;
-protected $CatalogoOfferte;
-protected $gestioneAcquisizioneCoupon;
-protected $CatalogoAziende;
+    protected $ProfileUser;
+    protected $CatalogoOfferte;
+    protected $gestioneAcquisizioneCoupon;
+    protected $CatalogoAziende;
 
-public function __construct()
-{
-    $this->gestioneAcquisizioneCoupon = New GestioneAcquisizioneCoupon();
-    $this->ProfileUser = new ProfileUser();
-    $this->CatalogoOfferte=new CatalogoOfferte();
-    $this->CatalogoAziende= new CatalogoAziende();
-}
+    public function __construct()
+    {
+        $this->gestioneAcquisizioneCoupon = New GestioneAcquisizioneCoupon();
+        $this->ProfileUser = new ProfileUser();
+        $this->CatalogoOfferte=new CatalogoOfferte();
+        $this->CatalogoAziende= new CatalogoAziende();
+    }
 
+    /**
+     * Metodo che permette di ritornare la view per visualizzare i propri dati.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    function showProfilo(){
 
-function showProfilo(){
+         $user= Auth::user();
 
-     $user= Auth::user();
-     $coupons = $this->ProfileUser->getCoupons($user->id);
-     return view('updateProfile.profilo_visualizza_dati')
-        ->with('user', $user)
-        ->with('coupons', $coupons);
+         // prende tutti i coupon generati dall'utente che ha un id uguale a quello dell'utente autenticato
+         $coupons = $this->ProfileUser->getCoupons($user->id);
 
-}
+         return view('updateProfile.profilo_visualizza_dati')
+            ->with('user', $user)
+            ->with('coupons', $coupons);
 
-function ShowModificaDati(){
+    }
 
-    $user= Auth::user();
-    return view('updateProfile.profilo_modifica_dati')
-        ->with('user', $user);
+    /**
+     * Metodo che permette di ritornare la view per modifica i propri dati.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    function ShowModificaDati(){
 
-}
+        $user= Auth::user();
+        return view('updateProfile.profilo_modifica_dati')
+            ->with('user', $user);
 
-function ShowModificaPassword(){
+    }
 
-    $user= Auth::user();
-    return view('updateProfile.profilo_modifica_password')
-        ->with('user', $user);
+    /**
+     * Metodo che permette di ritornare la view per modificare la propria password.
+     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     */
+    function ShowModificaPassword(){
 
-}
+        $user= Auth::user();
+        return view('updateProfile.profilo_modifica_password')
+            ->with('user', $user);
 
+    }
 
+    /**
+     * Metodo che permette di modificare i dati di un utente
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updateData(Request $request)
     {
         $user = User::find(Auth::id());
@@ -77,6 +95,7 @@ function ShowModificaPassword(){
             'citta' => ['required', 'string', 'max:50'],
         ]);
 
+        // se l'utente autenticato risulta un utente di livello 1 entra dentro l'if
         if( $request->genere){
             $user->nome = $request->nome;
             $user->cognome = $request->cognome;
@@ -88,6 +107,7 @@ function ShowModificaPassword(){
             $user->numero_civico = $request->numero_civico;
             $user->citta = $request->citta;
         }
+        // entra solo se l'utente fa parte dello staff
         else{
             $user->nome = $request->nome;
             $user->cognome = $request->cognome;
@@ -98,8 +118,6 @@ function ShowModificaPassword(){
             $user->numero_civico = $request->numero_civico;
             $user->citta = $request->citta;
         }
-
-
         $user->save();
 
         return redirect()->route('profilo')
@@ -107,13 +125,21 @@ function ShowModificaPassword(){
 
     }
 
+    /**
+     * Metodo che permette di modificare la password di un utente
+     * @param Request $request
+     * @return \Illuminate\Http\RedirectResponse
+     */
     public function updatePassword(Request $request)
     {
         $user = User::find(Auth::id());
-        Log::info("entro qua ".Hash::make($request->oldpassword));
-        Log::info("password ".$user->password);
+
+        // effettua il confronto tra la password immessa all'interno del campo 'oldpassword' e quella esistente su
+        // db tramite il metodo Hash::check.
+        // Infatti Hash::check effettua il confronto tra la password immessa, in formato di stringa, e la password
+        // codificata del db. Ritorna true solo se i due le stringhe corrispondono
         if(Hash::check($request->oldpassword, $user->password)){
-            Log::info("confronto andato a buon fine");
+
             $request->validate([
                 'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()]
             ]);
@@ -126,12 +152,8 @@ function ShowModificaPassword(){
                 ->with('message', "Password modificata con successo");
         }else{
 
-            $request->validate([
-                'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()]
-            ]);
-
             return redirect()->route('profilo-modifica-password')
-                ->with('message', "vecchia password incorretta");
+                ->with('message', "Vecchia password incorretta");
         }
 
 
@@ -139,8 +161,10 @@ function ShowModificaPassword(){
 
     public function showCouponGenerato(Request $request) {
 
-        // viene determinato il codice dell'offerta attraverso il valore 'codiceOfferta' inviato tramite form
+        // viene determinato il codice dell'offerta attraverso il valore 'codiceOfferta' inviato tramite un campo hidden
+        // nella form che contiene il tasto ottieni
         $codiceOfferta = $request['codiceOfferta'];
+
         // determina qual'è l'offerta di riferimento con il codice inviato
         $offertaSelezionata = $this->CatalogoOfferte->getOffertaByID($codiceOfferta);
 

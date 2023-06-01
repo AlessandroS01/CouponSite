@@ -13,7 +13,6 @@
 
         <div class="barra-superiore_coupon">
 
-
             <a href="{{ route('home') }}"> <img src="{{ asset('img/logo.png') }}" title="Home" alt="site logo"> </a>
 
         </div>
@@ -36,8 +35,8 @@
 
                         <div class="container-dati_utente">
 
-                            <p> Nome cliente: {{ $user->nome }}</p>
-                            <p> Cognome cliente: {{ $user->cognome }}</p>
+                            <p> Nome cliente: {{ $user->nome }} </p>
+                            <p> Cognome cliente: {{ $user->cognome }} </p>
 
                         </div>
 

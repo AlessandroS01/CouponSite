@@ -20,8 +20,10 @@ class GestioneAcquisizioneCoupon extends Model {
      * @return boolean true quando l'user non ha mai riscattato l'offerta selezionata e false altrimenti
      */
     public function checkClienteOfferta(Request $request){
+
         // prende l'id dell'utente autenticato
         $idUser = Auth::id();
+
         // determina il codice dell'offerta inviato tramite la submit della form
         $codiceOfferta = $request['codiceOfferta'];
 
@@ -48,8 +50,10 @@ class GestioneAcquisizioneCoupon extends Model {
      * @return void
      */
     public function createCoupon(Request $request){
+
         // prende l'id dell'utente autenticato
         $userId = Auth::id();
+
         // determina il codice dell'offerta inviato tramite la submit della form
         $codiceOfferta = $request['codiceOfferta'];
 
@@ -64,10 +68,12 @@ class GestioneAcquisizioneCoupon extends Model {
 
         // crea una nuova istanza per la relazione Acquisizione
         $acquisizione = new Acquisizione();
+
         // setta i parametri della relazione alla nuova istanza
         $acquisizione->codice_coupon = $codiceCoupon;
         $acquisizione->offerta = $codiceOfferta;
         $acquisizione->cliente = $userId;
+
         // salva sul db il nuovo record appena generato
         $acquisizione->save();
 
@@ -82,6 +88,7 @@ class GestioneAcquisizioneCoupon extends Model {
 
         // prende l'id dell'utente autenticato
         $userId = Auth::id();
+
         // determina il codice dell'offerta inviato tramite la submit della form
         $codiceOfferta = $request['codiceOfferta'];
 

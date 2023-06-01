@@ -14,6 +14,10 @@ use Illuminate\Support\Facades\Log;
 
 class ProfileUser extends Model {
 
+    /**
+     * @param $idUser è lo user dell'utente autenticato
+     * @return mixed una collezione di elementi
+     */
 function getCoupons($idUser)
 {
 

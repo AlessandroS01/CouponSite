@@ -12,6 +12,7 @@
     </div>
 
     <div class="container-generale-profile">
+        <!-- Determina se esiste una variabile di sessione che ha nome 'message'-->
         @if (session('message'))
             <p class="message-modifica-password-success">{{ session('message') }}</p>
         @endif
@@ -66,6 +67,7 @@
     <div class="container-coupon-riscattati">
         <table>
             <tr>
+                <!-- definite le celle di "heading" -->
                 <th>ID offerta</th>
                 <th>Nome offerta</th>
                 <th>Azienda</th>
