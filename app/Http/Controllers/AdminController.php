@@ -89,7 +89,9 @@ class AdminController extends Controller {
 
         // serve per far visualizzare al client che la richiesta è stata correttemente validata.
         // In questo modo con ajax si può entrare all'interno del blocco success per fare il redirect
-        // alla rotta desiderata
+        // alla rotta desiderata.
+        // Senza il contenuto della risposta nella richiesta, il metodo $.ajax() genererebbe comunque un errore
+        // nonostante lo stato della richiesta risulti 200.
         return response()->json(['message' => 'FAQ creata con successo'], 200);
     }
 
