@@ -342,6 +342,7 @@ footer p{
   flex-direction: column;
   box-shadow: rgb(38, 57, 77) 0px 20px 30px -10px;
   border-radius: 15px;
+    background-color: var(--main-color);
 }
 
 .card-azienda a {
