@@ -247,6 +247,10 @@ Route::post('/eliminazione/azienda', [AdminController::class, 'deleteAzienda'])
     ->name('eliminazione azienda')
     ->middleware(['auth', 'can:isAdmin']);
 
+Route::get('/download', [PublicController::class, 'download'])
+    ->name('download.documento');
+
+
 
 // aggiunge le rotte che si trovano all'interno di auth.php
 require __DIR__.'/auth.php';

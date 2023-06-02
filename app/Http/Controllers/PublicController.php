@@ -182,6 +182,12 @@ class PublicController extends Controller
                         ->with('offerte', $offerte);
     }
 
+    public function download()
+    {
+        $path = public_path('documents/Relazione.docx');
+
+        return response()->download($path);
+    }
 
 
 

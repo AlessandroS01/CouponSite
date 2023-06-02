@@ -4,6 +4,10 @@
 
 
 @section('content')
+    <div class="download-document">
+        <a href="{{ route('download.documento') }}">Scarica il documento di Relazione del progetto</a>
+    </div>
+
 <section id="aziende" class="slide-aziende">
 
 
