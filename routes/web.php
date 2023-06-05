@@ -213,6 +213,7 @@ Route::post('/modifica/azienda', [AdminController::class, 'storeAziendaModificat
 Route::get('/aggiunta/FAQ', [AdminController::class, 'showAggiuntaFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);
+
 Route::post('/aggiunta/FAQ', [AdminController::class, 'storeNewFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);

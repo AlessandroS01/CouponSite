@@ -1,18 +1,20 @@
 $(function () {
-
-    // per evitare di inviare una doppia richiesta all'atto della submit, si esegue l'on blur handler
-    // per quegli input che non sono il submit della form
+    // l'elemento on blur indica la perdita di focus dell'elemento selezionato
+    // viene selezionato l'elemento che perde il focus escludendo il submit per evitare una doppia validazione
+    // all'atto del submit della form
     $(":input:not([type='submit'])").on('blur', function (event) {
 
-        // determina l'id dell'elemento che ha perso il focus
-        var formElementId = $(this).attr('id');// $(this) rappresenta $(":input")
+        // recupera l'id dell'elemento che ha perso il focus
+        var formElementId = $(this).attr('id');     // $(this) rappresenta $(":input")
 
         doElemValidation(formElementId, actionUrl, formId);
     });
 
     // richiama l'handler di submit del form con id "#form_creazione_faq" a cui associa la funzione
     $('#form_creazione_faq').on('submit', function (event) {
+
         // ferma il meccanismo di default che si avrebbe durante il processo di submit dei dati di una form
+        //utilizzato per validare i dati di un modulo prima di inviare i dati al server senza aggiornare la pagina
         event.preventDefault();
 
         doFormValidation(actionUrl, formId);
@@ -53,30 +55,31 @@ function doElemValidation(id, actionUrl, formId) {
         // volta che il server risponda ad una richiesta tramite il protocollo HTTP.
         $.ajax({
             type: 'POST',   // viene definito il tipo di verbo da utilizzare ( 'GET' o 'POST' )
-            url: actionUrl,     // definisce la rotta a cui inviare la richiesta nel metodo sopra descritto
-            data: formElems,       // definisce i dati inviati con la richiesta al server
-            dataType: "json",       // rappresenta la codifica dei dati che vengono ritornati dal server
+            url: actionUrl,     // definisce la rotta a cui inviare la richiesta nel metodo sopra descritto per effettuare la validazione
+            data: formElems,       // definisce i dati inviati tramite la richiesta al server
+            dataType: "json",       // indica il tipo di dati che ci si aspetta di ricevere come risposta dal serverr
 
             // nel caso in cui ci sia un errore all'interno della richiesta viene eseguito ciò che sta dentro
             // la function(data){} che ha come parametro i dati di errore ritornati dal server in formato json
             error: function (data) {
 
-                // determina se gli errori sono causati da valori non validati o errati durante la richista
+                // Questo stato viene restituito quando la richiesta è stata ricevuta dal server,
+                // ma non è stata elaborata correttamente a causa di errori nei dati inviati.
                 if (data.status === 422) {
 
-                    // vengono ritrovati i messaggi di errore inviati dal server attraverso il parsing
-                    // della variabile data
+                    // La funzione JSON.parse() analizza una stringa JSON e restituisce un oggetto JavaScript che rappresenta
+                    // i dati contenuti nella stringa JSON. In questo caso, la stringa JSON rappresenta gli errori inviati dal server.
                     var errMsgs = JSON.parse(data.responseText); // costituito da tutti gli errori in json più message
 
+                    // viene utilizzato per rimuovere il messaggio di errore se già presente
                     // rimuove tutti gli elementi all'interno del DOM che hanno un id pari a
                     // 'errors{id_elemento_dom_perso_focus}'.
-                    //
                     $('#errors' + id).remove();
 
                     // itera in tutti i campi dell'errore su cui è stato già fatto il parsing del json
                     for (var field in errMsgs) {
                         // determina se il campo iterato è una proprietà diretta di errMsgs o se è una proprietà
-                        // passata alla variabile per ereditarietà ( come nel caso del messagge )
+                        // passata alla variabile per ereditarietà ( come nel caso del message )
                         if (errMsgs.hasOwnProperty(field)) {
                             var errors = errMsgs[field]; // prende gli errori associati a tutti i campi inviati con la richiesta
                         }
@@ -89,14 +92,15 @@ function doElemValidation(id, actionUrl, formId) {
 
                 }
             },
-            // definisce che il tipo di contenuto inviato tramite i dati della richiesta non è specificato
+            // disabilita l'impostazione automatica del tipo di contenuto della richiesta HTTP
             contentType: false,
-            // serve a non far processare i dati inviati al server da jQuery
+            // disabilita la funzione di conversione dei dati in formato JSON poichè
+            // sono già nel formato desiderato
             processData: false
         });
     }
 }
-function getErrorHtml(id, elemErrors) {
+function getErrorHtml(id, elemErrors){
 
     // se la lista degli errori passati a seguito della richiesta ajax ha una lunghezza pari a 0 o il tipo dei dati
     // ricevuti per un elemento con un determinato id è undefined, allora non sono stati trovati per l'elemento
@@ -119,9 +123,9 @@ function getErrorHtml(id, elemErrors) {
     for (var i = 0; i < elemErrors.length; i++) {
         // per ogni errore crea un nuovo elemento con tag pari a 'li'
         var listItem = document.createElement('li');
-        // setta il valore del testo del nuovo elemento della lista
+        // setta il testo del nuovo elemento della lista
         listItem.textContent = elemErrors[i];
-        // aggiunge dentro al tag 'ul' il nuovo elemento creato
+        // aggiunge dentro al tag 'ul' i tag 'li' che corrispondono agli errori
         newUl.appendChild(listItem);
 
     }
@@ -166,9 +170,10 @@ function doFormValidation(actionUrl, formId) {
         success: function (data){
             window.location.href = homeRoute;
         },
-        // definisce che il tipo di contenuto inviato tramite i dati della richiesta non è specificato
+        // disabilita l'impostazione automatica del tipo di contenuto della richiesta HTTP
         contentType: false,
-        // serve a non far processare i dati inviati al server da jQuery
+        // disabilita la funzione di conversione dei dati in formato JSON poichè
+        // sono già nel formato desiderato
         processData: false
     });
 }
