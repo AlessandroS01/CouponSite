@@ -125,7 +125,7 @@ class AdminController extends Controller {
         // Prima verifica tutte le varie regole di validazione
         $request->validate([
             'partita_iva' => ['required', 'string', 'min:11', 'max:11', 'unique:azienda'],
-            'nome' => ['required', 'string', 'max:50'],
+            'nome' => ['required', 'string', 'max:50', 'unique:azienda'],
             'localita' => ['required', 'string', 'max:50'],
             'tipologia' => ['required', 'string', 'max:50'],
             'email' => ['required', 'string', 'email', 'max:50', 'unique:azienda'],
