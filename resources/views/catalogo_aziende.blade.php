@@ -30,35 +30,10 @@
         <div class="catalogo-offerte">
 
             <div class="filters">
-                <h2>Filtri</h2>
-
-                <button class="accordion" id="first-filter" >Settore</button>
-                <div class="accordion-panel">
-
-                    <div id="settore" class="filter-items">
-
-                        <label>
-                            <input type="radio" name="settore" />
-                            <span class="label-text">Informatica</span>
-                        </label>
+                <h2>Sfoglia le aziende</h2>
+                <h3>Clicca visualizza per vedere i dettagli dell'azienda</h3>
 
 
-
-                        <label>
-                            <input type="radio" name="settore" />
-                            <span class="label-text">Abbigliamento</span>
-                        </label>
-
-
-
-                        <label>
-                            <input type="radio" name="settore" />
-                            <span class="label-text">Alimentari</span>
-                        </label>
-
-                    </div>
-
-                </div>
 
 
             </div>
