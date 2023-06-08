@@ -184,7 +184,7 @@ class PublicController extends Controller
 
     public function download()
     {
-        $path = public_path('documents/Relazione.docx');
+        $path = public_path('documents/Relazione.pdf');
 
         return response()->download($path);
     }
