@@ -131,9 +131,13 @@ class AdminController extends Controller {
             'email' => ['required', 'string', 'email', 'max:50', 'unique:azienda'],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
+            // in logo utilizziamo una function di callback che permette di esplicitare regole di validazione personalizzate
             'logo' => ['required', 'image', function ($attribute, $value, $fail) use ($request){
+                //dentro fileName recuperiamo il nome originale del file, il valore di $attribute in questo caso è logo (ovvero il name del campo input file)
                 $fileName = $request->file($attribute)->getClientOriginalName();
+                // if che serve a controllare se il nome del file contiene caratteri speciali
                     if (preg_match('/[!@#$%^&*(),?":{}|<>]/', $fileName)) {
+                        //Se il nome del file contiene uno di questi caratteri speciali, la validazione fallirà e verrà restituito un errore utilizzando la funzione $fail
                         $fail("Non può contenere caratteri speciali.");
                     }
                 },
@@ -143,19 +147,24 @@ class AdminController extends Controller {
 
         $image = $request->file('logo');
 
+        //imposto il percorso di destinazione dell'immagine, public/img
         $destinationPath = public_path('img');
-
+        //crea il percorso relativo (rispetto alla cartella pubblica) in cui verrà salvata l'immagine
         $imagePathRelativo = 'img/'.$image->getClientOriginalName();
 
         $indiceImmagine = 1;
+
+        //se esiste gia un percorso con lo stesso path relativo andiamo a gestire il path
         while(File::exists($imagePathRelativo)) {
 
+            //modifichiamo il path relativo andando ad aggiungere prima del nome dell'immagine ($indiceImmagine)
             $imagePathRelativo = 'img/'.'('.$indiceImmagine.')'.$image->getClientOriginalName();
             $indiceImmagine ++;
 
         }
-
+        // spostamento file dell'immagine dalla sua posizione temporanea alla cartella di destinazione specificata ($destinationPath) (vengono combinati i due path)
         $image->move($destinationPath, $imagePathRelativo);
+        //passato come parametro imagePathRelativo da salvare nel db
         $this->gestioneAdmin->createAzienda($request, $imagePathRelativo);
 
         return redirect('/');
@@ -174,38 +183,48 @@ class AdminController extends Controller {
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('azienda')->ignore($azienda)],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
+            // in logo utilizziamo una function di callback che permette di esplicitare regole di validazione personalizzate
             'logo' => ['image', function ($attribute, $value, $fail) use ($request){
+                //dentro fileName recuperiamo il nome originale del file, il valore di $attribute in questo caso è logo (ovvero il name del campo input file)
                 $fileName = $request->file($attribute)->getClientOriginalName();
+                // if che serve a controllare se il nome del file contiene caratteri speciali
                 if (preg_match('/[!@#$%^&*(),?":{}|<>]/', $fileName)) {
+                    //Se il nome del file contiene uno di questi caratteri speciali, la validazione fallirà e verrà restituito un errore utilizzando la funzione $fail
                     $fail("Non può contenere caratteri speciali.");
                 }
             },
             ], // Regola di validazione per l'immagine
             'ragione_sociale' => ['required', 'string', 'max:20'],
         ]);
-
+        //recupero il path relativo dell'immagine attuale dell'azienda
         $imageName = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
 
+        //caso in cui è stato modificato il logo
         if ($request->hasFile('logo')) {
-
+            //recupero l'istanza dell'oggetto "UploadedFile"
             $image = $request->file('logo');
-
+            //modifico il path relativo con il nome della nuova immagine
             $imageName = 'img/'.$image->getClientOriginalName();
 
             $indiceImmagine = 1;
+
+            //se esiste gia un percorso con lo stesso path relativo andiamo a gestire il path
             while(File::exists($imageName)) {
 
+                //modifichiamo il path relativo andando ad aggiungere prima del nome dell'immagine ($indiceImmagine)
                 $imageName = 'img/'.'('.$indiceImmagine.')'.$image->getClientOriginalName();
                 $indiceImmagine ++;
 
             }
-
+            //recupero il path dell'immagine attuale dell'azienda
             $logoAziendaPreesistente = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
+            // eliminiamo il file dalla cartella img
             unlink($logoAziendaPreesistente);
 
 
 
             $destinationPath = public_path('img');
+            //spostamento file dell'immagine dalla sua posizione temporanea alla cartella di destinazione specificata ($destinationPath)
             $image->move($destinationPath, $imageName);
 
         }
@@ -313,6 +332,7 @@ class AdminController extends Controller {
     }
 
     public function showEliminazioneUtente() {
+        //ritorna un array contenente gli username degli utenti di livello 1
         $usernameUtentiRegistrati = $this->gestioneAdmin->getUsernameUtentiRegistrati();
 
         $utente = $this->gestioneAdmin->getUtentiRegistrati();
@@ -335,7 +355,7 @@ class AdminController extends Controller {
         if($request->partita_iva){
             $aziendaDaEliminare = Azienda::find($request->partita_iva);
             $percorsoLogo = public_path($aziendaDaEliminare->logo);
-            //unlink elimina il logo dell'azienda da eliminare dalla cartella img
+            //unlink elimina il logo dell'azienda dalla cartella img
             unlink($percorsoLogo);
             $aziendaDaEliminare->delete();
         }

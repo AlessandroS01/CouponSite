@@ -13,6 +13,8 @@
         <div class="form">
             <div class="container-form-gestione">
                 <div>
+                    <!-- enctype: multipart/form-data indica che il modulo può contenere campi di input di tipo file e che i dati di tali
+                    campi verranno inviati al server come parte separata della richiesta HTTP-->
                     {{ Form::open(array('route' => 'aggiunta azienda', 'class' => 'contact-form', 'method' => 'POST', 'files' => true, 'enctype' => 'multipart/form-data')) }}
                     @csrf
                     <div  class="container-dati_form">

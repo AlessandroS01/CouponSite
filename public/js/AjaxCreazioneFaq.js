@@ -75,7 +75,6 @@ function doElemValidation(id, actionUrl, formId) {
                     // rimuove tutti gli elementi all'interno del DOM che hanno un id pari a
                     // 'errors{id_elemento_dom_perso_focus}'.
                     $('#errors' + id).remove();
-
                     // itera in tutti i campi dell'errore su cui è stato già fatto il parsing del json
                     for (var field in errMsgs) {
                         // determina se il campo iterato è una proprietà diretta di errMsgs o se è una proprietà
@@ -84,7 +83,6 @@ function doElemValidation(id, actionUrl, formId) {
                             var errors = errMsgs[field]; // prende gli errori associati a tutti i campi inviati con la richiesta
                         }
                     }
-
                     // determina qual è il div con classe '.container-dati-offerta' che ha come figlio un id pari
                     // a quello specificato, e, a seguito di questo, tramite .after, posiziona nel DOM gli elementi
                     // che vengono ritornati dalla funzione getErrorHtml(id, errors[id])
@@ -157,7 +155,6 @@ function doFormValidation(actionUrl, formId) {
                 // della variabile data
                 var errMsgs = JSON.parse(data.responseText); // costituito da tutti gli errori in json più message
                 // errMsgs = [ errors(JSON), message ]
-
                 $.each(errMsgs, function (id) {
                     // se l'id all'interno del loop è 'errors'
                     if(id === 'errors'){
@@ -191,13 +188,12 @@ function getErrorHtmlSubmit(elemErrors) {
 
     // prende gli id della form (le chiavi) in cui sono presenti errori poichè elemErrors è un array chiave valore
     var fields = Object.keys(elemErrors);
-
     // effettua un ciclo per ogni elemento della form
     for (var campo in fields) {
 
+        //prende l'elemento 0 e 1 di fields che corrispondono rispettivamente a "domanda" e "risposta"
         // salva l'elemento che sta analizzando al ciclo i-esimo
         var campoValue = fields[campo];
-
         // crea una nuova lista non ordinata
         var newUl = $('<ul>');
 
@@ -206,7 +202,6 @@ function getErrorHtmlSubmit(elemErrors) {
 
             // prende tutti gli errori associati al campo che si sta analizzando
             var errors = elemErrors[campoValue];
-
 
             for (var i = 0; i < errors.length; i++) {
                 // prende l'i-esimo errore associato ad un elemento

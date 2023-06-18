@@ -77,6 +77,7 @@ class GestioneAdmin extends Model {
     public function createStaff(Request $request){
 
         switch ($request->gestionePacchetti){
+            //caso in cui lo staff non gestisce i pacchetti
             case '0': {
 
                 // crea la nuova tupla da aggiungere al database
@@ -98,9 +99,12 @@ class GestioneAdmin extends Model {
                 // definisce l'evento della creazione di un nuovo utente registrato
                 event(new Registered($user));
 
+                //controllo se sono state selezionate delle checkbox
                 if( $request->aziende){
+                    //salvo il valore delle checkbox selezionate (partita iva)
                     $aziende = $request->aziende;
 
+                    //creo un record in gestione per ogni azienda selezionata
                     foreach ($aziende as $azienda){
                         $nuovaGestione = Gestione::create([
                             'staff' => $user->id,
@@ -113,10 +117,12 @@ class GestioneAdmin extends Model {
 
                 break;
             }
-
+            //caso in cui lo staff che creo gestisce i pacchetti
             case '1': {
+                //recupero il vecchio staff che gestisce i pacchetti
                 $vecchioUserPacchetti = User::where('flagPacchetti', true)->first();
 
+                //se esiste lo staff che gestisce i pacchetti
                 if ($vecchioUserPacchetti) {
                     $vecchioUserPacchetti->flagPacchetti = false;
                     $vecchioUserPacchetti->save();
@@ -142,10 +148,11 @@ class GestioneAdmin extends Model {
                 // definisce l'evento della creazione di un nuovo utente registrato
                 event(new Registered($user));
 
-
+                //controllo se sono state selezionate delle checkbox
                 if( $request->aziende){
                     $aziende = $request->aziende;
 
+                    //creo nuovi record nella tabella Gestione per ogni azienda presente (lo staff puo gestire tutte le aziende in questo caso)
                     foreach ($aziende as $azienda){
                         $nuovaGestione = Gestione::create([
                             'staff' => $user->id,
@@ -180,8 +187,9 @@ class GestioneAdmin extends Model {
         $membroStaff = User::find($request->staffId);
 
         switch ($request->gestionePacchetti){
+            //caso in cui lo staff modificato non potrà gestire i pacchetti
             case '0': {
-
+                //elimino inzialmente tutte le tuple della tabella gestione che si riferiscono allo staff modificato
                 Gestione::where('staff', $request->staffId)->delete();
 
                 // effettua l'update della tupla di user
@@ -197,7 +205,7 @@ class GestioneAdmin extends Model {
                 $membroStaff->flagPacchetti = $request->gestionePacchetti;
 
                 $membroStaff->save();
-
+                //creo le tuple nella tabella gestione per le checkbox selezionate
                 if( $request->aziende){
                     $aziende = $request->aziende;
 
@@ -213,16 +221,16 @@ class GestioneAdmin extends Model {
 
                 break;
             }
-
+            // caso in cui lo staff modificato potrà gestire i pacchetti
             case '1': {
-
+                //recupero lo staff che gestiva i pacchetti precedentemente
                 $vecchioUserPacchetti = User::where('flagPacchetti', true)->first();
                 if ($vecchioUserPacchetti) {
                     $vecchioUserPacchetti->flagPacchetti = false;
                     $vecchioUserPacchetti->save();
                 }
 
-
+                //elimino tutte le tuple di Gestione per lo staff modificato
                 Gestione::where('staff', $request->staffId)->delete();
 
                 // effettua l'update della tupla di user
@@ -238,7 +246,7 @@ class GestioneAdmin extends Model {
                 $membroStaff->flagPacchetti = $request->gestionePacchetti;
 
                 $membroStaff->save();
-
+                //creo nuove tuple in Gestione per ogni azienda presente associate allo staff modificato
                 if( $request->aziende){
                     $aziende = $request->aziende;
 
@@ -278,6 +286,7 @@ class GestioneAdmin extends Model {
 
         $staffGestionePacchetti = User::where('flagPacchetti', true)->first();
 
+        //controllo se esiste uno staff che puo gestire i pacchetti, in caso esista associo l'azienda allo staff nella tabella Gestione
         if($staffGestionePacchetti){
             $nuovaGestione = Gestione::create([
                 'staff' => $staffGestionePacchetti->id,

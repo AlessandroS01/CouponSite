@@ -10,11 +10,11 @@ $(document).ready(function() {
         // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
         if ( $(this).val() !== '-') {
 
-            // prende l'offerta che si trova alla posizione i-esima
+            // prende l'azienda che si trova alla posizione i-esima, il $(this) si riferisce al valore passato dall'input con id=nomeAzienda
             var aziendaSelezionata = aziende[ $(this).val() ];
 
 
-
+            //impostazione valori attuali dell'azienda all'interno degli input
             $('#partita_iva').val(aziendaSelezionata.partita_iva);
             $('#nome').val(aziendaSelezionata.nome);
             $('#localita').val(aziendaSelezionata.localita);
@@ -26,7 +26,9 @@ $(document).ready(function() {
 
             $('.container-logo-modifica_azienda').show();
 
+            //definiamo il path dell'immagine attuale dell'azienda
             var logo = public_url + '/' + aziendaSelezionata.logo;
+            // impostiamo il path nell'attributo src dell'immagine per avere una preview
             $("#logo-preview").attr("src", logo);
 
 

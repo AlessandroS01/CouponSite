@@ -6,6 +6,7 @@ $(document).ready(function() {
             $('.container-check-boxes-aziende').show();
             $('input[name="aziende[]"]').prop('checked', false);
         }
+        //gestione pacchetti = si, hide checkbox e vengono tutte e checkate
         if ( $(this).val() == 1){
             $('.container-check-boxes-aziende').hide();
             $('input[name="aziende[]"]').prop('checked', true);

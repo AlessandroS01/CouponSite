@@ -100,6 +100,7 @@ Route::get('/profilo', [UserController::class, 'showProfilo'])
 Route::get('/profilo/modifica', [UserController::class, 'ShowModificaDati'])
     ->name('profilo-modifica-dati')
     ->middleware(['auth', 'can:isUserStaff']);
+
 Route::post('/profilo/modifica', [UserController::class, 'updateData'])
     ->name('profilo-modifica-dati')
     ->middleware(['auth', 'can:isUserStaff']);
@@ -112,6 +113,7 @@ Route::post('/profilo/modifica', [UserController::class, 'updateData'])
 Route::get('/profilo/modifica/password', [UserController::class, 'ShowModificaPassword'])
     ->name('profilo-modifica-password')
     ->middleware(['auth', 'can:isUserStaff']);
+
 Route::post('/profilo/modifica/password', [UserController::class, 'updatePassword'])
     ->name('profilo-modifica-password')
     ->middleware(['auth', 'can:isUserStaff']);
@@ -136,6 +138,7 @@ Route::get('/pannello/staff', [StaffController::class, 'showPannelloStaff'])
 Route::get('/creazione/offerta', [StaffController::class, 'showCreazioneOfferta'])
     ->name('creazione offerta')
     ->middleware(['auth', 'can:isStaff']);
+
 Route::post('/creazione/offerta', [StaffController::class, 'storeNewOfferta'])
     ->name('creazione offerta')
     ->middleware(['auth', 'can:isStaff']);
@@ -150,6 +153,7 @@ Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModifi
 Route::get('/eliminazione/offerta', [StaffController::class, 'showEliminaOfferta'])
     ->name('eliminazione offerta')
     ->middleware(['auth', 'can:isStaff']);
+
 Route::post('/eliminazione/offerta', [StaffController::class, 'disattivaOfferta'])
     ->name('eliminazione offerta')
     ->middleware(['auth', 'can:isStaff']);
@@ -159,6 +163,7 @@ Route::get('/pannello_admin', [AdminController::class, 'showPannelloAdmin'])
     ->name('pannello_admin')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotte aggiunta staff
 Route::get('/aggiunta/staff', [AdminController::class, 'showAggiuntaStaff'])
     ->name('aggiunta staff')
     ->middleware(['auth', 'can:isAdmin']);
@@ -167,6 +172,7 @@ Route::post('/aggiunta/staff', [AdminController::class, 'storeNewStaff'])
     ->name('aggiunta staff')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotte modifica staff
 Route::get('/modifica/staff', [AdminController::class, 'showModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
@@ -175,6 +181,7 @@ Route::post('/modifica/staff', [AdminController::class, 'storeModificaStaff'])
     ->name('modifica staff')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotte modifica Faq
 Route::get('/modifica/faq', [AdminController::class, 'showModificaFaq'])
     ->name('modifica FAQ')
     ->middleware(['auth', 'can:isAdmin']);
@@ -183,7 +190,7 @@ Route::post('/modifica/faq', [AdminController::class, 'storeModificaFaq'])
     ->name('modifica FAQ')
     ->middleware(['auth', 'can:isAdmin']);
 
-
+//rotte eliminazione Faq
 Route::get('/elimina/faq', [AdminController::class, 'showEliminazioneFaq'])
     ->name('elimina FAQ')
     ->middleware(['auth', 'can:isAdmin']);
@@ -192,24 +199,27 @@ Route::post('/elimina/faq', [AdminController::class, 'deleteFaq'])
     ->name('elimina FAQ')
     ->middleware(['auth', 'can:isAdmin']);
 
-
+//rotte per la creazione di una nuova azienda
 Route::get('/aggiunta/azienda', [AdminController::class, 'showAggiuntaAzienda'])
     ->name('aggiunta azienda')
     ->middleware(['auth', 'can:isAdmin']);
+
 
 Route::post('/aggiunta/azienda', [AdminController::class, 'storeNewCompany'])
     ->name('aggiunta azienda')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotte per modificare un azienda esistente
 Route::get('/modifica/azienda', [AdminController::class, 'showModificaAzienda'])
     ->name('modifica azienda')
     ->middleware(['auth', 'can:isAdmin']);
 
+
 Route::post('/modifica/azienda', [AdminController::class, 'storeAziendaModificata'])
     ->name('modifica azienda')
     ->middleware(['auth', 'can:isAdmin']);
-//rotte FAQ
 
+//rotte aggiunta FAQ
 Route::get('/aggiunta/FAQ', [AdminController::class, 'showAggiuntaFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);
@@ -218,7 +228,7 @@ Route::post('/aggiunta/FAQ', [AdminController::class, 'storeNewFAQ'])
     ->name('aggiunta FAQ')
     ->middleware(['auth', 'can:isAdmin']);
 
-//fine rotte FAQ
+//rotte eliminazione staff
 Route::get('/eliminazione/staff', [AdminController::class, 'showEliminazioneStaff'])
     ->name('eliminazione staff')
     ->middleware(['auth', 'can:isAdmin']);
@@ -227,6 +237,7 @@ Route::post('/eliminazione/staff', [AdminController::class, 'deleteStaff'])
     ->name('eliminazione staff')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotte eliminazione utente
 Route::get('/eliminazione/utente', [AdminController::class, 'showEliminazioneUtente'])
     ->name('eliminazione utente')
     ->middleware(['auth', 'can:isAdmin']);
@@ -235,11 +246,12 @@ Route::post('/eliminazione/utente', [AdminController::class, 'deleteUtente'])
     ->name('eliminazione utente')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotta per la visualizzazione delle statistiche
 Route::get('/statistiche', [AdminController::class, 'visualizzaStatistiche'])
     ->name('visualizza statistiche')
     ->middleware(['auth', 'can:isAdmin']);
 
-
+// rotte per l'eliminazione di un azienda
 Route::get('/eliminazione/azienda', [AdminController::class, 'showEliminazioneAzienda'])
     ->name('eliminazione azienda')
     ->middleware(['auth', 'can:isAdmin']);
@@ -248,6 +260,7 @@ Route::post('/eliminazione/azienda', [AdminController::class, 'deleteAzienda'])
     ->name('eliminazione azienda')
     ->middleware(['auth', 'can:isAdmin']);
 
+//rotta per il download del documento della relazione
 Route::get('/download', [PublicController::class, 'download'])
     ->name('download.documento');
 

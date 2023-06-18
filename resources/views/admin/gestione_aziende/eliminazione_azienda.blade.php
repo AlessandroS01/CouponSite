@@ -11,7 +11,8 @@
 
         <div class="container-form">
             <div class="form">
-
+                <!-- enctype: multipart/form-data indica che il modulo può contenere campi di input di tipo file e che i dati di tali
+                    campi verranno inviati al server come parte separata della richiesta HTTP-->
                 {{ Form::open(array('route' => 'eliminazione azienda', 'class' => 'contact-form', 'method' => 'POST', 'files' => true, 'enctype' => 'multipart/form-data')) }}
                 @csrf
                 @isset($partitaIvaAziende)
@@ -108,6 +109,7 @@
 @section('script')
     <script>
         var aziende = {!! $aziende !!};
+        //in public_url inserisco il path http://localhost/CouponSite/public, utilizzo l'helper url('/') per ottenerla
         var public_url = {!! json_encode(url('/')) !!};
     </script>
 
