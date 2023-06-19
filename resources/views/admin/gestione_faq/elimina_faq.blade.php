@@ -13,6 +13,7 @@
         <div class="container-form">
             <div class="form">
 
+                <!--Al submit della form si attiva la rotta eliminazione della FAQ -->
                 {{ Form::open(array('route' => 'elimina FAQ', 'class' => 'contact-form', 'method' => 'POST')) }}
 
                 @csrf
@@ -21,6 +22,8 @@
                 <div  class="container-dati_form">
                     {{ Form::label('faq', 'Faq', ['class' => 'label-input']) }}
 
+                    <!--Utilizziamo la variabile $faqdomanda per andare a popolare i campi della select con
+                    le domande delle faq-->
                     {{ Form::select('faq', [ '-' => '-'] + $faqdomanda, null,  ['class' => 'input']) }}
                 </div>
 

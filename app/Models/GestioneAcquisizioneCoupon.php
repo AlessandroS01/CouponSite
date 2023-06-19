@@ -15,9 +15,7 @@ use Illuminate\Support\Str;
 class GestioneAcquisizioneCoupon extends Model {
 
     /**
-     * @param Request $request rappresenta la richiesta inviata tramite metodo post a seguito dell'invio della form
-     *      per generare un coupon
-     * @return boolean true quando l'user non ha mai riscattato l'offerta selezionata e false altrimenti
+     * funzione utilizzata per verificare che l'utente non abbia riscattato già l'offerta selezionata
      */
     public function checkClienteOfferta(Request $request){
 
@@ -27,20 +25,17 @@ class GestioneAcquisizioneCoupon extends Model {
         // determina il codice dell'offerta inviato tramite la submit della form
         $codiceOfferta = $request['codiceOfferta'];
 
-        // $contatore prende il valore pari al conteggio degli elementi della tabella Acquisizione
-        // che hanno settati i parametri 'offerta' pari al valore dell'offerta di cui si richiede il coupon
-        // e 'user' uguale all'id dell'utente autenticato
+        // tramite la variabile $contatore andiamo a verificare se l'offerta è già stata generata dall'utente.
+        // viene passato alla query l'id dell'utente e il codice dell'offerta
         $contatore = Acquisizione::query()
                 ->where('offerta', $codiceOfferta)
                 ->where('cliente', $idUser)
                 ->get()
                 ->count();
 
-        // nel caso il conteggio sia pari a 0 allora ritorna true altrimenti false
+        // nel caso il conteggio sia 0 allora ritorna true altrimenti false
         if ( $contatore == 0 ) return true;
             else return false;
-
-
     }
 
     /**
@@ -92,6 +87,7 @@ class GestioneAcquisizioneCoupon extends Model {
         // determina il codice dell'offerta inviato tramite la submit della form
         $codiceOfferta = $request['codiceOfferta'];
 
+        // Restituisce il record della tabella acquisizione corrispondente ai paramentri imposti nella where
         return Acquisizione::query()
             ->where('offerta', $codiceOfferta)
             ->where('cliente', $userId)

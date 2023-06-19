@@ -25,12 +25,14 @@ class GestioneAdmin extends Model {
 
     public function getNumeroCouponEmessi(){
 
+        // vengono contati il numero di coupon emessi
         $couponTotali = Acquisizione::all()->count();
         return $couponTotali;
     }
 
     public function getAllCouponEmessi(){
 
+        //recupera tutte le informazioni dei coupon emessi dal database utilizzando la tabella Acquisizione
         $listaCoupon = Acquisizione::join('offerta', 'acquisizione.offerta', '=', 'offerta.codice')
             ->leftJoin('users', 'users.id', '=', 'acquisizione.cliente')
             ->select('acquisizione.offerta as id_offerta', 'offerta.oggetto_offerta as nome_offerta', 'users.nome as nome_cliente', 'users.id as id_cliente', 'users.cognome as cognome_cliente', 'acquisizione.codice_coupon as codice', 'acquisizione.created_at as data')
@@ -44,6 +46,7 @@ class GestioneAdmin extends Model {
         $utenti = User::where('livello', 1)->get();
         return $utenti;
     }
+
     public function getUtentiStaff(){
 
         $utenti = User::where('livello', 2)->get();
@@ -57,19 +60,24 @@ class GestioneAdmin extends Model {
     }
     public function getFaqDomanda(){
 
+        // Ottiene tutte le domande delle FAQ dal modello Faq e le converte in un array
         $faqdomanda = Faq::pluck('domanda')->toArray();
+
         return $faqdomanda;
     }
 
     public function getUsernameUtentiStaff(){
 
+        // Ottiene gli username degli utenti con livello 2 dal modello User e li converte in un array
         $utenti = User::where('livello', 2)->pluck('username')->toArray();
+        // Restituisce l'array degli username degli utenti di livello 2
         return $utenti;
     }
 
     public function getUsernameUtentiRegistrati(){
-
+        // Ottiene gli username degli utenti con livello 1 dal modello User e li converte in un array
         $utenti = User::where('livello', 1)->pluck('username')->toArray();
+        // Restituisce l'array degli username degli utenti di livello 1
         return $utenti;
     }
 
@@ -104,7 +112,7 @@ class GestioneAdmin extends Model {
                     //salvo il valore delle checkbox selezionate (partita iva)
                     $aziende = $request->aziende;
 
-                    //creo un record in gestione per ogni azienda selezionata
+                    //creo un record nella tabella gestione per ogni azienda selezionata
                     foreach ($aziende as $azienda){
                         $nuovaGestione = Gestione::create([
                             'staff' => $user->id,
@@ -182,6 +190,8 @@ class GestioneAdmin extends Model {
     }
 
 
+    //divido l'aggiornamento dei nuovi dati dell'utente staff in relazione alla possibilità
+    // di gestire o meno i pacchetti
     public function storeStaffModificato(Request $request){
 
         $membroStaff = User::find($request->staffId);
@@ -230,7 +240,7 @@ class GestioneAdmin extends Model {
                     $vecchioUserPacchetti->save();
                 }
 
-                //elimino tutte le tuple di Gestione per lo staff modificato
+                //elimino tutte le tuple della tabella Gestione riguardante l'utente staff modificato
                 Gestione::where('staff', $request->staffId)->delete();
 
                 // effettua l'update della tupla di user
@@ -246,7 +256,9 @@ class GestioneAdmin extends Model {
                 $membroStaff->flagPacchetti = $request->gestionePacchetti;
 
                 $membroStaff->save();
-                //creo nuove tuple in Gestione per ogni azienda presente associate allo staff modificato
+
+                //creo nuove tuple nella tabella Gestione per ogni azienda presente
+                //nel database associata all'utente staff modificato
                 if( $request->aziende){
                     $aziende = $request->aziende;
 
@@ -266,6 +278,10 @@ class GestioneAdmin extends Model {
 
     }
 
+    //funzione che permette di creare l'azienda all'interno del database
+    // e di assegnare la gestione dell'azienda appena creata all'utente staff che
+    // gestisce i pacchetti
+
     public function createAzienda(Request $request, $imageName)
     {
         // Crea la nuova tupla da aggiungere al database
@@ -284,9 +300,11 @@ class GestioneAdmin extends Model {
         // Definisce l'evento della creazione di un nuovo utente registrato
         event(new Registered($azienda));
 
+        // prendo l'utente staff in grado di gestire i pacchetti
         $staffGestionePacchetti = User::where('flagPacchetti', true)->first();
 
-        //controllo se esiste uno staff che puo gestire i pacchetti, in caso esista associo l'azienda allo staff nella tabella Gestione
+        //controllo se esiste uno staff che puo gestire i pacchetti,
+        // in caso esista associo l'azienda allo staff nella tabella Gestione
         if($staffGestionePacchetti){
             $nuovaGestione = Gestione::create([
                 'staff' => $staffGestionePacchetti->id,
@@ -298,6 +316,7 @@ class GestioneAdmin extends Model {
 
     }
 
+    //funzione che va a aggiornare i dati dell'azienda
     public function modificaAzienda(Request $request, $imageName)
     {
 

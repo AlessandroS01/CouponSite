@@ -10,6 +10,8 @@
 @section('content')
 
 
+    <!--Andiamo a verificare che la variabile $aziende che contiene i nomi delle aziende
+    che può gestire l'utente non sia nulla -->
     @isset($aziende)
         <div class="container-titolo_form">
             <h1> Creazione offerta</h1>
@@ -20,6 +22,9 @@
             <div class="container-form-offerta">
 
                 <div>
+                    <!--Form di creazione dell'offerta nel quale troviamo il campo di selezione dell'azienda
+                     che eroga l'offerta, che viene gestita tramite l'utilizzo della variabile $aziende per far
+                      visualizzare i vari nomi delle aziende, il quale utente staff è abilitato a crearne le offerte-->
                     {{ Form::open(array('class' => 'contact-form', 'method' => 'POST', 'id'=>'form_creazione_offerta')) }}
                     @csrf
                     {{ Form::hidden('flagAttivo', 1, ['id' => 'hidden_param']) }}

@@ -14,35 +14,30 @@ use Illuminate\Support\Facades\Auth;
 class AuthenticatedSessionController extends Controller {
 
     /**
-     * Display the login view.
-     *
-     * @return \Illuminate\View\View
+     * Ritorna la vista in cui si effettua il login
      */
     public function create() {
         return view('auth.login');
     }
 
     /**
-     * Handle an incoming authentication request.
-     *
-     * @param  \App\Http\Requests\Auth\LoginRequest  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * gestisce il processo di autenticazione dell'utente
+     * e il reindirizzamento a rotte specifiche in base al ruolo dell'utente
      */
     public function store(LoginRequest $request) {
         // authenticate gestisce il controllo tra le credenziali passate e quelle presenti nel db
         $request->authenticate();
+
         // ricrea la sessione con un nuovo id per l'utente che si è autenticato
         $request->session()->regenerate();
 
-
         // estraiamo dall'utente autenticato il suo ruolo
         $livello = auth()->user()->livello;
-        /*
-         * In base al ruolo, l'utente viene reindirizzato in rotte diverse
-         */
+
+        // In base al livello, l'utente viene reindirizzato in rotte diverse
         switch ($livello) {
-            case '2':
             case '1':
+            case '2':
             case '3': return redirect()->route('home');
                 break;
             default: return redirect('/');
@@ -50,19 +45,16 @@ class AuthenticatedSessionController extends Controller {
     }
 
     /**
-     * Destroy an authenticated session.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
+     * azione che permette di fare il logout di un utente loggato
      */
     public function destroy(Request $request) {
         // effettua il logout dell'user autenticato e pulisce lo stato dell'autenticazione
         Auth::guard('web')->logout();
-        // invalida la sessione dell'utente che era rpima autenticato
+        // invalida la sessione dell'utente che era prima autenticato
         $request->session()->invalidate();
         // regenera il token per la sessione dell'utente a seguito del logout
         $request->session()->regenerateToken();
-        // reindirizza l'utente alla rotta definita tramite '/', cioè la home
+        // reindirizza l'utente alla rotta home
         return redirect('/');
     }
 

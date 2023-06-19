@@ -19,9 +19,7 @@ use Illuminate\Validation\Rules;
 class RegisteredUserController extends Controller
 {
     /**
-     * Creazione della vista per la registrazione
-     *
-     * @return \Illuminate\View\View
+     * Ritorna la vista di registrazione
      */
     public function create()
     {
@@ -29,16 +27,11 @@ class RegisteredUserController extends Controller
     }
 
     /**
-     * request è un Request object che viene creato a seguito del click
-     * del bottone Registrati della form di registrazione
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\RedirectResponse
-     *
-     * @throws \Illuminate\Validation\ValidationException
+     * valida i dati dell'utente inseriti in fase di registrazione e crea l'utente all'interno del database
+     * a cui viene passato l'oggetto request che rappresenta il request object nel quale sono inseriti tutti i
+     * dati immessi nel form di registrazione
      */
-    /*Quando un client invia una richiesta HTTP POST al percorso 'register', Laravel si occupa automaticamente di creare un oggetto Request
-    che rappresenta la richiesta e lo passa come argomento al metodo*/
+
     public function store(Request $request)
     {
 
@@ -56,6 +49,7 @@ class RegisteredUserController extends Controller
             'numero_civico' => ['required', 'int'],
             'citta' => ['required', 'string', 'max:50'],
         ]);
+
         // crea la nuova tupla da aggiungere al database
         $user = User::create([
             'username' => $request->username,
@@ -75,7 +69,7 @@ class RegisteredUserController extends Controller
         event(new Registered($user));
         // viene fatto il login del nuovo utente
         Auth::login($user);
-        // reindirizza alla rotta definita su HOME -> bisogna ridefinire in maniera giusta la rotta
+        // reindirizza alla rotta predefinita
         return redirect('/');
     }
 

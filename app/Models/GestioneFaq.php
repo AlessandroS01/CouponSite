@@ -22,7 +22,7 @@ use Illuminate\Support\Str;
 class GestioneFaq extends Model {
 
     /**
-     * @return la lista di tutte le faq
+     * ritorna la lista di tutte le faq
      */
     public function getFaqs(){
 

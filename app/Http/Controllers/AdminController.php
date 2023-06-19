@@ -43,6 +43,7 @@ class AdminController extends Controller {
 
     public function showAggiuntaStaff() {
 
+        //passo alla vista tutte le aziende
         $aziende = $this->catalogoAziende->getAllNoPaginate();
 
         return view('admin.gestione_staff.aggiunta_staff')
@@ -57,8 +58,10 @@ class AdminController extends Controller {
 
     public function showModificaAzienda() {
 
+        //passo alla vista tutte le aziende
         $aziende = $this->catalogoAziende->getAllNoPaginate();
 
+        //passo alla vista tutte le partite iva delle aziende
         $partitaIvaAziende = $this->catalogoAziende->getAllPartiteIvaAziende();
 
         return view('admin.gestione_aziende.modifica_azienda')
@@ -79,25 +82,24 @@ class AdminController extends Controller {
      */
     public function storeNewFAQ(Request $request){
 
+        //valida la faq
         $request->validate([
             'domanda'=>['required', 'string', 'min:1'],
             'risposta' =>['required', 'string', 'min:1']
         ]);
 
-
+        //crea la nuova faq all'interno del database tramite il metodo createFAQ
         $this->gestioneAdmin->createFAQ($request);
 
         // serve per far visualizzare al client che la richiesta è stata correttemente validata dal server.
         // In questo modo con ajax si può entrare all'interno del blocco success per fare il redirect
         // alla rotta desiderata.
-        // Senza il contenuto della risposta nella richiesta, il metodo $.ajax() genererebbe comunque un errore
-        // nonostante lo stato della richiesta risulti 200.
         return response()->json(['message' => 'FAQ creata con successo'], 200);
     }
 
     public function storeNewStaff(Request $request) {
 
-        // Prima verifica tutte le varie regole di validazione
+        //verifica tutte le varie regole di validazione
         $request->validate([
             'username' => ['required', 'string', 'min:8', 'max:50', 'unique:users'],
             'password' => ['required', 'max:50', 'confirmed', Rules\Password::defaults()],
@@ -113,8 +115,10 @@ class AdminController extends Controller {
         ]);
 
 
+        //crea il nuovo utente staff nel database e crea dei record nella
+        // tabella gestione che rappresentano la possibilità di gestire le offerte di
+        // determinate aziende
         $this->gestioneAdmin->createStaff($request);
-
 
 
         return redirect('/');
@@ -131,20 +135,29 @@ class AdminController extends Controller {
             'email' => ['required', 'string', 'email', 'max:50', 'unique:azienda'],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
-            // in logo utilizziamo una function di callback che permette di esplicitare regole di validazione personalizzate
+            // all'interno del parametro logo utilizziamo una funzione di callback che permette
+            // di esplicitare regole di validazione personalizzate
             'logo' => ['required', 'image', function ($attribute, $value, $fail) use ($request){
-                //dentro fileName recuperiamo il nome originale del file, il valore di $attribute in questo caso è logo (ovvero il name del campo input file)
+
+                //salviamo all'interno della variabile fileName  il nome originale del file
                 $fileName = $request->file($attribute)->getClientOriginalName();
-                // if che serve a controllare se il nome del file contiene caratteri speciali
+
+                // utilizziamo il costrutto condizionale if
+                // che serve a controllare se il nome del file contiene caratteri speciali
                     if (preg_match('/[!@#$%^&*(),?":{}|<>]/', $fileName)) {
-                        //Se il nome del file contiene uno di questi caratteri speciali, la validazione fallirà e verrà restituito un errore utilizzando la funzione $fail
+
+                        //Se il nome del file contiene uno di questi caratteri speciali,
+                        // la validazione fallirà e verrà restituito un errore utilizzando la funzione $fail
                         $fail("Non può contenere caratteri speciali.");
                     }
                 },
-            ], // Regola di validazione per l'immagine
+            ],
             'ragione_sociale' => ['required', 'string', 'max:20'],
         ]);
 
+        //andiamo poi a gestire il percorso del file impostato come logo dell'azienda
+
+        //salviamo nella variabile $immage il file del logo immesso nel form
         $image = $request->file('logo');
 
         //imposto il percorso di destinazione dell'immagine, public/img
@@ -154,17 +167,21 @@ class AdminController extends Controller {
 
         $indiceImmagine = 1;
 
-        //se esiste gia un percorso con lo stesso path relativo andiamo a gestire il path
+        //tramite un while verifichiamo che se esiste gia un percorso con
+        // lo stesso path relativo andiamo a gestire il path
         while(File::exists($imagePathRelativo)) {
 
-            //modifichiamo il path relativo andando ad aggiungere prima del nome dell'immagine ($indiceImmagine)
+            //modifichiamo il path relativo andando ad aggiungere
+            // prima del nome dell'immagine ($indiceImmagine)
             $imagePathRelativo = 'img/'.'('.$indiceImmagine.')'.$image->getClientOriginalName();
             $indiceImmagine ++;
 
         }
-        // spostamento file dell'immagine dalla sua posizione temporanea alla cartella di destinazione specificata ($destinationPath) (vengono combinati i due path)
+        // spostiamo il file dell'immagine nella cartella public/img
         $image->move($destinationPath, $imagePathRelativo);
-        //passato come parametro imagePathRelativo da salvare nel db
+
+        //infine viene richiamato il metodo di creazione dell'azienda nel database
+        // passandogli il path relativo dell'immagine
         $this->gestioneAdmin->createAzienda($request, $imagePathRelativo);
 
         return redirect('/');
@@ -183,7 +200,8 @@ class AdminController extends Controller {
             'email' => ['required', 'string', 'email', 'max:50', Rule::unique('azienda')->ignore($azienda)],
             'telefono' => ['required', 'numeric', 'digits:10'],
             'descrizione' => ['required', 'string', 'max:255'],
-            // in logo utilizziamo una function di callback che permette di esplicitare regole di validazione personalizzate
+            // all'interno del parametro logo utilizziamo una funzione di callback che permette
+            // di esplicitare regole di validazione personalizzate
             'logo' => ['image', function ($attribute, $value, $fail) use ($request){
                 //dentro fileName recuperiamo il nome originale del file, il valore di $attribute in questo caso è logo (ovvero il name del campo input file)
                 $fileName = $request->file($attribute)->getClientOriginalName();
@@ -199,19 +217,22 @@ class AdminController extends Controller {
         //recupero il path relativo dell'immagine attuale dell'azienda
         $imageName = $this->catalogoAziende->getLogoAzienda($request->partita_iva);
 
-        //caso in cui è stato modificato il logo
+
+        //Se viene modificato il logo dell'azienda si attiva l'if
         if ($request->hasFile('logo')) {
-            //recupero l'istanza dell'oggetto "UploadedFile"
+            //salviamo nella variabile $immage il file del logo immesso nel form
             $image = $request->file('logo');
             //modifico il path relativo con il nome della nuova immagine
             $imageName = 'img/'.$image->getClientOriginalName();
 
             $indiceImmagine = 1;
 
-            //se esiste gia un percorso con lo stesso path relativo andiamo a gestire il path
+            //tramite un while verifichiamo che se esiste gia un percorso con
+            // lo stesso path relativo andiamo a gestire il path
             while(File::exists($imageName)) {
 
-                //modifichiamo il path relativo andando ad aggiungere prima del nome dell'immagine ($indiceImmagine)
+                //modifichiamo il path relativo andando ad aggiungere
+                // prima del nome dell'immagine ($indiceImmagine)
                 $imageName = 'img/'.'('.$indiceImmagine.')'.$image->getClientOriginalName();
                 $indiceImmagine ++;
 
@@ -221,14 +242,15 @@ class AdminController extends Controller {
             // eliminiamo il file dalla cartella img
             unlink($logoAziendaPreesistente);
 
-
-
+            //costruisco il destination path
             $destinationPath = public_path('img');
-            //spostamento file dell'immagine dalla sua posizione temporanea alla cartella di destinazione specificata ($destinationPath)
+            // spostiamo il file dell'immagine nella cartella public/img
             $image->move($destinationPath, $imageName);
 
         }
 
+        //infine viene richiamato il metodo di modifica dell'azienda
+        // passandogli il path relativo dell'immagine
         $this->gestioneAdmin->modificaAzienda($request, $imageName);
 
 
@@ -239,10 +261,14 @@ class AdminController extends Controller {
 
 
     public function showModificaStaff() {
+
+        //passo alla view gli username degli utenti di livello 2
         $usernameUtentiStaff = $this->gestioneAdmin->getUsernameUtentiStaff();
 
+        //ritorna tutti gli utenti di livello 2
         $staff = $this->gestioneAdmin->getUtentiStaff();
 
+        //passo alla vista tutte le aziende
         $aziende = $this->catalogoAziende->getAllNoPaginate();
 
 
@@ -253,7 +279,10 @@ class AdminController extends Controller {
     }
 
     public function showModificaFaq(){
+        //passiamo alla vista tutte le faq
         $faq = $this->gestioneAdmin->getFaq();
+
+        // passiamo l'array delle domande delle FAQ ottenute tramite il metodo getFaqDomanda
         $faqdomanda = $this->gestioneAdmin->getFaqDomanda();
 
 
@@ -264,7 +293,10 @@ class AdminController extends Controller {
 
     public function showEliminazioneFaq(){
 
+        //passiamo alla vista tutte le faq
         $faq = $this->gestioneAdmin->getFaq();
+
+        // passiamo l'array delle domande delle FAQ ottenute tramite il metodo getFaqDomanda
         $faqdomanda = $this->gestioneAdmin->getFaqDomanda();
 
         return view('admin.gestione_faq.elimina_faq')
@@ -275,6 +307,7 @@ class AdminController extends Controller {
 
     public function deleteFaq(Request $request) {
         if($request->idfaq){
+            //ricerchiamo la faq da eliminare tramite l'id della faq selezionata nella request
             $faqDaEliminare = Faq::find($request->idfaq);
             $faqDaEliminare->delete();
         }
@@ -284,6 +317,7 @@ class AdminController extends Controller {
 
     public function storeModificaFaq(Request $request){
 
+        //richiamo il metodo storeFaqModificato che aggiorna la faq
         $this->gestioneAdmin->storeFaqModificato($request);
 
         return redirect('/');
@@ -292,7 +326,7 @@ class AdminController extends Controller {
     public function storeModificaStaff(Request $request) {
 
 
-        // Prima verifica tutte le varie regole di validazione
+        //verifica tutte le varie regole di validazione
         $request->validate([
             'nome' => ['required', 'string', 'max:50'],
             'cognome' => ['required', 'string', 'max:50'],
@@ -313,8 +347,10 @@ class AdminController extends Controller {
 
     public function showEliminazioneStaff() {
 
+        //passo alla view gli username degli utenti di livello 2
         $usernameUtentiStaff = $this->gestioneAdmin->getUsernameUtentiStaff();
 
+        //ritorna tutti gli utenti di livello 2
         $staff = $this->gestioneAdmin->getUtentiStaff();
 
 
@@ -324,6 +360,7 @@ class AdminController extends Controller {
     }
 
     public function deleteStaff(Request $request) {
+        //elimina l'utente staff
         if ($request->staffId){
             $staffDaEliminare = User::find($request->staffId);
             $staffDaEliminare->delete();
@@ -335,6 +372,7 @@ class AdminController extends Controller {
         //ritorna un array contenente gli username degli utenti di livello 1
         $usernameUtentiRegistrati = $this->gestioneAdmin->getUsernameUtentiRegistrati();
 
+        //ritorna tutti gli utenti di livello 1
         $utente = $this->gestioneAdmin->getUtentiRegistrati();
 
 
@@ -354,7 +392,10 @@ class AdminController extends Controller {
     public function deleteAzienda(Request $request) {
         if($request->partita_iva){
             $aziendaDaEliminare = Azienda::find($request->partita_iva);
+
+            //recuperiamo il percorso dell'immagine dell'azienda
             $percorsoLogo = public_path($aziendaDaEliminare->logo);
+
             //unlink elimina il logo dell'azienda dalla cartella img
             unlink($percorsoLogo);
             $aziendaDaEliminare->delete();
@@ -376,11 +417,14 @@ class AdminController extends Controller {
 
     public function visualizzaStatistiche() {
 
+        //passiamo alla view il numero di coupon emessi, ottenuti tramite il metodo getNumeroCouponEmessi
         $numeroCouponEmessi = $this->gestioneAdmin->getNumeroCouponEmessi();
 
+        //recupera tutte le informazioni dei coupon emessi dal database
         $listaCoupon = $this->gestioneAdmin->getAllCouponEmessi();
 
-
+        //le statistiche vengono paginate tramite il metodo paginate che
+        // ne fa visualizzare 5 per pagina e vengono salvate nella variabile $listaCouponPaginated
         $listaCouponPaginated = $this->paginate($listaCoupon, 5, null, ['path' => URL::full(), 'pageName' => 'page']);
 
         return view('admin.gestione_generale.visualizza_statistiche')

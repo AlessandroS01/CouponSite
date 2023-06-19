@@ -13,6 +13,7 @@
             <div class="form">
                 <div class="container-form-gestione">
                     <div>
+                        <!--Al submit della form si attiva la rotta aggiunta staff -->
                         {{ Form::open(array('route' => 'aggiunta staff', 'class' => 'contact-form', 'method' => 'POST')) }}
                         @csrf
                         <div  class="container-dati_form">
@@ -166,9 +167,11 @@
                 <div>
                     <div class="container-dati_form">
                         {{ Form::label('gestionePacchetti', 'Gestione pacchetti', ['class' => 'label-input']) }}
+                        <!--Andiamo a definire tramite la select se l'utente staff può gestire i pacchetti -->
                         {{ Form::select('gestionePacchetti', ['No', 'Sì'], null, ['class' => 'input', 'id' => 'gestione_pacchetti']) }}
                     </div>
                 </div>
+
 
                 @isset($aziende)
 
@@ -179,6 +182,8 @@
 
                     <div class="container-aziende-check">
 
+                        <!--Per ogni azienda andiamo a definire una check box nella quale specifico la
+                         partita iva dell'azienda e il nome dell'azienda-->
                         @foreach($aziende as $azienda)
 
                             <label>

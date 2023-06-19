@@ -11,14 +11,16 @@
 
         <div class="container-form">
             <div class="form">
-                <!-- enctype: multipart/form-data indica che il modulo può contenere campi di input di tipo file e che i dati di tali
+                <!-- enctype: multipart/form-data indica che il form può contenere campi di input di tipo file e che i dati di tali
                     campi verranno inviati al server come parte separata della richiesta HTTP-->
+                <!--Form collegato alla rotta di eliminazione azienda -->
                 {{ Form::open(array('route' => 'eliminazione azienda', 'class' => 'contact-form', 'method' => 'POST', 'files' => true, 'enctype' => 'multipart/form-data')) }}
                 @csrf
                 @isset($partitaIvaAziende)
                     <div  class="container-dati_form">
                         {{ Form::label('azienda', 'Azienda', ['class' => 'label-input']) }}
-
+                        <!--Selezioniamo la partita iva di un'azienda nella select e si attiverà il meccanismo
+                        javascript che riempirà in automatico i campi di input del form-->
                         {{ Form::select('azienda', [ '-' => '-'] + $partitaIvaAziende, null, ['class' => 'input', 'id' => 'nomeAzienda']) }}
                     </div>
                 @endisset
@@ -108,6 +110,7 @@
 
 @section('script')
     <script>
+        //creo un array contenente tutte le aziende
         var aziende = {!! $aziende !!};
         //in public_url inserisco il path http://localhost/CouponSite/public, utilizzo l'helper url('/') per ottenerla
         var public_url = {!! json_encode(url('/')) !!};

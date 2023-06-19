@@ -1,6 +1,7 @@
 $(function () {
 
-    // richiamata ogni volta che un singolo elemento di input perde il focus
+    // andiamo ad inserire nel wrap-set gli elementi di input tranne quello di submit,
+    // ad ogni evento di perdita del focus (blur) viene attivato l'handler
     $(":input:not([type='submit'])").on('blur', function (event) {
 
         // determina l'id dell'elemento che ha perso il focus
@@ -9,7 +10,8 @@ $(function () {
         doElemValidation(formElementId, actionUrl, formId);
     });
 
-    // richiama l'handler di submit del form con id "#form_creazione_offerta" a cui associa la funzione
+    // viene messo all'interno del wrap-set gli elementi del DOM che hanno come id #form_creazione_offerta
+    // ed in seguito viene associato un event handler per la gestione della submit
     $("#form_creazione_offerta").on('submit', function (event) {
 
         // ferma il meccanismo di default che si avrebbe durante il processo di submit dei dati di una form
@@ -19,6 +21,9 @@ $(function () {
     });
 });
 
+
+// La funzione `doElemValidation()` esegue la validazione di un elemento
+// di input e invia una richiesta asincrona al server utilizzando AJAX.
 function doElemValidation(id, actionUrl, formId) {
 
     var formElems;
@@ -30,12 +35,12 @@ function doElemValidation(id, actionUrl, formId) {
 
     // viene creato un nuovo oggetto di FormData() per manipolare gli elementi di input e i corrispettivi valori della form
     formElems = new FormData();
-    // aggiunge una coppia chiave valore all'id dell'elemento di input e il suo valore
+    // Aggiunge la coppia chiave-valore all'oggetto formElems
     formElems.append(id, inputVal);
 
-    addFormToken();
+    addFormToken(); // Aggiunge il token della form all'oggetto formElems
 
-    sendAjaxReq();
+    sendAjaxReq(); // Invia la richiesta AJAX al server
 
     // aggiunge al FormData il token della form
     function addFormToken() {
@@ -46,6 +51,8 @@ function doElemValidation(id, actionUrl, formId) {
         formElems.append('_token', tokenVal);
     }
 
+
+    // funzione che manda la richiesta asincrona ajax al server
     function sendAjaxReq() {
 
         // $.ajax è una funzione che permette di inviare richieste asincrone al server invece di aspettare ogni
@@ -67,9 +74,7 @@ function doElemValidation(id, actionUrl, formId) {
                     // della variabile data
                     var errMsgs = JSON.parse(data.responseText); // costituito da tutti gli errori in json più message
 
-                    // rimuove tutti gli elementi all'interno del DOM che hanno un id pari a
-                    // 'errors{id_elemento_dom_perso_focus}'.
-                    //
+                    // rimuove tutti gli errori già presenti nel DOM
                     $('#errors' + id).remove();
 
                     // itera in tutti i campi dell'errore su cui è stato già fatto il parsing del json
@@ -96,6 +101,8 @@ function doElemValidation(id, actionUrl, formId) {
     }
 }
 
+// Funzione che prima verifica la presenza di errori e poi crea un nuovo elemento del DOM all'interno di una lista
+// non ordinata nel quale vengono inseriti gli errori di validazione
 function getErrorHtml(id, elemErrors) {
 
     // se la lista degli errori passati a seguito della richiesta ajax ha una lunghezza pari a 0 o il tipo dei dati
@@ -132,8 +139,7 @@ function getErrorHtml(id, elemErrors) {
 
 function doFormValidation(actionUrl, formId) {
 
-    // crea un nuovo oggetto FormData che contiene tutti i dati tramite coppia chiave valore all'interno del form
-    // che ha un id pari a formId
+    // crea un nuovo oggetto FormData che contiene tutti i dati con id pari a formId
     var form = new FormData(document.getElementById(formId));
 
     // $.ajax è una funzione che permette di inviare richieste asincrone al server invece di aspettare ogni
@@ -150,20 +156,24 @@ function doFormValidation(actionUrl, formId) {
             // determina se gli errori sono causati da valori non validati o errati durante la richista
             if (data.status === 422) {
 
-                // vengono ritrovati i messaggi di errore inviati dal server attraverso il parsing
-                // della variabile data
-                var errMsgs = JSON.parse(data.responseText); // costituito da tutti gli errori in json più message
+                // vengono salvati gli errori e i messaggi di errore (inviati dal server e parsati)
+                // all'interno della variabile errMsgs
+                var errMsgs = JSON.parse(data.responseText); // costituito da tutti gli errori e i messaggi di errore
                 // errMsgs = [ errors(JSON), message ]
 
+                //vengono gestiti gli errori restituiti dal server
+                // e se l'id all'interno del each è 'errors' viene richiamata la
+                // funzione getErrorHtmlSubmit
                 $.each(errMsgs, function (id) {
-                    // se l'id all'interno del loop è 'errors'
+                    //
                     if(id === 'errors'){
                         getErrorHtmlSubmit(errMsgs[id]);
                     }
                 });
             }
         },
-        // in caso di successo la finestra viene re-indirizzata alla rotta definita all'interno di homeRoute
+        // in caso di successo della chiamata l'utente viene re-indirizzato
+        // alla rotta definita all'interno di homeRoute
         success: function (data){
             window.location.href = homeRoute;
         },
@@ -174,6 +184,10 @@ function doFormValidation(actionUrl, formId) {
     });
 }
 
+//funzione che prima verifica che l'array di errori che gli è stato passato come parametro
+//non sia vuoto ed in seguito elimina gli elementi con id errors(che rappresentano
+// gli errori già visualizzati) ed effettua un ciclo per ogni elemento della form nel quale
+// per ciascun elemento crea una lista non ordinata nella quale vengono inseriti gli errori sotto forma di <li>
 function getErrorHtmlSubmit(elemErrors) {
 
     // se la lista degli errori passati a seguito della richiesta ajax ha una lunghezza pari a 0 o il tipo dei dati

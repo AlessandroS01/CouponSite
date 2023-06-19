@@ -59,8 +59,6 @@ class User extends Authenticatable
     /**
      * funzione che mi permette di verificare il livello a cui l'utente appartiene
      * viene passato il livello e ricevo un valore di verità
-     * @param $role passato durante l'attivazione
-     * @return bool true quando il ruolo associato a quell'utente è uguale al parametro che gli passo
      */
     public function hasLevel($livello) {
         // crea un array
@@ -71,8 +69,6 @@ class User extends Authenticatable
 
     /**
      * Metodo utilizzato per determinare se un membro dello staff può gestire o meno i pacchetti
-     * @param $livello rappresenta il livello dell'utente
-     * @return bool true quando la proprietà flagPacchetti è settata a true e false altrimenti
      */
     public function isStaffPacchetti($livello) {
 

@@ -11,6 +11,8 @@
                 <p class="message-modifica-password-fail">{{ session('message') }}</p>
             @endif
 
+            <!--Form utilizzata per andare a modificare la password, richiedendo la vecchia password
+            e la password di conferma -->
             {{ Form::open(array('route' => 'profilo-modifica-password', 'class' => 'form-modifica-dati','id'=>'modifica-dati-form', 'method' => 'POST')) }}
             @csrf
             <h3>Password attuale:</h3>

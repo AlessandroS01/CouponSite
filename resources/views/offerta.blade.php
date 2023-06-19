@@ -54,12 +54,13 @@
                 @auth
                     <div class="container-form-acquisizione">
 
+                        <!--Apertura form per la generazione del coupon al'interno del quale definiamo il bottone di submit
+                        ed un campo hidden al quale passiamo il codice dell'offerta-->
                         {{ Form::open(['route' => 'generazione coupon', 'method' => 'post', 'id' => 'ottenimento-coupon', 'class' => 'form']) }}
 
                         <div class="bottone-acquisizione">
                             {{ Form::submit('Ottieni', ['class' => 'btn']) }}
                         </div>
-
 
                         {{ Form::hidden('codiceOfferta',  $offerta->codice  ) }}
 

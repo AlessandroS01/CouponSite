@@ -3,10 +3,11 @@
 
 @section('profilo-content')
 
-
+<!-- Verifichiamo che l'utente sia loggato -->
 @isset($user)
 
     <div class="options-user">
+        <!--Definiamo le rotte per la modifica dei dati dello user e per la modifica della password -->
         <a href="{{route('profilo-modifica-dati')}}">Modifica dati generali</a>
         <a href="{{route('profilo-modifica-password')}}"> Modifica password </a>
     </div>
@@ -61,9 +62,10 @@
 
 @endisset
 
-
+<!--Verifica che $coupons sia settato-->
 @isset($coupons)
 
+    <!--Andiamo a costruire una tabella che mostra i coupon generati dall'utente-->
     <div class="container-coupon-riscattati">
         <table>
             <tr>
@@ -75,6 +77,7 @@
                 <th>Data acquisizione</th>
             </tr>
 
+            <!--Per ogni coupon andiamo a riempire una riga della tabella che mostra i coupon erogati dall'utente -->
             @foreach($coupons as $coupon)
                 <tr>
                     <td>{{$coupon->id}} </td>

@@ -12,6 +12,7 @@
     <div class="container-form">
         <div class="form">
 
+            <!--Al submit della form si attiva la rotta di eliminazione di un utente -->
             {{ Form::open(array('route' => 'eliminazione utente', 'class' => 'contact-form', 'method' => 'POST')) }}
             @csrf
             {{ Form::hidden('utenteId', null, ['id' => 'utenteId']) }}
@@ -21,6 +22,8 @@
                     <div  class="container-dati_form">
                         {{ Form::label('utente', 'utente', ['class' => 'label-input']) }}
 
+                        <!--Utilizziamo la variabile $usernameUtentiRegistrati per andare a popolare i campi della select con
+                    gli username degli utenti registrati-->
                         {{ Form::select('utente', [ '-' => '-'] + $usernameUtentiRegistrati, null, ['class' => 'input', 'id' => 'utenteUsername', 'readonly' => 'readonly']) }}
                     </div>
                 @endisset

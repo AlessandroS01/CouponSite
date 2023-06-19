@@ -1,23 +1,25 @@
 $(document).ready(function() {
 
-    // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+    // script che viene eseguito quando cambio il valore della select
+    // all'interno delle view aggiunta_staff e modifica_staff
     $('#gestione_pacchetti').change(function () {
+
+        //gestione pacchetti nella select = no
         if ( $(this).val() == 0){
             $('.container-check-boxes-aziende').show();
             $('input[name="aziende[]"]').prop('checked', false);
         }
-        //gestione pacchetti = si, hide checkbox e vengono tutte e checkate
+        //gestione pacchetti nella select = si, viene fatto l'hide delle checkbox
+        //e vengono tutte checkate
         if ( $(this).val() == 1){
             $('.container-check-boxes-aziende').hide();
             $('input[name="aziende[]"]').prop('checked', true);
         }
     });
 
-    // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+    // script che viene eseguito quando cambio il valore della select
+    // all'interno delle view eliminazione_staff e modifica_staff
     $('#staffUsername').change(function () {
-
-        // serve a determinare se da template vengono passati i vari membri dello staff
-        console.log(utentiStaff);
 
         // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
         if ( $(this).val() !== '-') {
@@ -43,9 +45,6 @@ $(document).ready(function() {
             else{
                 $('#gestione_pacchetti').val(1).change();
             }
-
-
-
 
             // se invece si seleziona '-' tutti i campi vengono resettati
         }else{

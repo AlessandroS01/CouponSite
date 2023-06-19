@@ -3,8 +3,6 @@ $(document).ready(function() {
     // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
     $('#staffUsername').change(function () {
 
-        // serve a determinare se da template vengono passati i vari membri dello staff
-        console.log(utentiStaff);
 
         // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
         if ( $(this).val() !== '-') {

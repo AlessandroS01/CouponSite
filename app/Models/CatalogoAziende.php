@@ -54,6 +54,8 @@ class CatalogoAziende extends Model {
      */
     public function getAllPartiteIvaAziende() {
 
+        // Recupera tutte le partite IVA delle aziende dal database utilizzando il metodo pluck()
+        // Il metodo pluck() recupera la colonna partita_iva dal database e restituisce un array dei suoi valori
         $aziende = Azienda::pluck('partita_iva')->toArray();
 
         return $aziende;
@@ -91,8 +93,11 @@ class CatalogoAziende extends Model {
      */
     public function getAziendeByNome($nome) {
 
+        // Matchiamo il mìnome dell'offerta inserito nella form con i nomi delle aziende
+        // all'interno del database
         $aziende = Azienda::where('nome', 'like', '%'.$nome.'%')->get();
 
+        // Paginiamo le aziende
         $aziende = $this->paginate($aziende, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
         return $aziende;
@@ -100,8 +105,8 @@ class CatalogoAziende extends Model {
     }
 
     /**
-     * @param $offerta rappresenta l'offerta da cui si può riprendere la partita iva dell'azienda
-     * @return l'azienda di una determinata offerta
+     * restituisce un'azienda a partire dal parametro partita iva all'interno
+     * dell'offerta
      */
     public function getAziendaByOfferta($offerta) {
         return Azienda::where('partita_iva', $offerta->azienda)->first();

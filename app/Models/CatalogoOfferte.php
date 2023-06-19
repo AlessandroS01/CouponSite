@@ -15,7 +15,7 @@ use Symfony\Component\Console\Input\Input;
 class CatalogoOfferte extends Model {
 
     /**
-     * @return tutte le offerte
+     * ritorna tutte le offerte
      */
     public function getAll() {
 
@@ -29,7 +29,7 @@ class CatalogoOfferte extends Model {
     }
 
     /**
-     * @return i primi 3 elementi della relazione Offerta
+     * ritorna le prime 3 offerte attive, ovvero con flagattivo impostato ad 1
      */
     public function getPrimiTreElementi() {
         $offerte = Offerta::where('flagAttivo', '=', '1')
@@ -39,8 +39,8 @@ class CatalogoOfferte extends Model {
     }
 
     /**
-     * @return i primi 3 elementi della relazione Offerta
-     * che hanno scadenza imminente
+     * ritorna le prime 3 offerte attive, ovvero con flagattivo impostato ad 1
+     * ordinate in base alla data di scadenza
      */
     public function getElementiDataScadenza() {
         return Offerta::orderBy('data_scadenza')
@@ -51,8 +51,7 @@ class CatalogoOfferte extends Model {
     }
 
     /**
-     * @param $offertaId rappresenta il codice dell'offerta che si passa dalla rotta
-     * @return ritorna l'offerta che ha come codice quello passato da parametro
+     * viene ritornata l'offerta ricercata tramite la sua partita iva
      */
     public function getOffertaByID($offertaId){
         return Offerta::where('codice',$offertaId)
@@ -75,13 +74,14 @@ class CatalogoOfferte extends Model {
     }
 
     /**
-     * @param $aziende rappresenta un array di aziende di cui si vogliono ritrovare le offerte
-     * @return la lista delle offerte delle aziende inserite come parametro nella ricerca
+     * restituisce le offerte ricercate per nome dell'azienda a cui passo il parametro
+     * di input espresso nel form all'interno della vista catalogo_offerte
      */
     public function getOfferteByAziendeRicercate($aziendaInput){
 
-        // crea una nuova collezione di dati
+        // Crea una nuova collezione di dati
         $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
+            // Tramite $aziendaInput vado a cotrollare il match tra il dato di input e il nome delle aziende
             ->where('azienda.nome', 'like', '%'.$aziendaInput.'%')
             ->where('flagAttivo', '=', '1')
             ->select('offerta.*')
@@ -89,19 +89,20 @@ class CatalogoOfferte extends Model {
             ->get();
 
 
-        // richiama il metodo per impaginare la lista di oggetti.
-        // La variabile path, settato al valore dell'URL corrente tramite il metodo full della Facade URL, serve a
-        // rappresentare l'url per la generazione della paginazione per mantenere intatti i parametri passati tramite il
-        // metodo GET. La variabile pageName invece rappresenta il valore corrente della pagina visualizzata tramite
+        // Richiama il metodo paginate per impaginare la lista di oggetti.
+        // La variabile "path" viene settata al valore dell'URL corrente tramite il metodo "full()" della Facade URL, serve a
+        // rappresentare l'URL per la generazione della paginazione per mantenere intatti i parametri passati tramite il
+        // metodo GET. La variabile pageName rappresenta il valore corrente della pagina visualizzata tramite
         // paginazione che prende il valore di $page all'interno del metodo per la creazione della paginazione stessa.
         $offerte = $this->paginate($offerte, 3, null, ['path' => URL::full(), 'pageName' => 'page']);
 
-
         return $offerte;
-
-
     }
 
+    /**
+     * restituisce le offerte ricercate per nome dell'azienda e nome dell'offerta
+     * a cui passo i parametri di input espressi nel form all'interno della vista catalogo_offerte
+     */
     public function getOfferteByAziendeEProdotto($aziendaInput, $offertaInput){
 
         // crea una nuova collezione di dati
@@ -126,32 +127,10 @@ class CatalogoOfferte extends Model {
 
     }
 
-
-
-
     /**
-     * @param $offerta rappresenta l'offerta da cui si vuole ricercare il logo dell'azienda
-     * @return il logo dell'azienda
+     * restituisce le offerte ricercate per nome dell'offerta
+     * a cui passo il parametro di input espresso nel form all'interno della vista catalogo_offerte
      */
-    public function getLogoAziendaByOfferta($offerta){
-
-        $azienda = Azienda::where('partita_iva', $offerta->azienda)->first();
-
-        return $azienda->logo;
-
-    }
-
-    /**
-     * Viene utilizzato per calcolare il valore della prezzo scontato nella pagina di visualizzazione di una singola offerta
-     * @param $offerta rappresenta l'offerta di cui si vuole calcolare il prezzo scontato
-     * @return il prezzo scontato del prodotto
-     */
-    public function getPrezzoScontato($offerta){
-
-        return $offerta->prezzo_pieno - ( $offerta->prezzo_pieno * ( $offerta->percentuale_sconto / 100) ) ;
-
-    }
-
     public function getOffertaByRicerca($offertaInput) {
 
         $offerte = Offerta::join('azienda', 'offerta.azienda', '=', 'azienda.partita_iva')
@@ -179,7 +158,7 @@ class CatalogoOfferte extends Model {
      *      valore predefinito null se non viene passato direttamente al richiamo del metodo
      * @param $page rappresenta il numero della pagina corrente
      * @param $options rappresenta una lista di altre opzioni da dare al nuovo elemento di paginazione
-     * @return LengthAwarePaginator ovvero una nuova lista di elementi di $items ma paginata
+     * restituisce LengthAwarePaginator ovvero una nuova lista di elementi di $items (oggetti passati come parametri) paginata
      */
     public function paginate($items, $perPage = 3, $page = null, $options = [])
     {
@@ -196,9 +175,25 @@ class CatalogoOfferte extends Model {
         return new LengthAwarePaginator($items->forPage($page, $perPage), $items->count(), $perPage, $page, $options);
     }
 
+    /**
+     * restituisce il logo dell'offerta passata come parametro tramite
+     * l'oggetto azienda (logoazienda = logoofferta)
+     */
+    public function getLogoAziendaByOfferta($offerta){
 
+        $azienda = Azienda::where('partita_iva', $offerta->azienda)->first();
 
+        return $azienda->logo;
 
+    }
 
+    /**
+     * restituisce il l'offerta al quale prezzo viene applicata la percentuale di sconto
+     */
+    public function getPrezzoScontato($offerta){
+
+        return $offerta->prezzo_pieno - ( $offerta->prezzo_pieno * ( $offerta->percentuale_sconto / 100) ) ;
+
+    }
 
 }

@@ -21,12 +21,15 @@
 
                 <div>
 
-
+                    <!--Form di eliminazione offerta che all'atto del submit richiama la rotta eliminazione offerta
+                     utilizzando il metodo post-->
                     {{ Form::open(array('route' => 'eliminazione offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
                     @csrf
                     {{ Form::hidden('codiceOfferta', null, ['id' => 'hidden_param']) }}
 
                     <div class="container-dati-offerta">
+                        <!--All'interno della select vengono impostate come opzioni di selezione tutte le offerte che
+                        l'utente staff può gestire-->
                         {{ Form::label('offerta', 'Offerta', ['class' => 'label-input']) }}
                         {{ Form::select('offerta', ['-' => '-'] + $oggetto_offerte , null, ['class' => 'input', 'id' => 'offerta']) }}
                     </div>

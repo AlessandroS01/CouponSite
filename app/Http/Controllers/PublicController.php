@@ -21,6 +21,7 @@ class PublicController extends Controller
 
     protected $faqs;
 
+    // All'interno del costruttore vengono settate le variabili secondo i model
     public function __construct(){
         $this->catalogoAziende = new CatalogoAziende;
         $this->catalogoOfferte = new CatalogoOfferte;
@@ -28,12 +29,8 @@ class PublicController extends Controller
     }
 
 
-    /**
-     * @return @View vista home a cui passa anche le variabili per ottenere le 3 aziende dello slideshow,
-     * le 5 aziende sotto lo slideshow, e le 6 offerte totali della home page pubblica.
-     * All'interno della vista vengono richiamati i metodi di $catalogoAzienda e $catalogoOfferte
-     * per ricercare i dati su db.
-     */
+    // Funzione legata alla rotta home che permette di visualizzare la vista home
+    // alla quale verranno passate le variabili catalogoAziende e catalogoOfferte
     public function showHome() {
 
         return view('home')
@@ -41,51 +38,54 @@ class PublicController extends Controller
                     ->with('catalogoOfferte', $this->catalogoOfferte);
     }
 
-    /**
-     * @return @View che permette di visualizzare il catalogo delle offerte
-     */
+    // Permette di visualizzare il catalogo delle offerte
     public function showCatalogoOfferte() {
 
+        // Ottiene tutte le offerte dal catalogo
         $offerte = $this->catalogoOfferte->getAll();
 
+        // Restituisce la vista 'ricercaCatalogo.catalogo_offerte_visualizza'
+        // passandogli le offerte e l'oggetto di gestione delle offerte
         return view('ricercaCatalogo.catalogo_offerte_visualizza')
                             -> with('offerte', $offerte)
                             -> with('gestioneOfferte', $this->catalogoOfferte);
     }
 
     /**
-     * @return @View che permette di visualizzare il catalogo delle offerte a seguito della ricerca
+     * ritorna una vista che fa visualizzare le offerte in relazione alla ricerca
+     * fatta all'interno del form della vista catalogo_offerte
      */
     public function searchOfferteRicerca(Request $request) {
 
+        // Ottengo i parametri di input inseriti dall'utente nella form della vista catalogo_offerte
         $offertaInput = $request['offerta'];
-
         $aziendaInput = $request['azienda'];
 
-        // caso in cui si immettono entrambi i parametri di ricerca
+        // Caso in cui vengono inseriti entrambi i parametri di ricerca
         if ( !empty($offertaInput) and !empty($aziendaInput) )
             {
-
+                // Ottengo le offerte corrispondenti all'azienda e al nome dell'offerta inserite nel form
                 $offerte = $this->catalogoOfferte->getOfferteByAziendeEProdotto($aziendaInput, $offertaInput);
 
             }
-        // caso in cui si immette solo l'azienda come campo di ricerca
+        // Caso in cui viene inserita solo l'azienda come input
         else if ( empty($offertaInput) and !empty($aziendaInput)  )
             {
-
+                // Ottengo le offerte corrispondenti all'azienda specificata
                 $offerte = $this->catalogoOfferte->getOfferteByAziendeRicercate($aziendaInput);
 
             }
-        // caso in cui si immette solo l'offerta come campo di ricerca
+        // Caso in cui viene inserito solo il nome dell'offerta come input
         else if ( !empty($offertaInput) and empty($aziendaInput) )
             {
+                // Ottengo le offerte corrispondenti al nome dell'offerta specificata
                 $offerte = $this->catalogoOfferte->getOffertaByRicerca($offertaInput);
             }
-        // caso in cui non si immettono campi di ricerca
+
+        // Caso in cui non si immettono campi di input
         else $offerte = $this->catalogoOfferte->getAll();
 
-
-
+        // Restituisco la vista catalogo_offerte_visualizza con le offerte specifiche
         return view('ricercaCatalogo.catalogo_offerte_visualizza')
                     ->with('offerte', $offerte)
                     ->with('gestioneOfferte', $this->catalogoOfferte);
@@ -93,7 +93,7 @@ class PublicController extends Controller
     }
 
     /**
-     * @return @View che permette di visualizzare il catalogo delle aziende
+     * ritorna la view che permette di visualizzare il catalogo delle aziende
      */
     public function showCatalogoAziende() {
 
@@ -107,22 +107,23 @@ class PublicController extends Controller
 
 
     /**
-     * @return @View che permette di visualizzare il catalogo delle aziende a seguito della ricerca
+     * ritorna la vista che permette di visualizzare il catalogo delle aziende a seguito della ricerca
      */
     public function searchAziendeRicerca() {
 
-        //prende quello che è stato scritto nella ricerca dell'azienda
+        // Prende quello che è stato scritto nella ricerca dell'azienda
         $aziendaInput = $_GET['azienda'];
 
-        // caso in cui si immettono entrambi i parametri di ricerca
+        // Caso in cui si immette in input il nome dell'azienda
         if ( !empty($aziendaInput) )
         {
             // vengono selezionate tutte le aziende che hanno un nome che contiene l'input dato dalla ricerca
             $aziende = $this->catalogoAziende->getAziendeByNome($aziendaInput);
 
         }
+        // Caso in cui non è stato inserito nulla all'interno della ricerca
         else {
-            // vengono selezionate tutte le aziende
+            // Vengono selezionate tutte le aziende
             $aziende = $this->catalogoAziende->getAll();
         }
 
@@ -132,14 +133,15 @@ class PublicController extends Controller
     }
 
     /**
-     * @return @View che permette di visualizzare i contatti del sito
+     * ritorna la view di visualizzazione dei contatti del sito
      */
     public function showContatti() {
         return view('contatti');
     }
 
     /**
-     * @return @View che permette di visualizzare le faq del sito
+     * ritorna la view di visualizzazione delle faq del sito al quale passo
+     * tutte le faqs
      */
     public function showFaq() {
         // passa alla vista l'insieme di tutte le faq
@@ -148,11 +150,12 @@ class PublicController extends Controller
 
 
     /**
-     * @param $offertaId è il paramatro passato direttamente dalla rotta e rappresenta il codice dell'offerta
-     * una volta che l'user clicca su OTTIENI nella card.
-     * @return  @View a cui si passa $gestoreOfferte per poter ottenere il logo di un'azienda data l'offerta e
-     * calcolare il valore del prezzo scontato, $offerta che rappresenta l'offerta di cui si vogliono visualizzare i
-     * dati, e $azienda che serve a visualizzare il logo e un riferimento dell'azienda associata a quell'offerta
+     * viene passato alla funzione $offertaId è il paramatro passato direttamente dalla rotta e
+     * rappresenta il codice dell'offerta una volta che l'user clicca su OTTIENI nella card.
+     * ritorna la vista a cui si passa:
+     * $gestoreOfferte per poter ottenere il logo di un'azienda data l'offerta e calcolare il valore del prezzo scontato,
+     * $offerta che rappresenta l'offerta di cui si vogliono visualizzare i dati,
+     * $azienda che serve a visualizzare il logo e un riferimento dell'azienda associata a quell'offerta
      */
     public function showOfferta($offertaId) {
 
@@ -182,6 +185,7 @@ class PublicController extends Controller
                         ->with('offerte', $offerte);
     }
 
+    //metodo richiamato per il download della documentazione
     public function download()
     {
         $path = public_path('documents/Relazione.pdf');

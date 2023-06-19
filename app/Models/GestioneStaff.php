@@ -77,7 +77,7 @@ class GestioneStaff extends Model {
         $partita_iva = Azienda::where('nome', $aziendaSelezionata)->pluck('partita_iva')->first();
 
 
-        // crea la nuova tupla da aggiungere al database
+        // crea la nuova offerta da aggiungere al database
         $offerta = Offerta::create([
             'oggetto_offerta' => $request->oggetto_offerta,
             'data_scadenza' => $request->data_scadenza,

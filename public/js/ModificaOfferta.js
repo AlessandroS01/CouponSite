@@ -1,8 +1,8 @@
 $(document).ready(function() {
-    // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+    // il wrapset e composto da tutti gli elementi
+    // che hanno id = offerta, e a questo wrapset agganciamo l'event
+    // handler che attiva la funzione al cambiamento del valore degli elementi del wrapset
     $('#offerta').change(function () {
-
-
 
         // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
         if ( $(this).val() !== '-') {
@@ -16,7 +16,7 @@ $(document).ready(function() {
             // crea un loop con un indice al più pari alla lunghezza dell'array contenente tutte le aziende
             for( var i = 0; i < aziende.length; i++){
                 // quando la partita iva dell'offerta selezionata è pari alla partita iva di un'azienda presente
-                // all'interno dell'array contenente tutte le aziende setta il valore della variabile azienda
+                // all'interno dell'array che contiene tutte le aziende setta il valore della variabile azienda
                 // uguale al nome dell'azienda stessa
                 if(aziende[i].partita_iva == oggettoOffertaSelezionata.azienda){
                     azienda = aziende[i].nome;

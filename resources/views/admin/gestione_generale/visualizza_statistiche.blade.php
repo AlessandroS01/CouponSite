@@ -25,6 +25,7 @@
 
             <div class="container-coupon_totali">
                 @isset($couponTotali)
+                    <!--Andiamo a far visualizzare il numero totale di coupon emessi -->
                     <h3> Numero coupon emessi: {{ $couponTotali }}</h3>
                 @endisset
             </div>
@@ -32,6 +33,9 @@
             <div class="container-lista_coupon">
                 @isset($listaCouponPaginated)
                     <div class="container-coupon-riscattati">
+                        <!--Andiamo a creare una tabella nella quale andremo a mettere le informazioni specifiche
+                         dell'utente che ha aquisito un coupon e le informazioni specifiche dell'offerta relativa
+                         al coupon erogato-->
                         <table>
                             <tr>
                                 <th>ID offerta</th>
@@ -44,6 +48,7 @@
                             </tr>
 
                             @foreach($listaCouponPaginated as $coupon)
+                                <!--Se il cliente è stato cancellato  -->
                                 @if($coupon->id_cliente === null)
                                     <tr>
                                         <td class="container-offerta-Id">{{$coupon->id_offerta}}</td>

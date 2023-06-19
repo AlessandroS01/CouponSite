@@ -43,14 +43,14 @@ class StaffController extends Controller {
     public function showCreazioneOfferta()
     {
         // alla vista si passano i nomi di tutte le aziende che lo staff può gestire attraverso
-        // il metodo sotto nominato
+        // il metodo getNomeAziendeByStaff()
         return view('staff.gestione_offerte.creazione_offerta')
                 ->with('aziende', $this->gestioneStaff->getNomeAziendeByStaff());
     }
 
     /**
-     * Implementa la possibilità di creare una nuova offerta ad un membro dello staff su una determinata azienda
-     * @param $request rappresenta la richiesta di tipo post inviata all'atto di invio della form
+     * Permette di validare i campi della form di creazione di un'offerta da parte dello staff
+     * richiama la funzione createofferta per andare a creare l'offerta all'interno del database
      */
     public function storeNewOfferta(Request $request)
     {
@@ -73,6 +73,7 @@ class StaffController extends Controller {
         // tra tutte quelle selezionate trova quella alla posizione selezionata all'interno della form
         $aziendaSelezionata = $listaAziende[$request->azienda];
 
+        // crea l'offerta nel database
         $this->gestioneStaff->createOfferta($request, $aziendaSelezionata);
 
         // serve per far visualizzare al client che la richiesta è stata correttemente validata.

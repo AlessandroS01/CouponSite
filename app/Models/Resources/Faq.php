@@ -16,7 +16,7 @@ class Faq extends Model {
         'risposta',
     ];
 
-    // id non modificabile da un HTTP Request (Mass Assignment)
+    // id non modificabile da un HTTP Request
     protected $guarded = ['id'];
 
     public $timestamps = false;

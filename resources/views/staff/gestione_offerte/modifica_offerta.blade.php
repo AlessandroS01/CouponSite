@@ -27,13 +27,16 @@
 
                 <div>
 
-
+                    <!--Form di modifica offerta che all'atto del submit richiama la rotta modifica offerta utilizzando il
+                     metodo post-->
                     {{ Form::open(array('route' => 'modifica offerta', 'class' => 'contact-form', 'method' => 'POST')) }}
                     @csrf
                     {{ Form::hidden('codiceOfferta', null, ['id' => 'hidden_param']) }}
                     {{ Form::hidden('flagAttivo', 1, ['id' => 'hidden_param']) }}
 
                     <div class="container-dati-offerta">
+                        <!--All'interno della select vengono impostate come opzioni di selezione tutte le offerte che
+                         l'utente staff può gestire-->
                         {{ Form::label('offerta', 'Offerta', ['class' => 'label-input']) }}
                         {{ Form::select('offerta', ['-' => '-'] + $oggetto_offerte , null, ['class' => 'input', 'id' => 'offerta']) }}
                     </div>
@@ -189,6 +192,6 @@
         // prende il valore di tutte le offerte codificate in JSON direttamente da php
         var offerte = {!! ($offerte) !!};
     </script>
-
+    <!--Andiamo a gestire il riempimento dei campi di input del form tramite ModificaOfferta.js -->
     <script src="{{ asset('js/ModificaOfferta.js') }}"></script>
 @endsection

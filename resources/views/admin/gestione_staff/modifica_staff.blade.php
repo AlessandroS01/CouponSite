@@ -13,6 +13,7 @@
         <div class="container-form">
             <div class="form">
 
+                <!--Al submit della form si attiva la rotta di modifica dello staff -->
                 {{ Form::open(array('route' => 'modifica staff', 'class' => 'contact-form', 'method' => 'POST')) }}
                 @csrf
                 {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
@@ -22,6 +23,8 @@
                         <div  class="container-dati_form">
                             {{ Form::label('staff', 'Staff', ['class' => 'label-input']) }}
 
+                            <!--Utilizziamo la variabile $usernameUtentiStaff per andare a popolare i campi della select con
+                            gli username degli utenti staff-->
                             {{ Form::select('staff', [ '-' => '-'] + $usernameUtentiStaff, null, ['class' => 'input', 'id' => 'staffUsername']) }}
                         </div>
                     @endisset

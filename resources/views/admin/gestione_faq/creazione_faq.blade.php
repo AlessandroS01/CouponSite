@@ -12,7 +12,7 @@
     <div class="container-form">
         <div class="form faq-form">
 
-
+                    <!--Al submit della form si attiva la rotta aggiunta FAQ -->
                     {{ Form::open(array('route' => 'aggiunta FAQ','class' => 'contact-form', 'method' => 'POST', 'id'=>'form_creazione_faq' )) }}
                     @csrf
                     <div  class="container-dati_form_descrizione">

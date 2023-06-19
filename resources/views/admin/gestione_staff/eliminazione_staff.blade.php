@@ -13,7 +13,8 @@
         <div class="container-form">
             <div class="form">
 
-                    {{ Form::open(array('route' => 'eliminazione staff', 'class' => 'contact-form', 'method' => 'POST')) }}
+                <!--Al submit della form si attiva la rotta eliminazione dello staff -->
+                {{ Form::open(array('route' => 'eliminazione staff', 'class' => 'contact-form', 'method' => 'POST')) }}
                 @csrf
                     {{ Form::hidden('staffId', null, ['id' => 'staffId']) }}
 
@@ -22,6 +23,8 @@
                         <div  class="container-dati_form">
                             {{ Form::label('staff', 'Staff', ['class' => 'label-input']) }}
 
+                            <!--Utilizziamo la variabile $usernameUtentiStaff per andare a popolare i campi della select con
+                            gli username degli utenti staff-->
                             {{ Form::select('staff', [ '-' => '-'] + $usernameUtentiStaff, null, ['class' => 'input', 'id' => 'staffUsername', 'readonly' => 'readonly']) }}
                         </div>
                     @endisset

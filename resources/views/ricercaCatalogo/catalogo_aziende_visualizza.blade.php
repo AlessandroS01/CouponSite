@@ -20,6 +20,8 @@
                     </div>
 
                     <div class="button">
+                        <!--Viene settata un ancora che punta alla rotta azienda alla quale viene passato
+                        la partita iva dell'offerta selezionata-->
                         <a href="{{ route('azienda', ['partita_iva' => $azienda->partita_iva]) }}">Visualizza</a>
                     </div>
 

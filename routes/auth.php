@@ -22,15 +22,24 @@ Route::middleware('guest')->group(function () {
      */
     Route::post('register', [RegisteredUserController::class, 'store']);
 
-
+    /*
+     * Genera una richiesta per la visualizzazione della form di login
+     */
     Route::get('login', [AuthenticatedSessionController::class, 'create'])
                 ->name('login');
 
+    /*
+     * Genera una richiesta per l'invio dei dati immessi nella form di login
+     */
     Route::post('login', [AuthenticatedSessionController::class, 'store']);
 
 });
 
 Route::middleware('auth')->group(function () {
+    /*
+    * Rotta implementata nel bottone di logout per andare a disconnettere un
+     * utente tramite la funzione destroy
+    */
     Route::post('logout', [AuthenticatedSessionController::class, 'destroy'])
                 ->name('logout');
 });

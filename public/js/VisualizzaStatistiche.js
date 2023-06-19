@@ -4,7 +4,8 @@ $(document).ready(function() {
 
     var coupons = listaCoupon;
 
-    //click su id di un offerta
+    //al click sull'id di un offerta faremo visualizzare un box nel quale troveremo le
+    // informazioni rigurdanti in numero di coupon emessi relativi all'offerta cliccata
     $('.container-offerta-Id').click( function (){
         $('.container-show_hide_stats').show();
         var idOffertaCliccata = $(this).text();
@@ -27,7 +28,8 @@ $(document).ready(function() {
 
     })
 
-    //click su id di un utente
+    //al click sull'id di un cliente faremo visualizzare un box nel quale troveremo le
+    // informazioni su quanti coupon ha ottenuto il cliente cliccato
     $('.container-cliente-Id').click( function (){
         $('.container-show_hide_stats').show();
         var idClienteSelezionato = $(this).text();

@@ -1,6 +1,8 @@
 
 $(document).ready(function() {
-    // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+    // il wrapset e composto da tutti gli elementi
+    // che hanno id = faq, e a questo wrapset agganciamo l'event
+    // handler che attiva la funzione al cambiamento del valore degli elementi del wrapset
     $('#faq').change(function () {
 
         // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if

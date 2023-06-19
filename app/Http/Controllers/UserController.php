@@ -33,8 +33,7 @@ class UserController extends Controller {
     }
 
     /**
-     * Metodo che permette di ritornare la view per visualizzare i propri dati.
-     * @return \Illuminate\Contracts\Foundation\Application|\Illuminate\Contracts\View\Factory|\Illuminate\Contracts\View\View
+     * Metodo che permette di ritornare la view per visualizzare i dati dell'utente loggato
      */
     function showProfilo(){
 
@@ -74,9 +73,8 @@ class UserController extends Controller {
     }
 
     /**
-     * Metodo che permette di modificare i dati di un utente
-     * @param Request $request
-     * @return \Illuminate\Http\RedirectResponse
+     * Metodo che permette di validare i nuovi dati immessi nella form
+     * ed in seguito di salvarli all'interno del database
      */
     public function updateData(Request $request)
     {
@@ -177,6 +175,7 @@ class UserController extends Controller {
                 ->with('validita_promozione', false);
 
         }
+
         // nel caso in cui invece, attraverso il metodo definito all'interno di GestioneAcquisizioneCoupon chiamato
         // checkClienteOfferta che come parametro assume la richiesta, il cliente non ha già richiesto quel coupon
         // viene prima creato il coupon e poi ripreso dal db settando un parametro $nuovoCoupon a true.

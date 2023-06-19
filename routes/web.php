@@ -31,7 +31,8 @@ Route::get('/catalogo/offerte', [PublicController::class, 'showCatalogoOfferte']
         ->name('catalogo offerte');
 
 /**
- * rotta che permette di visualizzare le offerte cha "matchano" con i campi di ricerca inseriti nel catalogo
+ * rotta che permette di visualizzare le offerte cha "matchano" con i campi di ricerca inseriti nel
+ * form della vista catalogo_offerte
  */
 Route::get('/catalogo/offerte/ricerca', [PublicController::class, 'searchOfferteRicerca'])
     ->name('catalogo offerte ricerca');
@@ -146,6 +147,7 @@ Route::post('/creazione/offerta', [StaffController::class, 'storeNewOfferta'])
 Route::get('/modifica/offerta', [StaffController::class, 'showModificaOfferta'])
     ->name('modifica offerta')
     ->middleware(['auth', 'can:isStaff']);
+
 Route::post('/modifica/offerta', [StaffController::class, 'storeNewOffertaModificata'])
     ->name('modifica offerta')
     ->middleware(['auth', 'can:isStaff']);

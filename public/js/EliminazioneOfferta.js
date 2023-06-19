@@ -1,6 +1,8 @@
 $(document).ready(function() {
 
-    // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+    // il wrapset e composto da tutti gli elementi
+    // che hanno id = offerta, e a questo wrapset agganciamo l'event
+    // handler che attiva la funzione al cambiamento del valore degli elementi del wrapset
     $('#offerta').change(function () {
 
         // prende il valore di tutte le aziende codificate in JSON direttamente da php

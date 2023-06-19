@@ -2,15 +2,15 @@ $(document).ready(function() {
 
     $('.container-logo-modifica_azienda').hide();
 
-    // script che viene eseguito solo dopo che il campo all'interno della select viene cambiato
+    // il wrapset e composto da tutti gli elementi
+    // che hanno id = nomeAzienda, e a questo wrapset agganciamo l'event
+    // handler che attiva la funzione al cambiamento del valore degli elementi del wrapset
     $('#nomeAzienda').change(function () {
 
-
-
-        // quando il valore cliccato sulla selection è diverso da '-' entra all'interno dell'if
+        // quando il valore cliccato sulla select è diverso da '-' entra all'interno dell'if
         if ( $(this).val() !== '-') {
 
-            // prende l'azienda che si trova alla posizione i-esima, il $(this) si riferisce al valore passato dall'input con id=nomeAzienda
+            // viene salvata nella variabile aziendaSelezionata l'azienda che si trova alla posizione i-esima
             var aziendaSelezionata = aziende[ $(this).val() ];
 
 
@@ -30,8 +30,6 @@ $(document).ready(function() {
             var logo = public_url + '/' + aziendaSelezionata.logo;
             // impostiamo il path nell'attributo src dell'immagine per avere una preview
             $("#logo-preview").attr("src", logo);
-
-
 
 
 

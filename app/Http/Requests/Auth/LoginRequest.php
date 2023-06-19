@@ -46,18 +46,24 @@ class LoginRequest extends FormRequest
      *
      * @throws \Illuminate\Validation\ValidationException
      */
+    // Funzione responsabile di gestire il processo di autenticazione dell'utente
     public function authenticate()
     {
+        // Verifica se l'utente non è soggetto a limitazioni di accesso
         $this->ensureIsNotRateLimited();
 
+        // Viene fatto un tentativo di autenticazione dell'utente utilizzando le credenziali fornite
         if (! Auth::attempt($this->only('username', 'password'), $this->boolean('remember'))) {
             RateLimiter::hit($this->throttleKey());
 
+            // Genera un'eccezione di validazione con il messaggio di errore
             throw ValidationException::withMessages([
                 'username' => trans('auth.failed'),
             ]);
         }
 
+        // Se l'autenticazione ha successo, resetta il contatore del
+        // limite di accesso per questo utente
         RateLimiter::clear($this->throttleKey());
     }
 
